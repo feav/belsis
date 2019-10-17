@@ -3,11 +3,12 @@
     <ion-menu type="overlay">
       <ion-header>
         <ion-toolbar>
-          <ion-title>Menu</ion-title>
+          <img src="/assets/profile.svg" alt="" />
+          <ion-title>Julien</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <ion-list>
+        <!-- <ion-list>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
@@ -16,7 +17,19 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
-        </ion-list>
+        </ion-list> -->
+        <div class="ion-list">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+          <div class="ion-item" [routerDirection]="'root'" [routerLink]="[p.url]">
+            <!-- <ion-icon slot="start" [name]="p.icon"></ion-icon> -->
+            <img [src]="p.icon" alt="" />
+            <br>
+              <ion-label>
+                {{p.title}}
+              </ion-label>
+          </div>
+          </ion-menu-toggle>
+        </div>
       </ion-content>
     </ion-menu>
     <ion-router-outlet main></ion-router-outlet>

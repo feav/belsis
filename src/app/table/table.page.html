@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>PLAN DE TABLE</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+        <!-- <ion-card-title class="ion-text-center">Plan de Travail</ion-card-title> -->
+        <ion-row class="ion-margin" *ngFor="let table of tables">
+          <ion-col *ngFor="let tab of table">
+            <ion-card>
+              <ion-card-header>
+                <div>
+                	<ion-label class="primary round" [ngStyle]="{'background-color': tab.color}" ></ion-label>
+                	<ion-label class="title"> -<span>{{tab.etat}}</span>- </ion-label>
+                </div>
+                <div class="left-part">
+                	<ion-label class="title"> <span>SERVEUR - {{tab.serveur}}</span> </ion-label>
+                	<img src="/assets/profile-2.svg">
+                </div>
+              </ion-card-header>
+
+              <ion-card-content>
+                <div class="img-content">
+                  
+                	<ion-card-subtitle class="secondary">{{tab.label}}</ion-card-subtitle>
+                	<ion-card-title class="primary">{{tab.value}}</ion-card-title>
+                	<b>COMMANDE</b>
+                </div>
+                <div class="foot ion-text-center">
+                	<div>
+                		<img src="/assets/logo-oeil.svg">
+
+                		<ion-label style="margin-left: 5px" > 
+                			<span> {{tab.location}} </span> 
+                		</ion-label>
+                	</div>
+                	<div>
+                		<button>+</button>
+                	</div>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

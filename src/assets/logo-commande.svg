@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="46" width="35">
+  <defs>
+    <ellipse id="ellipse-1" opacity="1" rx="2.282608695652172" ry="2.3258426966292163" cx="30.181159420289916" cy="41.08988764044917"/>
+    <rect id="rect-2" opacity="1" x="5.579710144927503" y="17.056179775281407" width="12.173913043478258" height="1.5505617977528008"/>
+    <rect id="rect-3" opacity="1" x="5.579710144927503" y="23.7752808988767" width="18.260869565217387" height="1.5505617977528026"/>
+    <rect id="rect-4" opacity="1" x="5.579710144927503" y="30.49438202247154" width="24.347826086956516" height="1.550561797752799"/>
+    <rect id="rect-5" opacity="1" x="5.579710144927503" y="10.337078651685829" width="24.347826086956516" height="1.5505617977528008"/>
+    <rect id="rect-6" opacity="1" x="0" y="2.584269662921372" width="35" height="43.415730337078585"/>
+    <mask id="mask-7" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0">
+      <rect opacity="1" x="0" y="0" width="35" height="46" fill="black"/>
+      <use xlink:href="#rect-6" fill="white"/>
+    </mask>
+    <rect id="rect-8" opacity="1" x="7.608695652173765" y="0" width="20.289855072463762" height="5.685393258426968"/>
+  </defs>
+  <g opacity="1">
+    <g opacity="1">
+      <use xlink:href="#ellipse-1" fill="rgb(255,255,255)" fill-opacity="1"/>
+    </g>
+    <g opacity="1">
+      <use xlink:href="#rect-2" fill="rgb(255,255,255)" fill-opacity="1"/>
+    </g>
+    <g opacity="1">
+      <use xlink:href="#rect-3" fill="rgb(255,255,255)" fill-opacity="1"/>
+    </g>
+    <g opacity="1">
+      <use xlink:href="#rect-4" fill="rgb(255,255,255)" fill-opacity="1"/>
+    </g>
+    <g opacity="1">
+      <use xlink:href="#rect-5" fill="rgb(255,255,255)" fill-opacity="1"/>
+    </g>
+    <g opacity="1">
+      <use xlink:href="#rect-6" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="1" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" mask="url(#mask-7)"/>
+    </g>
+    <g opacity="1">
+      <use xlink:href="#rect-8" fill="rgb(255,255,255)" fill-opacity="1"/>
+    </g>
+  </g>
+</svg>

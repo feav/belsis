@@ -1,5 +1,7 @@
 {
   "name": "Belbis",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

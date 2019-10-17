@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="53.70463010947856" width="57.409260218957115">
+  <defs>
+    <path id="path-1" opacity="1" fill-rule="evenodd" d="M52.704630109478536,21.99874775653757 L48.6564373383942,26.034041874184616 L52.704630109478536,25.025218344772853 L52.704630109478536,21.99874775653757Z"/>
+    <ellipse id="ellipse-2" opacity="1" rx="0.5783132530120465" ry="0.5764705882352921" cx="31.88535300104487" cy="51.39874775653625"/>
+    <ellipse id="ellipse-3" opacity="1" rx="4.048192771084338" ry="4.0352941176470445" cx="33.041979507068824" cy="49.66933599183143"/>
+    <mask id="mask-4" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0">
+      <rect opacity="1" x="0" y="0" width="57.409260218957115" height="53.70463010947856" fill="black"/>
+      <use xlink:href="#ellipse-3" fill="white"/>
+    </mask>
+    <path id="path-5" opacity="1" fill-rule="evenodd" d="M4.704630109478558,4.704630109478558 L33.041979507068916,36.41051246241967 L52.70463010947856,20.845806580066757 L33.041979507068916,43.904630109478475 L4.704630109478558,4.704630109478558Z"/>
+    <rect id="rect-6" opacity="1" x="26.17520460803712" y="12.737369488454078" width="15.614457831325304" height="18.447058823529375"/>
+    <mask id="mask-7" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0">
+      <rect opacity="1" x="0" y="0" width="57.409260218957115" height="53.70463010947856" fill="black"/>
+      <use xlink:href="#rect-6" fill="white"/>
+    </mask>
+  </defs>
+  <g opacity="1">
+    <g opacity="1">
+      <use xlink:href="#path-1" fill="rgb(255,255,255)" fill-opacity="1"/>
+      <use xlink:href="#path-1" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="1" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"/>
+    </g>
+    <g opacity="1">
+      <use xlink:href="#ellipse-2" fill="rgb(255,255,255)" fill-opacity="1"/>
+    </g>
+    <g opacity="1">
+      <use xlink:href="#ellipse-3" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="1" stroke-width="2" stroke-linecap="butt" stroke-linejoin="miter" mask="url(#mask-4)"/>
+    </g>
+    <g opacity="1">
+      <use xlink:href="#path-5" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="1" stroke-width="2" stroke-linecap="butt" stroke-linejoin="miter"/>
+    </g>
+    <g transform="translate(33.98243352369977, 21.960898900218766) rotate(-39.000013945002515) translate(-33.98243352369977, -21.960898900218766)" opacity="1">
+      <use xlink:href="#rect-6" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="1" stroke-width="4" stroke-linecap="butt" stroke-linejoin="miter" mask="url(#mask-7)"/>
+    </g>
+  </g>
+</svg>

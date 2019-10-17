@@ -6,26 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['list.page.scss']
 })
 export class ListPage implements OnInit {
-  private selectedItem: any;
-  private icons = [
-    'flask',
-    'wifi',
-    'beer',
-    'football',
-    'basketball',
-    'paper-plane',
-    'american-football',
-    'boat',
-    'bluetooth',
-    'build'
-  ];
-  public items: Array<{ title: string; note: string; icon: string }> = [];
-  constructor() {
+  private tables : Array<{
+          label:String,
+          value:Number,
+          logo:String,
+          color:String
+        }> = [];  
+  constructor(){
     for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
+      this.tables.push({
+        label: 'Item ' + i,
+        value: 'This is item #' + i,
+        logo: "/assets/logo-stock.svg",
+        color:"red"
       });
     }
   }

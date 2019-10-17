@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="109.81730769230762" width="110.19354838709677">
+  <defs>
+    <rect id="rect-1" opacity="1" x="0" y="-5.684341886080802e-14" width="110.19354838709677" height="109.81730769230768"/>
+    <image id="9f2b28ac-b7c5-48c8-bcad-ea01e4e7067b" opacity="1" x="0" y="0" width="400" height="400" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQAQMAAAC6caSPAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAZQTFRFAAAA////pdmf3QAAAAJ0Uk5TAP9bkSK1AAAErUlEQVR4nO3bQY6kOBAFUJAXbEbyEXwUjgbSXIzdXIMbTI5mk4tUuss2JsGOHxFuqWdULccihbJ4bfDHbkNRw9CrV69evXr16vX9a/Tb16d7he24ad8Smfz+9Tn7rw/jH3mTLRv3W/wa9DNvsuXifj7sZ/0rkk0kr3BCYb9EfDxSJXH+rSLzQfaDjL+OmE6+N5k9qp8gazvZ2gk8G0we7eTZTl7tBE5lmMBgGLK2k72doF5mCOplhqBeZgjqZYagXubI2k42RB70QPYwGEgWGAwkMwwGEgeDgcTCYCCZYDCQGBgMJCMMBpJBQcr/Xpd24lhCLhWsQJ71gmRiiaWWPUYgaXE1XBdXI0uOJVw4i7SEcz62ypAx5mwvC8WXROjqpJNOOvnuBFUnnfw3pFr6cv/O70ea6v8ndm8mYNHPEANW8AxB61GGWHCfxJAZJMqQBdwnsdM43WWYhLsR8j4Jk3DPQ/YyJhO6gcXEohtYTJwHN7CYzGioYbIEQgWDSRzQVDCQjJFQwUBi0rzRQqZE1gZi4ZMFSFwiOyLE1DfDORCSJW0QwUBybBDBIDIeG0QwiJi8pe+xKZNVTWwmm5q4THY1Oc+u/jEiSyZ1MIicfVcHA8h4kjoYQM5YiGAAmT5kVRL7IZuSuHYSYvkbZAlIiOWvNhL2/RPET5MYy9hETMywiUzxSllaiI3X49xCXNzVtZDZH0/I9GSJqU8tJF2OpoGM6aIfG4g5hhZHZl/V6zilBvLMX+tJen6Hr2SChD1tG9mGYwbYVD2WYjnmmVVDjliODRXJsaTmqh9TZDpiAQs/itgjlticbk52OcDJa2f+OadhqfBJsuQ0HJUkSc6unakkKXLGEptbNUSIhSJCLBQRYqGIEAtFhFgoIsRCESEWgkixEESKhSBSLASRYiGIFAtBpFgIIsUCpr41N7epydncqiVsLDRhY6EJG0vdY2IsNRFjqYkYS03EWCoijpaaiKOlJuJoqYk4Wmoix1IROZaKyLFURI6lJIpYSqKIpSSKWEqiiKUkilhKooilJIpYSqKIpSCaWAqiiaUgZywGx0KQ581Ccp364p5npCoSj+eMVEX8MFwi1ZF1uESqI2HXM1JIcoVTCAf0iVRHHnwsFHnysRRk/jfty8VSkn/SEXGxlOSRzpuLpSLpoudiKciyp6HFxVKROIDZWCoSpwk2lorEEcPGUhC/xSmPjaUicWJlY6lI7Cw2lposlyGgIOGNlTx0Vj1xl+GsJPYyaSjJdJmaFMT485EdjqUm6OETQ46HT3sLWYRY7mR6D3lOW1uIE2IhiBViIcgkxHIn8SUoI8RCkFGIhSCDEAtF2EmsJO6ZvmJjoYjjY6EIfjsRkomP5U7muG34WAoSdx35WAqSDkh4a/xO0mkLf8xwI/HNvnAuawNZ41f8H2bUxAixlGSLjbCx3EnoKiOMloqk34exsZTkaaTRcl1W7YG8ZmESK0j+pQt/9heynYRvhCJCIxQRGrkRo2rkQvITd6mRmoiN1ERs5Eb41Q5B0pwvN1ISRSMlUTTyIe/8CnAj0TRyJ6pG7kTVyId8tfCHSvTq1atXr169evXq1atXr169erXUD69ci52c8IBlAAAAAElFTkSuQmCC"/>
+    <pattern id="pattern-2" x="0" y="-0.0017130300436942747" width="1" height="1.0017130300436943" patternUnits="objectBoundingBox">
+      <use xlink:href="#9f2b28ac-b7c5-48c8-bcad-ea01e4e7067b" transform="scale(0.2754838709677419,0.2754838709677419)"/>
+    </pattern>
+  </defs>
+  <g opacity="0.9">
+    <use xlink:href="#rect-1" fill="url(#pattern-2)"/>
+  </g>
+</svg>

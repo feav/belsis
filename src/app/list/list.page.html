@@ -4,24 +4,33 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      List
+      Plan de Table
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
-      <div class="item-note" slot="end">
-        {{item.note}}
-      </div>
-    </ion-item>
-  </ion-list>
-  <!--
-    <div *ngIf="selectedItem" padding>
-      You navigated here from <b>{{selectedItem.title }}</b>
+    <div class="ion-content">
+      <ion-grid >
+        <ion-card-title class="ion-text-center">Les Commandes</ion-card-title>
+        <ion-row class="ion-margin">
+          <ion-col *ngFor="let commande of etatCommendes">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-subtitle class="primary" [ngStyle]="{'background-color': commande.color}" >{{commande.value}}</ion-card-subtitle>
+              </ion-card-header>
+
+              <ion-card-content>
+                <div class="img-content">
+                  <img [src]="commande.logo">
+                </div>
+                <div class="foot ion-text-center">
+                  {{commande.label}}
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
-  -->
 </ion-content>
