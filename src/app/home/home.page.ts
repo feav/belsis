@@ -7,9 +7,9 @@ import { Chart } from 'chart.js';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  @ViewChild('barChart',{}) barChart;
+  @ViewChild('barChart',{static: true}) barChart;
 
-  @ViewChild('barChartSecond',{}) barChartSecond;
+  @ViewChild('barChartSecond',{static: true}) barChartSecond;
   private etatCommendes : Array<{
     			label:String,
     			value:Number,
@@ -19,6 +19,7 @@ export class HomePage {
   private commandes: Array<number> = [];
   private stocks: Array<number> = [];
   private bars: any;
+  private bars2:any;
   constructor() { }
 
   ionViewDidEnter() {
@@ -30,12 +31,12 @@ export class HomePage {
   	this.commandes = [Math.floor(Math.random() * 100) + 1,Math.floor(Math.random() * 100) + 1,Math.floor(Math.random() * 100) + 1];
     	this.bars = new Chart(this.barChart.nativeElement, {
 	      type: 'doughnut',
-	      weight: 1,
+	      /*weight: 1,*/
 	      data: {
 	        labels: ['En cours', 'Finalisees', 'Annulees'],
 	        datasets: [{
 	            label: 'Commaandes',
-	      weight: 1,
+	      		/*weight: 1,*/
 	            data: [this.commandes[0], this.commandes[1], this.commandes[2]],
 	            backgroundColor: [
 	                'rgba(255, 99, 132, 0.2)',
@@ -64,12 +65,12 @@ export class HomePage {
 
     	this.bars2 = new Chart(this.barChartSecond.nativeElement, {
 	      type: 'doughnut',
-	      weight: 1,
+	      /*weight: 1,*/
 	      data: {
 	        labels: [ 'En Rupture','Disponnible'],
 	        datasets: [{
 	            label: '# of Votes',
-	      weight: 1,
+	      /*weight: 1,*/
 	            data: [this.stocks[0], this.stocks[1]],
 	            backgroundColor: [
 	                'rgba(255, 99, 132, 0.2)',

@@ -16,7 +16,7 @@ export class ListPage implements OnInit {
     for (let i = 1; i < 11; i++) {
       this.tables.push({
         label: 'Item ' + i,
-        value: 'This is item #' + i,
+        value: i,
         logo: "/assets/logo-stock.svg",
         color:"red"
       });
