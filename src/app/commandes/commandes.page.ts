@@ -153,4 +153,8 @@ export class CommandesPage implements OnInit {
   		this.produits[index].quantite = this.produits[index].quantite - 1;
   }
 
+  public ajoutGlobal(){
+  	//TODO
+  }
+
 }
