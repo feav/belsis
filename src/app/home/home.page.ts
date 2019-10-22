@@ -36,7 +36,7 @@ export class HomePage {
 	        labels: ['En cours', 'Finalisees', 'Annulees'],
 	        datasets: [{
 	            label: 'Commaandes',
-	      		/*weight: 1,*/
+	      /*weight: 1,*/
 	            data: [this.commandes[0], this.commandes[1], this.commandes[2]],
 	            backgroundColor: [
 	                'rgba(255, 99, 132, 0.2)',

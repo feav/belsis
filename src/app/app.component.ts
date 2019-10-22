@@ -18,7 +18,7 @@ export class AppComponent {
     },
     {
       title: 'Les Commandes',
-      url: '/list',
+      url: '/commandes',
       icon: '/assets/logo-commande.svg'
     },
     {

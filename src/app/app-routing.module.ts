@@ -15,7 +15,10 @@ const routes: Routes = [
     path: 'list',
     loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
   },
-  { path: 'table', loadChildren: './table/table.module#TablePageModule' }
+  { path: 'table', 
+    loadChildren: './table/table.module#TablePageModule' },
+  { path: 'commandes', 
+    loadChildren: './commandes/commandes.module#CommandesPageModule' }
 ];
 
 @NgModule({
