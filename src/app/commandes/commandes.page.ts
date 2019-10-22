@@ -16,6 +16,8 @@ export class CommandesPage implements OnInit {
 
 	public produits:Array<any>;
 
+	public produitsPages:any;
+
 	public showList:boolean = true;
 
 
@@ -23,6 +25,38 @@ export class CommandesPage implements OnInit {
 
   ngOnInit() {
   	this.produits = [
+  		{
+  			id: 1,
+  			nom: "Salade de fruits",
+  			prix: "15 000",
+  			stock: 64,
+  			quantite: 3,
+  			url:"../../assets/logo-stock.svg"
+  		},
+  		{
+  			id: 1,
+  			nom: "Salade de fruits",
+  			prix: "15 000",
+  			stock: 64,
+  			quantite: 3,
+  			url:"../../assets/logo-stock.svg"
+  		},
+  		{
+  			id: 1,
+  			nom: "Salade de fruits",
+  			prix: "15 000",
+  			stock: 64,
+  			quantite: 3,
+  			url:"../../assets/logo-stock.svg"
+  		},
+  		{
+  			id: 1,
+  			nom: "Salade de fruits",
+  			prix: "15 000",
+  			stock: 64,
+  			quantite: 3,
+  			url:"../../assets/logo-stock.svg"
+  		},
   		{
   			id: 1,
   			nom: "Salade de fruits",
@@ -103,6 +137,7 @@ export class CommandesPage implements OnInit {
 		},
 	];
   	this.commandePages = this.convertArrayToPagible(this.commandes, 6);
+  	this.produitsPages = this.convertArrayToPagible(this.produit, 3);
   }
 
   public rechercher() {

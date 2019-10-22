@@ -89,7 +89,18 @@
 				</ion-grid>
 				<ion-grid *ngIf="!showList">
 					<ion-row>
-						
+						<ion-col col-3 *ngFor="let produit of produits; let i = index ">
+							<ion-card>
+					        	<img src="{{produit.url}}" />
+					        	<ion-card-header>
+					          		<ion-card-subtitle></ion-card-subtitle>
+					          		<ion-card-title text-center>{{produit.nom}}</ion-card-title>
+					        	</ion-card-header>
+					        	<ion-card-content>
+					          		Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
+					        	</ion-card-content>
+					      	</ion-card>
+						</ion-col>
 					</ion-row>
 				</ion-grid>
 		</ion-row>
