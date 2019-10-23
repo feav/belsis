@@ -26,6 +26,7 @@
     "@ionic/angular": "^4.7.1",
     "@types/chart.js": "^2.8.6",
     "chart.js": "^2.8.0",
+    "cordova-plugin-filechooser": "^1.2.0",
     "core-js": "^2.5.4",
     "ng2-charts": "^2.3.0",
     "rxjs": "~6.5.1",
@@ -59,5 +60,10 @@
     "tslint": "~5.15.0",
     "typescript": "~3.4.3"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-filechooser": {}
+    }
+  }
 }

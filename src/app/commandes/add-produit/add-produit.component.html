@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>BELSIS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content text-center>
+	
+	<ion-grid>
+		<ion-row>
+			<ion-col id="newProduct" text-center>
+				<b>NOUVEAU PRODUIT</b>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col id="horiszontalBar">
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col col-2>
+				<img class="circular" src="" alt="IMAGE" />
+			</ion-col>
+			<ion-col col-10>
+				<ion-grid text-left>
+					<ion-row>
+						<ion-col col-1>Nom : </ion-col>
+						<ion-col col-11> <input class="input-text-my" type="text" [(ngModel)]="produit.name" /> </ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-1>Prix : </ion-col>
+						<ion-col col-11> <input class="input-text-my" type="text" [(ngModel)]="produit.prix" /> </ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-1>Qualite : </ion-col>
+						<ion-col col-11> <input class="input-text-my" type="text" [(ngModel)]="produit.quantite" /> </ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-1>Quategories : </ion-col>
+						<ion-col col-11> <input class="input-text-my" type="text" /> </ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<button class="addProductButton">
+					AJOUTER LE PRODUIT
+				</button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+</ion-content>

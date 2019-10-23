@@ -43,70 +43,109 @@
 			</ion-col>
 		</ion-row>
 		<ion-row>
-				<ion-grid *ngIf="showList">
-					<ion-row text-center>
-						<ion-col col-1>
-						</ion-col>
-						<ion-col col-3>
-							Nom
-						</ion-col>
-						<ion-col col-2>
-							Prix
-						</ion-col>
-						<ion-col col-1>
-							Stock
-						</ion-col>
-						<ion-col col-3>
-							Quantite
-						</ion-col>
-						<ion-col col-2>
-						</ion-col>
-					</ion-row>
-					<ion-row text-center *ngFor="let produit of produits; let i = index" class="list-row-item">
-						<ion-col col-1>
-							<img src="{{produit.url}}" />
-						</ion-col>
-						<ion-col col-3>
-							{{produit.nom}}
-						</ion-col>
-						<ion-col col-2>
-							<span class="digits">{{produit.prix}}</span> €
-						</ion-col>
-						<ion-col col-1>
-							<span class="digits">{{produit.stock}}</span>
-						</ion-col>
-						<ion-col col-3>
-							<button class="circular" (click)="moins(i)" style="background-color:#EC0000;">-</button>
-							<span  class = "nonDigits" >
-								<input type="text" [(value)]="produit.quantite" style="width: 40px;" />
-							</span>
-							<button class="circular" (click)="plus(i)" style="background-color:#00B79A;">+</button>
-						</ion-col>
-						<ion-col col-2>
-							<button class="nonCirculaire" (click)="ajouter(produit)">AJOUTER</button>
-						</ion-col>
-					</ion-row>
-				</ion-grid>
-				<ion-grid *ngIf="!showList">
-					<ion-row>
-						<ion-col col-3 *ngFor="let produit of produits; let i = index ">
-							<ion-card>
-					        	<img src="{{produit.url}}" />
-					        	<ion-card-header>
-					          		<ion-card-subtitle></ion-card-subtitle>
-					          		<ion-card-title text-center>{{produit.nom}}</ion-card-title>
-					        	</ion-card-header>
-					        	<ion-card-content>
-					          		Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
-					        	</ion-card-content>
-					      	</ion-card>
-						</ion-col>
-					</ion-row>
-				</ion-grid>
+			<ion-col>
+				<p id="contentList">
+					<ion-grid *ngIf="showList">
+						<ion-row text-center>
+							<ion-col col-1>
+							</ion-col>
+							<ion-col col-3>
+								Nom
+							</ion-col>
+							<ion-col col-2>
+								Prix
+							</ion-col>
+							<ion-col col-1>
+								Stock
+							</ion-col>
+							<ion-col col-3>
+								Quantite
+							</ion-col>
+							<ion-col col-2>
+							</ion-col>
+						</ion-row>
+						<ion-row text-center *ngFor="let produit of produits; let i = index" class="list-row-item">
+							<ion-col col-1>
+								<img src="{{produit.url}}" />
+							</ion-col>
+							<ion-col col-3>
+								{{produit.nom}}
+							</ion-col>
+							<ion-col col-2>
+								<span class="digits">{{produit.prix}}</span> €
+							</ion-col>
+							<ion-col col-1>
+								<span class="digits">{{produit.stock}}</span>
+							</ion-col>
+							<ion-col col-3>
+								<button class="circular" (click)="moins(i)" style="background-color:#EC0000;">-</button>
+								<span  class = "nonDigits" >
+									<input type="text" [(value)]="produit.quantite" style="width: 40px;" />
+								</span>
+								<button class="circular" (click)="plus(i)" style="background-color:#00B79A;">+</button>
+							</ion-col>
+							<ion-col col-2>
+								<button class="nonCirculaire" (click)="ajouter(produit)">AJOUTER</button>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+					<ion-grid *ngIf="!showList">
+						<ion-row *ngFor="let page of produitsPages; let li = index ">
+							<ion-col col-4 *ngFor="let produit of page; let co = index ">
+								<ion-card>
+						        	<img class="cardImg" src="{{produit.url}}" />
+						        	<ion-card-header>
+						          		<ion-card-title text-center></ion-card-title>
+						        	</ion-card-header>
+						        	<ion-card-content>
+
+						          		<ion-grid>
+						          			<ion-row>
+						          				<ion-col>
+						          					<span class="produit-title">{{produit.nom}}</span>
+						          				</ion-col>
+						          			</ion-row>
+						          			<ion-row>
+						          				<ion-col>
+									          		<p text-center>
+									          			<ion-chip>
+														  	<ion-label>Categorie</ion-label>
+														</ion-chip>
+									          			<ion-chip>
+														  	<ion-label>Categorie</ion-label>
+														</ion-chip>
+									          			<ion-chip>
+														  	<ion-label>Categorie</ion-label>
+														</ion-chip>
+									        		</p>
+						          				</ion-col>
+						          			</ion-row>
+						          			<ion-row>
+						          				<ion-col text-center>
+													<button class="circular" (click)="moins(li*3+co)" style="background-color:#EC0000;">-</button>
+													<span  class = "nonDigits" >
+														<input type="text" [(value)]="produit.quantite" style="width: 40px;" />
+													</span>
+													<button class="circular" (click)="plus(li*3+co)" style="background-color:#00B79A;">+</button>
+						          				</ion-col>
+						          			</ion-row>
+						          			<ion-row>
+						          				<ion-col>
+						          					<button class="nonCirculaire" (click)="ajouter(produit)">AJOUTER</button>
+						          				</ion-col>
+						          			</ion-row>
+						          		</ion-grid>
+						        	</ion-card-content>
+						      	</ion-card>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+				</p>
+			</ion-col>
 		</ion-row>
 		<ion-row text-right>
-			<ion-col>
-				<button (click)="ajoutGlobal()" class="addButton">
+			<ion-col >
+				<button class="addButton" (click)="ajoutGlobal()">
 					+
 				</button>
 			</ion-col>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-commandes',
@@ -21,7 +22,7 @@ export class CommandesPage implements OnInit {
 	public showList:boolean = true;
 
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   	this.produits = [
@@ -137,7 +138,7 @@ export class CommandesPage implements OnInit {
 		},
 	];
   	this.commandePages = this.convertArrayToPagible(this.commandes, 6);
-  	this.produitsPages = this.convertArrayToPagible(this.produit, 3);
+  	this.produitsPages = this.convertArrayToPagible(this.produits, 3);
   }
 
   public rechercher() {
@@ -189,7 +190,7 @@ export class CommandesPage implements OnInit {
   }
 
   public ajoutGlobal(){
-  	//TODO
+  	 this.router.navigate(["/commandes/add"]);
   }
 
 }
