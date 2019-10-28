@@ -16,12 +16,12 @@
 			<ion-col id="horiszontalBar">
 			</ion-col>
 		</ion-row>
-		<ion-row class="color-text">
-			<ion-col col-1>
+		<ion-row>
+			<ion-col col-2>
 				<img class="circular" src="" alt="IMAGE" />
 			</ion-col>
-			<ion-col col-11>
-				<ion-grid text-left>
+			<ion-col col-10>
+				<ion-grid class="color-text" text-left>
 					<ion-row>
 						<ion-col col-1>Nom : </ion-col>
 						<ion-col col-11> <input class="input-text-my" type="text" [(ngModel)]="produit.name" /> </ion-col>
@@ -32,7 +32,7 @@
 					</ion-row>
 					<ion-row>
 						<ion-col col-1>Quantite : </ion-col>
-						<ion-col col-11> <input class="input-text-my" type="text" [(ngModel)]="produit.quantite" /> </ion-col>
+						<ion-col col-11> <input class="input-text-my" type="text" [(ngModel)]="produit.stock" /> </ion-col>
 					</ion-row>
 					<ion-row>
 						<ion-col col-1>Categories : </ion-col>
@@ -43,7 +43,7 @@
 		</ion-row>
 		<ion-row>
 			<ion-col>
-				<button class="addProductButton">
+				<button (click)="valider()" class="addProductButton">
 					AJOUTER LE PRODUIT
 				</button>
 			</ion-col>

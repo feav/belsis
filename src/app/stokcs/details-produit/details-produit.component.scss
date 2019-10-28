@@ -1,0 +1,179 @@
+.red {
+	background-color: red!important;
+}
+
+ion-header{
+	ion-toolbar{
+	    --background : #142768!important; 
+	    ion-title{
+	    	text-align: center;
+	    	color: white;
+	    }
+	    ion-button{
+	    	color: white;
+	    	ion-menu-button{
+	    		color: white;
+	    	}
+	    }
+	}
+}
+
+ion-content{
+	margin:10px;
+	div.ion-content{
+		//--background-image:url("/assets/bg-belsis.svg");
+		background-image: url(/assets/bg-belsis.svg);
+	    height: 100%;
+	    width: 100%;
+	    background-size: 500px 500px;
+	}
+	
+}
+
+	#searchRow {
+		text-align: center;
+		padding: 20px;
+		input{
+			border-style: solid;
+			border-radius: 0px;
+			border-width: 2px;
+			border-color: #c8c8c8;
+			height: 40px;
+			width: 80%;
+			margin: 2px;
+		}
+		button{
+			font-weight: 800;
+		    border-radius: 100%;
+		    background: #142768;
+		    color: white;
+		    width: 80px;
+		    height: 80px;
+		    //font-size: x-large;
+		    position: relative;
+		    left:-10px;
+		    //right: 10px;
+		    //bottom: 10px;
+		    //line-height: 15px;
+		}
+	}
+
+	#categoriesList {
+		ion-col{
+			border-width: 2px;
+			border-color: #142768;
+			button{
+				width: 95%;
+				border-raduis: 0px;
+				min-height: 35px;
+				border-style: solid;
+				border-color: #142768;
+				border-width: 2px;
+				background-color: white;
+			}
+		}
+	}
+
+	#shwitchIcons {
+		button {
+			margin: 10px;
+			min-height:30px;
+			border-radius: 10%;
+		}
+		.on{
+			color: #142768;
+			background-color: white;
+			border-style: solid;
+			border-color: #142768;
+			border-width: 2px;
+		}
+	}
+
+	ion-grid {
+		padding: 20px;
+	}
+
+	#horiszontalBar {
+		padding: 10px;
+		border-style: solid;
+		border-top:2px;
+		border-left: 2px;
+		border-right: 2px;
+		border-color: #c8c8c8;
+	}
+
+	.list-row-item {
+		background-color:#F4F4F4;
+		margin:5px;
+		ion-col {
+			vertical-align: middle;
+			padding: 10px;
+			img{
+				height: 100%;
+			}
+
+		}
+	}
+
+	ion-card{
+		margin-lef: 50px;
+		margin-right:50px;
+		margin-top: 10px;
+		margin-bottom:10px;
+	}
+
+	.cardImg{
+		height: 100px;
+	}
+
+	.digits {
+		color: #FF418A;
+	}
+
+	.produit-title{
+		font-size:15px;
+		font-style: bold;
+	}
+
+	.nonCirculaire{
+		background-color:#142768;
+		color: white;
+		padding: 10px;
+	}
+
+	.nonDigits{
+		border: solid;
+		border: 1px;
+		padding: 10px;
+	}
+
+	.circular {
+		border-radius: 100%;
+		height: 25px;
+		width: 25px;
+		color: white;
+	}
+
+	#shwitchIcons {
+		button{
+			height: 50px;
+			background-color: #142768;
+			color: white;
+		}
+	}
+
+	.addButton {
+		background-color: #142768;
+		border-radius:100%;
+		color:white;
+		min-width: 70px;
+		min-height: 70px;
+		position: fixed;
+		right:70px;
+		bottom:10px;
+	}
+
+	#contentList{
+		/*height: 80%;
+		overflow:scroll;*/
+	}

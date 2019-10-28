@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>BELSIS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content text-center>
+	
+	<ion-grid>
+		<ion-row>
+			<ion-col id="newProduct" text-center>
+				<b>DETAILS PRODUIT</b>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col id="horiszontalBar">
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col col-2>
+				<img class="circular" src="{{produit.url}}" alt="IMAGE" />
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<ion-grid class="color-text" text-left>
+					<ion-row>
+						<ion-col col-1>Nom : </ion-col>
+						<ion-col col-11>
+							{{produit.name}}
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-1>Prix : </ion-col>
+						<ion-col col-11>
+							{{produit.prix}}
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-1>Stock : </ion-col>
+						<ion-col col-11>
+							{{produit.stock}}
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col col-1>Categories : </ion-col>
+						<ion-col col-11>
+							<ion-chip *ngFor="let categorie of produit.categories">
+							  	<ion-label>{{categorie}}</ion-label>
+							</ion-chip>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col col-6>
+				<button class="nonCirculaire" (click)="editer(id)">Modifier</button>
+			</ion-col>
+			<ion-col col-6>
+				<button class="nonCirculaire red"  (click)="supprimer(id)">Supprimer</button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+</ion-content>

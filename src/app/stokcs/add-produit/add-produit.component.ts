@@ -16,8 +16,12 @@ export class AddProduitComponent implements OnInit {
 		categories: []
 	};
 
-  constructor() { }
+	constructor() { }
 
-  ngOnInit() {}
+	ngOnInit() {}
+
+	public valider(){
+		
+	}
 
 }

@@ -23,7 +23,7 @@ export class AppComponent {
     },
     {
       title: 'Le Stock',
-      url: '/list',
+      url: '/stokcs',
       icon: '/assets/logo-stock.svg'
     },
     {
