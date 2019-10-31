@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class TablePage implements OnInit {
 
  	private tables : Array<any> = [];  
- 	constructor(){
+ 	constructor(private router: Router){
  		let color = [
  			{color:"green",value:"En cours"},
  			{color:"red",value:"Terminee"},
@@ -36,5 +37,10 @@ export class TablePage implements OnInit {
   	}
 	  ngOnInit() {
 	  }
+
+	public openTable(tab){
+	    //this.router.naigate(['/table/details/' + tab.id]);
+	  	this.router.navigate(['/table/details/10']);
+	}
 
 }

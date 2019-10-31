@@ -25,6 +25,7 @@ export class CommandesPage implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+
   	this.produits = [
   		{
   			id: 1,
@@ -74,75 +75,76 @@ export class CommandesPage implements OnInit {
   			quantite: 3,
   			url:"../../assets/logo-stock.svg"
   		},
-  	]
+  	];
+
   	this.commandes = [
-		{
-			id: 1,
-			name: "Categorie 1",
-			statusFilter: false
-		},
-		{
-			id: 2,
-			name: "Categorie 2	",
-			statusFilter: false
-		},
-		{
-			id: 1,
-			name: "Categorie 1",
-			statusFilter: false
-		},
-		{
-			id: 2,
-			name: "Categorie 2	",
-			statusFilter: false
-		},
-		{
-			id: 1,
-			name: "Categorie 1",
-			statusFilter: false
-		},
-		{
-			id: 2,
-			name: "Categorie 2	",
-			statusFilter: false
-		},
-		{
-			id: 1,
-			name: "Categorie 1",
-			statusFilter: false
-		},
-		{
-			id: 2,
-			name: "Categorie 2	",
-			statusFilter: false
-		},
-		{
-			id: 1,
-			name: "Categorie 1",
-			statusFilter: false
-		},
-		{
-			id: 2,
-			name: "Categorie 2	",
-			statusFilter: false
-		},
-		{
-			id: 1,
-			name: "Categorie 1",
-			statusFilter: false
-		},
-		{
-			id: 2,
-			name: "Categorie 2	",
-			statusFilter: false
-		},
-	];
+  		{
+  			id: 1,
+  			name: "Categorie 1",
+  			statusFilter: false
+  		},
+  		{
+  			id: 2,
+  			name: "Categorie 2	",
+  			statusFilter: false
+  		},
+  		{
+  			id: 1,
+  			name: "Categorie 1",
+  			statusFilter: false
+  		},
+  		{
+  			id: 2,
+  			name: "Categorie 2	",
+  			statusFilter: false
+  		},
+  		{
+  			id: 1,
+  			name: "Categorie 1",
+  			statusFilter: false
+  		},
+  		{
+  			id: 2,
+  			name: "Categorie 2	",
+  			statusFilter: false
+  		},
+  		{
+  			id: 1,
+  			name: "Categorie 1",
+  			statusFilter: false
+  		},
+  		{
+  			id: 2,
+  			name: "Categorie 2	",
+  			statusFilter: false
+  		},
+  		{
+  			id: 1,
+  			name: "Categorie 1",
+  			statusFilter: false
+  		},
+  		{
+  			id: 2,
+  			name: "Categorie 2	",
+  			statusFilter: false
+  		},
+  		{
+  			id: 1,
+  			name: "Categorie 1",
+  			statusFilter: false
+  		},
+  		{
+  			id: 2,
+  			name: "Categorie 2	",
+  			statusFilter: false
+  		},
+	 ];
   	this.commandePages = this.convertArrayToPagible(this.commandes, 6);
   	this.produitsPages = this.convertArrayToPagible(this.produits, 3);
   }
 
-  public rechercher() {
-  	
+  public rechercher(tab) {
+
   }
 
   public convertArrayToPagible(datas: Array<any>, pagesize: number):Array<Array<any>>{

@@ -1,0 +1,110 @@
+ion-header{
+	ion-toolbar{
+	    --background : #142768!important; 
+	    ion-title{
+	    	text-align: center;
+	    	color: white;
+	    }
+	    ion-button{
+	    	color: white;
+	    	ion-menu-button{
+	    		color: white;
+	    	}
+	    }
+	}
+}
+
+ion-content{
+	margin:10px;
+	padding:10px;
+}
+
+.color-text {
+	color: #142768!important;
+}
+
+.color-back {
+	background-color: #142768!important;
+}
+
+.bit-element{
+	font-weight: bold;
+}
+
+/*#commandeChip {
+	height: 300px;
+}*/
+
+#commandeChip {
+	position: relative;
+	bottom: -32px;
+	z-index: 2;
+	font-size: 16pt;
+}
+
+.digits {
+	color: red;
+}
+
+ion-icon {
+  font-size: 28px;
+}
+
+.list-row-item {
+	background-color:#F4F4F4;
+	margin:5px;
+	ion-col {
+		vertical-align: middle;
+		padding: 10px;
+		img{
+			height: 100%;
+		}
+
+	}
+}
+
+.addButton {
+	background-color: #142768;
+	border-radius:100%;
+	color:white;
+	min-width: 70px;
+	min-height: 70px;
+	/*position: absolute;
+	right:70px;
+	bottom:10px;*/
+}
+
+ion-card {
+	z-index: 1;
+}
+
+#bottom-gird {
+	position: fixed;
+	bottom: 10px;
+}
+
+span {
+	button {
+		border-style: solid;
+		border-width: 2px;
+		border-color:#142768;
+	}
+}
+
+.selected {
+	padding: 15px;
+	background-color: white;
+}
+
+.unselected {
+	padding: 13px;
+	color: white;
+}
+
+.left-raduis {
+	border-radius: 30% 0% 0% 30%;
+}
+
+.right-raduis {
+	border-radius: 0% 30% 30% 0%;
+}
