@@ -20,14 +20,13 @@
         </ion-list> -->
         <div class="ion-list">
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-          <div class="ion-item" [routerDirection]="'root'" [routerLink]="[p.url]">
-            <!-- <ion-icon slot="start" [name]="p.icon"></ion-icon> -->
-            <img [src]="p.icon" alt="" />
-            <br>
-              <ion-label>
-                {{p.title}}
-              </ion-label>
-          </div>
+            <div class="ion-item" [routerDirection]="'root'" [routerLink]="[p.url]">
+              <!-- <ion-icon slot="start" [name]="p.icon"></ion-icon> -->
+              <img [src]="p.icon" alt="" />
+                <ion-label>
+                  {{p.title}}
+                </ion-label>
+            </div>
           </ion-menu-toggle>
         </div>
       </ion-content>

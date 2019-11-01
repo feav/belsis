@@ -215,7 +215,6 @@
 			vertical-align: middle;
 			padding: 10px;
 			img{
-				height: 100%;
 			}
 
 		}
@@ -251,6 +250,9 @@
 		border: solid;
 		border: 1px;
 		padding: 10px;
+		input{
+			text-align: center;
+		}
 	}
 
 	.circular {

@@ -13,7 +13,8 @@ export class AddProduitComponent implements OnInit {
 		name:"",
 		prix:"",
 		quantite:"",
-		categories: []
+		categories: [],
+		logo:"../../assets/prod_1.png"
 	};
 
 	constructor() { }

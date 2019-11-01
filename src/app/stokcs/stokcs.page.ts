@@ -32,7 +32,7 @@ export class StokcsPage implements OnInit {
   			prix: "15 000",
   			stock: 64,
   			quantite: 3,
-  			url:"../../assets/logo-stock.svg"
+  			url:"../../assets/prod_1.png"
   		},
   		{
   			id: 1,
@@ -40,7 +40,7 @@ export class StokcsPage implements OnInit {
   			prix: "15 000",
   			stock: 64,
   			quantite: 3,
-  			url:"../../assets/logo-stock.svg"
+  			url:"../../assets/prod_1.png"
   		},
   		{
   			id: 1,
@@ -48,7 +48,7 @@ export class StokcsPage implements OnInit {
   			prix: "15 000",
   			stock: 64,
   			quantite: 3,
-  			url:"../../assets/logo-stock.svg"
+  			url:"../../assets/prod_1.png"
   		},
   		{
   			id: 1,
@@ -56,7 +56,7 @@ export class StokcsPage implements OnInit {
   			prix: "15 000",
   			stock: 64,
   			quantite: 3,
-  			url:"../../assets/logo-stock.svg"
+  			url:"../../assets/prod_1.png"
   		},
   		{
   			id: 1,
@@ -64,7 +64,7 @@ export class StokcsPage implements OnInit {
   			prix: "15 000",
   			stock: 64,
   			quantite: 3,
-  			url:"../../assets/logo-stock.svg"
+  			url:"../../assets/prod_1.png"
   		},
   		{
   			id: 1,
@@ -72,7 +72,7 @@ export class StokcsPage implements OnInit {
   			prix: "15 000",
   			stock: 64,
   			quantite: 3,
-  			url:"../../assets/logo-stock.svg"
+  			url:"../../assets/prod_1.png"
   		},
   	]
   	this.commandes = [

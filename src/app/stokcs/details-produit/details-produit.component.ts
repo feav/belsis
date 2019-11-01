@@ -21,7 +21,7 @@ export class DetailsProduitComponent implements OnInit {
 	    	this.id = params['id'];
 		});
 		this.produit = {
-			url: "../asset/..",
+			url: "../asset/prod_1.png",
 			id: 1,
 			name: "Salade de fruit",
 			prix: "15 000",
