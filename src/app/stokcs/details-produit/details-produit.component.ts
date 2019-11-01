@@ -13,7 +13,14 @@ export class DetailsProduitComponent implements OnInit {
 	public produit:any;
 
 	constructor(private router: Router,
-				private route:ActivatedRoute) { }
+				private route:ActivatedRoute) { 
+		this.route.queryParams.subscribe(params => {
+			console.log(params);
+	      // if (params && params.special) {
+	      //   this.produit = JSON.parse(params.special);
+	      // }
+	    });
+	}
 
 	ngOnInit() {
 

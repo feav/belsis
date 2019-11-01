@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProduitService } from "../services/produit.service";
 
 @Component({
   selector: 'app-commandes',
@@ -22,123 +23,21 @@ export class CommandesPage implements OnInit {
 	public showList:boolean = true;
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private prod : ProduitService) { }
 
   ngOnInit() {
 
-  	this.produits = [
-  		{
-  			id: 1,
-  			nom: "Salade de fruits",
-  			prix: "15 000",
-  			stock: 64,
-  			quantite: 3,
-  			url:"../../assets/prod_1.png"
-  		},
-  		{
-  			id: 1,
-  			nom: "Salade de fruits",
-  			prix: "15 000",
-  			stock: 64,
-  			quantite: 3,
-  			url:"../../assets/prod_1.png"
-  		},
-  		{
-  			id: 1,
-  			nom: "Salade de fruits",
-  			prix: "15 000",
-  			stock: 64,
-  			quantite: 3,
-  			url:"../../assets/prod_1.png"
-  		},
-  		{
-  			id: 1,
-  			nom: "Salade de fruits",
-  			prix: "15 000",
-  			stock: 64,
-  			quantite: 3,
-  			url:"../../assets/prod_1.png"
-  		},
-  		{
-  			id: 1,
-  			nom: "Salade de fruits",
-  			prix: "15 000",
-  			stock: 64,
-  			quantite: 3,
-  			url:"../../assets/prod_1.png"
-  		},
-  		{
-  			id: 1,
-  			nom: "Salade de fruits",
-  			prix: "15 000",
-  			stock: 64,
-  			quantite: 3,
-  			url:"../../assets/prod_1.png"
-  		},
-  	];
+  	this.produits = this.prod.getAll();
 
   	this.commandes = [
-  		{
-  			id: 1,
-  			name: "Categorie 1",
-  			statusFilter: false
-  		},
-  		{
-  			id: 2,
-  			name: "Categorie 2	",
-  			statusFilter: false
-  		},
-  		{
-  			id: 1,
-  			name: "Categorie 1",
-  			statusFilter: false
-  		},
-  		{
-  			id: 2,
-  			name: "Categorie 2	",
-  			statusFilter: false
-  		},
-  		{
-  			id: 1,
-  			name: "Categorie 1",
-  			statusFilter: false
-  		},
-  		{
-  			id: 2,
-  			name: "Categorie 2	",
-  			statusFilter: false
-  		},
-  		{
-  			id: 1,
-  			name: "Categorie 1",
-  			statusFilter: false
-  		},
-  		{
-  			id: 2,
-  			name: "Categorie 2	",
-  			statusFilter: false
-  		},
-  		{
-  			id: 1,
-  			name: "Categorie 1",
-  			statusFilter: false
-  		},
-  		{
-  			id: 2,
-  			name: "Categorie 2	",
-  			statusFilter: false
-  		},
-  		{
-  			id: 1,
-  			name: "Categorie 1",
-  			statusFilter: false
-  		},
-  		{
-  			id: 2,
-  			name: "Categorie 2	",
-  			statusFilter: false
-  		},
 	 ];
+   let produitsList = ["Salade de fruits",""]
+   let commandesList = ["Fruit","Glace","Boissons","légumes","Céréales","féculents","Produits","Viande","poisson","œuf","Sucre","Corps gras"];
+    
+    for (var i = 1; i <= commandesList.length ; ++i) {
+      this.commandes.push({id: i,name:commandesList[i-1],statusFilter: false});
+      
+    }
   	this.commandePages = this.convertArrayToPagible(this.commandes, 6);
   	this.produitsPages = this.convertArrayToPagible(this.produits, 3);
   }
@@ -146,7 +45,9 @@ export class CommandesPage implements OnInit {
   public rechercher(tab) {
 
   }
-
+  public random(){
+    this.produits = this.prod.randomlly();
+  }
   public convertArrayToPagible(datas: Array<any>, pagesize: number):Array<Array<any>>{
   	let result:Array<Array<any>> = [];
   	for (var i = 0; i < (datas.length / pagesize); ++i) {

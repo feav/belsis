@@ -47,7 +47,7 @@
 				<button click="off" *ngIf="showList" (click)="setToCard()">icon2</button>
 			</ion-col>
 		</ion-row>
-		<ion-row>
+		<ion-row >
 			<ion-col>
 				<p id="contentList">
 					<ion-grid *ngIf="showList">
@@ -64,14 +64,12 @@
 								Stock
 							</ion-col>
 							<ion-col col-1>
-							</ion-col>
-							<ion-col col-1>
 								Opérations
 							</ion-col>
 							<ion-col col-1>
 							</ion-col>
 						</ion-row>
-						<ion-row text-center *ngFor="let produit of produits; let i = index" class="list-row-item">
+						<ion-row (click)="details(produit)" text-center *ngFor="let produit of produits; let i = index" class="list-row-item">
 							<ion-col col-1>
 								<img src="{{produit.url}}" />
 							</ion-col>
@@ -86,9 +84,6 @@
 							</ion-col>
 							<ion-col col-1>
 								<button class="nonCirculaire" (click)="editer(produit)">Modifier</button>
-							</ion-col>
-							<ion-col col-1>
-								<button class="nonCirculaire" (click)="details(produit)">Details</button>
 							</ion-col>
 							<ion-col col-1>
 								<button class="nonCirculaire red" (click)="supprimer(produit)">Supprimer</button>

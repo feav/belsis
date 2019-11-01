@@ -52,3 +52,12 @@ ion-menu
     	}
     }
 }
+
+
+@media screen and (max-width: 975px) {
+    ion-menu {
+        ion-header ion-toolbar,ion-item,.ion-item{
+            width: 70%;
+        }
+    }
+}
