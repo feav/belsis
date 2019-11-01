@@ -1,0 +1,33 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+	<form (ngSubmit)="logForm()">
+		<ion-grid>
+			<ion-row justify-content-center>
+					<ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+
+						<div text-center>
+							<h4>BELSIS</h4>
+						</div>
+						<div padding>
+							<ion-item>
+								<ion-input type="text" [(ngModel)]="user.name" name="name" placeholder="Username"></ion-input>
+							</ion-item>
+
+							<ion-item>
+								<ion-input type="password" [(ngModel)]="user.password"  name="psw" placeholder="Password"></ion-input>
+							</ion-item>
+						</div>
+
+						<div padding>
+							<ion-button size="large" ion-button type="submit" expand="block">CONNEXION</ion-button>
+						</div>
+					</ion-col>
+			</ion-row>
+		</ion-grid>
+	</form>
+</ion-content>

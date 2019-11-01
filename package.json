@@ -28,6 +28,7 @@
     "chart.js": "^2.8.0",
     "cordova-plugin-filechooser": "^1.2.0",
     "core-js": "^2.5.4",
+    "ionic-angular": "^3.9.9",
     "ng2-charts": "^2.3.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
