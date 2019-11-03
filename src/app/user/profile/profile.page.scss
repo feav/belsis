@@ -1,3 +1,19 @@
+ion-header{
+	ion-toolbar{
+	    --background : #142768!important; 
+	    ion-title{
+	    	text-align: center;
+	    	color: white;
+	    }
+	    ion-button{
+	    	color: white;
+	    	ion-menu-button{
+	    		color: white;
+	    	}
+	    }
+	}
+}
+
 page-profile {
     .profile-image{
         width: 200px;

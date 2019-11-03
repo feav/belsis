@@ -41,10 +41,10 @@
 		</ion-row>
 		<ion-row>
 			<ion-col id="shwitchIcons" text-right>
-				<button class="on" *ngIf="showList" (click)="setToList()">icon1</button>
-				<button class="off" *ngIf="!showList" (click)="setToList()">icon1</button>
-				<button class="on" *ngIf="!showList" (click)="setToCard()">icon2</button>
-				<button click="off" *ngIf="showList" (click)="setToCard()">icon2</button>
+				<button class="on" *ngIf="showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
+				<button class="off" *ngIf="!showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
+				<button class="on" *ngIf="!showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
+				<button click="off" *ngIf="showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
 			</ion-col>
 		</ion-row>
 		<ion-row>
