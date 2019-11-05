@@ -45,7 +45,7 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private router: Router,
-    private toast: ToastController
+    private toast: ToastController,
     private tableService: TableService
   ) {
     this.initializeApp();
@@ -85,12 +85,5 @@ export class AppComponent {
       this.splashScreen.hide();
       this.tableService.initializeTables();
     });
-    let user_exist = localStorage.getItem('user');
-    if(user_exist){
-      this.user = JSON.parse(user_exist);
-    }else{
-      this.router.navigate(["/login"],{queryParams:{}});
-
-    }
   }
 }

@@ -33,8 +33,8 @@ export class LoginPage implements OnInit {
     if(this.user.name=="test@gmail.com" && this.user.password=="test"){
     	this.presentToast("Bienvenue "+this.user.name,"success");
     	localStorage.setItem('user', JSON.stringify(this.user));
-    	this.router.navigate(["/"],{queryParams:{}});
-
+    	this.router.navigate(["/home"],{queryParams:{}});
+      localStorage.setItem('recentLogged', "1");
     }else{
     	this.presentToast("Mot de passe ou nom d'utilisateur incorrect","warning");
     }

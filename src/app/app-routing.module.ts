@@ -1,10 +1,18 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+let home = 'login';
+
+let user_exist = localStorage.getItem('user');
+if(user_exist){
+  home = 'home';
+  localStorage.setItem('recentLogged', "0");
+}
+console.log(home)
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: home,
     pathMatch: 'full'
   },
   {
@@ -31,7 +39,7 @@ const routes: Routes = [
     loadChildren: './comptabilite/comptabilite.module#ComptabilitePageModule' 
   },
   { path: 'login', loadChildren: './user/login/login.module#LoginPageModule' },
-  { path: 'profile', loadChildren: './user/profile/profile.module#ProfilePageModule' }
+  { path: 'profile', loadChildren: './user/profile/profile.module#ProfilePageModule' },
   { path: 'commandes/new', loadChildren: './commandes/nouveau/nouveau.module#NouveauPageModule' }
 ];
 

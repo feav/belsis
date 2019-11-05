@@ -23,7 +23,13 @@ export class HomePage {
   constructor() { }
 
   ionViewDidEnter() {
-    this.createBarChart();
+    
+    if(localStorage.getItem('recentLogged') === "1"){
+    	localStorage.setItem('recentLogged', "0");
+    	window.location.reload();
+    }else{
+		this.createBarChart();    	
+    }
   }
 
   createBarChart() {
