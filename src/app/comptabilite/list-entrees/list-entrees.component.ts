@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 export class ListEntreesComponent implements OnInit {
 
+  private entrees:Array<any>;
+
   constructor(private router: Router) { }
 
   ngOnInit() {
