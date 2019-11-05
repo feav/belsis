@@ -14,15 +14,15 @@ export class ProduitService {
 	      {
 	        id: 1,
 	        nom: "Poulet dg",
-	        prix: "7 000",
+	        prix: "7000",
 	        stock: 12,
 	        quantite: 3,
-	        url:"../../assets/prod_2.jpg"
+	        url:"../../assets/prod_2.jpg",
 	      },
 	      {
 	        id: 2,
 	        nom: "Gateau Ananas",
-	        prix: "5 000",
+	        prix: "5000",
 	        stock: 64,
 	        quantite: 3,
 	        url:"../../assets/prod_3.jpg"
@@ -38,7 +38,7 @@ export class ProduitService {
 	      {
 	        id: 4,
 	        nom: "Salade de fruits",
-	        prix: "15 000",
+	        prix: "15000",
 	        stock: 6,
 	        quantite: 3,
 	        url:"../../assets/prod_1.png"
@@ -46,7 +46,7 @@ export class ProduitService {
 	      {
 	        id: 5,
 	        nom: "Les lefombos",
-	        prix: "1 000",
+	        prix: "1000",
 	        stock: 54,
 	        quantite: 3,
 	        url:"../../assets/prod_5.jpeg"
@@ -54,7 +54,7 @@ export class ProduitService {
 	      {
 	        id: 6,
 	        nom: "Beignet sucré au blé entier",
-	        prix: "3 000",
+	        prix: "3000",
 	        stock: 4,
 	        quantite: 3,
 	        url:"../../assets/prod_6.jpeg"
@@ -62,7 +62,7 @@ export class ProduitService {
 	      {
 	        id: 7,
 	        nom: "Gâteau ou met de pistache",
-	        prix: "1 000",
+	        prix: "1000",
 	        stock: 114,
 	        quantite: 3,
 	        url:"../../assets/prod_7.png"
@@ -70,7 +70,7 @@ export class ProduitService {
 	      {
 	        id: 8,
 	        nom: "Koki",
-	        prix: "3 000",
+	        prix: "3000",
 	        stock: 9,
 	        quantite: 3,
 	        url:"../../assets/prod_9.jpg"
@@ -91,4 +91,9 @@ export class ProduitService {
 	      return item.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
 	    });
 	  }
+
+	getProduct(id){
+		console.log(this.items.filter(item=>{item.id == id})[0]);
+		return this.items.filter(item=>{item.id == id})[0];
+	}
 }

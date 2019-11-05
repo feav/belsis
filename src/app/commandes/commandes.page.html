@@ -52,107 +52,42 @@
 				<p id="contentList">
 					<ion-grid *ngIf="showList">
 						<ion-row text-center>
-							<ion-col col-1>
+							<ion-col col-2>
+								N° Commande
 							</ion-col>
 							<ion-col col-3>
-								Nom
-							</ion-col>
-							<ion-col col-2>
-								Prix
-							</ion-col>
-							<ion-col col-1>
-								Stock
+								Quantité
 							</ion-col>
 							<ion-col col-3>
-								Quantite
-							</ion-col>
-							<ion-col col-2>
-							</ion-col>
-						</ion-row>
-						<ion-row text-center *ngFor="let produit of produits; let i = index" class="list-row-item">
-							<ion-col col-1>
-								<img src="{{produit.url}}" />
+								Table
 							</ion-col>
 							<ion-col col-3>
-								{{produit.nom}}
-							</ion-col>
-							<ion-col col-2>
-								<span class="digits">{{produit.prix}}</span> €
+								Montant Total
 							</ion-col>
 							<ion-col col-1>
-								<span class="digits">{{produit.stock}}</span>
+								Détail
 							</ion-col>
-							<ion-col col-3>
-								<button class="circular" (click)="moins(i)" style="background-color:#EC0000;">-</button>
-								<span  class = "nonDigits" >
-									<input type="text" [(value)]="produit.quantite" style="width: 40px;" />
-								</span>
-								<button class="circular" (click)="plus(i)" style="background-color:#00B79A;">+</button>
-							</ion-col>
-							<ion-col col-2>
-								<button class="nonCirculaire" (click)="ajouter(produit)">AJOUTER</button>
-							</ion-col>
-						</ion-row>
-					</ion-grid>
-					<ion-grid *ngIf="!showList">
-						<ion-row *ngFor="let page of produitsPages; let li = index ">
-							<ion-col col-4 *ngFor="let produit of page; let co = index ">
-								<ion-card>
-						        	<img class="cardImg" src="{{produit.url}}" />
-						        	<ion-card-header>
-						          		<ion-card-title text-center></ion-card-title>
-						        	</ion-card-header>
-						        	<ion-card-content>
 
-						          		<ion-grid>
-						          			<ion-row>
-						          				<ion-col>
-						          					<span class="produit-title">{{produit.nom}}</span>
-						          				</ion-col>
-						          			</ion-row>
-						          			<ion-row>
-						          				<ion-col>
-									          		<p text-center>
-									          			<ion-chip>
-														  	<ion-label>Categorie</ion-label>
-														</ion-chip>
-									          			<ion-chip>
-														  	<ion-label>Categorie</ion-label>
-														</ion-chip>
-									          			<ion-chip>
-														  	<ion-label>Categorie</ion-label>
-														</ion-chip>
-									        		</p>
-						          				</ion-col>
-						          			</ion-row>
-						          			<ion-row>
-						          				<ion-col text-center>
-													<button class="circular" (click)="moins(li*3+co)" style="background-color:#EC0000;">-</button>
-													<span  class = "nonDigits" >
-														<input type="text" [(value)]="produit.quantite" style="width: 40px;" />
-													</span>
-													<button class="circular" (click)="plus(li*3+co)" style="background-color:#00B79A;">+</button>
-						          				</ion-col>
-						          			</ion-row>
-						          			<ion-row>
-						          				<ion-col>
-						          					<button class="nonCirculaire" (click)="ajouter(produit)">AJOUTER</button>
-						          				</ion-col>
-						          			</ion-row>
-						          		</ion-grid>
-						        	</ion-card-content>
-						      	</ion-card>
+						</ion-row>
+						<ion-row text-center *ngFor="let order of orders; let i = index" class="list-row-item">
+							<ion-col col-2>
+								{{order.id}}
+							</ion-col>
+							<ion-col col-3>
+								<span>{{ order.quantityOrdered }}</span>
+							</ion-col>
+							<ion-col col-3>
+								<span>vide</span>
+							</ion-col>
+							<ion-col col-3>
+								<span> {{ order.totalAmount }} FCFA</span>
+							</ion-col>
+							<ion-col col-1>
+								<ion-icon class="digits" name="eye"></ion-icon>
 							</ion-col>
 						</ion-row>
 					</ion-grid>
 				</p>
-			</ion-col>
-		</ion-row>
-		<ion-row text-right>
-			<ion-col >
-				<button class="addButton" (click)="ajoutGlobal()">
-					+
-				</button>
 			</ion-col>
 		</ion-row>
 	</ion-grid>

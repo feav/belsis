@@ -2,19 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController, AlertController } from '@ionic/angular';
 
-import { ProduitService } from "../services/produit.service";
-import { CommandeService } from "../services/commande.service";
-import { UtilsService } from "../services/utils.service";
+import { ProduitService } from "../../services/produit.service";
+import { CommandeService } from "../../services/commande.service";
+import { TableService } from "../../services/table.service";
+import { UtilsService } from "../../services/utils.service";
+
 
 @Component({
-  selector: 'app-commandes',
-  templateUrl: './commandes.page.html',
-  styleUrls: ['./commandes.page.scss'],
+  selector: 'app-nouveau',
+  templateUrl: './nouveau.page.html',
+  styleUrls: ['./nouveau.page.scss'],
 })
-export class CommandesPage implements OnInit {
+export class NouveauPage implements OnInit {
 
-
-	public searchInput:string;
+  public searchInput:string;
 
 	public commandes:Array<any>;
 
@@ -26,15 +27,19 @@ export class CommandesPage implements OnInit {
 
 	public showList:boolean = true;
 
-  orders: any;
+	private tables = [];
+	private tableId = null;
 
 
   constructor(private router: Router,private prod : ProduitService, 
-    private commandeService: CommandeService, private utilsService: UtilsService, private toastController: ToastController) { }
+    private commandeService: CommandeService, private utilsService: UtilsService, 
+    private toastController: ToastController,
+    private tableService: TableService) { }
 
   ngOnInit() {
 
   	this.produits = this.prod.getAll();
+  	this.tables = this.tableService.getTables();
 
   	this.commandes = [
 	 ];
@@ -47,8 +52,6 @@ export class CommandesPage implements OnInit {
     }
   	this.commandePages = this.convertArrayToPagible(this.commandes, 6);
   	this.produitsPages = this.convertArrayToPagible(this.produits, 3);
-
-    this.getOrders();
   }
 
   public rechercher(tab) {
@@ -88,9 +91,23 @@ export class CommandesPage implements OnInit {
   	this.showList = false;
   }
 
-  public getOrders(){
-     this.orders = this.commandeService.getOrders();
-     console.log(this.orders);
+  public ajouter(produit, quantityOrdered){
+    this.commandeService.addOrder(produit, quantityOrdered, quantityOrdered, this.tableId );
+    this.utilsService.presentToast('Commande Ajoutée', 2000, 'success');
+    console.log(this.tableId);
+  }
+
+  public plus(index){
+  	this.produits[index].quantite = this.produits[index].quantite + 1;
+  }
+
+  public moins(index){
+  	if (this.produits[index].quantite != 0) 
+  		this.produits[index].quantite = this.produits[index].quantite - 1;
+  }
+
+  public ajoutGlobal(){
+  	 this.router.navigate(["/commandes/add"]);
   }
 
 }

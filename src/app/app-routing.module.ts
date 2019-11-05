@@ -26,13 +26,13 @@ const routes: Routes = [
   { 
     path: 'stokcs', 
     loadChildren: './stokcs/stokcs.module#StokcsPageModule' 
-  },
-  { 
+  },{ 
     path: 'comptabilite', 
     loadChildren: './comptabilite/comptabilite.module#ComptabilitePageModule' 
   },
   { path: 'login', loadChildren: './user/login/login.module#LoginPageModule' },
   { path: 'profile', loadChildren: './user/profile/profile.module#ProfilePageModule' }
+  { path: 'commandes/new', loadChildren: './commandes/nouveau/nouveau.module#NouveauPageModule' }
 ];
 
 @NgModule({
