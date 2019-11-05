@@ -1,41 +1,60 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>comptabilite</ion-title>
+    <ion-title>Comptabilite</ion-title>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
     <div class="ion-content">
-      <ion-grid >
-        <ion-card-title>Les Rapports</ion-card-title>
+      <ion-grid>
+        <ion-row>
+          <ion-col id="buttonSwicht" text-center>
+            <button (click)="setToEntrees()" class="left-round-button button-swicht text-color">
+              LISTE DES ENTREES
+            </button>
+            
+            <button (click)="setToSorties()" class="button-swicht text-color">
+              LISTE DES SORTIES
+            </button>
+
+            <button class="right-round-button button-swicht back-ground-color">
+              STATISTIQUES
+            </button>
+          </ion-col>
+        </ion-row>
         <ion-row>
           <ion-col>
-            <div> 
-              <canvas #barChart></canvas>
-              <ion-card-subtitle class="ion-text-center">Flux Financier</ion-card-subtitle>
-            </div>
-          </ion-col>
-          <ion-col>
-            <div> 
-              <canvas #barChartSecond></canvas>
-              <ion-card-subtitle class="ion-text-center">Stocks</ion-card-subtitle>
-            </div>
+            <ion-grid>
+              <ion-card-title>Les Rapports</ion-card-title>
+              <ion-row>
+                <ion-col>
+                  <div> 
+                    <canvas #barChart></canvas>
+                    <ion-card-subtitle class="ion-text-center">Flux Financier</ion-card-subtitle>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div> 
+                    <canvas #barChartSecond></canvas>
+                    <ion-card-subtitle class="ion-text-center">Stocks</ion-card-subtitle>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-card-title class="ion-text-center">Les Commandes</ion-card-title>
+
+
+               <ion-row>
+                <ion-col>
+                  <div> 
+                    <canvas #barChartBar></canvas>
+                    <ion-card-subtitle class="ion-text-center">Meilleurs ventes</ion-card-subtitle>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
           </ion-col>
         </ion-row>
-        <ion-card-title class="ion-text-center">Les Commandes</ion-card-title>
-
-
-         <ion-row>
-          <ion-col>
-            <div> 
-              <canvas #barChartBar></canvas>
-              <ion-card-subtitle class="ion-text-center">Meilleurs ventes</ion-card-subtitle>
-            </div>
-          </ion-col>
-        </ion-row>
-
-
       </ion-grid>
     </div>
 </ion-content>

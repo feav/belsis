@@ -41,10 +41,10 @@
 		</ion-row>
 		<ion-row>
 			<ion-col id="shwitchIcons" text-right>
-				<button class="on" *ngIf="showList" (click)="setToList()">icon1</button>
-				<button class="off" *ngIf="!showList" (click)="setToList()">icon1</button>
-				<button class="on" *ngIf="!showList" (click)="setToCard()">icon2</button>
-				<button click="off" *ngIf="showList" (click)="setToCard()">icon2</button>
+				<button class="on" *ngIf="showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
+				<button class="off" *ngIf="!showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
+				<button class="on" *ngIf="!showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
+				<button click="off" *ngIf="showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
 			</ion-col>
 		</ion-row>
 		<ion-row>
@@ -73,32 +73,32 @@
 							</ion-col>
 						</ion-row>
 						<ion-row text-center *ngFor="let produit of produits; let i = index" class="list-row-item">
-							<ion-col col-1>
+							<ion-col align-self-center col-1>
 								<img src="{{produit.url}}" />
 							</ion-col>
-							<ion-col col-3>
+							<ion-col align-self-center col-3>
 								{{produit.nom}}
 							</ion-col>
-							<ion-col col-2>
+							<ion-col align-self-center col-2>
 								<span class="digits">{{produit.prix}}</span> €
 							</ion-col>
-							<ion-col col-1>
+							<ion-col align-self-center col-1>
 								<span class="digits">{{produit.stock}}</span>
 							</ion-col>
-							<ion-col col-3>
+							<ion-col align-self-center col-3>
 								<button class="circular" (click)="moins(i)" style="background-color:#EC0000;">-</button>
 								<span  class = "nonDigits" >
 									<input type="text" [(value)]="produit.quantite" style="width: 40px;" />
 								</span>
 								<button class="circular" (click)="plus(i)" style="background-color:#00B79A;">+</button>
 							</ion-col>
-							<ion-col col-1>
+							<ion-col align-self-center col-1>
 								<ion-select value="brown" okText="Okay" cancelText="Dismiss" [(ngModel)]="tableId">
 							      <ion-select-option value="">Aucune</ion-select-option>
 							      <ion-select-option *ngFor="let table of tables" value="{{ table.id }}">{{ table.label }}</ion-select-option>
 							    </ion-select>
 							</ion-col>
-							<ion-col col-2>
+							<ion-col align-self-center col-2>
 								<button class="nonCirculaire" (click)="ajouter(produit, produit.quantite,  tableId)">AJOUTER</button>
 							</ion-col>
 						</ion-row>
