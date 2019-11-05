@@ -1,5 +1,6 @@
 import { Chart } from 'chart.js';
 import { Component, OnInit , ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-comptabilite',
@@ -24,13 +25,21 @@ export class ComptabilitePage  {
   private bars2:any;
   private bars3:any;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   ionViewDidEnter() {
     this.createBarChart();
+  }
+
+  public setToEntrees(){
+  	this.router.navigate(["/comptabilite/list-entrees"]);
+  }
+
+  public setToSorties(){
+  	this.router.navigate(["/comptabilite/list-sorties"]);
   }
 
   createBarChart() {

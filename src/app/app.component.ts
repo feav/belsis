@@ -45,7 +45,7 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private router: Router,
-    private toast: ToastController
+    private toast: ToastController,
     private tableService: TableService
   ) {
     this.initializeApp();

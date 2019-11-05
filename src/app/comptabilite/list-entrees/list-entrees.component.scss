@@ -1,4 +1,60 @@
+	ion-icon{
+	    font-size: 30px;
+	}
 
+	.digits {
+		color: red;
+	}
+
+	.list-row-item {
+		background-color:#F4F4F4;
+		margin:5px;
+		ion-col {
+			vertical-align: middle;
+			padding: 10px;
+			img{
+			}
+
+		}
+	}
+
+	#horiszontalBar {
+		padding: 10px;
+		border-style: solid;
+		border-top:2px;
+		border-left: 2px;
+		border-right: 2px;
+		border-color: #c8c8c8;
+	}
+
+	#searchRow {
+		text-align: center;
+		padding: 7px;
+		input{
+			border-style: solid;
+			border-radius: 0px;
+			border-width: 2px;
+			border-color: #c8c8c8;
+			height: 40px;
+			width: 80%;
+			margin: 2px;
+		}
+		button{
+			font-weight: 800;
+		    border-radius: 100%;
+		    background: #142768;
+		    color: white;
+		    width: 80px;
+		    height: 80px;
+		    //font-size: x-large;
+		    position: relative;
+		    left:-20px;
+		    //right: 10px;
+		    //bottom: 10px;
+		    //line-height: 15px;
+		}
+	}
+	
 	.left-round-button {
 		border-radius: 45% 0 0 45%;
 	}

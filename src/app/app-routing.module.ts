@@ -31,7 +31,7 @@ const routes: Routes = [
     loadChildren: './comptabilite/comptabilite.module#ComptabilitePageModule' 
   },
   { path: 'login', loadChildren: './user/login/login.module#LoginPageModule' },
-  { path: 'profile', loadChildren: './user/profile/profile.module#ProfilePageModule' }
+  { path: 'profile', loadChildren: './user/profile/profile.module#ProfilePageModule' },
   { path: 'commandes/new', loadChildren: './commandes/nouveau/nouveau.module#NouveauPageModule' }
 ];
 
