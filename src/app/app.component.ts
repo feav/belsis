@@ -4,6 +4,8 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import { TableService } from './services/table.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -15,6 +17,10 @@ export class AppComponent {
       title: 'Plan de Tables',
       url: '/table',
       icon: '/assets/logo-tables.svg'
+    },{
+      title: 'Nouvelle Commande',
+      url: '/commandes/new',
+      icon: '/assets/logo-commande.svg'
     },
     {
       title: 'Les Commandes',
@@ -36,7 +42,8 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private tableService: TableService
   ) {
     this.initializeApp();
   }
@@ -45,6 +52,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.tableService.initializeTables();
     });
   }
 }

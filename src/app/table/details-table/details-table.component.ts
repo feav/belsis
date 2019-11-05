@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-details-table',
@@ -71,7 +72,19 @@ export class DetailsTableComponent implements OnInit {
 		]
 	];
 
-	constructor() { }
+	tableId: any;
+
+	constructor(private route : ActivatedRoute, private router: Router) {
+	}
+
+	ionViewDidEnter(){
+		this.route.queryParams.subscribe(params => {
+	      if (params && params.tableId) {
+	        this.tableId = JSON.parse(params.tableId);
+	        console.log(this.tableId);
+	      }
+	    });
+	}
 
 	ngOnInit() {}
 

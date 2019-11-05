@@ -7,16 +7,16 @@
 <ion-content>
 	<ion-grid>
         <!-- <ion-card-title class="ion-text-center">Plan de Travail</ion-card-title> -->
-        <ion-row class="ion-margin" *ngFor="let table of tables">
-          <ion-col *ngFor="let tab of table">
+        <ion-row >
+          <ion-col class="ion-margin" *ngFor="let table of tables" size="3">
             <ion-card>
               <ion-card-header>
                 <div>
-                	<ion-label class="primary round" [ngStyle]="{'background-color': tab.color}" ></ion-label>
-                	<ion-label class="title"> -<span>{{tab.etat}}</span>- </ion-label>
+                	<ion-label class="primary round" [ngStyle]="{'background-color': table.color}" ></ion-label>
+                	<ion-label class="title"> -<span>{{table.etat}}</span>- </ion-label>
                 </div>
                 <div class="left-part">
-                	<ion-label class="title"> <span>SERVEUR - {{tab.serveur}}</span> </ion-label>
+                	<ion-label class="title"> <span>SERVEUR - {{table.serveur}}</span> </ion-label>
                 	<img src="/assets/profile-2.svg">
                 </div>
               </ion-card-header>
@@ -24,16 +24,16 @@
               <ion-card-content>
                 <div class="img-content">
                   
-                	<ion-card-subtitle class="secondary">{{tab.label}}</ion-card-subtitle>
-                	<ion-card-title class="primary">{{tab.value}}</ion-card-title>
+                	<ion-card-subtitle class="secondary">{{table.label}}</ion-card-subtitle>
+                	<ion-card-title class="primary">{{table.orders.length}}</ion-card-title>
                 	<b>COMMANDE</b>
                 </div>
                 <div class="foot ion-text-center">
                 	<div>
-                		<img (click)="openTable(tab)" src="/assets/logo-oeil.svg">
+                		<img (click)="openTable(tab, table.id)" src="/assets/logo-oeil.svg">
 
                 		<ion-label style="margin-left: 5px" > 
-                			<span> {{tab.location}} </span> 
+                			<span> {{table.location}} </span> 
                 		</ion-label>
                 	</div>
                 	<div>

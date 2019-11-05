@@ -26,7 +26,9 @@ const routes: Routes = [
   { 
     path: 'stokcs', 
     loadChildren: './stokcs/stokcs.module#StokcsPageModule' 
-  }
+  },
+  { path: 'commandes/new', loadChildren: './commandes/nouveau/nouveau.module#NouveauPageModule' }
+
 ];
 
 @NgModule({
