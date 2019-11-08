@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { ModalDetailsPage } from "../modal-details/modal-details.page";
 
 @Component({
   selector: 'app-details-table',
@@ -50,31 +52,87 @@ export class DetailsTableComponent implements OnInit {
 	public datas:Array<Array<any>> = [
 		[
 			{
-				nombre: 10
+				commandNomber: 123,
+				nombrePlat: 10,
+				montant: 10000,
+				produits: [
+			  		{
+			  			id: 1,
+			  			nom: "Salade de fruits",
+			  			prix: 15000,
+			  			stock: 64,
+			  			quantite: 3,
+			  			url:"../../assets/logo-stock.svg",
+			  			show: false
+			  		},
+			  		{
+			  			id: 1,
+			  			nom: "Salade de fruits",
+			  			prix: 15000,
+			  			stock: 64,
+			  			quantite: 3,
+			  			url:"../../assets/logo-stock.svg",
+			  			show: false
+			  		}
+				]
 			},
 			{
-				nombre: 11
-			},
-			{
-				nombre: 12
+				commandNomber: 126,
+				nombrePlat: 11,
+				montant: 10000
 			}
 		],
 		[
 			{
-				nombre: 13
+				commandNomber: 123,
+				nombrePlat: 10,
+				montant: 10000,
+				produits: [
+			  		{
+			  			id: 1,
+			  			nom: "Salade de fruits",
+			  			prix: 15000,
+			  			stock: 64,
+			  			quantite: 3,
+			  			url:"../../assets/logo-stock.svg",
+			  			show: false
+			  		},
+			  		{
+			  			id: 1,
+			  			nom: "Salade de fruits",
+			  			prix: 15000,
+			  			stock: 64,
+			  			quantite: 3,
+			  			url:"../../assets/logo-stock.svg",
+			  			show: false
+			  		}
+				]
 			},
 			{
-				nombre: 14
+				commandNomber: 126,
+				nombrePlat: 11,
+				montant: 10000
+			}
+		],
+		[
+			{
+				commandNomber: 130,
+				nombrePlat: 12,
+				montant: 10000
 			},
 			{
-				nombre: 15
+				commandNomber: 130,
+				nombrePlat: 12,
+				montant: 10000
 			}
 		]
 	];
 
 	tableId: any;
 
-	constructor(private route : ActivatedRoute, private router: Router) {
+	constructor(private route : ActivatedRoute,
+				private router: Router,
+				public modalController: ModalController) {
 	}
 
 	ionViewDidEnter(){
@@ -85,6 +143,14 @@ export class DetailsTableComponent implements OnInit {
 	      }
 	    });
 	}
+
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: ModalDetailsPage
+    });
+    return await modal.present();
+  }
 
 	ngOnInit() {}
 

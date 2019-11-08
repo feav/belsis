@@ -18,7 +18,13 @@ export class AppComponent {
       title: 'Plan de Tables',
       url: '/table',
       icon: '/assets/logo-tables.svg'
-    },{
+    },
+    {
+      title: 'Plats',
+      url: '/commandes/new',
+      icon: '/assets/logo-commande.svg'
+    },
+    {
       title: 'Nouvelle Commande',
       url: '/commandes/new',
       icon: '/assets/logo-commande.svg'
