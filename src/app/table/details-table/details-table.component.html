@@ -45,14 +45,14 @@
 				
 			</ion-col>	
 		</ion-row>
-		<ion-row >
+		<ion-row>
 			<ion-col size-md="6" size-lg="6">
 				<br>
 				<br>
 				<ion-grid>
-					<ion-row *ngFor="let items of datas" size-lg="6" size-md="6" size-xs="12" size-sm="12">
-						<ion-col *ngFor="let item of items">
-							<ion-card style="min-height: px;" class="detail-card">
+					<ion-row>
+						<ion-col *ngFor="let item of datas; let i = index" size-lg="6" size-md="6" size-xs="12" size-sm="12">
+							<ion-card (click)="load(item)" class="detail-card hide-only-xs hide-only-sm">
 								<ion-card-header>
 									<ion-card-title>
 										Commande N° {{item.commandNomber}}
@@ -65,33 +65,53 @@
 									<ion-label>
 										Montant : {{item.montant}} FCFA
 									</ion-label><br>
-									<div>
-										<ion-item style="text-style: bold">
+								</ion-card-content>
+							</ion-card>
+							<ion-card (click)="showDetails(i)" class="detail-card hide-only-xl hide-only-md hide-only-lg">
+								<ion-card-header>
+									<ion-card-title>
+										Commande N° {{item.commandNomber}}
+									</ion-card-title>
+								</ion-card-header>
+								<ion-card-content>
+									<ion-label *ngIf="!item.showDetail"> 
+										Nombre de plats : {{item.nombrePlat}}<br>
+									</ion-label>
+									<ion-label *ngIf="!item.showDetail">
+										Montant : {{item.montant}} FCFA
+									</ion-label>
+									<div *ngIf="item.showDetail">
+										<ion-item *ngFor="let prod of item.produits">
 											<ion-label>
-										    	Produits  commandés
+												{{prod.nom}}
 											</ion-label>
 										</ion-item>
-										<!--<ion-item *ngFor="let prod of item.produits; j=index">
-										    	<!--Nom : {{produit.nom}}
-										    	Prix : {{produit.prix}}
-										    	Quantite : {{produit.quantite}}--
-										    	Nom : {{prod.nom}}
-										    	Prix : {{prod.prix}}
-										    	Quantite : {{prod.quantite}}--
-										</ion-item>-->
-									</div>
-										<!--<ion-card-header>
-											<ion-label>
-												Contenu
+										<ion-item *ngIf="item.showDetail">
+											<ion-label> 
+												Nombre de plats : {{item.nombrePlat}}
 											</ion-label>
-										</ion-card-header>
-										<ion-card-content>
-											<ion-item>
-											  <ion-label>
-											    Secondary Color Item
-											  </ion-label>
-											</ion-item>
-										</ion-content>-->
+										</ion-item>
+										<ion-item *ngIf="item.showDetail">
+											<ion-label>
+												Montant : {{item.montant}} FCFA
+											</ion-label>
+										</ion-item>
+										<ion-grid *ngIf="item.showDetail">
+											<ion-row>
+												<ion-col  text-center>
+													<ion-button>ENCAISSER</ion-button>
+												</ion-col>
+												<ion-col  text-center>
+													<ion-button>IMPRIMER</ion-button>
+												</ion-col>
+												<ion-col text-center>
+													<ion-button>
+														EDUTER
+													</ion-button>
+												</ion-col>
+											</ion-row>
+										</ion-grid>
+									</div>
 								</ion-card-content>
 							</ion-card>
 						</ion-col>

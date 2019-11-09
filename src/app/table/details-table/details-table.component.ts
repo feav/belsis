@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ModalDetailsPage } from "../modal-details/modal-details.page";
+import { CommandesComponent } from '../commandes/commandes.component';
 
 @Component({
   selector: 'app-details-table',
@@ -49,12 +50,13 @@ export class DetailsTableComponent implements OnInit {
 
 	public day: string = "10/10/2012";
 
-	public datas:Array<Array<any>> = [
-		[
+	public datas:Array<any> = [
+		
 			{
 				commandNomber: 123,
 				nombrePlat: 10,
 				montant: 10000,
+				showDetail: false,
 				produits: [
 			  		{
 			  			id: 1,
@@ -79,14 +81,16 @@ export class DetailsTableComponent implements OnInit {
 			{
 				commandNomber: 126,
 				nombrePlat: 11,
-				montant: 10000
+				montant: 10000,
+				showDetail: false
 			}
-		],
-		[
+		,
+		
 			{
 				commandNomber: 123,
 				nombrePlat: 10,
 				montant: 10000,
+				showDetail: false,
 				produits: [
 			  		{
 			  			id: 1,
@@ -111,24 +115,28 @@ export class DetailsTableComponent implements OnInit {
 			{
 				commandNomber: 126,
 				nombrePlat: 11,
-				montant: 10000
+				montant: 10000,
+				showDetail: false
 			}
-		],
-		[
+		,
+		
 			{
 				commandNomber: 130,
 				nombrePlat: 12,
-				montant: 10000
+				montant: 10000,
+				showDetail: false
 			},
 			{
 				commandNomber: 130,
 				nombrePlat: 12,
-				montant: 10000
+				montant: 10000,
+				showDetail: false
 			}
-		]
+		
 	];
 
 	tableId: any;
+	precedent: any;
 
 	constructor(private route : ActivatedRoute,
 				private router: Router,
@@ -144,13 +152,28 @@ export class DetailsTableComponent implements OnInit {
 	    });
 	}
 
+	public load(commande){
+		this.commande = commande;
+	}
 
-  async presentModal() {
+	public showDetails(commande){
+		this.datas[commande].showDetail = true;
+		if(this.precedent!=undefined)
+			this.datas[this.precedent].showDetail = false;
+		this.precedent = commande;
+	}
+
+  /*async presentModal(commande) {
+  	console.log("toto");
+  	let compo:any = ModalDetailsPage;
     const modal = await this.modalController.create({
-      component: ModalDetailsPage
+      	component: compo,
+		componentProps: {
+			"commande": this.commande 
+		}
     });
     return await modal.present();
-  }
+  }*/
 
 	ngOnInit() {}
 

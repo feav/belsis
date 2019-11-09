@@ -10,7 +10,8 @@ describe('DetailsTableComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DetailsTableComponent ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      schemas: [CUSTOM_ELEMENT          this.tableId = JSON.parse(params.tableId);
+S_SCHEMA],
     })
     .compileComponents();
   }));

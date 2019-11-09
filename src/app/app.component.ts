@@ -45,7 +45,7 @@ export class AppComponent {
       icon: '/assets/logo-stat.svg'
     }
   ];
-  public user:any;
+  public user:any = {};
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
