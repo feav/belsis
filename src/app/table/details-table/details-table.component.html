@@ -33,18 +33,6 @@
 				</ion-grid>
 			</ion-col>
 		</ion-row>
-		<ion-row text-center class="ion-align-items-center">
-			<ion-col col-5>
-
-			</ion-col>	
-			<ion-col col-2 text-center class="bit-element color-text">
-				
-				<br>
-			</ion-col>
-			<ion-col col-5 text-left>
-				
-			</ion-col>	
-		</ion-row>
 		<ion-row>
 			<ion-col size-md="6" size-lg="6">
 				<br>
@@ -99,14 +87,14 @@
 										<ion-grid *ngIf="item.showDetail">
 											<ion-row>
 												<ion-col  text-center>
-													<ion-button>ENCAISSER</ion-button>
+													<ion-button (click)="encaisser(item)">ENCAISSER</ion-button>
 												</ion-col>
 												<ion-col  text-center>
-													<ion-button>IMPRIMER</ion-button>
+													<ion-button (click)="imprimer(item)">IMPRIMER</ion-button>
 												</ion-col>
 												<ion-col text-center>
-													<ion-button>
-														EDUTER
+													<ion-button (click)="editer(item)" >
+														EDITER
 													</ion-button>
 												</ion-col>
 											</ion-row>
@@ -120,7 +108,7 @@
 			</ion-col>
 			<ion-col size-md="6" size-lg="6" size-xs="12" size-sm="12" class="hide-only-xs hide-only-sm" text-center>
 		    	<ion-chip id="commandeChip" class="color-back">
-						<ion-label style="color: white;">COMMANDE N.{{commande.numero}}</ion-label>
+						<ion-label style="color: white;">COMMANDE N.{{commande.commandNomber}}</ion-label>
 				</ion-chip>
 				<ion-card style="min-height: 725px;">
 					<ion-card-header>
@@ -151,7 +139,7 @@
 									{{produit.nom}}
 								</ion-col>
 								<ion-col col-2>
-									<span class="digits">{{produit.prix}}</span> €
+									<span class="digits">{{produit.prix}}</span> FCFA
 								</ion-col>
 								<ion-col col-3>
 									<span>{{produit.quantite}}</span>
@@ -168,7 +156,7 @@
 								<ion-grid id="bottom-gird" text-center style="width: 40%">
 									<ion-row>
 										<ion-col class="bit-element" style="font-size: 15pt;">
-											{{calculer()}} €
+											{{calculer()}} FCFA
 										</ion-col>
 									</ion-row>
 									<ion-row>

@@ -20,11 +20,6 @@ export class AppComponent {
       icon: '/assets/logo-tables.svg'
     },
     {
-      title: 'Plats',
-      url: '/commandes/new',
-      icon: '/assets/logo-commande.svg'
-    },
-    {
       title: 'Nouvelle Commande',
       url: '/commandes/new',
       icon: '/assets/logo-commande.svg'
@@ -38,6 +33,10 @@ export class AppComponent {
       title: 'Le Stock',
       url: '/stokcs',
       icon: '/assets/logo-stock.svg'
+    },    {
+      title: 'Les Produits',
+      url: '/plats',
+      icon: '/assets/logo-commande.svg'
     },
     {
       title: 'Comptabilite',

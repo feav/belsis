@@ -23,7 +23,7 @@ export class DetailsTableComponent implements OnInit {
 
 	private commande:any = {
 		id:10,
-		numero: 123,
+		commandNomber: 123,
 		produits: [
 	  		{
 	  			id: 1,

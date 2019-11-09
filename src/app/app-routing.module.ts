@@ -41,7 +41,8 @@ const routes: Routes = [
   { path: 'login', loadChildren: './user/login/login.module#LoginPageModule' },
   { path: 'profile', loadChildren: './user/profile/profile.module#ProfilePageModule' },
   { path: 'commandes/new', loadChildren: './commandes/nouveau/nouveau.module#NouveauPageModule' },
-  { path: 'modal-details', loadChildren: './table/modal-details/modal-details.module#ModalDetailsPageModule' }
+  { path: 'modal-details', loadChildren: './table/modal-details/modal-details.module#ModalDetailsPageModule' },
+  { path: 'plats', loadChildren: './plats/plats.module#PlatsPageModule' }
 ];
 
 @NgModule({
