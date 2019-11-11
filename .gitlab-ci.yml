@@ -1,0 +1,26 @@
+# Gitlab CI - Build Ionic 3 Project and generates apk files
+image: beevelop/ionic:latest
+
+stages:
+  - deploy
+
+cache:
+  untracked: true
+  key: "$CI_PROJECT_ID"
+  paths:
+    - node_modules/
+
+build_android:
+  stage: deploy
+  only:
+    - develop
+  script:
+    - ls
+    - npm i
+    - ionic cordova platform rm android
+    - ionic cordova platform add android
+    - ionic cordova build android
+    - ls ./platforms/android/build/outputs/apk/android*.apk
+  artifacts:
+    paths:
+      - platforms/android/build/outputs/apk
