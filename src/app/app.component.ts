@@ -33,14 +33,15 @@ export class AppComponent {
       title: 'Le Stock',
       url: '/stokcs',
       icon: '/assets/logo-stock.svg'
-    },    {
+    },
+    {
       title: 'Les Produits',
-      url: '/plats',
+      url: '/plats/entrees',
       icon: '/assets/logo-commande.svg'
     },
     {
       title: 'Comptabilite',
-      url: '/comptabilite',
+      url: '/comptabilite/stats',
       icon: '/assets/logo-stat.svg'
     }
   ];

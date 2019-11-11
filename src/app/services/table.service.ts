@@ -19,7 +19,7 @@ export class TableService {
 
   	if(localStorage.getItem('tables') == null)
   		localStorage.setItem('tables', JSON.stringify(tables));
-  }
+    }
 
   getTables(){
   	return JSON.parse(localStorage.getItem('tables'));

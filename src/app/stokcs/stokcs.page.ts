@@ -35,6 +35,7 @@ export class StokcsPage implements OnInit {
     }
   	this.commandePages = this.convertArrayToPagible(this.commandes, 6);
   	this.produitsPages = this.convertArrayToPagible(this.produits, 3);
+    this.setToCard();
   }
 
   public rechercher() {

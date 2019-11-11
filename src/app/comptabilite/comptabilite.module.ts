@@ -8,19 +8,26 @@ import { IonicModule } from '@ionic/angular';
 import { ComptabilitePage } from './comptabilite.page';
 import { ListEntreesComponent } from './list-entrees/list-entrees.component';
 import { ListSortiesComponent } from './list-sorties/list-sorties.component';
+import { StatsComponent } from './stats/stats.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ComptabilitePage
-  },
-  {
-    path: 'list-entrees',
-    component: ListEntreesComponent
-  },
-  {
-    path: 'list-sorties',
-    component: ListSortiesComponent
+    component: ComptabilitePage,
+    children: [
+        {
+          path: 'list-entrees',
+          component: ListEntreesComponent
+        },
+        {
+          path: 'list-sorties',
+          component: ListSortiesComponent
+        },
+        {
+          path: 'stats',
+          component: StatsComponent
+        }
+    ]
   }
 ];
 
@@ -31,6 +38,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ComptabilitePage, ListSortiesComponent, ListEntreesComponent]
+  declarations: [ComptabilitePage, ListSortiesComponent, ListEntreesComponent, StatsComponent]
 })
 export class ComptabilitePageModule {}

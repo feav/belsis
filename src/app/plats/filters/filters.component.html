@@ -1,0 +1,32 @@
+<div>
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+				<ion-searchbar [(ngModel)]="filterParam.searchInput" placeholder="Entrer un mot clé"></ion-searchbar>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<b>Catégories</b>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col *ngFor="let categorie of filterParam.categories">
+				<ion-button *ngIf="categorie.actived"  class="color-back" (click)="addOrRemove(categorie)">
+					{{categorie.nom}}
+				</ion-button>
+				<ion-button *ngIf="!categorie.actived" class="color-text" (click)="addOrRemove(categorie)">
+					{{categorie.nom}}
+				</ion-button>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<ion-button expand="block" (click)="valider()" color="success" fill="outline">Valider</ion-button>
+			</ion-col>
+			<ion-col>
+				<ion-button expand="block" (click)="annuler()" color="danger" fill="outline">Annuler</ion-button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</div>	

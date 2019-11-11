@@ -1,0 +1,36 @@
+ion-popover {
+  --min-width: 80%;
+}
+
+.popover-content{
+    min-width: 85%;
+}
+
+.color-back{
+  background: #142768;
+  --background: #142768;
+  --color: white; 
+  color: white;
+}
+
+.color-text{
+  --background: white;
+  --color: #142768;
+  background: white;
+  color: #142768;
+}
+
+ion-button {
+  --border-style: solid;
+  --border-color: #142768;
+  --border-radius: 0 0 0 0;
+  --border-width: 2px;
+}
+
+.grid-contener{
+    overflow: auto;
+}
+
+.product-image{
+  text-align:center;
+}
