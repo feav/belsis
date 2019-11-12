@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { ProduitService } from "../../services/produit.service"
+import {JSON_CONFIG_FILENAME} from "tslint/lib/configuration";
+import { UtilsService } from  "../../services/utils.service"
 
 @Component({
   selector: 'app-details-produit',
@@ -10,12 +12,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class DetailsProduitComponent implements OnInit {
 
 	public id:number;
-	public produit:any;
+	public produit={};
 
 	constructor(private router: Router,
-				private route:ActivatedRoute) { 
+				private route:ActivatedRoute,
+				private products: ProduitService,
+				private utilService: UtilsService
+	){
 		this.route.queryParams.subscribe(params => {
-			console.log(params);
+			//console.log(params);
 	      // if (params && params.special) {
 	      //   this.produit = JSON.parse(params.special);
 	      // }
@@ -23,26 +28,36 @@ export class DetailsProduitComponent implements OnInit {
 	}
 
 	ngOnInit() {
-
 		this.route.params.subscribe(params =>{
 	    	this.id = params['id'];
 		});
-		this.produit = {
-			url: "../asset/prod_1.png",
-			id: 1,
-			name: "Salade de fruit",
-			prix: "15 000",
-			stock: "64",
-			categories : ["Categorie 1", "Categorie 2", "Categorie 3"]
-		}
 	}
+    ionViewWillEnter(){
+	    this.products.Product(this.id).then(produit=>{
+            this.produit = produit;
+            },error=>{
+	           console.log(error);
+            }
+        );
+    }
 
 	public editer(id:number){
 		this.router.navigate(["/stokcs/edit/"+id]);
 	} 
 
 	public supprimer(id:number){
-		return null;
+        let newArray = new Array();
+        let datas = localStorage.getItem('produits');
+        let conv = JSON.parse(datas);
+        for (let i = 0; i < conv.length;i++){
+            if (conv[i].id != this.id){
+                newArray.push(conv[i]);
+            }
+        }
+        if (newArray.length>0){
+            localStorage.setItem("produits",JSON.stringify(newArray));
+		}
+        this.router.navigate(["/stokcs"]);
 	}
 
 

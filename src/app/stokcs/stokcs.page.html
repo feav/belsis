@@ -74,13 +74,13 @@
 								<img src="{{produit.url}}" />
 							</ion-col>
 							<ion-col col-4>
-								{{produit.nom}}
+								{{produit.name}}
 							</ion-col>
 							<ion-col col-2>
 								<span class="digits">{{produit.prix}}</span> €
 							</ion-col>
 							<ion-col col-2>
-								<span class="digits">{{produit.stock}}</span>
+								<span class="digits">{{produit.quantite}}</span>
 							</ion-col>
 							<ion-col col-1>
 								<button class="nonCirculaire" (click)="editer(produit)">Modifier</button>
@@ -103,7 +103,7 @@
 						          		<ion-grid>
 						          			<ion-row>
 						          				<ion-col>
-						          					<span class="produit-title">{{produit.nom}}</span>
+						          					<span class="produit-title">{{produit.name}}</span>
 						          				</ion-col>
 						          			</ion-row>
 						          			<ion-row>

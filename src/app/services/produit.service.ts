@@ -1,15 +1,72 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import {reject} from "q";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProduitService {
   	private items:any;
+  	public produit = {
+		id: '',
+		nom: "",
+		prix: "",
+		stocks: "0",
+		quantite: "3",
+		url:"../../assets/prod_7.png"
+    }
 
   	getAll(){
   		return this.items;
   	}
-  	constructor() { 
+
+    createNewProduct(record) {
+        //return this.firestore.collection('Students').add(record);
+        localStorage.setItem('2',this.produit['id']);
+        localStorage.setItem('nom',this.produit['nom']);
+        localStorage.setItem('prix',this.produit['prix']);
+        localStorage.setItem('stock',this.produit['stocks']);
+        localStorage.setItem('quantite',this.produit['quantite']);
+    }
+
+    readProducts() {
+        //return this.firestore.collection('Produit').snapshotChanges();
+    }
+
+    updatePruduct(recordID,record){
+        //this.firestore.doc('Students/' + recordID).update(record);
+    }
+
+    deleteProduct(record_id) {
+        //this.firestore.doc('Students/' + record_id).delete();
+    }
+    async allProduct():Promise<any>{
+        return new Promise(resolve => {
+            let produits = localStorage.getItem('produits');
+            produits = JSON.parse(produits);
+            resolve(produits);
+        })
+    }
+    async Product(id):Promise<any>{
+        return new Promise(resolve => {
+            let produit = localStorage.getItem('produits');
+            let conv = JSON.parse(produit);
+            if (id !==null ){
+                for (let i = 0; i < conv.length;i++){
+                    if (conv[i].id == id){
+                        produit = conv[i];
+                        resolve(produit);
+                    }
+                }
+			} else {
+            	reject("id is undefined");
+			}
+        })
+    }
+
+  	constructor(
+  		//private firestore: AngularFirestore
+	) {
 	  	this.items = [
 	      {
 	        id: 1,
@@ -96,4 +153,5 @@ export class ProduitService {
 		console.log(this.items.filter(item=>{item.id == id})[0]);
 		return this.items.filter(item=>{item.id == id})[0];
 	}
+
 }
