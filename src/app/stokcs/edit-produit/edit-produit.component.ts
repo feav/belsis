@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UtilsService } from "../../services/utils.service";
+import { ProduitService } from "../../services/produit.service"
 @Component({
   selector: 'app-edit-produit',
   templateUrl: './edit-produit.component.html',
@@ -14,14 +15,16 @@ export class EditProduitComponent implements OnInit {
 		name:"",
 		prix:"",
 		quantite:"",
-		categories: []
+		categories:3
 	};
 	public id:number;
-
+    public produitCategoris:{};
+    public cat;
 	constructor(
 	    private route: ActivatedRoute,
-        private utilService: UtilsService
-    ) { }
+        private utilService: UtilsService,
+        private products: ProduitService,
+    ) {}
 
 	ngOnInit() {
         this.route.params.subscribe(params =>{
@@ -29,9 +32,18 @@ export class EditProduitComponent implements OnInit {
         });
         this.getSelectedProduct();
 	}
+    ionViewWillEnter(){
+        this.products.allCategoris().then(datas=>{
+                this.produitCategoris = datas;
+                console.log(this.produitCategoris);
+            },error=>{
+                console.log(error);
+            }
+        );
+    }
 
-	public valider(){
-
+    public valider(){
+            console.log(this.cat);
             let testObject = localStorage.getItem('produits');
             let newArray = new Array();
             let datas = localStorage.getItem('produits');
@@ -42,6 +54,7 @@ export class EditProduitComponent implements OnInit {
                     conv[i].prix     = this.produit.prix;
                     conv[i].url      = "../../../assets/prod_4.jpeg";
                     conv[i].quantite = this.produit.quantite;
+                    conv[i].categories = parseInt(this.cat);
                     newArray.push(conv[i]);
                 }else {
                     newArray.push(conv[i]);
@@ -59,6 +72,7 @@ export class EditProduitComponent implements OnInit {
         for (let i = 0; i < conv.length;i++){
             if (conv[i].id == this.id){
                 this.produit = conv[i];
+
             }
         }
     }

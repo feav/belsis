@@ -10,7 +10,44 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 	private user : {name:string,password:string,role:string}
-  constructor(public menuCtrl: MenuController, private toast : ToastController,private router : Router) { 
+    public users: any[] = [
+        {
+            id: 1,
+            name: 'belsis@gmail.com',
+            password: '123456',
+			roleId:1,
+            birthday:"1995/27/07",
+			restoId:1
+        },
+        {
+            id: 2,
+            name: 'server@gmail.com',
+            password: '123456',
+            roleId:2,
+            birthday:"1995/27/07",
+            restoId:1
+        }
+    ];
+    public resto: any[] = [
+        {
+            id: 1,
+            name: 'akoa',
+            description: 'lorem isum 237 product',
+        },
+        {
+            id: 2,
+            name: 'germai',
+            description: 'lorem isum 237 product',
+        },
+        {
+            id: 3,
+            name: 'etang',
+            description: 'lorem isum 237 product',
+        }
+    ];
+
+
+    constructor(public menuCtrl: MenuController, private toast : ToastController,private router : Router) {
   		this.user = {name:"",password:"",role:""}; 
   	}
 	ionViewWillEnter() {

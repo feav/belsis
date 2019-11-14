@@ -1,7 +1,7 @@
 import { Chart } from 'chart.js';
 import { Component, OnInit , ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { ProduitService } from "../services/produit.service";
 @Component({
   selector: 'app-comptabilite',
   templateUrl: './comptabilite.page.html',
@@ -24,13 +24,20 @@ export class ComptabilitePage  {
   private bars: any;
   private bars2:any;
   private bars3:any;
-
-  constructor(private router: Router) { }
+  public listCmd:Array<any> = [];
+  constructor(private router: Router,private product: ProduitService) { }
 
   ngOnInit() {
   }
 
   ionViewDidEnter() {
+      this.product.allCategoris().then(datas=>{
+              this.listCmd = datas;
+              console.log(this.listCmd);
+          },error=>{
+              console.log(error);
+          }
+      );
     this.createBarChart();
   }
 
@@ -43,7 +50,38 @@ export class ComptabilitePage  {
   }
 
   createBarChart() {
-  	let commandesList = ["Fruit","Glace","Boissons","légumes","Céréales","féculents","Produits","Viande","poisson","œuf","Sucre","Corps gras"];
+  	//let commandesList = ["Fruit","Glace","Boissons","légumes","Céréales","féculents","Produits","Viande","poisson","œuf","Sucre","Corps gras"];
+  	/*let commandesList = this.listCmd;*/
+
+      let order = new Array();
+      let catego = localStorage.getItem('categories');
+      let conv1 = JSON.parse(catego);
+      let prix = new Array();
+      let catName = new Array();
+      let datas2 = localStorage.getItem('orders');
+      let conv2 = JSON.parse(datas2);
+      for (let i = 0; i < conv2.length;i++){
+          //console.log(conv2[i]);
+          catName.push(conv1[conv2[i].product.categories].name);
+          prix.push(conv2[i].totalAmount)
+          //order.push(conv2[i]);totalAmount
+      }
+      console.log(prix);
+      console.log(catName);
+      //console.log(order[0].product.categories);
+      //let commandesList = newArray;
+
+
+
+	  let newArray = new Array();
+      let datas = localStorage.getItem('categories');
+      let conv = JSON.parse(datas);
+      for (let i = 0; i < conv.length;i++){
+              newArray.push(conv[i].name);
+      }
+      //console.log(newArray);
+      let commandesList = newArray;
+
   	let color = ['rgba(25, 9, 132, 0.2)','rgba(5, 99, 132, 0.2)','rgba(225, 99, 132, 0.2)','rgba(2, 99, 13, 0.2)' ];
   	this.stocks = [ Math.floor(Math.random() * 100000) + 1,Math.floor(Math.random() * 100000) + 1];
   	this.commandes = [Math.floor(Math.random() * 100000) + 1,Math.floor(Math.random() * 100000) + 1];
@@ -109,6 +147,7 @@ export class ComptabilitePage  {
 	        }
 	      }
 	    });
+
 	    let max = Math.floor(Math.random() * commandesList.length) + 5;
 	    let listCommande = [];
 	    let listColor = [];
@@ -122,11 +161,11 @@ export class ComptabilitePage  {
 	      type: 'bar',
 	      /*weight: 1,*/
 	      data: {
-	        labels: listCommande,
+	        labels: catName,
 	        datasets: [{
 	            label: 'Flux financier',
 	      /*weight: 1,*/
-	            data: listValue,
+	            data: prix,
 	            backgroundColor: listColor,
 	            borderColor: listColor,
 	            borderWidth: 1

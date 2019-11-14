@@ -38,8 +38,15 @@
 						<ion-col col-11> <input class="input-text-my" type="text" [(ngModel)]="produit.quantite" /> </ion-col>
 					</ion-row>
 					<ion-row>
-						<ion-col col-1>Categories : </ion-col>
-						<ion-col col-11> <input class="input-text-my" type="text" /> </ion-col>
+						<ion-col col-11>
+							<ion-item>
+								<ion-label>Categories</ion-label>
+								<ion-select value="brown" okText="Valider" cancelText="Annuler" name="cat" [(ngModel)]="cat">
+									<!--<ion-select-option selected="true" value="test">test</ion-select-option>-->
+									<ion-select-option [selected]="categorie.id == produit.categories" *ngFor="let categorie of produitCategoris" value="{{categorie.id}}"  >{{categorie.name}}</ion-select-option>
+								</ion-select>
+							</ion-item>
+						</ion-col>
 					</ion-row>
 				</ion-grid>
 			</ion-col>

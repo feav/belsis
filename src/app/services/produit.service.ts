@@ -42,9 +42,18 @@ export class ProduitService {
     }
     async allProduct():Promise<any>{
         return new Promise(resolve => {
-            let produits = localStorage.getItem('produits');
-            produits = JSON.parse(produits);
-            resolve(produits);
+            let datas = localStorage.getItem('produits');
+            datas = JSON.parse(datas);
+            //console.log(produits);
+            resolve(datas);
+        })
+    }
+    async allCategoris():Promise<any>{
+        return new Promise(resolve => {
+            let datas = localStorage.getItem('categories');
+            datas = JSON.parse(datas);
+            //console.log(produits);
+            resolve(datas);
         })
     }
     async Product(id):Promise<any>{
@@ -61,6 +70,22 @@ export class ProduitService {
 			} else {
             	reject("id is undefined");
 			}
+        })
+    }
+    async categorisNameById(id):Promise<any>{
+        return new Promise(resolve => {
+            let categorie = localStorage.getItem('categories');
+            let conv = JSON.parse(categorie);
+            if (id !==null ){
+                for (let i = 0; i < conv.length;i++){
+                    if (conv[i].id == id){
+                        categorie = conv[i].id+"=>"+conv[i].name;
+                        resolve(categorie);
+                    }
+                }
+            } else {
+                reject("id is undefined");
+            }
         })
     }
 

@@ -23,16 +23,22 @@
 				</div>
 			</ion-col>
 		</ion-row>
-		<ion-row id="categoriesList" *ngFor="let page of commandePages ; let i = index">
+		<!--<ion-row id="categoriesList" *ngFor="let page of commandePages ; let i = index">
 			<ion-col col-2 *ngFor="let item of page; let j = index">
 				<button
 					*ngIf="!item.statusFilter"
 					(click)="addOrRemoveCategorieToFilter(i, j)" >{{item.name}}</button>
-				<button 
+				<button
 					*ngIf="item.statusFilter"
 					(click)="addOrRemoveCategorieToFilter(i, j)"
 					style="background-color: #142768; color:white;"
 					>{{item.name}}</button>
+			</ion-col>
+		</ion-row>-->
+		<ion-row id="categoriesList" >
+			<ion-col col-2 class="cat-filter" *ngFor="let cate of produitCategoris ; let i = index">
+				<!--<button (click)="addOrRemoveCategorieToFilter(i, j)" >{{cate.name}}</button>-->
+				<button (click)="filtrerParID(cate.id)" >{{cate.name}}</button>
 			</ion-col>
 		</ion-row>
 		<ion-row>
@@ -72,25 +78,30 @@
 							<ion-col col-2>
 							</ion-col>
 						</ion-row>
-						<ion-row text-center *ngFor="let produit of produits; let i = index" class="list-row-item">
+						<div class="query_status">
+
+						</div>
+						<ion-row text-center *ngFor="let produit of products; let i = index" class="list-row-item">
+
 							<ion-col align-self-center col-1>
 								<img src="{{produit.url}}" />
 							</ion-col>
 							<ion-col align-self-center col-3>
-								{{produit.nom}}
+								{{produit.name}}
 							</ion-col>
 							<ion-col align-self-center col-2>
 								<span class="digits">{{produit.prix}}</span> €
 							</ion-col>
 							<ion-col align-self-center col-1>
-								<span class="digits">{{produit.stock}}</span>
+								<span class="digits qtity_{{produit.id}}">{{produit.quantite}}</span>
+								<input class="{{produit.id}}_stock" type="hidden" name="" value="{{produit.quantite}}">
 							</ion-col>
 							<ion-col align-self-center col-3>
-								<button class="circular" (click)="moins(i)" style="background-color:#EC0000;">-</button>
+								<button class="circular {{produit.id}}_reduise mois" (click)="moins(produit.id+'_mois')" style="background-color:#EC0000;">-</button>
 								<span  class = "nonDigits" >
-									<input type="text" [(value)]="produit.quantite" style="width: 40px;" />
+									<input class="qte_{{produit.id}}" type="text" value="0" style="width: 40px;" />
 								</span>
-								<button class="circular" (click)="plus(i)" style="background-color:#00B79A;">+</button>
+								<button id="{{produit.id}}_adder" class="circular add {{produit.id}}_adder plus" (click)="plus(produit.id+'_add')" style="background-color:#00B79A;">+</button>
 							</ion-col>
 							<ion-col align-self-center col-1>
 								<ion-select value="brown" okText="Okay" cancelText="Dismiss" [(ngModel)]="tableId">
@@ -99,7 +110,7 @@
 							    </ion-select>
 							</ion-col>
 							<ion-col align-self-center col-2>
-								<button class="nonCirculaire" (click)="ajouter(produit, produit.quantite,  tableId)">AJOUTER</button>
+								<button class="nonCirculaire" (click)="ajouter(produit, produit.quantite,  tableId,produit.quantite,produit.id)">AJOUTER</button>
 							</ion-col>
 						</ion-row>
 					</ion-grid>
