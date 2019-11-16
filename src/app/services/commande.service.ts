@@ -47,6 +47,10 @@ export class CommandeService {
 
   }
 
+  saveCommande(panier:Array<any>, table){
+    
+  }
+
   getOrders(){
   	let orders = [];
   	if(localStorage.getItem('orders') != null)

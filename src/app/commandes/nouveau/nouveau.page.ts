@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingController, ToastController, AlertController } from '@ionic/angular';
 
 import { ProduitService } from "../../services/produit.service";
@@ -29,38 +29,48 @@ export class NouveauPage implements OnInit {
 
 	private tables = [];
 	private tableId = null;
-  private panier:any = {
-    nombre: 22
-  };
+  private panier:Array<any> = [];
 
 
-  constructor(private router: Router,private prod : ProduitService, 
-    private commandeService: CommandeService, private utilsService: UtilsService, 
-    private toastController: ToastController,
-    private tableService: TableService) { }
+
+  constructor(private router: Router,
+              private route:ActivatedRoute,
+              private prod : ProduitService, 
+              private commandeService: CommandeService,
+              private utilsService: UtilsService, 
+              private toastController: ToastController,
+              private tableService: TableService) {
+
+  }
 
   ngOnInit() {
 
-  	this.produits = this.prod.getAll();
-  	this.tables = this.tableService.getTables();
-    this.setToCard();
+    this.route.queryParams.subscribe(params => {
+      if (params && params.tableId != undefined) {
+        this.tableId = params.tableId;
+      }
+      this.produits = this.prod.getAll();
+      this.tables = this.tableService.getTables();
+      this.setToCard();
 
-  	this.commandes = [
-	 ];
-   let produitsList = ["Salade de fruits",""]
-   let commandesList = ["Fruit","Glace","Boissons","légumes","Céréales","féculents","Produits","Viande","poisson","œuf","Sucre","Corps gras"];
-    
-    for (var i = 1; i <= commandesList.length ; ++i) {
-      this.commandes.push({id: i,name:commandesList[i-1],statusFilter: false});
+      this.commandes = [
+      ];
+      let produitsList = ["Salade de fruits",""]
+      let commandesList = ["Fruit","Glace","Boissons","légumes","Céréales","féculents","Produits","Viande","poisson","œuf","Sucre","Corps gras"];
       
-    }
-  	this.commandePages = this.convertArrayToPagible(this.commandes, 6);
-  	this.produitsPages = this.convertArrayToPagible(this.produits, 3);
+      for (var i = 1; i <= commandesList.length ; ++i) {
+        this.commandes.push({id: i,name:commandesList[i-1],statusFilter: false});
+        
+      }
+      this.commandePages = this.convertArrayToPagible(this.commandes, 6);
+      this.produitsPages = this.convertArrayToPagible(this.produits, 3);
+    });
   }
 
   public rechercher(tab) {
 
   }
+
   public random(){
     this.produits = this.prod.randomlly();
   }
@@ -84,7 +94,6 @@ export class NouveauPage implements OnInit {
 	  	this.commandePages[line][col].statusFilter = true;
 	  	this.commandes[line*6 + col].statusFilter = true;
   	}
-
   }
 
   public setToList(){
@@ -95,10 +104,22 @@ export class NouveauPage implements OnInit {
   	this.showList = false;
   }
 
+
   public ajouter(produit, quantityOrdered){
-    this.commandeService.addOrder(produit, quantityOrdered, quantityOrdered, this.tableId );
-    this.utilsService.presentToast('Produit ajouté dans votre panier', 2000, 'success');
-    console.log(this.tableId);
+    if(quantityOrdered > 0){
+      let found = this.panier.find(function (item) {
+        return item.id == produit.id;
+      });
+
+      if(found != undefined)
+        found.quantite = quantityOrdered;
+        else{
+        produit.quantite = quantityOrdered;
+        this.panier.push(produit);
+      }
+      //this.commandeService.addOrder(produit, quantityOrdered, quantityOrdered, this.tableId );
+      this.utilsService.presentToast('Produit ajouté dans votre panier', 2000, 'success');
+    }
   }
 
   public plus(index){
@@ -111,8 +132,40 @@ export class NouveauPage implements OnInit {
   }
 
   public ajoutGlobal(){
-     this.utilsService.presentToast('Commande validée', 2000, 'success');
-     this.router.navigate(["/commandes/new"]);
+     if(this.panier.length > 0 && this.tableId != null){
+       this.utilsService.presentToast('Commande validée', 2000, 'success');
+       this.commandeService.saveCommande(this.panier, this.tableId);
+       this.router.navigate(["/commandes/commandes"]);
+     }else{
+       if(this.tableId == null)
+         this.utilsService.presentToast('Veillez choisir la table', 3000, 'danger');
+       else
+         this.utilsService.presentToast("Aucun produit n'a été choisi", 3000, 'danger');
+     }
+  }
+
+  public montantPanier(){
+    let montant:any = 0;
+    for (var produit in this.panier) {
+      montant = montant + this.montantProduit(produit);
+    }
+    return montant;
+  }
+
+  public montantProduit(produit){
+    return produit.quantite * produit.prix;
+  }
+
+  public nombrePanier(){
+    let result = 0;
+    for (var i in this.panier) {
+      result = result + this.panier[i].quantite;
+    }
+    return result;
+  }
+
+  public detailsPanier(){
+
   }
 
 }
