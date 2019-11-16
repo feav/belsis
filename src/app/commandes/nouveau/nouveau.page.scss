@@ -9,6 +9,15 @@
 		min-height: 70px;
 		position: fixed;
 		bottom: 8px;
+		ion-badge {
+			position: relative;
+			top: -55px;
+			right: -65px;
+		};
+		ion-icon {
+			font-size: 50pt;
+			color: #D76800
+		}
 	}
 
 	ion-icon{
@@ -282,18 +291,17 @@
 		}
 	}
 
-	.addButton {
-		background-color: #142768;
-		border-radius:100%;
-		color:white;
-		min-width: 70px;
-		min-height: 70px;
-		position: fixed;
-		right:70px;
-		bottom:10px;
+	#addButton {
+		position:fixed;
+    	bottom: 10px;
+    	right: 10px;
 	}
 
 	#contentList{
 		/*height: 80%;
 		overflow:scroll;*/
 	}
+
+ion-fab-button {
+  --background: #142768;
+}
