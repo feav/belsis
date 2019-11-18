@@ -18,7 +18,8 @@ export class AppComponent {
       title: 'Plan de Tables',
       url: '/table',
       icon: '/assets/logo-tables.svg'
-    },{
+    },
+    {
       title: 'Nouvelle Commande',
       url: '/commandes/new',
       icon: '/assets/logo-commande.svg'
@@ -34,12 +35,17 @@ export class AppComponent {
       icon: '/assets/logo-stock.svg'
     },
     {
+      title: 'Les Produits',
+      url: '/plats/entrees',
+      icon: '/assets/logo-commande.svg'
+    },
+    {
       title: 'Comptabilite',
-      url: '/comptabilite',
+      url: '/comptabilite/stats',
       icon: '/assets/logo-stat.svg'
     }
   ];
-  public user:any;
+  public user:any = {};
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,

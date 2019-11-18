@@ -7,6 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { TablePage } from './table.page';
 import { DetailsTableComponent } from './details-table/details-table.component';
+import { CommandesComponent } from './commandes/commandes.component';
+import { ModalDetailsPageModule } from "./modal-details/modal-details.module";
+
 
 const routes: Routes = [
   {
@@ -26,6 +29,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [TablePage, DetailsTableComponent]
+  declarations: [TablePage, DetailsTableComponent, CommandesComponent],
+  exports: [CommandesComponent]
 })
 export class TablePageModule {}

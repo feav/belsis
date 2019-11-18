@@ -1,0 +1,163 @@
+	#menu{
+		ion-icon{
+			color: white;
+		}
+	}
+
+	ion-icon{
+	    font-size: 30px;
+	}
+
+	.digits {
+		color: red;
+	}
+
+	.list-row-item {
+		background-color:#F4F4F4;
+		margin:5px;
+		ion-col {
+			vertical-align: middle;
+			padding: 10px;
+			img{
+			}
+
+		}
+	}
+
+	#horiszontalBar {
+		padding: 10px;
+		border-style: solid;
+		border-top:2px;
+		border-left: 2px;
+		border-right: 2px;
+		border-color: #c8c8c8;
+	}
+
+	#searchRow {
+		text-align: center;
+		padding: 7px;
+		input{
+			border-style: solid;
+			border-radius: 0px;
+			border-width: 2px;
+			border-color: #c8c8c8;
+			height: 40px;
+			width: 80%;
+			margin: 2px;
+		}
+		button{
+			font-weight: 800;
+		    border-radius: 100%;
+		    background: #142768;
+		    color: white;
+		    width: 80px;
+		    height: 80px;
+		    //font-size: x-large;
+		    position: relative;
+		    left:-20px;
+		    //right: 10px;
+		    //bottom: 10px;
+		    //line-height: 15px;
+		}
+	}
+	
+	.left-round-button {
+		border-radius: 45% 0 0 45%;
+	}
+
+	.right-round-button {
+		border-radius: 0 45% 45% 0;
+	}
+
+	.back-ground-color{
+		background-color: #142768;
+		color: white;
+	}
+
+	.text-color {
+		color: #142768;
+		background-color: white;
+	}
+
+	.button-swicht {
+		padding: 15px;
+		border-style: solid;
+		border-width: 2px;
+		border-color: #142768;
+		font-weight: bold;
+	}
+
+	#buttonSwicht {
+		padding: 20px;
+	}
+
+	.welcome-card img {
+	  max-height: 35vh;
+	  overflow: hidden;
+	}
+	ion-card-title{
+		text-align:center;
+	}
+	ion-header{
+		ion-toolbar{
+		    --background : #142768!important; 
+		    ion-title{
+		    	text-align: center;
+		    	color: white;
+		    }
+		    ion-button{
+		    	color: white;
+		    	ion-menu-button{
+		    		color: white;
+		    	}
+		    }
+		}
+	}
+	ion-content{
+		div.ion-content{
+			//--background-image:url("/assets/bg-belsis.svg");
+			background-image: url(/assets/bg-belsis.svg);
+		    height: 100%;
+		    width: 100%;
+		    background-size: 500px 500px;
+		}
+		
+	}
+	ion-card{
+		border-radius: 5px;
+		background:rgba(20,39,104,.98);
+		overflow: visible;
+		ion-card-content{
+			padding: 0;
+			.img-content{
+				display: flex;
+	    		justify-content: center;
+			    margin: 20px;
+			    img{
+			    	width: 100px;
+			    	height: 100px;
+				}
+			}
+			.foot{
+				text-align: center;
+			    background: rgba(255, 255, 255, 0.8);
+			    line-height: 40px;
+			    color: black;
+			    font-weight: bold;
+			}
+		}
+		ion-card-subtitle {
+			position: absolute;
+		    color: white;
+		    right: -25px;
+		    top: -25px;
+		    /*background: green;*/
+		    width: 50px;
+		    height: 50px;
+		    border-radius: 100%;
+		    text-align: center;
+		    line-height: 50px;
+		    font-size: x-large;
+		}
+	}
+	

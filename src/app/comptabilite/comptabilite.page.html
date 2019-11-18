@@ -1,41 +1,30 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>comptabilite</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button id="menu" color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Comptabilite</ion-title>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
-    <div class="ion-content">
-      <ion-grid >
-        <ion-card-title>Les Rapports</ion-card-title>
-        <ion-row>
-          <ion-col>
-            <div> 
-              <canvas #barChart></canvas>
-              <ion-card-subtitle class="ion-text-center">Flux Financier</ion-card-subtitle>
-            </div>
-          </ion-col>
-          <ion-col>
-            <div> 
-              <canvas #barChartSecond></canvas>
-              <ion-card-subtitle class="ion-text-center">Stocks</ion-card-subtitle>
-            </div>
-          </ion-col>
-        </ion-row>
-        <ion-card-title class="ion-text-center">Les Commandes</ion-card-title>
+    <ion-tabs>
+      <ion-tab-bar slot="top">
+        <ion-tab-button tab="list-entrees">
+        <ion-icon name="calendar"></ion-icon>
+        <ion-label>ENTREES</ion-label>
+        </ion-tab-button>
 
+        <ion-tab-button tab="list-sorties">
+        <ion-icon name="contacts"></ion-icon>
+        <ion-label>SORTIES</ion-label>
+        </ion-tab-button>
 
-         <ion-row>
-          <ion-col>
-            <div> 
-              <canvas #barChartBar></canvas>
-              <ion-card-subtitle class="ion-text-center">Meilleurs ventes</ion-card-subtitle>
-            </div>
-          </ion-col>
-        </ion-row>
-
-
-      </ion-grid>
-    </div>
+        <ion-tab-button tab="stats">
+        <ion-icon name="chart"></ion-icon>
+        <ion-label>STATISTIQUES</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
 </ion-content>

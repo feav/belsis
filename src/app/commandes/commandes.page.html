@@ -1,9 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button id="menu" color="light"></ion-menu-button>
     </ion-buttons>
-    <ion-title>Les commandes</ion-title>
+    <ion-title>
+      Les commandes
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,7 +14,8 @@
 	<ion-grid>
 		<ion-row id="searchRow">
 			<ion-col>
-				<div style="text-align:center;">
+				<ion-searchbar placeholder="Filtrer les produit" class="hide-only-lg hide-only-xl hide-only-md"></ion-searchbar>
+				<div style="text-align:center;" class="hide-only-sm hide-only-xs">
 					<span>
 					<input type="text" placeholder="Recherche..." />
 					<!--<ion-input class="searchInput" placeholder="Recherche..." type="text" ></ion-input>-->
@@ -23,7 +26,7 @@
 				</div>
 			</ion-col>
 		</ion-row>
-		<ion-row id="categoriesList" *ngFor="let page of commandePages ; let i = index">
+		<ion-row id="categoriesList" *ngFor="let page of commandePages ; let i = index" class="hide-only-xs hide-only-sm">
 			<ion-col col-2 *ngFor="let item of page; let j = index">
 				<button
 					*ngIf="!item.statusFilter"
@@ -40,17 +43,17 @@
 			</ion-col>
 		</ion-row>
 		<ion-row>
-			<ion-col id="shwitchIcons" text-right>
+			<!--<ion-col id="shwitchIcons" text-right>
 				<button class="on" *ngIf="showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
 				<button class="off" *ngIf="!showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
 				<button class="on" *ngIf="!showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
 				<button click="off" *ngIf="showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
-			</ion-col>
+			</ion-col>-->
 		</ion-row>
 		<ion-row>
 			<ion-col>
 				<p id="contentList">
-					<ion-grid *ngIf="showList">
+					<ion-grid *ngIf="showList" class="hide-only-xs hide-only-sm">
 						<ion-row text-center>
 							<ion-col col-2>
 								N° Commande
@@ -69,7 +72,7 @@
 							</ion-col>
 
 						</ion-row>
-						<ion-row text-center *ngFor="let order of orders; let i = index" class="list-row-item">
+						<ion-row align-self-center text-center *ngFor="let order of orders; let i = index" class="list-row-item">
 							<ion-col col-2>
 								{{order.id}}
 							</ion-col>
@@ -88,6 +91,45 @@
 						</ion-row>
 					</ion-grid>
 				</p>
+				<div>
+					<ion-grid class="hide-only-lg hide-only-md hide-only-xl">
+						<ion-row align-self-center text-center  class="list-row-item">
+							<ion-col *ngFor="let order of orders; let i = index">
+								<ion-card>
+									<ion-card-header>
+									</ion-card-header>
+									<ion-card-content>
+										<ion-item>
+											<ion-label>
+												Commande N° {{ order.id }}
+											</ion-label>
+										</ion-item>
+										<ion-item>
+											<ion-label>
+												Quantité : {{ order.quantityOrdered }}
+											</ion-label>
+										</ion-item>
+										<ion-item>
+											<ion-label>
+												Table : 
+											</ion-label>
+										</ion-item>
+										<ion-item>
+											<ion-label>
+												Montant total : {{ order.totalAmount }}
+											</ion-label>
+										</ion-item>
+										<ion-item>
+											<ion-label>
+												<ion-icon class="digits" name="eye"></ion-icon>
+											</ion-label>
+										</ion-item>
+									</ion-card-content>
+								</ion-card>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+				</div>	
 			</ion-col>
 		</ion-row>
 	</ion-grid>

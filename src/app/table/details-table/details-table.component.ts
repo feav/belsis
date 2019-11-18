@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { ModalDetailsPage } from "../modal-details/modal-details.page";
+import { CommandesComponent } from '../commandes/commandes.component';
 
 @Component({
   selector: 'app-details-table',
@@ -20,7 +23,7 @@ export class DetailsTableComponent implements OnInit {
 
 	private commande:any = {
 		id:10,
-		numero: 123,
+		commandNomber: 123,
 		produits: [
 	  		{
 	  			id: 1,
@@ -47,34 +50,97 @@ export class DetailsTableComponent implements OnInit {
 
 	public day: string = "10/10/2012";
 
-	public datas:Array<Array<any>> = [
-		[
+	public datas:Array<any> = [
+		
 			{
-				nombre: 10
+				commandNomber: 123,
+				nombrePlat: 10,
+				montant: 10000,
+				showDetail: false,
+				produits: [
+			  		{
+			  			id: 1,
+			  			nom: "Salade de fruits",
+			  			prix: 15000,
+			  			stock: 64,
+			  			quantite: 3,
+			  			url:"../../assets/logo-stock.svg",
+			  			show: false
+			  		},
+			  		{
+			  			id: 1,
+			  			nom: "Salade de fruits",
+			  			prix: 15000,
+			  			stock: 64,
+			  			quantite: 3,
+			  			url:"../../assets/logo-stock.svg",
+			  			show: false
+			  		}
+				]
 			},
 			{
-				nombre: 11
-			},
-			{
-				nombre: 12
+				commandNomber: 126,
+				nombrePlat: 11,
+				montant: 10000,
+				showDetail: false
 			}
-		],
-		[
+		,
+		
 			{
-				nombre: 13
+				commandNomber: 123,
+				nombrePlat: 10,
+				montant: 10000,
+				showDetail: false,
+				produits: [
+			  		{
+			  			id: 1,
+			  			nom: "Salade de fruits",
+			  			prix: 15000,
+			  			stock: 64,
+			  			quantite: 3,
+			  			url:"../../assets/logo-stock.svg",
+			  			show: false
+			  		},
+			  		{
+			  			id: 1,
+			  			nom: "Salade de fruits",
+			  			prix: 15000,
+			  			stock: 64,
+			  			quantite: 3,
+			  			url:"../../assets/logo-stock.svg",
+			  			show: false
+			  		}
+				]
 			},
 			{
-				nombre: 14
-			},
-			{
-				nombre: 15
+				commandNomber: 126,
+				nombrePlat: 11,
+				montant: 10000,
+				showDetail: false
 			}
-		]
+		,
+		
+			{
+				commandNomber: 130,
+				nombrePlat: 12,
+				montant: 10000,
+				showDetail: false
+			},
+			{
+				commandNomber: 130,
+				nombrePlat: 12,
+				montant: 10000,
+				showDetail: false
+			}
+		
 	];
 
 	tableId: any;
+	precedent: any;
 
-	constructor(private route : ActivatedRoute, private router: Router) {
+	constructor(private route : ActivatedRoute,
+				private router: Router,
+				public modalController: ModalController) {
 	}
 
 	ionViewDidEnter(){
@@ -85,6 +151,29 @@ export class DetailsTableComponent implements OnInit {
 	      }
 	    });
 	}
+
+	public load(commande){
+		this.commande = commande;
+	}
+
+	public showDetails(commande){
+		this.datas[commande].showDetail = true;
+		if(this.precedent!=undefined)
+			this.datas[this.precedent].showDetail = false;
+		this.precedent = commande;
+	}
+
+  /*async presentModal(commande) {
+  	console.log("toto");
+  	let compo:any = ModalDetailsPage;
+    const modal = await this.modalController.create({
+      	component: compo,
+		componentProps: {
+			"commande": this.commande 
+		}
+    });
+    return await modal.present();
+  }*/
 
 	ngOnInit() {}
 

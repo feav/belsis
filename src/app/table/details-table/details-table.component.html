@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button id="menu" color="light"></ion-menu-button>
+    </ion-buttons>
     <ion-title>BELSIS</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -11,51 +14,101 @@
 				{{time}} - {{day}}
 			</ion-col>
 		</ion-row>
-		<ion-row text-center class="ion-align-items-center">
-			<ion-col col-5>
-				
-			</ion-col>	
-			<ion-col col-2 text-center class="bit-element color-text">
+		<ion-row>
+			<ion-col>
 				<ion-grid>
 					<ion-row>
-						<ion-col col-5 text-right>
+						<ion-col size="3" text-right>
 							<br/>
 							<hr class="color-back" style="width: 70%; float: right; border-width: 1px;" />
 						</ion-col>	
-						<ion-col col-2 text-center class="bit-element color-text">
+						<ion-col size="6" text-center class="bit-element color-text">
 							 <h3><b>TABLE N.{{table.numero}}</b></h3>
 						</ion-col>
-						<ion-col col-5 text-left>
+						<ion-col size="3" text-left>
 							<br/>
 							<hr class="color-back" style="width: 70%; float: left; border-width: 1px;" />
 						</ion-col>	
 					</ion-row>
 				</ion-grid>
-				<br>
 			</ion-col>
-			<ion-col col-5 text-left>
-				
-			</ion-col>	
 		</ion-row>
-		<ion-row >
-			<ion-col col-6>
+		<ion-row>
+			<ion-col size-md="6" size-lg="6">
 				<br>
 				<br>
 				<ion-grid>
-					<ion-row *ngFor="let items of datas">
-						<ion-col *ngFor="let item of items" col-4>
-							<ion-card style="min-height: 200px;">
-								<ion-card-content text-right>
-									<span style="font-size: 30pt; position: relative; bottom: 2px; right: 5px; background-color:">{{item.nombre}}</span>
+					<ion-row>
+						<ion-col *ngFor="let item of datas; let i = index" size-lg="6" size-md="6" size-xs="12" size-sm="12">
+							<ion-card (click)="load(item)" class="detail-card hide-only-xs hide-only-sm">
+								<ion-card-header>
+									<ion-card-title>
+										Commande N° {{item.commandNomber}}
+									</ion-card-title>
+								</ion-card-header>
+								<ion-card-content>
+									<ion-label> 
+										Nombre de plats : {{item.nombrePlat}}
+									</ion-label><br>
+									<ion-label>
+										Montant : {{item.montant}} FCFA
+									</ion-label><br>
+								</ion-card-content>
+							</ion-card>
+							<ion-card (click)="showDetails(i)" class="detail-card hide-only-xl hide-only-md hide-only-lg">
+								<ion-card-header>
+									<ion-card-title>
+										Commande N° {{item.commandNomber}}
+									</ion-card-title>
+								</ion-card-header>
+								<ion-card-content>
+									<ion-label *ngIf="!item.showDetail"> 
+										Nombre de plats : {{item.nombrePlat}}<br>
+									</ion-label>
+									<ion-label *ngIf="!item.showDetail">
+										Montant : {{item.montant}} FCFA
+									</ion-label>
+									<div *ngIf="item.showDetail">
+										<ion-item *ngFor="let prod of item.produits">
+											<ion-label>
+												{{prod.nom}}
+											</ion-label>
+										</ion-item>
+										<ion-item *ngIf="item.showDetail">
+											<ion-label> 
+												Nombre de plats : {{item.nombrePlat}}
+											</ion-label>
+										</ion-item>
+										<ion-item *ngIf="item.showDetail">
+											<ion-label>
+												Montant : {{item.montant}} FCFA
+											</ion-label>
+										</ion-item>
+										<ion-grid *ngIf="item.showDetail">
+											<ion-row>
+												<ion-col  text-center>
+													<ion-button (click)="encaisser(item)">ENCAISSER</ion-button>
+												</ion-col>
+												<ion-col  text-center>
+													<ion-button (click)="imprimer(item)">IMPRIMER</ion-button>
+												</ion-col>
+												<ion-col text-center>
+													<ion-button (click)="editer(item)" >
+														EDITER
+													</ion-button>
+												</ion-col>
+											</ion-row>
+										</ion-grid>
+									</div>
 								</ion-card-content>
 							</ion-card>
 						</ion-col>
 					</ion-row>
 				</ion-grid>
 			</ion-col>
-			<ion-col col-6 text-center>
+			<ion-col size-md="6" size-lg="6" size-xs="12" size-sm="12" class="hide-only-xs hide-only-sm" text-center>
 		    	<ion-chip id="commandeChip" class="color-back">
-						<ion-label style="color: white;">COMMANDE N.{{commande.numero}}</ion-label>
+						<ion-label style="color: white;">COMMANDE N.{{commande.commandNomber}}</ion-label>
 				</ion-chip>
 				<ion-card style="min-height: 725px;">
 					<ion-card-header>
@@ -86,7 +139,7 @@
 									{{produit.nom}}
 								</ion-col>
 								<ion-col col-2>
-									<span class="digits">{{produit.prix}}</span> €
+									<span class="digits">{{produit.prix}}</span> FCFA
 								</ion-col>
 								<ion-col col-3>
 									<span>{{produit.quantite}}</span>
@@ -103,30 +156,39 @@
 								<ion-grid id="bottom-gird" text-center style="width: 40%">
 									<ion-row>
 										<ion-col class="bit-element" style="font-size: 15pt;">
-											{{calculer()}} €
+											{{calculer()}} FCFA
 										</ion-col>
 									</ion-row>
 									<ion-row>
-										<ion-col col-8 text-center class="color-text">
-											<br>
-											<span style="display: inline;" *ngIf="!encaisser">
-												<button class="color-back unselected left-raduis" (click)="toEncaisser()" text-center>
-													<b>ENCAISSER</b>
-												</button>
-												<button class="selected right-raduis" (click)="toImprimer()" text-center>
-													<b>IMPRIMER</b>
-												</button>
-											</span>
-											<span style="display: inline;" *ngIf="encaisser">
-												<button style="" class="selected left-raduis" (click)="toEncaisser()" text-center>
-													<b>ENCAISSER</b>
-												</button>
-												<button style="" class="color-back unselected right-raduis" (click)="toImprimer()" text-center>
-													<b>IMPRIMER</b>
-												</button>
-											</span>
+										<ion-col size-md="8" size-lg="8" size-xs="12" size-sm="12" text-center class="color-text">
+											<ion-grid>
+												<ion-row text-center *ngIf="!encaisser">
+													<ion-col text-left size="6" >
+														<button class="color-back unselected left-raduis" (click)="toEncaisser()" text-center>
+															<b>ENCAISSER</b>
+														</button>
+													</ion-col>
+													<ion-col text-right size="6">
+														<button class="selected right-raduis" (click)="toImprimer()" text-center>
+															<b>IMPRIMER</b>
+														</button>
+													</ion-col>
+												</ion-row>
+												<ion-row *ngIf="encaisser">
+													<ion-col size="6">
+														<button style="" class="selected left-raduis" (click)="toEncaisser()" text-center>
+															<b>ENCAISSER</b>
+														</button>
+													</ion-col>
+													<ion-col size="6">
+														<button style="" class="color-back unselected right-raduis" (click)="toImprimer()" text-center>
+															<b>IMPRIMER</b>
+														</button>
+													</ion-col>
+												</ion-row>
+											</ion-grid>
 										</ion-col>
-										<ion-col col-4 text-center>
+										<ion-col size-md="4" size-lg="4" size-xs="12" size-sm="12" text-center>
 										    <button class="addButton">
 										    	<ion-icon name="add"></ion-icon>
 										    </button>

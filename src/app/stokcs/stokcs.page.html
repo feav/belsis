@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button id="menu" color="light"></ion-menu-button>
     </ion-buttons>
     <ion-title>Stock</ion-title>
   </ion-toolbar>
@@ -12,7 +12,8 @@
 	<ion-grid>
 		<ion-row id="searchRow">
 			<ion-col>
-				<div style="text-align:center;">
+				<ion-searchbar placeholder="Filtrer les produit" class="hide-only-lg hide-only-xl hide-only-md"></ion-searchbar>
+				<div style="text-align:center;" class="hide-only-sm hide-only-xs">
 					<span>
 					<input type="text" placeholder="Recherche..." />
 					<!--<ion-input class="searchInput" placeholder="Recherche..." type="text" ></ion-input>-->
@@ -23,7 +24,7 @@
 				</div>
 			</ion-col>
 		</ion-row>
-		<ion-row id="categoriesList" *ngFor="let page of commandePages ; let i = index">
+		<ion-row id="categoriesList" *ngFor="let page of commandePages ; let i = index" class="hide-only-sm hide-only-xs">
 			<ion-col col-2 *ngFor="let item of page; let j = index">
 				<button
 					*ngIf="!item.statusFilter"
@@ -40,7 +41,7 @@
 			</ion-col>
 		</ion-row>
 		<ion-row>
-			<ion-col id="shwitchIcons" text-right>
+			<ion-col id="shwitchIcons" text-right class="hide-only-sm hide-only-xs">
 				<button class="on" *ngIf="showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
 				<button class="off" *ngIf="!showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
 				<button class="on" *ngIf="!showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
@@ -96,16 +97,11 @@
 								<ion-card>
 						        	<img class="cardImg" src="{{produit.url}}" />
 						        	<ion-card-header>
-						          		<ion-card-title text-center></ion-card-title>
+						          		<ion-card-title text-center>{{produit.nom}}</ion-card-title>
 						        	</ion-card-header>
 						        	<ion-card-content>
 
 						          		<ion-grid>
-						          			<ion-row>
-						          				<ion-col>
-						          					<span class="produit-title">{{produit.nom}}</span>
-						          				</ion-col>
-						          			</ion-row>
 						          			<ion-row>
 						          				<ion-col>
 									          		<p text-center>
