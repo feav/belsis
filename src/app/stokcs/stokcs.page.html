@@ -8,11 +8,11 @@
 </ion-header>
 
 <ion-content text-center>
+
     <ion-grid>
         <ion-row id="searchRow">
             <ion-col>
-                <ion-searchbar placeholder="Filtrer les produit" class="hide-only-lg hide-only-xl hide-only-md"></ion-searchbar>
-                <div style="text-align:center;" class="hide-only-sm hide-only-xs">
+                <div style="text-align:center;">
 					<span>
 					<input type="text" placeholder="Recherche..." />
                         <!--<ion-input class="searchInput" placeholder="Recherche..." type="text" ></ion-input>-->
@@ -23,8 +23,7 @@
                 </div>
             </ion-col>
         </ion-row>
-
-       <!-- <ion-row id="categoriesList" *ngFor="let page of commandePages ; let i = index" class="hide-only-sm hide-only-xs">
+        <ion-row id="categoriesList" *ngFor="let page of commandePages ; let i = index">
             <ion-col col-2 *ngFor="let item of page; let j = index">
                 <button
                         *ngIf="!item.statusFilter"
@@ -35,13 +34,13 @@
                         style="background-color: #142768; color:white;"
                 >{{item.name}}</button>
             </ion-col>
-        </ion-row>-->
+        </ion-row>
         <ion-row>
             <ion-col id="horiszontalBar">
             </ion-col>
         </ion-row>
         <ion-row>
-            <ion-col id="shwitchIcons" text-right class="hide-only-sm hide-only-xs">
+            <ion-col id="shwitchIcons" text-right>
                 <button class="on" *ngIf="showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
                 <button class="off" *ngIf="!showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
                 <button class="on" *ngIf="!showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
@@ -99,7 +98,7 @@
                                         <img class="cardImg" src="{{produit.url}}" />
                                     </div>
                                     <ion-card-header>
-                                        <ion-card-title text-center>{{produit.nom}}</ion-card-title>
+                                        <ion-card-title text-center></ion-card-title>
                                     </ion-card-header>
                                     <ion-card-content>
 
@@ -111,8 +110,6 @@
                                             </ion-row>
                                             <ion-row>
                                                 <ion-col>
-
-
                 <p text-center>
                     <ion-chip>
                         <ion-label>{{categorieByID(produit.categories)}}</ion-label>
@@ -128,7 +125,14 @@
             </ion-col>
         </ion-row>
     </ion-grid>
-    <ion-grid>
+    </ion-card-content>
+    </ion-card>
+    </ion-col>
+    </ion-row>
+    </ion-grid>
+    </p>
+    </ion-col>
+    </ion-row>
     <ion-row text-right>
         <ion-col >
             <button class="addButton" (click)="ajoutGlobal()">
@@ -138,4 +142,3 @@
     </ion-row>
     </ion-grid>
 </ion-content>
-
