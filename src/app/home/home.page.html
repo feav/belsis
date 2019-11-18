@@ -27,9 +27,11 @@
             </div>
           </ion-col>
         </ion-row>
+      </ion-grid>
         <ion-card-title class="ion-text-center">Les Commandes</ion-card-title>
+      <ion-grid>
         <ion-row class="ion-margin">
-          <ion-col *ngFor="let commande of etatCommendes">
+          <ion-col size-md="12" size-lg="4" size-xs="12" size-sm="4" *ngFor="let commande of etatCommendes">
             <ion-card>
               <ion-card-header>
                 <ion-card-subtitle class="primary" [ngStyle]="{'background-color': commande.color}" >{{commande.value}}</ion-card-subtitle>

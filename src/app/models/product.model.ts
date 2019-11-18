@@ -1,5 +1,6 @@
 export class Product {
 	id: any;
+	restoId:any;
 	nom: any;
 	prix: any;
 	stock: any;

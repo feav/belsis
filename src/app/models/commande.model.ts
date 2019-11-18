@@ -3,12 +3,13 @@ import { Table } from './table.model';
 
 export class Commande{
     id: any;
-    pro: Product;
-    quantityOrdered: any;
-    quantityDelivered: any;
-    totalAmount: any;
-    table: Table;
-    public commande =[[]];
+    date:'18-11-2019';
+    etat:'0';
+    /*public commande =[{
+        id:0,
+        date:'18-11-2019',
+        etat:'0'
+    }];*/
     //public cmd =[[]];
     idcmd:number;
     constructor(id){
