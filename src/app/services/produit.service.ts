@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-//import { UsersService } from 'users.service';
+import { ProduitModel } from '../models/produit.model';
+import { PanierModel } from '../models/panier.model';
 import {reject} from "q";
 
 @Injectable({
@@ -29,6 +30,19 @@ export class ProduitService {
         localStorage.setItem('prix',this.produit['prix']);
         localStorage.setItem('stock',this.produit['stocks']);
         localStorage.setItem('quantite',this.produit['quantite']);
+    }
+
+    pushProduct(id,name, pu,qte,restoID,catID,url){
+  		return new ProduitModel(id,name, pu,qte,restoID,catID,url);
+	}
+	pushPanier(produitId,qte,pu,restoId,tatbleID){
+  		return new PanierModel(produitId,qte,pu,restoId,tatbleID);
+	}
+
+    public lastId():any{
+        let storage = localStorage.getItem('products');
+        let  storages = JSON.parse(storage);
+        return storages.length;
     }
 
     readProducts() {
@@ -64,15 +78,15 @@ export class ProduitService {
     }
     async ProductResto():Promise<any>{
         return new Promise(resolve => {
-            let produit = localStorage.getItem('produits');
+            let produit = localStorage.getItem('products');
             let restoId = this.curentUserInfo()[0].restoId;
             let produitResto = new Array();
             //console.log(restoId);
             let conv = JSON.parse(produit);
-
+                 //console.log(produit);
                 for (let i = 0; i < conv.length;i++){
-                    if (conv[i].restoID == restoId){
-                        //produit = conv[i];
+                    if (conv[i].restoId == restoId){
+
 						produitResto.push( conv[i]);
                         //resolve(produit);
                     }

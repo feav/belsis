@@ -114,8 +114,8 @@ export class StokcsPage implements OnInit {
       //console.log(this.prod.categorie(id).name);
      return this.prod.categorie(id).name;
   }*/
- /* public ajoutGlobal(){
+ public ajoutGlobal(){
         this.router.navigate(["/stokcs/add-produit"]);
-  }*/
+ }
 
 }

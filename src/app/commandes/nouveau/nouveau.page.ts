@@ -66,6 +66,14 @@ export class NouveauPage implements OnInit {
     nombre: 22
   };
 
+  public cart:any = [{
+      produitId:0,
+      qte:0,
+      pu:0,
+      total:0
+  }];
+  public Cartshop = new Array();
+
 
   constructor(private router: Router,private prod : ProduitService, 
     private commandeService: CommandeService, private utilsService: UtilsService, 
@@ -110,11 +118,14 @@ export class NouveauPage implements OnInit {
   public Produits(){
 
   }
+  public catname(id){
+      return this.prod.categorie(id).name;
+  }
   public rechercher(tab) {
 
   }
   filtrerParID(id) {
-      $('.query_status').html(this.loader);
+      //$('.query_status').html(this.loader);
       let produit = localStorage.getItem('produits');
       let conv = JSON.parse(produit);
       let dataFilter = new Array();
@@ -167,11 +178,12 @@ export class NouveauPage implements OnInit {
   	this.showList = false;
   }
 
-
-  public ajouter(produit, quantityOrdered,tableId,stock,produitId){
+  //  public ajouter(produit, quantityOrdered,tableId,stock,produitId){
+  public ajouter(prix,produitId){
       console.log(produitId);
-      let qte = "qte_"+produitId;
-      /*let self = parseInt($('.'+qte+'').val());*/
+     /* let qte:any = "qte_"+produitId;
+      let pu:any = "prix_"+produitId;
+       pu = $('.'+pu+'').val();
       let self:any = $('.'+qte+'').val();
       let stoc = "qtity_"+produitId;
       let stocHidden:any = produitId+"_stock";
@@ -179,10 +191,28 @@ export class NouveauPage implements OnInit {
       $('.'+stoc+'').text(total);
       $('.'+stocHidden+'').val(quantityOrdered - self);
       console.log(produit);
-      this.updateStockQuantitis(produitId,self);
-      this.commandeService.addOrder(produit,self, quantityOrdered, this.tableId );
-      this.utilsService.presentToast('Commande Ajoutée avec success !', 2000, 'success');
+     let datas = this.prod.pushPanier(produitId,self,pu,this.utilsService.curentUserInfo()[0].restoId);*/
+      //this.updateStockQuantitis(produitId,self);
+      //console.log(datas);
+     // this.commandeService.addOrder(produit,self, quantityOrdered, this.tableId );
+      //this.utilsService.presentToast('Commande Ajoutée avec success !', 2000, 'success');
 
+  }
+  public pushToCart(prix,produitId){
+      console.log(prix);
+      console.log(produitId);
+      let qte:any = "qte_"+produitId;
+      let pu:any = prix;
+      let self:any = $('.'+qte+'').val();
+      let stoc = "qtity_"+produitId;
+      let stocHidden:any = produitId+"_stock";
+      //let total:any = parseInt(quantityOrdered) - parseInt(self);
+     // $('.'+stoc+'').text(total);
+      //$('.'+stocHidden+'').val(quantityOrdered - self);
+      let datas = this.prod.pushPanier(produitId,self,pu,this.utilsService.curentUserInfo()[0].restoId,this.tableId);
+      //this.updateStockQuantitis(produitId,self);
+      this.Cartshop.push(datas);
+      console.log(this.Cartshop);
   }
   updateCommande(){}
 
@@ -213,14 +243,15 @@ export class NouveauPage implements OnInit {
       this.utilsService.presentToast("modification de la quantité en stock ",2000,"success");
   }
   public plus(index){
-
+      console.log(index);
       let convert = index.split("_");
       let qte:any = "qte_"+convert[0];
       let self:any = $('.'+qte+'');
       let stock:any = convert[0]+"_stock";
       let selfStock:any = $('.'+stock+'').val();
-      let oldQte:any = self.val();
-      //console.log(selfStock);
+      let oldQte:any = parseInt(self.val().trim());
+      console.log(oldQte);
+      console.log(selfStock);
       if(this.stockControl(selfStock,oldQte)){
           self.val( oldQte + 1);
       }else {
@@ -232,10 +263,10 @@ export class NouveauPage implements OnInit {
 
   public moins(index){
       let convert = index.split("_");
-      let qte = "qte_"+convert[0];
-      let self = $('.'+qte+'');
-      let oldQte:any = self.val();
-
+      let qte:any = "qte_"+convert[0];
+      let self:any = $('.'+qte+'');
+      let oldQte:any = parseInt(self.val().trim());
+      console.log(oldQte);
       if(oldQte >0){
           let g:any = oldQte - 1;
           self.val(g);
@@ -244,6 +275,8 @@ export class NouveauPage implements OnInit {
       }
   }
   public stockControl(stock,qte):boolean{
+      console.log(stock);
+      console.log(qte);
       if (stock > qte){
           return true
       }else {

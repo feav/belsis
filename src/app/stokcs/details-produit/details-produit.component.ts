@@ -47,7 +47,7 @@ export class DetailsProduitComponent implements OnInit {
 
 	public supprimer(id:number){
         let newArray = new Array();
-        let datas = localStorage.getItem('produits');
+        let datas = localStorage.getItem('products');
         let conv = JSON.parse(datas);
         for (let i = 0; i < conv.length;i++){
             if (conv[i].id != this.id){
@@ -55,7 +55,7 @@ export class DetailsProduitComponent implements OnInit {
             }
         }
         if (newArray.length>0){
-            localStorage.setItem("produits",JSON.stringify(newArray));
+            localStorage.setItem("products",JSON.stringify(newArray));
 		}
         this.router.navigate(["/stokcs"]);
 	}

@@ -1,5 +1,5 @@
 import { Commande } from 'commande.model';
-import { Product } from './product.model';
+import { ProduitModel } from './produit.model';
 import { Table } from './table.model';
 
 export class ProduitsCommande {
@@ -9,15 +9,17 @@ export class ProduitsCommande {
     commandeId: any;
     pu: any;
     total:any;
-    tableId: Table;
+    tableId: any;
+    restoID:any
 
-    constructor(idcomde,produitId,qte,pu,tatleID =  null){
+    constructor(id,idCommande,produitId,qte,pu,tatleID = null,restoId){
         this.id = id;
         this.produitId = produitId;
         this.qte = qte;
         this.pu = pu;
         this.total = parseInt(pu.trim()) *  qte;
         this.tableId = tatleID;
+        this.restoID = restoId;
     }
 
 }

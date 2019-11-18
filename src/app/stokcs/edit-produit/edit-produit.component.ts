@@ -13,8 +13,8 @@ export class EditProduitComponent implements OnInit {
 		url: "../../../assets/prod_4.jpeg",
 		id: 0,
 		name:"",
-		prix:"",
-		quantite:"",
+		pu:"",
+		qte:"",
 		categories:3
 	};
 	public id:number;
@@ -43,27 +43,34 @@ export class EditProduitComponent implements OnInit {
     }
 
     public valider(){
-            console.log(this.cat);
+            //console.log(this.cat);
             let testObject = localStorage.getItem('produits');
             let newArray = new Array();
             let datas = localStorage.getItem('produits');
             let conv = JSON.parse(datas);
-            for (let i = 0; i < conv.length;i++){
-                if (conv[i].id == this.id){
-                    conv[i].name     = this.produit.name;
-                    conv[i].prix     = this.produit.prix;
-                    conv[i].url      = "../../../assets/prod_4.jpeg";
-                    conv[i].quantite = this.produit.quantite;
-                    conv[i].categories = parseInt(this.cat);
-                    newArray.push(conv[i]);
-                }else {
-                    newArray.push(conv[i]);
+            if (this.cat != 'NAN' && this.cat != undefined){
+                for (let i = 0; i < conv.length;i++){
+                    if (conv[i].id == this.id){
+                        let newProduct = this.products.pushProduct(
+                            this.id,
+                            this.produit.name,
+                            this.produit.pu,
+                            this.produit.qte,
+                            this.utilService.curentUserInfo()[0].restoId,
+                            this.cat,
+                            this.produit.url);
+                        newArray.push(newProduct);
+                    }else {
+                        newArray.push(conv[i]);
+                    }
                 }
             }
             if (newArray.length>0){
-                localStorage.setItem("produits",JSON.stringify(newArray));
+
+                localStorage.setItem("products",JSON.stringify(newArray));
+                this.utilService.presentToast("le produit "+this.produit.name+" a bien été modifier ",2000,"success");
             }
-            this.utilService.presentToast("le produit "+this.produit.name+" a bien été modifier ",2000,"success");
+
 
 	}
     public getSelectedProduct(){

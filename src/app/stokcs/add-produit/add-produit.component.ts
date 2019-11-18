@@ -12,8 +12,8 @@ import * as $ from 'jquery';
 export class AddProduitComponent implements OnInit {
 
 	public produits:any = {
+	    id:0,
 		url: "",
-		id: 0,
 		name:"",
 		prix:"",
 		quantite:"",
@@ -68,8 +68,9 @@ export class AddProduitComponent implements OnInit {
 	ngOnInit() {}
 
 	public valider(){
+
         localStorage.setItem("categories",JSON.stringify(this.produitCategoris));
-        let testObject = localStorage.getItem('produits');
+        let testObject = localStorage.getItem('products');
         let oldProduct = new Array();
         if (testObject != null){
             this.produits.url = "../../../assets/prod_2.jpg";
@@ -77,25 +78,28 @@ export class AddProduitComponent implements OnInit {
         	this.produits.id = parseInt(this.lastId()) + 1;
         	this.produits.categories = parseInt(this.cat);
         	this.produits.restoID = this.user.curentUserInfo()[0].restoId;
+        	let newProduct = this.produit.pushProduct(this.produits.id,this.produits.name,this.produits.prix,this.produits.quantite,this.user.curentUserInfo()[0].restoId,this.produits.categories,this.produits.url);
         	let rec = JSON.parse(testObject);
-            rec.push(this.produits);
-            console.log(this.user.curentUserInfo()[0].restoId);
-            localStorage.setItem("produits",JSON.stringify(rec));
+            rec.push(newProduct);
+
+            console.log(rec);
+            localStorage.setItem("products",JSON.stringify(rec));
             this.presentToast(" produit "+this.produits.name+" enregistré ","success");
 		}else {
-            console.log(this.user.curentUserInfo()[0]);
         	this.produits.url = "../../../assets/prod_2.jpg";
         	this.produits.id = 1;
             this.produits.categories = parseInt(this.cat);
-        	oldProduct.push(this.produits);
             this.produits.restoID = this.user.curentUserInfo()[0].restoId;
-            localStorage.setItem("produits", JSON.stringify(oldProduct));
+            let newProduct = this.produit.pushProduct(this.produits.id,this.produits.name,this.produits.prix,this.produits.quantite,this.user.curentUserInfo()[0].restoId,this.produits.categories,this.produits.url);
+            oldProduct.push(newProduct);
+            console.log(oldProduct);
+            localStorage.setItem("products", JSON.stringify(oldProduct));
             this.presentToast("produit "+this.produits.name+" enregistré ","success");
 		}
 	}
 
 	public lastId():any{
-        let storage = localStorage.getItem('produits');
+        let storage = localStorage.getItem('products');
         let  storages = JSON.parse(storage);
         return storages.length;
 	}
