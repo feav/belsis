@@ -1,0 +1,74 @@
+<div class="grid-contener">
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+			<ion-searchbar (click)="openSearch()" [(ngModel)]="filterParam.searchInput" placeholder="Filtrer les produits"></ion-searchbar>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col *ngFor="let produit of produits" size-md="4" size-lg="4" size-xl="4" size-xm="12" size-sm="12" >
+				<ion-card>
+		        	<img class="cardImg" src="{{produit.url}}" />
+		        	<ion-card-header>
+		          		<ion-card-title text-center>{{produit.nom}}</ion-card-title>
+		        	</ion-card-header>
+		        	<ion-card-content>
+		          		<ion-grid>
+		          			<ion-row>
+		          				<ion-col>
+		          					<ion-item>
+		          						<ion-label>
+		          							<b>Catégories :</b>
+		          						</ion-label>
+		          					</ion-item>
+		          					<ion-item>
+										<ion-label>
+		          							<span *ngFor="let categorie of produit.categories">
+											{{categorie}} - 
+											</span>
+										</ion-label>
+		          					</ion-item>
+		          					<ion-item>
+		          						<ion-label>
+		          							<b>Prix : </b> {{produit.prix}} FCFA
+		          						</ion-label>
+		          					</ion-item>
+		          					<ion-item>
+		          						<ion-label>
+		          							<b>Composition</b>
+		          						</ion-label>
+		          					</ion-item>
+		          					<ion-item *ngFor="let composante of produit.composition">
+		          						<ion-label text-left>
+		          							{{composante.nom}}
+		          						</ion-label>
+		          						<ion-label text-right>
+		          							{{composante.quantite}}
+		          						</ion-label>
+		          					</ion-item>
+		          				</ion-col>
+		          			</ion-row>
+		          			<ion-row>
+		          				<ion-col text-center>
+		          					<ion-icon class="icon-size" (click)="editer(produit)" name="create"></ion-icon>
+		          				</ion-col>
+		          				<ion-col text-center>
+		          					<ion-icon color="danger" (click)="supprimer(produit)" class="icon-size" name="trash"></ion-icon>
+		          				</ion-col>
+		          			</ion-row>
+		          		</ion-grid>
+		        	</ion-card-content>
+		      	</ion-card>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col text-center>
+				<ion-fab id="addButton">
+					<ion-fab-button (click)="ajouterDessert()">
+						<ion-icon class="icon-size" name="add"></ion-icon>
+					</ion-fab-button>
+				</ion-fab>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</div>

@@ -8,6 +8,7 @@ import { ProduitService } from "../services/produit.service";
   styleUrls: ['./comptabilite.page.scss'],
 })
 export class ComptabilitePage  {
+
   @ViewChild('barChart',{static: true}) barChart;
 
   @ViewChild('barChartSecond',{static: true}) barChartSecond;
@@ -27,8 +28,13 @@ export class ComptabilitePage  {
   public listCmd:Array<any> = [];
   constructor(private router: Router,private product: ProduitService) { }
 
+
+  constructor(private router: Router) { }
+
+
   ngOnInit() {
   }
+
 
   ionViewDidEnter() {
       this.product.allCategoris().then(datas=>{
@@ -202,4 +208,5 @@ export class ComptabilitePage  {
     		}
     	];
 	}
+
 }

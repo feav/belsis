@@ -34,11 +34,16 @@ export class TableService {
 
   	if(localStorage.getItem('tables') == null)
   		localStorage.setItem('tables', JSON.stringify(tables));
+
   }
   curentUserInfo(){
         let curentcy = localStorage.getItem('userconnected');
         return JSON.parse(curentcy);
   }
+
+
+
+
   getTables(){
   	return JSON.parse(localStorage.getItem('tables'));
   }

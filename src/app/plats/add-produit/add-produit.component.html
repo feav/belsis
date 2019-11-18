@@ -1,0 +1,88 @@
+<div class="grid-contener">
+	<ion-grid class="cool-font color-text">
+		<ion-row class="ion-text-center">
+			<ion-col>
+				<br>
+				<ion-item>
+					<ion-label text-center class="color-text">
+						{{headerMessage}}
+					</ion-label>
+				</ion-item>
+				<ion-item *ngIf="errorMessage">
+					<ion-label text-center style="color: red;">
+						{{errorMessage}}
+					</ion-label>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<ion-row *ngIf="produit">
+			<ion-col size-xl="4" size-lg="4" size-md="4" size-sm="12" size-xs="12">
+				<ion-item>
+					<ion-label text-center>
+						<img class="product-image" (click)="openChooser()" src="{{produit.url}}" />
+					</ion-label>
+					<input id="file-input" (change)="onFileSelected($event)" type="file" name="name" style="display: none;" />
+				</ion-item>
+			</ion-col>
+			<ion-col align-self-center size-xl="8" size-lg="8" size-md="8" size-sm="12" size-xs="12">
+				<ion-grid>
+					<ion-row>
+						<ion-col align-self-center size="2">
+							Nom :
+						</ion-col>
+						<ion-col align-self-center size="10">
+							<ion-input [(ngModel)]="produit.nom" placeholder="Nom"></ion-input>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col align-self-center size="2">
+							Prix :
+						</ion-col>
+						<ion-col align-self-center size="10">
+							<ion-input [(ngModel)]="produit.prix" type="number" placeholder="Prix"></ion-input>
+						</ion-col>
+					</ion-row>
+					<ion-row *ngIf="isBoisson">
+						<ion-col align-self-center size="2">
+							Boison :
+						</ion-col>
+						<ion-col align-self-center size="10">
+							<ion-select [(ngModel)]="boissonId" placeholder="Bonsoin en stock">
+								<ion-select-option *ngFor="let boisson of boissons" value="{{boisson.id}}">
+									{{boisson.nom}}
+								</ion-select-option>
+						    </ion-select>
+						</ion-col>
+					</ion-row>
+					<ion-row *ngIf="!isBoisson">
+						<ion-col size="2">
+							Ingredient
+						</ion-col>
+						<ion-col size="10">
+							<ion-button (click)="ajouterIngrediant()" class="color-back">Ajouter les ingredients</ion-button>
+						</ion-col>
+					</ion-row>
+					<ion-row *ngIf="!isBoisson">
+						<ion-col align-self-center size="2">
+							Categories
+						</ion-col>
+						<ion-col align-self-center size="10">
+							<ion-chip>
+								<ion-label>Categorie</ion-label>
+							</ion-chip>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-col>
+		</ion-row>
+		<ion-row text-center>
+			<ion-col>
+				<ion-button class="color-back" (click)="soumettre()" *ngIf="!edit">Ajouter</ion-button>
+				<ion-button class="color-back" (click)="soumettre()" *ngIf="edit">Modifier</ion-button>
+			</ion-col>
+			<ion-col>
+				<ion-button style="border-style: none;" color="danger" (click)="annuller()">Annuler</ion-button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</div>

@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button id="menu" color="light"></ion-menu-button>
     </ion-buttons>
-    <ion-title>Les commandes</ion-title>
+    <ion-title>Nouvelle commande</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,7 +12,8 @@
 	<ion-grid>
 		<ion-row id="searchRow">
 			<ion-col>
-				<div style="text-align:center;">
+				<ion-searchbar placeholder="Filtrer les produit" class="hide-only-lg hide-only-xl hide-only-md"></ion-searchbar>
+				<div style="text-align:center;" class="hide-only-sm hide-only-xs">
 					<span>
 					<input type="text" placeholder="Recherche..." />
 					<!--<ion-input class="searchInput" placeholder="Recherche..." type="text" ></ion-input>-->
@@ -23,7 +24,11 @@
 				</div>
 			</ion-col>
 		</ion-row>
+
 		<!--<ion-row id="categoriesList" *ngFor="let page of commandePages ; let i = index">
+=======
+		<ion-row id="categoriesList" *ngFor="let page of commandePages; let i = index" class="hide-only-xs hide-only-sm">
+>>>>>>> design
 			<ion-col col-2 *ngFor="let item of page; let j = index">
 				<button
 					*ngIf="!item.statusFilter"
@@ -46,7 +51,16 @@
 			</ion-col>
 		</ion-row>
 		<ion-row>
-			<ion-col id="shwitchIcons" text-right>
+			<ion-col>
+				<ion-item text-center>
+					<ion-label>Choisir une table</ion-label>
+					<ion-select okText="Ok" cancelText="Annuler" [(ngModel)]="tableId">
+				    	<ion-select-option value="">Aucune</ion-select-option>
+				    	<ion-select-option *ngFor="let table of tables" value="{{ table.id }}">{{ table.label }}</ion-select-option>
+				    </ion-select>
+				</ion-item>
+			</ion-col>
+			<ion-col id="shwitchIcons" text-right class="hide-only-xs hide-only-sm">
 				<button class="on" *ngIf="showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
 				<button class="off" *ngIf="!showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
 				<button class="on" *ngIf="!showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
@@ -56,7 +70,7 @@
 		<ion-row>
 			<ion-col>
 				<p id="contentList">
-					<ion-grid *ngIf="showList">
+					<ion-grid *ngIf="showList" class="hide-only-xs hide-only-sm">
 						<ion-row text-center>
 							<ion-col col-1>
 							</ion-col>
@@ -70,13 +84,15 @@
 								Stock
 							</ion-col>
 							<ion-col col-3>
-								Quantite
-							</ion-col>
-							<ion-col col-1>
-								Table
+								Quantité
 							</ion-col>
 							<ion-col col-2>
+								
 							</ion-col>
+							<!--
+								<ion-col col-2>
+								</ion-col>
+							-->
 						</ion-row>
 						<div class="query_status">
 
@@ -103,63 +119,47 @@
 								</span>
 								<button id="{{produit.id}}_adder" class="circular add {{produit.id}}_adder plus" (click)="plus(produit.id+'_add')" style="background-color:#00B79A;">+</button>
 							</ion-col>
+							<!--
 							<ion-col align-self-center col-1>
 								<ion-select value="brown" okText="Okay" cancelText="Dismiss" [(ngModel)]="tableId">
 							      <ion-select-option value="">Aucune</ion-select-option>
 							      <ion-select-option *ngFor="let table of tables" value="{{ table.id }}">{{ table.label }}</ion-select-option>
 							    </ion-select>
 							</ion-col>
+							-->
 							<ion-col align-self-center col-2>
 								<button class="nonCirculaire" (click)="ajouter(produit, produit.quantite,  tableId,produit.quantite,produit.id)">AJOUTER</button>
 							</ion-col>
 						</ion-row>
 					</ion-grid>
 					<ion-grid *ngIf="!showList">
-						<ion-row *ngFor="let page of produitsPages; let li = index ">
-							<ion-col col-4 *ngFor="let produit of page; let co = index ">
+						<ion-row>
+							<ion-col *ngFor="let produit of produits; let i = index " size-md="4" size-lg="4" size-xl="4" size-xm="12" size-sm="12">
 								<ion-card>
 						        	<img class="cardImg" src="{{produit.url}}" />
 						        	<ion-card-header>
-						          		<ion-card-title text-center></ion-card-title>
+						          		<ion-card-title text-center>{{produit.nom}}</ion-card-title>
 						        	</ion-card-header>
-						        	<ion-card-content>
-
-						          		<ion-grid>
-						          			<ion-row>
-						          				<ion-col>
-						          					<span class="produit-title">{{produit.nom}}</span>
-						          				</ion-col>
-						          			</ion-row>
-						          			<ion-row>
-						          				<ion-col>
-									          		<p text-center>
-									          			<ion-chip>
-														  	<ion-label>Categorie</ion-label>
-														</ion-chip>
-									          			<ion-chip>
-														  	<ion-label>Categorie</ion-label>
-														</ion-chip>
-									          			<ion-chip>
-														  	<ion-label>Categorie</ion-label>
-														</ion-chip>
-									        		</p>
-						          				</ion-col>
-						          			</ion-row>
-						          			<ion-row>
-						          				<ion-col text-center>
-													<button class="circular" (click)="moins(li*3+co)" style="background-color:#EC0000;">-</button>
-													<span  class = "nonDigits" >
-														<input type="text" [(value)]="produit.quantite" style="width: 40px;" />
-													</span>
-													<button class="circular" (click)="plus(li*3+co)" style="background-color:#00B79A;">+</button>
-						          				</ion-col>
-						          			</ion-row>
-						          			<ion-row>
-						          				<ion-col>
-						          					<button class="nonCirculaire" (click)="ajouter(produit)">AJOUTER</button>
-						          				</ion-col>
-						          			</ion-row>
-						          		</ion-grid>
+						        	<ion-card-content text-cente>
+						        		<div>
+						          			<ion-chip *ngFor="let categorie of produit.categories" text-center>
+											  	<ion-label>{{categorie}}</ion-label>
+											</ion-chip>
+						        		</div>
+						        		<ion-item text-center>
+											<ion-label>
+												<button class="circular" (click)="moins(i)" style="background-color:#EC0000;">-</button>
+												<span  class = "nonDigits" >
+												<input type="text" [(value)]="produit.quantite" style="width: 40px;" />
+												</span>
+												<button class="circular" (click)="plus(i)" style="background-color:#00B79A;">+</button>
+											</ion-label>
+						        		</ion-item>
+						        		<ion-item>
+						        			<ion-label text-center>
+						        				<button class="nonCirculaire" (click)="ajouter(produit, produit.quantite,  tableId)">AJOUTER</button>
+						        			</ion-label>
+						        		</ion-item>
 						        	</ion-card-content>
 						      	</ion-card>
 							</ion-col>
@@ -168,10 +168,17 @@
 				</p>
 			</ion-col>
 		</ion-row>
-		<ion-row text-right>
-			<ion-col >
+		<ion-row>
+			<ion-col>
+				<ion-label class="panier" text-center>
+					<ion-badge style="position: relative; top: -65px; right: -75px;" slot="start">{{panier.nombre}}</ion-badge>
+					<ion-icon style="font-size: 60pt; color: #D76800" name="basket">
+					</ion-icon>
+				</ion-label>
+			</ion-col>
+			<ion-col>
 				<button class="addButton" (click)="ajoutGlobal()">
-					+
+					<ion-icon name="add"></ion-icon>
 				</button>
 			</ion-col>
 		</ion-row>

@@ -1,9 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button id="menu" color="light"></ion-menu-button>
-    </ion-buttons>
-    <ion-title>comptabilite</ion-title>
+    <ion-title>Comptabilite</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,19 +10,17 @@
       <ion-grid>
         <ion-row>
           <ion-col id="buttonSwicht" text-center>
-            <ion-toolbar>
-              <ion-segment (ionChange)="segmentChanged($event)">
-                <ion-segment-button (click)="setToEntrees()" checked>
-                  ENTREES
-                </ion-segment-button>
-                <ion-segment-button (click)="setToSorties()">
-                  SORTIES
-                </ion-segment-button>
-                <ion-segment-button (click)="setToSatats()">
-                  STATISTIQUES
-                </ion-segment-button>
-              </ion-segment>
-            </ion-toolbar>
+            <button class="left-round-button button-swicht back-ground-color">
+              LISTE DES ENTREES
+            </button>
+            
+            <button (click)="setToSorties()" class="button-swicht text-color">
+              LISTE DES ENTREES
+            </button>
+
+            <button (click)="setToSatats()" class="right-round-button button-swicht text-color">
+              STATISTIQUES
+            </button>
           </ion-col>
         </ion-row>
         <ion-row id="searchRow">

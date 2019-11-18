@@ -62,11 +62,22 @@ export class NouveauPage implements OnInit {
       console.log(cmd);*/
   }
 
+  private panier:any = {
+    nombre: 22
+  };
+
+
+  constructor(private router: Router,private prod : ProduitService, 
+    private commandeService: CommandeService, private utilsService: UtilsService, 
+    private toastController: ToastController,
+    private tableService: TableService) { }
+
   ngOnInit() {
 
   	this.produits = this.prod.getAll();
     //this.produits = this.products;
   	this.tables = this.tableService.getTables();
+    this.setToCard();
 
   	this.commandes = [
 	 ];
@@ -156,6 +167,7 @@ export class NouveauPage implements OnInit {
   	this.showList = false;
   }
 
+
   public ajouter(produit, quantityOrdered,tableId,stock,produitId){
       console.log(produitId);
       let qte = "qte_"+produitId;
@@ -172,7 +184,12 @@ export class NouveauPage implements OnInit {
       this.utilsService.presentToast('Commande Ajoutée avec success !', 2000, 'success');
 
   }
-  updateCommande(){
+  updateCommande(){}
+
+  public ajouter(produit, quantityOrdered){
+    this.commandeService.addOrder(produit, quantityOrdered, quantityOrdered, this.tableId );
+    this.utilsService.presentToast('Produit ajouté dans votre panier', 2000, 'success');
+    console.log(this.tableId);
 
   }
 
@@ -236,7 +253,8 @@ export class NouveauPage implements OnInit {
   }
 
   public ajoutGlobal(){
-  	 this.router.navigate(["/commandes/add"]);
+     this.utilsService.presentToast('Commande validée', 2000, 'success');
+     this.router.navigate(["/commandes/new"]);
   }
 
 }
