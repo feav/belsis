@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController, AlertController } from '@ionic/angular';
+import { Commande } from "../../models/commande.model";
 
 import { ProduitService } from "../../services/produit.service";
 import { CommandeService } from "../../services/commande.service";
@@ -40,7 +41,26 @@ export class NouveauPage implements OnInit {
       private commandeService: CommandeService,
       private utilsService: UtilsService,
       private toastController: ToastController,
-      private tableService: TableService) { }
+      private tableService: TableService) {
+      /*let com = new Array();
+      let cmd = new Commande(1,2,12,200,1);
+      let cmd2 = new Commande(1,2,12,200,1);
+      cmd2.commande[0].push(
+          {
+              productId:4,
+              qte:5,
+              pu:6,
+              date:'',
+              status:0,
+              totalPrice:0,
+              tableId:0,
+              author:4,}
+      )
+      com.push(cmd);
+      com.push(cmd2);
+      localStorage.setItem('commandes',JSON.stringify(com));
+      console.log(cmd);*/
+  }
 
   ngOnInit() {
 
@@ -139,10 +159,12 @@ export class NouveauPage implements OnInit {
   public ajouter(produit, quantityOrdered,tableId,stock,produitId){
       console.log(produitId);
       let qte = "qte_"+produitId;
-      let self = parseInt($('.'+qte+'').val());
+      /*let self = parseInt($('.'+qte+'').val());*/
+      let self:any = $('.'+qte+'').val();
       let stoc = "qtity_"+produitId;
-      let stocHidden = produitId+"_stock";
-      $('.'+stoc+'').text(quantityOrdered - self);
+      let stocHidden:any = produitId+"_stock";
+      let total:any = parseInt(quantityOrdered) - parseInt(self);
+      $('.'+stoc+'').text(total);
       $('.'+stocHidden+'').val(quantityOrdered - self);
       console.log(produit);
       this.updateStockQuantitis(produitId,self);
@@ -150,6 +172,10 @@ export class NouveauPage implements OnInit {
       this.utilsService.presentToast('Commande Ajoutée avec success !', 2000, 'success');
 
   }
+  updateCommande(){
+
+  }
+
   updateStockQuantitis(idProduit,Qte){
       let testObject = localStorage.getItem('produits');
       let newArray = new Array();
@@ -172,16 +198,17 @@ export class NouveauPage implements OnInit {
   public plus(index){
 
       let convert = index.split("_");
-      let qte = "qte_"+convert[0];
-      let self = $('.'+qte+'');
-      let stock = convert[0]+"_stock";
-      let selfStock = $('.'+stock+'').val();
-      let oldQte = parseInt(self.val());
-      console.log(selfStock);
+      let qte:any = "qte_"+convert[0];
+      let self:any = $('.'+qte+'');
+      let stock:any = convert[0]+"_stock";
+      let selfStock:any = $('.'+stock+'').val();
+      let oldQte:any = self.val();
+      //console.log(selfStock);
       if(this.stockControl(selfStock,oldQte)){
           self.val( oldQte + 1);
       }else {
-          self.val( selfStock - 1);
+          let t:any = selfStock - 1;
+          self.val(t);
       }
 
   }
@@ -190,10 +217,11 @@ export class NouveauPage implements OnInit {
       let convert = index.split("_");
       let qte = "qte_"+convert[0];
       let self = $('.'+qte+'');
-      let oldQte = parseInt(self.val());
+      let oldQte:any = self.val();
 
       if(oldQte >0){
-          self.val( oldQte - 1);
+          let g:any = oldQte - 1;
+          self.val(g);
       }else {
           self.val( 1);
       }

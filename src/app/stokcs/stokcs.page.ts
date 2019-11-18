@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProduitService } from "../services/produit.service";
+import { UsersService } from "../services/users.service";
 
 @Component({
   selector: 'app-stokcs',
@@ -23,7 +24,11 @@ export class StokcsPage implements OnInit {
 	public showList:boolean = true;
 
 
-  constructor(private router: Router,private prod : ProduitService) { }
+  constructor(
+      private router: Router,
+      private prod: ProduitService,
+      private user: UsersService
+      ) { }
 
   ngOnInit() {
   	this.getProduct();
@@ -39,24 +44,34 @@ export class StokcsPage implements OnInit {
   }
     ionViewWillEnter(){
         this.getProduct();
+        this.prod.ProductResto().then(produitResto=>{
+                this.produits = produitResto;
+                //console.log(produitResto);
+            },error=>{
+                console.log(error);
+            }
+        );
     }
+
 
   public rechercher() {
   	
   }
   getProduct(){
       let datas = localStorage.getItem('produits');
-      this.produits = JSON.parse(datas);
+      //this.produits = JSON.parse(datas);
   }
   public details(produit){
         this.router.navigate(["/stokcs/details/"+produit.id],{queryParams:produit});
 
   }
     public setToList(){
+        console.log('show list');
         this.showList = true;
     }
 
     public setToCard(){
+        console.log('show cart');
         this.showList = false;
     }
   /*public convertArrayToPagible(datas: Array<any>, pagesize: number):Array<Array<any>>{
@@ -94,6 +109,10 @@ export class StokcsPage implements OnInit {
   public supprimer(produit:any){
   	return null;
   }*/
+  categorieByID(id){
+      //console.log(this.prod.categorie(id).name);
+     return this.prod.categorie(id).name;
+  }
   public ajoutGlobal(){
         this.router.navigate(["/stokcs/add-produit"]);
   }

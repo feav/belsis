@@ -26,12 +26,21 @@ export class CommandesPage implements OnInit {
 
 	public showList:boolean = true;
 
+	/*public commandes:any;*/
+    public cmd = [{
+        id:0,
+        qte:0,
+        total:0,
+    }];
+
   orders: any;
 
 
   constructor(private router: Router,private prod : ProduitService, 
     private commandeService: CommandeService, private utilsService: UtilsService, private toastController: ToastController) { }
-
+    ionViewWillEnter() {
+      this.getcommandes();
+    }
   ngOnInit() {
 
   	this.produits = this.prod.getAll();
@@ -92,5 +101,30 @@ export class CommandesPage implements OnInit {
      this.orders = this.commandeService.getOrders();
      console.log(this.orders);
   }
+  public getcommandes(){
+      let data = localStorage.getItem('commandes');
+      let conv = JSON.parse(data);
+      this.commandes = conv;
+      for (let i = 0 ;  i < conv.length ; i++){
+          let qt = 0;
+          let total = 0;
+          for (let k = 0 ;  k < conv[i].length ; k++){
+                   //console.log(conv[i][k]);
+               qt += parseInt(conv[i][k].qte);
+               total += parseInt(conv[i][k].totalPrice);
+          }
+          let data = {
+              id:i+1,
+              qte:qt,
+              total:total,
+          }
+          this.cmd.push(data);
+          console.log(qt);
+          console.log(total);
 
+      }
+      this.cmd.shift();
+      console.log(this.cmd);
+      //console.log(conv[0][0].qte);
+  }
 }

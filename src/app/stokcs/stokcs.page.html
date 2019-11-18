@@ -91,10 +91,12 @@
 						</ion-row>
 					</ion-grid>
 					<ion-grid *ngIf="!showList">
-						<ion-row *ngFor="let page of produitsPages; let li = index ">
-							<ion-col col-4 *ngFor="let produit of page; let co = index ">
+						<ion-row >
+							<ion-col col-4 *ngFor="let produit of produits; let co = index ">
 								<ion-card>
-						        	<img class="cardImg" src="{{produit.url}}" />
+						        	<div class="img-ctn">
+										<img class="cardImg" src="{{produit.url}}" />
+									</div>
 						        	<ion-card-header>
 						          		<ion-card-title text-center></ion-card-title>
 						        	</ion-card-header>
@@ -110,13 +112,7 @@
 						          				<ion-col>
 									          		<p text-center>
 									          			<ion-chip>
-														  	<ion-label>Categorie</ion-label>
-														</ion-chip>
-									          			<ion-chip>
-														  	<ion-label>Categorie</ion-label>
-														</ion-chip>
-									          			<ion-chip>
-														  	<ion-label>Categorie</ion-label>
+														  	<ion-label>{{categorieByID(produit.categories)}}</ion-label>
 														</ion-chip>
 									        		</p>
 						          				</ion-col>

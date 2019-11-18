@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+//import { UsersService } from 'users.service';
 import {reject} from "q";
 
 @Injectable({
@@ -56,6 +57,37 @@ export class ProduitService {
             resolve(datas);
         })
     }
+    allCategoris2(){
+            let datas = localStorage.getItem('categories');
+              return JSON.parse(datas);
+    }
+    async ProductResto():Promise<any>{
+        return new Promise(resolve => {
+            let produit = localStorage.getItem('produits');
+            let restoId = this.curentUserInfo()[0].restoId;
+            let produitResto = new Array();
+            //console.log(restoId);
+            let conv = JSON.parse(produit);
+
+                for (let i = 0; i < conv.length;i++){
+                    if (conv[i].restoID == restoId){
+                        //produit = conv[i];
+						produitResto.push( conv[i]);
+                        //resolve(produit);
+                    }
+                }
+                if (produitResto.length > 0){
+                    resolve(produitResto);
+				}else {
+                	reject('pas de produit pour votre restaurant');
+				}
+
+        })
+    }
+    curentUserInfo(){
+        let curentcy = localStorage.getItem('userconnected');
+        return JSON.parse(curentcy);
+    }
     async Product(id):Promise<any>{
         return new Promise(resolve => {
             let produit = localStorage.getItem('produits');
@@ -88,9 +120,24 @@ export class ProduitService {
             }
         })
     }
+    categorie(id){
+            let categorie = localStorage.getItem('categories');
+            let conv = JSON.parse(categorie);
+            if (id !== null ){
+                for (let i = 0; i < conv.length;i++){
+                    if (conv[i].id == id){
+                      return  categorie = conv[i];
+                    }
+                }
+            } else {
+                //reject("id is undefined");
+            }
+
+    }
 
   	constructor(
   		//private firestore: AngularFirestore
+		//private user: UsersService
 	) {
 	  	this.items = [
 	      {

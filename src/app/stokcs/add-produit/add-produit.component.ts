@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProduitService } from '../../services/produit.service';
+import { UsersService } from '../../services/users.service';
 import { MenuController , ToastController, } from '@ionic/angular';
 import {test} from "@angular-devkit/core/src/virtual-fs/host";
 import * as $ from 'jquery';
@@ -17,7 +18,8 @@ export class AddProduitComponent implements OnInit {
 		prix:"",
 		quantite:"",
 		categories: 0,
-		logo:"../../assets/prod_1.png"
+		logo:"../../assets/prod_1.png",
+        restoID:0,
 	};
 	public cat;
     public produitCategoris: any[] = [
@@ -52,8 +54,14 @@ export class AddProduitComponent implements OnInit {
             description: 'lorem isum 237 product',
         }
     ];
+    public restoId:number;
 	public categories:any=["Fruit","Glace","Boissons","légumes"]
-	constructor(private produit: ProduitService,private toast : ToastController) {
+	constructor(
+	    private produit: ProduitService,
+        private toast: ToastController,
+        private user: UsersService
+        ) {
+	    this.restoId = this.user.curentUserInfo()[0].restoId;
         localStorage.setItem("categories",JSON.stringify(this.produitCategoris));
     }
 
@@ -68,15 +76,19 @@ export class AddProduitComponent implements OnInit {
         	this.produits.id = 0;
         	this.produits.id = parseInt(this.lastId()) + 1;
         	this.produits.categories = parseInt(this.cat);
+        	this.produits.restoID = this.user.curentUserInfo()[0].restoId;
         	let rec = JSON.parse(testObject);
             rec.push(this.produits);
+            console.log(this.user.curentUserInfo()[0].restoId);
             localStorage.setItem("produits",JSON.stringify(rec));
             this.presentToast(" produit "+this.produits.name+" enregistré ","success");
 		}else {
+            console.log(this.user.curentUserInfo()[0]);
         	this.produits.url = "../../../assets/prod_2.jpg";
         	this.produits.id = 1;
             this.produits.categories = parseInt(this.cat);
         	oldProduct.push(this.produits);
+            this.produits.restoID = this.user.curentUserInfo()[0].restoId;
             localStorage.setItem("produits", JSON.stringify(oldProduct));
             this.presentToast("produit "+this.produits.name+" enregistré ","success");
 		}
