@@ -55,6 +55,7 @@ const routes: Routes = [
   ],
   declarations: [PlatsPage, FiltersComponent, BoissonsComponent, PlatsComponent, 
                  DessertsComponent, EntreesComponent, AddProduitComponent, SelectIngrediantsComponent],
-  exports:[FiltersComponent, SelectIngrediantsComponent]
+  exports:[FiltersComponent, SelectIngrediantsComponent],
+  entryComponents:[SelectIngrediantsComponent, FiltersComponent]
 })
 export class PlatsPageModule {}

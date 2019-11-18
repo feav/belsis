@@ -26,6 +26,7 @@ export class AddProduitComponent implements OnInit {
 	private boissonId:number;
 	private categories:Array<any>;
 	public ingrediants:Array<any>;
+	public imageSrc:string = "";
 
 	constructor(public route:ActivatedRoute,
 				public router:Router,
@@ -160,8 +161,15 @@ export class AddProduitComponent implements OnInit {
 		this.produit.categories.push("cat");
 	}
 
-	private onFileSelected(){
-		//TODO
+	private onFileSelected(event): void {
+    	if (event.target.files && event.target.files[0]) {
+        	const file = event.target.files[0];
+
+        	const reader = new FileReader();
+        	reader.onload = e => this.produit.url = reader.result;
+
+        	reader.readAsDataURL(file);
+    	}
 	}
 
 	private verifier(){
@@ -191,7 +199,7 @@ export class AddProduitComponent implements OnInit {
 			event: null,
 			translucent: true,
 			componentProps: params,
-			backdropDismiss: false
+			backdropDismiss: true
 	    });
 	    return await popover.present();
 	}

@@ -22,7 +22,8 @@ export class DessertsComponent implements OnInit {
 				public categorieService: CategorieService,
 				public produitService:ProduitService,
 				public router:Router,
-				public alertController: AlertController) {
+				public alertController: AlertController,
+				public filtersComponent: FiltersComponent) {
 
 	}
 
@@ -41,7 +42,7 @@ export class DessertsComponent implements OnInit {
 	}
 
 	public openSearch(){
-		this.openModal(FiltersComponent,{
+		this.openModal(this.filtersComponent,{
 	      					"filterParam": this.filterParam,
 	      					"parent" : this});
 	}

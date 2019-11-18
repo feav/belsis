@@ -79,10 +79,10 @@ export class PlatsComponent implements OnInit {
 		await alert.present();
 	}
 
-	private async openModal(component, params){
+	private async openModal(component, ev, params){
 	    const popover = await this.popoverController.create({
 	      component: component,
-	      event: null,
+	      event: ev,
 	      translucent: true,
 	      componentProps: params,
 	      backdropDismiss: false
@@ -90,8 +90,8 @@ export class PlatsComponent implements OnInit {
 	    return await popover.present();
 	}
 
-	public openSearch(){
-		this.openModal(FiltersComponent,{
+	public openSearch(ev){
+		this.openModal(FiltersComponent, ev,{
 	      					"filterParam": this.filterParam,
 	      					"parent" : this});
 	}
