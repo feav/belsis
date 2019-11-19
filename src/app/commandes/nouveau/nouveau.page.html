@@ -135,16 +135,16 @@
 											<ion-label>
 												<button class="circular" (click)="moins(i)" style="background-color:#EC0000;">-</button>
 												<span  class = "nonDigits" >
-												<input type="text" [(value)]="produit.quantite" style="width: 40px;" />
+												<input type="number" step="any"  [(value)]="produit.quantite" style="width: 40px;" />
 												</span>
 												<button class="circular" (click)="plus(i)" style="background-color:#00B79A;">+</button>
 											</ion-label>
 						        		</ion-item>
-						        		<ion-item>
+						        		<!-- <ion-item>
 						        			<ion-label text-center>
 						        				<button class="nonCirculaire" (click)="ajouter(produit, produit.quantite,  tableId)">AJOUTER</button>
 						        			</ion-label>
-						        		</ion-item>
+						        		</ion-item> -->
 						        	</ion-card-content>
 						      	</ion-card>
 							</ion-col>

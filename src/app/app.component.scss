@@ -5,7 +5,11 @@ ion-menu
     min-width: 210px !important;
     max-width: 15% !important;
 	ion-content.md.hydrated {
-    	--background: linear-gradient(190deg, #142768 50%, #142768 34%, #142768 52%, #394F99 100%) !important;
+        --background: linear-gradient(190deg, #142768 50%, #142768 34%, #142768 52%, #394F99 100%) !important;
+        background: linear-gradient(190deg, #142768 50%, #142768 34%, #142768 52%, #394F99 100%) !important;
+    }
+    ion-content.hydrated {
+        --background: #142768;
     }
     ion-header{
         background: #142768;
@@ -31,6 +35,8 @@ ion-menu
     ion-list,.ion-list{
     	background: none;
     	--background: none;
+        background: #142768;
+    --background: #142768;
     	ion-item,.ion-item{
             margin-bottom: 20px;
             margin-top: 10%;

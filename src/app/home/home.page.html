@@ -28,14 +28,14 @@
           </ion-col>
         </ion-row>
         <ion-card-title class="ion-text-center">Les Commandes</ion-card-title>
-        <ion-row class="ion-margin">
+        <ion-row class="ion-margin part-encart">
           <ion-col *ngFor="let commande of etatCommendes">
             <ion-card>
               <ion-card-header>
                 <ion-card-subtitle class="primary" [ngStyle]="{'background-color': commande.color}" >{{commande.value}}</ion-card-subtitle>
               </ion-card-header>
 
-              <ion-card-content>
+              <ion-card-content >
                 <div class="img-content">
                   <img [src]="commande.logo">
                 </div>

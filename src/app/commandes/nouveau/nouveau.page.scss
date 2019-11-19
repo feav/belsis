@@ -305,3 +305,35 @@
 ion-fab-button {
   --background: #142768;
 }
+
+
+@media (min-width : 200px) and (max-width : 500px) {
+	ion-card-header.ios.hydrated {
+	    padding: 4px;
+	    padding-top: 5px;
+	}
+		ion-card-title {
+			font-size: 3vw;
+		    text-align: center;
+		    max-height: 3ch;
+		    height: 3ch;
+		}
+		    ion-chip.ion-activatable.hydrated , button.circular{
+			    display: none;
+			}
+	ion-col.hydrated {
+	    width: 32%;
+		ion-card.hydrated {
+		    margin: 0;
+		}
+	}
+	#horiszontalBar{
+    padding: 0;
+     }
+	.nonDigits {
+	    border: none;
+	    width: 100%;
+	    padding: 0;
+	    margin: 0;
+	}
+}
