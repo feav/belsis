@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+declare var fileTrigger:any;
+
 @Component({
   selector: 'app-add-produit',
   templateUrl: './add-produit.component.html',
@@ -8,14 +10,15 @@ import { Component, OnInit } from '@angular/core';
 export class AddProduitComponent implements OnInit {
 
 	public produit:any = {
-		url: "",
 		id: 0,
 		name:"",
 		prix:"",
 		quantite:"",
 		categories: [],
-		logo:"../../assets/prod_1.png"
+		url:"../../assets/prod_1.png"
 	};
+
+	public categorie:string = "";
 
 	constructor() { }
 
@@ -23,6 +26,21 @@ export class AddProduitComponent implements OnInit {
 
 	public valider(){
 		
+	}
+
+	private openChooser(){
+		fileTrigger();
+	}
+
+	private onFileSelected(event): void {
+    	if (event.target.files && event.target.files[0]) {
+        	const file = event.target.files[0];
+
+        	const reader = new FileReader();
+        	reader.onload = e => this.produit.url = reader.result;
+
+        	reader.readAsDataURL(file);
+    	}
 	}
 
 }
