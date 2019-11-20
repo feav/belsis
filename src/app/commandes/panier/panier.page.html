@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button id="menu" color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Panier
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content text-center>
+  <ion-grid class="option-ctn">
+    <ion-row>
+      <ion-col size-md="6" size-lg="6" size-xs="6" size-sm="6">
+        <ion-button (click)="savePanier()" color="success"> <ion-icon ios="ios-cart" md="md-cart"></ion-icon> &nbsp;  <ion-icon ios="ios-add" md="md-add"></ion-icon> Enregistrer</ion-button>
+      </ion-col>
+      <ion-col size-md="6" size-lg="6" size-xs="6" size-sm="6">
+        <ion-button color="danger">vider</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+
+    <ion-row>
+      <ion-col id="horiszontalBar">
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+
+
+        <div>
+
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let produit of paniers; let i = index " size-md="4" size-lg="4" size-xl="4" size-xm="3" size-sm="4">
+        <ion-card>
+         <!-- <img class="cardImg" src="{{produit.url}}" />-->
+          <ion-card-header>
+            <ion-card-title text-center style="text-align: center!important;width: 100%;">prod</ion-card-title>
+          </ion-card-header>
+          <ion-card-content text-cente>
+            <div>
+              <ion-chip text-center>
+                <ion-label></ion-label>
+              </ion-chip>
+              <p>{{produit.total}}</p>
+            </div>
+            <ion-item text-center>
+              <ion-label>
+                <button class="circular"  style="background-color:#EC0000;">-</button>
+                <span  class = "nonDigits" >
+												<input type="text" class="qtitis qte_{{produit.productId}}" type="text" value="{{produit.qte}}" style="width: 40px;" />
+                                                <input type="hidden" class="digits prix_{{produit.id}}" value="{{produit.pu}}"  name="prix">
+												</span>
+                <button class="circular"  style="background-color:#00B79A;">+</button>
+                <input class="" type="hidden" name="" value="{{produit.qte}}">
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label text-center>
+                <button class="nonCirculaire" >Mettre a jour</button>
+              </ion-label>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

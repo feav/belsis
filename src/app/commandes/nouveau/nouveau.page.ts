@@ -60,6 +60,7 @@ export class NouveauPage implements OnInit {
       com.push(cmd2);
       localStorage.setItem('commandes',JSON.stringify(com));
       console.log(cmd);*/
+
   }
 
   private panier:any = {
@@ -75,10 +76,10 @@ export class NouveauPage implements OnInit {
   public Cartshop = new Array();
 
 
-  constructor(private router: Router,private prod : ProduitService, 
+  /*constructor(private router: Router,private prod : ProduitService,
     private commandeService: CommandeService, private utilsService: UtilsService, 
     private toastController: ToastController,
-    private tableService: TableService) { }
+    private tableService: TableService) { }*/
 
   ngOnInit() {
 
@@ -144,6 +145,37 @@ export class NouveauPage implements OnInit {
 
   }
 
+
+    public savepanier(){
+
+        /*localStorage.setItem("categories",JSON.stringify(this.produitCategoris));
+        let testObject = localStorage.getItem('products');
+        let oldProduct = new Array();
+        if ( testObject != null ){
+            this.produits.url = "../../../assets/prod_2.jpg";
+            this.produits.id = 0;
+            this.produits.id = parseInt(this.lastId()) + 1;
+            this.produits.categories = parseInt(this.cat);
+            this.produits.restoID = this.user.curentUserInfo()[0].restoId;
+            let newProduct = this.produit.pushProduct(this.produits.id,this.produits.name,this.produits.prix,this.produits.quantite,this.user.curentUserInfo()[0].restoId,this.produits.categories,this.produits.url);
+            let rec = JSON.parse(testObject);
+            rec.push(newProduct);
+            console.log(rec);
+            localStorage.setItem("products",JSON.stringify(rec));
+            this.presentToast(" produit "+this.produits.name+" enregistré ","success");
+        }else {
+            this.produits.url = "../../../assets/prod_2.jpg";
+            this.produits.id = 1;
+            this.produits.categories = parseInt(this.cat);
+            this.produits.restoID = this.user.curentUserInfo()[0].restoId;
+            let newProduct = this.produit.pushProduct(this.produits.id,this.produits.name,this.produits.prix,this.produits.quantite,this.user.curentUserInfo()[0].restoId,this.produits.categories,this.produits.url);
+            oldProduct.push(newProduct);
+            console.log(oldProduct);
+            localStorage.setItem("products", JSON.stringify(oldProduct));
+            this.presentToast("produit "+this.produits.name+" enregistré ","success");
+        }*/
+    }
+
   public random(){
     this.produits = this.prod.randomlly();
   }
@@ -179,9 +211,9 @@ export class NouveauPage implements OnInit {
   }
 
   //  public ajouter(produit, quantityOrdered,tableId,stock,produitId){
-  public ajouter(prix,produitId){
+ /* public ajouter(prix,produitId){
       console.log(produitId);
-     /* let qte:any = "qte_"+produitId;
+     /!* let qte:any = "qte_"+produitId;
       let pu:any = "prix_"+produitId;
        pu = $('.'+pu+'').val();
       let self:any = $('.'+qte+'').val();
@@ -191,16 +223,15 @@ export class NouveauPage implements OnInit {
       $('.'+stoc+'').text(total);
       $('.'+stocHidden+'').val(quantityOrdered - self);
       console.log(produit);
-     let datas = this.prod.pushPanier(produitId,self,pu,this.utilsService.curentUserInfo()[0].restoId);*/
+     let datas = this.prod.pushPanier(produitId,self,pu,this.utilsService.curentUserInfo()[0].restoId);*!/
       //this.updateStockQuantitis(produitId,self);
       //console.log(datas);
      // this.commandeService.addOrder(produit,self, quantityOrdered, this.tableId );
       //this.utilsService.presentToast('Commande Ajoutée avec success !', 2000, 'success');
 
-  }
+  }*/
   public pushToCart(prix,produitId){
-      console.log(prix);
-      console.log(produitId);
+
       let qte:any = "qte_"+produitId;
       let pu:any = prix;
       let self:any = $('.'+qte+'').val();
@@ -210,7 +241,25 @@ export class NouveauPage implements OnInit {
      // $('.'+stoc+'').text(total);
       //$('.'+stocHidden+'').val(quantityOrdered - self);
       let datas = this.prod.pushPanier(produitId,self,pu,this.utilsService.curentUserInfo()[0].restoId,this.tableId);
+      this.Cartshop.push(datas);
+      let panier = localStorage.getItem('panier');
+      let older = JSON.parse(panier);
+
+      if ( panier != null ){
+          let oldProduct = new Array();
+
+           older.push(datas);
+          localStorage.setItem("panier",JSON.stringify(older));
+          //this.presentToast(" produit ajouté dans le panier ","success");
+      }else {
+          localStorage.setItem("panier", JSON.stringify(this.Cartshop));
+          //this.Cartshop=[];
+      }
+
       //this.updateStockQuantitis(produitId,self);
+
+
+
       this.Cartshop.push(datas);
       console.log(this.Cartshop);
   }
@@ -289,5 +338,8 @@ export class NouveauPage implements OnInit {
      this.utilsService.presentToast('Commande validée', 2000, 'success');
      this.router.navigate(["/commandes/new"]);
   }
+    public Mycart(){
+        this.router.navigate(["/panier"]);
+    }
 
 }

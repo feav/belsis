@@ -92,7 +92,7 @@
                     </ion-grid>
                     <ion-grid *ngIf="!showList">
                         <ion-row >
-                            <ion-col col-4 *ngFor="let produit of produits; let co = index ">
+                            <ion-col size-md="12" size-lg="4" size-xs="12" size-sm="12" *ngFor="let produit of produits; let co = index ">
                                 <ion-card>
                                     <div class="img-ctn">
                                         <img class="cardImg" src="{{produit.url}}" />
@@ -104,15 +104,21 @@
 
                                         <ion-grid>
                                             <ion-row>
-                                                <ion-col>
+                                                <ion-col >
                                                     <span class="produit-title">{{produit.name}}</span>
+                                                </ion-col>
+                                                <ion-col size-md="12" size-lg="12" size-xs="12" size-sm="12">
+                                                    <span class="produit-title">{{produit.pu}}</span>
+                                                </ion-col>
+                                                <ion-col size-md="12" size-lg="12" size-xs="12" size-sm="12">
+                                                    <span class="produit-title">{{produit.qte}}</span>
                                                 </ion-col>
                                             </ion-row>
                                             <ion-row>
                                                 <ion-col>
                 <p text-center>
                     <ion-chip>
-                        <ion-label>{{categorieByID(produit.categories)}}</ion-label>
+                        <ion-label>{{categorieByID(produit.catID)}}</ion-label>
                     </ion-chip>
                 </p>
             </ion-col>
@@ -120,7 +126,7 @@
         <ion-row>
             <ion-col>
                 <button class="nonCirculaire" (click)="editer(produit)">Modifier</button>
-                <button class="nonCirculaire" (click)="details(produit)">Details</button>
+              <!--  <button class="nonCirculaire" (click)="details(produit)">Details</button>-->
                 <button class="nonCirculaire red" (click)="supprimer(produit)">Supprimer</button>
             </ion-col>
         </ion-row>

@@ -29,7 +29,7 @@ export class ComptabilitePage  {
   constructor(private router: Router,private product: ProduitService) { }
 
 
-  constructor(private router: Router) { }
+  //constructor(private router: Router) { }
 
 
   ngOnInit() {

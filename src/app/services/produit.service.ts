@@ -58,11 +58,17 @@ export class ProduitService {
     }
     async allProduct():Promise<any>{
         return new Promise(resolve => {
-            let datas = localStorage.getItem('produits');
+            let datas = localStorage.getItem('products');
             datas = JSON.parse(datas);
             //console.log(produits);
             resolve(datas);
         })
+    }
+    Panier(){
+            let datas = localStorage.getItem('panier');
+            datas = JSON.parse(datas);
+            return datas;
+
     }
     async allCategoris():Promise<any>{
         return new Promise(resolve => {
@@ -105,7 +111,7 @@ export class ProduitService {
     }
     async Product(id):Promise<any>{
         return new Promise(resolve => {
-            let produit = localStorage.getItem('produits');
+            let produit = localStorage.getItem('products');
             let conv = JSON.parse(produit);
             if (id !==null ){
                 for (let i = 0; i < conv.length;i++){

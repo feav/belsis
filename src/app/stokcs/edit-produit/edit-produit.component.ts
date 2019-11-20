@@ -44,9 +44,9 @@ export class EditProduitComponent implements OnInit {
 
     public valider(){
             //console.log(this.cat);
-            let testObject = localStorage.getItem('produits');
+            let testObject = localStorage.getItem('products');
             let newArray = new Array();
-            let datas = localStorage.getItem('produits');
+            let datas = localStorage.getItem('products');
             let conv = JSON.parse(datas);
             if (this.cat != 'NAN' && this.cat != undefined){
                 for (let i = 0; i < conv.length;i++){
@@ -74,7 +74,7 @@ export class EditProduitComponent implements OnInit {
 
 	}
     public getSelectedProduct(){
-        let datas = localStorage.getItem('produits');
+        let datas = localStorage.getItem('products');
         let conv = JSON.parse(datas);
         for (let i = 0; i < conv.length;i++){
             if (conv[i].id == this.id){

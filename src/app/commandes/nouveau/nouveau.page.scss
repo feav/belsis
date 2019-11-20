@@ -7,8 +7,15 @@
 	.panier{
 		min-width: 70px;
 		min-height: 70px;
-		position: fixed;
+		position: fixed!important;
 		bottom: 8px;
+		position: relative;
+		overflow: hidden;
+		left: 4%;
+	}
+	.shoper{
+		position: relative;
+		overflow: hidden;
 	}
 
 	ion-icon{

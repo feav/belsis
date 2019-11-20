@@ -118,10 +118,12 @@ export class AddProduitComponent implements OnInit {
 
 	public soumettre(){
 		if (this.verifier()) { 
-			if(this.isBoisson)
-				this.produitService.save(this.produit);
-			else
-				this.produitService.update(this.produit);
+			if(this.isBoisson) {
+                //this.produitService.save(this.produit);
+            }else{
+				
+			}
+				//this.produitService.update(this.produit);
 			this.presentToast(
 			 	"Produit enregistré", 
 			 	"success");

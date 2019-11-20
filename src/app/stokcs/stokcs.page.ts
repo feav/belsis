@@ -21,7 +21,7 @@ export class StokcsPage implements OnInit {
 
 	public produitsPages:any;
 
-	public showList:boolean = true;
+	public showList:boolean = false;
 
 
   constructor(
@@ -62,19 +62,16 @@ export class StokcsPage implements OnInit {
       let datas = localStorage.getItem('produits');
       //this.produits = JSON.parse(datas);
   }
-  public details(produit){
-        this.router.navigate(["/stokcs/details/"+produit.id],{queryParams:produit});
 
-  }
     public setToList(){
         console.log('show list');
         this.showList = true;
     }
 
-   /* public setToCard(){
+    public setToCard(){
         console.log('show cart');
         this.showList = false;
-    }*/
+    }
   /*public convertArrayToPagible(datas: Array<any>, pagesize: number):Array<Array<any>>{
   	let result:Array<Array<any>> = [];
   	for (var i = 0; i < (datas.length / pagesize); ++i) {
@@ -97,7 +94,7 @@ export class StokcsPage implements OnInit {
   	}
 
   }
-
+  */
 
   public editer(produit){
   	this.router.navigate(["/stokcs/edit/"+produit.id],{queryParams:produit});
@@ -109,11 +106,12 @@ export class StokcsPage implements OnInit {
 
   public supprimer(produit:any){
   	return null;
-  }*/
-  /*categorieByID(id){
+  }
+  categorieByID(id){
       //console.log(this.prod.categorie(id).name);
      return this.prod.categorie(id).name;
-  }*/
+    // console.log(this.prod.categorie(id));
+  }
  public ajoutGlobal(){
         this.router.navigate(["/stokcs/add-produit"]);
  }

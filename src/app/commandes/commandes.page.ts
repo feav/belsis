@@ -5,6 +5,7 @@ import { LoadingController, ToastController, AlertController } from '@ionic/angu
 import { ProduitService } from "../services/produit.service";
 import { CommandeService } from "../services/commande.service";
 import { UtilsService } from "../services/utils.service";
+import {reject} from 'q';
 
 @Component({
   selector: 'app-commandes',
@@ -25,7 +26,7 @@ export class CommandesPage implements OnInit {
 	public produitsPages:any;
 
 	public showList:boolean = true;
-
+    public comdes:any;
 	/*public commandes:any;*/
     public cmd = [{
         id:0,
@@ -42,7 +43,7 @@ export class CommandesPage implements OnInit {
       this.getcommandes();
     }
   ngOnInit() {
-
+    this.getOrder();
   	this.produits = this.prod.getAll();
 
   	this.commandes = [
@@ -63,6 +64,44 @@ export class CommandesPage implements OnInit {
   public rechercher(tab) {
 
   }
+  public getOrder(restoId = 0){
+      let datas = localStorage.getItem('commandes');
+      datas = JSON.parse(datas);
+      this.comdes = datas;
+  }
+  TotalPrice(idCmd){
+      let produit = localStorage.getItem('produitcommandes');
+      let conv = JSON.parse(produit);
+      let total:any = 0;
+      if (conv !=null ){
+          let datas = new Array();
+          for (let i = 0; i < conv.length;i++){
+              if (conv[i].commandeId == idCmd){
+                  total += conv[i].total;
+              }
+          }
+          return total
+      } else {
+          //reject("id is undefined");
+      }
+  }
+
+    TotalProtuit(idCmd){
+        let produit = localStorage.getItem('produitcommandes');
+        let conv = JSON.parse(produit);
+        let total:any = 0;
+        if (conv !=null ){
+            let datas = new Array();
+            for (let i = 0; i < conv.length;i++){
+                if (conv[i].commandeId == idCmd){
+                    datas.push(conv[i]);
+                }
+            }
+            return datas.length;
+        } else {
+            //reject("id is undefined");
+        }
+    }
   public random(){
     this.produits = this.prod.randomlly();
   }
@@ -127,4 +166,9 @@ export class CommandesPage implements OnInit {
       console.log(this.cmd);
       //console.log(conv[0][0].qte);
   }
+    public detail(CmdId){
+        let navigationExtras ={queryParams: {idcmd:CmdId}};
+        this.router.navigate(['detail'], navigationExtras);
+        //this.router.navigate(["/detail?id="+CmdId]);
+    }
 }

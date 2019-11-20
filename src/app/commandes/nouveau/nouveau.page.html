@@ -172,11 +172,13 @@
 			</ion-col>
 		</ion-row>
 		<ion-row>
-			<ion-col>
+			<ion-col class="cartshop">
 				<ion-label class="panier" text-center>
-					<ion-badge style="position: relative; top: -65px; right: -75px;" slot="start">{{Cartshop.length}}</ion-badge>
-					<ion-icon style="font-size: 60pt; color: #D76800" name="basket">
-					</ion-icon>
+					<div class="shoper" (click)="Mycart()">
+						<ion-badge style="top: 25px;z-index: 22;position: absolute;right: 0;left: 0;height: 20px;width: 20px;margin: 0 auto;" slot="start">{{Cartshop.length}}</ion-badge>
+						<ion-icon style="font-size: 50pt; color: #D76800" name="basket">
+						</ion-icon>
+					</div>
 				</ion-label>
 			</ion-col>
 			<ion-col>

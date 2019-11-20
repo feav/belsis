@@ -21,7 +21,7 @@ export class Commande{
         let curentcy = localStorage.getItem('userconnected');
         return JSON.parse(curentcy);
     }
-    newcmId(){
+  /*  newcmId(){
         if(localStorage.getItem('commandes') == null){
             this.idcmd = 0;
         }else{
@@ -54,6 +54,6 @@ export class Commande{
         }
         this.commande[0].push(data);
     }
-
+*/
 
 }
