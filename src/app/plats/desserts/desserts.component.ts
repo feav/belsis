@@ -58,7 +58,7 @@ export class DessertsComponent implements OnInit {
 	}
 
 	private supprimer(p){
-		this.presentAlertConfirm('<strong>Etes-vous sure de vouloir suppremer ce produit </strong> ??', ()=>{
+		this.presentAlertConfirm('<strong>Etes-vous sure de vouloir supprimer ce produit </strong> ??', ()=>{
 			//delete
 		}, ()=>{
 			//Nothings to do

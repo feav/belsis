@@ -132,7 +132,7 @@ export class NouveauPage implements OnInit {
   }
 
   public ajoutGlobal(){
-     if(this.panier.length > 0 && this.tableId != null){
+     if(this.nombrePanier() > 0 && this.tableId != null){
        this.utilsService.presentToast('Commande validée', 2000, 'success');
        this.commandeService.saveCommande(this.panier, this.tableId);
        this.router.navigate(["/commandes/commandes"]);
@@ -158,8 +158,8 @@ export class NouveauPage implements OnInit {
 
   public nombrePanier(){
     let result = 0;
-    for (var i in this.panier) {
-      result = result + this.panier[i].quantite;
+    for (var i in this.produits) {
+      result = result + this.produits[i].quantite;
     }
     return result;
   }
