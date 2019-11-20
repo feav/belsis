@@ -25,21 +25,6 @@
 			</ion-col>
 		</ion-row>
 
-		<!--<ion-row id="categoriesList" *ngFor="let page of commandePages ; let i = index">
-=======
-		<ion-row id="categoriesList" *ngFor="let page of commandePages; let i = index" class="hide-only-xs hide-only-sm">
->>>>>>> design
-			<ion-col col-2 *ngFor="let item of page; let j = index">
-				<button
-					*ngIf="!item.statusFilter"
-					(click)="addOrRemoveCategorieToFilter(i, j)" >{{item.name}}</button>
-				<button
-					*ngIf="item.statusFilter"
-					(click)="addOrRemoveCategorieToFilter(i, j)"
-					style="background-color: #142768; color:white;"
-					>{{item.name}}</button>
-			</ion-col>
-		</ion-row>-->
 		<ion-row id="categoriesList" >
 			<ion-col col-2 class="cat-filter" *ngFor="let cate of produitCategoris ; let i = index">
 				<!--<button (click)="addOrRemoveCategorieToFilter(i, j)" >{{cate.name}}</button>-->
@@ -151,12 +136,8 @@
 											<ion-label>
 												<button class="circular" (click)="moins(produit.id+'_mois')" style="background-color:#EC0000;">-</button>
 												<span  class = "nonDigits" >
-<<<<<<< HEAD
 												<input type="text" class="qtitis qte_{{produit.id}}" type="text" value="0" style="width: 40px;" />
                                                 <input type="hidden" class="digits prix_{{produit.id}}" value="{{produit.pu}}"  name="prix">
-=======
-												<input type="number" step="any"  [(value)]="produit.quantite" style="width: 40px;" />
->>>>>>> 095f933d0b3ed0269e62cc3c2cc63509db3e1f10
 												</span>
 												<button class="circular add {{produit.id}}_adder plus" (click)="plus(produit.id+'_add')" style="background-color:#00B79A;">+</button>
                                                 <input class="{{produit.id}}_stock" type="hidden" name="" value="{{produit.qte}}">
@@ -176,7 +157,6 @@
 			</ion-col>
 		</ion-row>
 		<ion-row>
-<<<<<<< HEAD
 			<ion-col class="cartshop">
 				<ion-label class="panier" text-center>
 					<div class="shoper" (click)="Mycart()">
@@ -184,13 +164,6 @@
 						<ion-icon style="font-size: 50pt; color: #D76800" name="basket">
 						</ion-icon>
 					</div>
-=======
-			<ion-col text-left>
-				<ion-label class="panier">
-					<ion-badge (click)="detailsPanier()" slot="start">{{nombrePanier()}}</ion-badge>
-					<ion-icon name="basket">
-					</ion-icon>
->>>>>>> 095f933d0b3ed0269e62cc3c2cc63509db3e1f10
 				</ion-label>
 			</ion-col>
 			<ion-col text-right>

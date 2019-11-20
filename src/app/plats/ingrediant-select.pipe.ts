@@ -13,7 +13,7 @@ export class IngrediantSelectPipe implements PipeTransform {
     	ingrediantSelect = ingrediantSelect.toLowerCase();
     
     	return items.filter( it => {
-      		return it.nom.toLowerCase().includes(searchText);
+      		return it.nom.toLowerCase().includes(ingrediantSelect);
     	});
 
     }

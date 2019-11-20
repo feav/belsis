@@ -32,7 +32,7 @@ export class NouveauPage implements OnInit {
 
 	private tables = [];
 	private tableId = null;
-<<<<<<< HEAD
+
     public produitCategoris:{};
     public loader = '<img src="../../../assets/loader/loader7.gif" alt="">';
 
@@ -64,12 +64,9 @@ export class NouveauPage implements OnInit {
 
   }
 
-  private panier:any = {
-    nombre: 22
-  };
-=======
+
   private panier:Array<any> = [];
->>>>>>> 095f933d0b3ed0269e62cc3c2cc63509db3e1f10
+
 
   public cart:any = [{
       produitId:0,
@@ -79,12 +76,6 @@ export class NouveauPage implements OnInit {
   }];
   public Cartshop = new Array();
 
-
-<<<<<<< HEAD
-  /*constructor(private router: Router,private prod : ProduitService,
-    private commandeService: CommandeService, private utilsService: UtilsService, 
-    private toastController: ToastController,
-    private tableService: TableService) { }*/
 
   ngOnInit() {
 
@@ -100,40 +91,9 @@ export class NouveauPage implements OnInit {
     
     for (var i = 1; i <= commandesList.length ; ++i) {
       this.commandes.push({id: i,name:commandesList[i-1],statusFilter: false});
-=======
-  constructor(private router: Router,
-              private route:ActivatedRoute,
-              private prod : ProduitService, 
-              private commandeService: CommandeService,
-              private utilsService: UtilsService, 
-              private toastController: ToastController,
-              private tableService: TableService) {
+    }
 
-  }
-
-  ngOnInit() {
-
-    this.route.queryParams.subscribe(params => {
-      if (params && params.tableId != undefined) {
-        this.tableId = params.tableId;
-      }
-      this.produits = this.prod.getAll();
-      this.tables = this.tableService.getTables();
-      this.setToCard();
-
-      this.commandes = [
-      ];
-      let produitsList = ["Salade de fruits",""]
-      let commandesList = ["Fruit","Glace","Boissons","légumes","Céréales","féculents","Produits","Viande","poisson","œuf","Sucre","Corps gras"];
->>>>>>> 095f933d0b3ed0269e62cc3c2cc63509db3e1f10
-      
-      for (var i = 1; i <= commandesList.length ; ++i) {
-        this.commandes.push({id: i,name:commandesList[i-1],statusFilter: false});
-        
-      }
-      this.commandePages = this.convertArrayToPagible(this.commandes, 6);
-      this.produitsPages = this.convertArrayToPagible(this.produits, 3);
-    });
+  
   }
     ionViewWillEnter(){
         $('.query_status').html(this.loader);
@@ -160,7 +120,7 @@ export class NouveauPage implements OnInit {
   public rechercher(tab) {
 
   }
-<<<<<<< HEAD
+
   filtrerParID(id) {
       //$('.query_status').html(this.loader);
       let produit = localStorage.getItem('produits');
@@ -184,35 +144,7 @@ export class NouveauPage implements OnInit {
 
     public savepanier(){
 
-        /*localStorage.setItem("categories",JSON.stringify(this.produitCategoris));
-        let testObject = localStorage.getItem('products');
-        let oldProduct = new Array();
-        if ( testObject != null ){
-            this.produits.url = "../../../assets/prod_2.jpg";
-            this.produits.id = 0;
-            this.produits.id = parseInt(this.lastId()) + 1;
-            this.produits.categories = parseInt(this.cat);
-            this.produits.restoID = this.user.curentUserInfo()[0].restoId;
-            let newProduct = this.produit.pushProduct(this.produits.id,this.produits.name,this.produits.prix,this.produits.quantite,this.user.curentUserInfo()[0].restoId,this.produits.categories,this.produits.url);
-            let rec = JSON.parse(testObject);
-            rec.push(newProduct);
-            console.log(rec);
-            localStorage.setItem("products",JSON.stringify(rec));
-            this.presentToast(" produit "+this.produits.name+" enregistré ","success");
-        }else {
-            this.produits.url = "../../../assets/prod_2.jpg";
-            this.produits.id = 1;
-            this.produits.categories = parseInt(this.cat);
-            this.produits.restoID = this.user.curentUserInfo()[0].restoId;
-            let newProduct = this.produit.pushProduct(this.produits.id,this.produits.name,this.produits.prix,this.produits.quantite,this.user.curentUserInfo()[0].restoId,this.produits.categories,this.produits.url);
-            oldProduct.push(newProduct);
-            console.log(oldProduct);
-            localStorage.setItem("products", JSON.stringify(oldProduct));
-            this.presentToast("produit "+this.produits.name+" enregistré ","success");
-        }*/
     }
-=======
->>>>>>> 095f933d0b3ed0269e62cc3c2cc63509db3e1f10
 
   public random(){
     this.produits = this.prod.randomlly();
@@ -247,27 +179,6 @@ export class NouveauPage implements OnInit {
   	this.showList = false;
   }
 
-<<<<<<< HEAD
-  //  public ajouter(produit, quantityOrdered,tableId,stock,produitId){
- /* public ajouter(prix,produitId){
-      console.log(produitId);
-     /!* let qte:any = "qte_"+produitId;
-      let pu:any = "prix_"+produitId;
-       pu = $('.'+pu+'').val();
-      let self:any = $('.'+qte+'').val();
-      let stoc = "qtity_"+produitId;
-      let stocHidden:any = produitId+"_stock";
-      let total:any = parseInt(quantityOrdered) - parseInt(self);
-      $('.'+stoc+'').text(total);
-      $('.'+stocHidden+'').val(quantityOrdered - self);
-      console.log(produit);
-     let datas = this.prod.pushPanier(produitId,self,pu,this.utilsService.curentUserInfo()[0].restoId);*!/
-      //this.updateStockQuantitis(produitId,self);
-      //console.log(datas);
-     // this.commandeService.addOrder(produit,self, quantityOrdered, this.tableId );
-      //this.utilsService.presentToast('Commande Ajoutée avec success !', 2000, 'success');
-
-  }*/
   public pushToCart(prix,produitId){
 
       let qte:any = "qte_"+produitId;
@@ -303,13 +214,7 @@ export class NouveauPage implements OnInit {
   }
   updateCommande(){}
 
-  public ajouter(produit, quantityOrdered){
-    this.commandeService.addOrder(produit, quantityOrdered, quantityOrdered, this.tableId );
-    this.utilsService.presentToast('Produit ajouté dans votre panier', 2000, 'success');
-    console.log(this.tableId);
-
-=======
-
+  
   public ajouter(produit, quantityOrdered){
     if(quantityOrdered > 0){
       let found = this.panier.find(function (item) {
@@ -325,7 +230,7 @@ export class NouveauPage implements OnInit {
       //this.commandeService.addOrder(produit, quantityOrdered, quantityOrdered, this.tableId );
       this.utilsService.presentToast('Produit ajouté dans votre panier', 2000, 'success');
     }
->>>>>>> 095f933d0b3ed0269e62cc3c2cc63509db3e1f10
+
   }
 
   updateStockQuantitis(idProduit,Qte){

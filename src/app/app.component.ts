@@ -36,7 +36,7 @@ export class AppComponent {
     },
     {
       title: 'Les Produits',
-      url: '/plats/entrees',
+      url: '/plats',
       icon: '/assets/logo-commande.svg'
     },
     {

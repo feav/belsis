@@ -48,17 +48,7 @@ export class CommandesPage implements OnInit {
 
   	this.commandes = [
 	 ];
-   let produitsList = ["Salade de fruits",""]
-   let commandesList = ["Fruit","Glace","Boissons","légumes","Céréales","féculents","Produits","Viande","poisson","œuf","Sucre","Corps gras"];
-    
-    for (var i = 1; i <= commandesList.length ; ++i) {
-      this.commandes.push({id: i,name:commandesList[i-1],statusFilter: false});
-      
-    }
-  	this.commandePages = this.convertArrayToPagible(this.commandes, 6);
-  	this.produitsPages = this.convertArrayToPagible(this.produits, 3);
-
-    this.getOrders();
+   
   }
 
   public rechercher(tab) {
@@ -143,14 +133,22 @@ export class CommandesPage implements OnInit {
   public getcommandes(){
       let data = localStorage.getItem('commandes');
       let conv = JSON.parse(data);
-      this.commandes = conv;
-      for (let i = 0 ;  i < conv.length ; i++){
+      if(conv != null && conv != undefined)
+        this.commandes = conv;
+      console.log({commande_length: this.commandes.length})
+      console.log({commandes: this.commandes})
+
+      for (let i = 0 ;  i < this.commandes.length ; i++){
           let qt = 0;
           let total = 0;
+
           for (let k = 0 ;  k < conv[i].length ; k++){
-                   //console.log(conv[i][k]);
-               qt += parseInt(conv[i][k].qte);
-               total += parseInt(conv[i][k].totalPrice);
+
+
+
+               //console.log(conv[i][k]);
+               // qt += parseInt(conv[i][k].qte);
+               // total += parseInt(conv[i][k].totalPrice);
           }
           let data = {
               id:i+1,

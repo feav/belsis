@@ -108,7 +108,7 @@ export class StokcsPage implements OnInit {
   	return null;
   }
   categorieByID(id){
-      //console.log(this.prod.categorie(id).name);
+      console.log(this.prod.categorie(id).name);
      return this.prod.categorie(id).name;
     // console.log(this.prod.categorie(id));
   }

@@ -9,7 +9,6 @@
 		min-height: 70px;
 		position: fixed!important;
 		bottom: 8px;
-<<<<<<< HEAD
 		position: relative;
 		overflow: hidden;
 		left: 4%;
@@ -17,17 +16,6 @@
 	.shoper{
 		position: relative;
 		overflow: hidden;
-=======
-		ion-badge {
-			position: relative;
-			top: -55px;
-			right: -65px;
-		};
-		ion-icon {
-			font-size: 50pt;
-			color: #D76800
-		}
->>>>>>> 095f933d0b3ed0269e62cc3c2cc63509db3e1f10
 	}
 
 	ion-icon{
@@ -314,7 +302,7 @@
 		/*height: 80%;
 		overflow:scroll;*/
 	}
-<<<<<<< HEAD
+
 	.query_status{
 		max-width: 50px;
 		margin: 0 auto;
@@ -327,7 +315,6 @@
 	.query_status>img{
 		width: 100%;
 	}
-=======
 
 ion-fab-button {
   --background: #142768;
@@ -364,4 +351,4 @@ ion-fab-button {
 	    margin: 0;
 	}
 }
->>>>>>> 095f933d0b3ed0269e62cc3c2cc63509db3e1f10
+
