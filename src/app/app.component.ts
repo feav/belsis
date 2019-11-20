@@ -56,10 +56,14 @@ export class AppComponent {
   ) {
     this.initializeApp();
   }
+    curentUserInfo(){
+        let curentcy = localStorage.getItem('userconnected');
+        return JSON.parse(curentcy);
+    }
 
   async presentToast(message,color) {
       const toast = await this.toast.create({
-            header: 'Bonjour'+this.user.name,
+            header: 'Bonjour '+this.curentUserInfo()[0].name,
             message: "",
             position: 'middle',
             buttons: [

@@ -5,7 +5,7 @@
 </ion-header> -->
 
 <ion-content>
-	<form (ngSubmit)="logForm()">
+	<form (ngSubmit)="Authenticate()">
 		<ion-grid>
 			<ion-row justify-content-center>
 					<ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
@@ -15,11 +15,11 @@
 						</div>
 						<div padding>
 							<ion-item>
-								<ion-input type="text" [(ngModel)]="user.name" name="name" placeholder="Username"></ion-input>
+								<ion-input type="text" [(ngModel)]="userName" name="userName" placeholder="Username"></ion-input>
 							</ion-item>
 
 							<ion-item>
-								<ion-input type="password" [(ngModel)]="user.password"  name="psw" placeholder="Password"></ion-input>
+								<ion-input type="password" [(ngModel)]="userPassword"  name="userPassword" placeholder="Password"></ion-input>
 							</ion-item>
 						</div>
 

@@ -17,4 +17,8 @@ export class UtilsService {
     });
     toast.present();
   }
+    curentUserInfo(){
+        let curentcy = localStorage.getItem('userconnected');
+        return JSON.parse(curentcy);
+    }
 }

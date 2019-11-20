@@ -1,22 +1,160 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { ProduitModel } from '../models/produit.model';
+import { PanierModel } from '../models/panier.model';
+import {reject} from "q";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProduitService {
   	private items:any;
+  	public produit = {
+		id: '',
+		nom: "",
+		prix: "",
+		stocks: "0",
+		quantite: "3",
+		url:"../../assets/prod_7.png"
+    }
 
   	getAll(){
   		return this.items;
   	}
 
-  	public save(produit){
 
-  	}
+    createNewProduct(record) {
+        //return this.firestore.collection('Students').add(record);
+        localStorage.setItem('2',this.produit['id']);
+        localStorage.setItem('nom',this.produit['nom']);
+        localStorage.setItem('prix',this.produit['prix']);
+        localStorage.setItem('stock',this.produit['stocks']);
+        localStorage.setItem('quantite',this.produit['quantite']);
+    }
 
-  	public update(produit){
-  		
-  	}
+    pushProduct(id,name, pu,qte,restoID,catID,url){
+  		return new ProduitModel(id,name, pu,qte,restoID,catID,url);
+	}
+	pushPanier(produitId,qte,pu,restoId,tatbleID){
+  		return new PanierModel(produitId,qte,pu,restoId,tatbleID);
+	}
+
+    public lastId():any{
+        let storage = localStorage.getItem('products');
+        let  storages = JSON.parse(storage);
+        return storages.length;
+    }
+
+    readProducts() {
+        //return this.firestore.collection('Produit').snapshotChanges();
+    }
+
+    updatePruduct(recordID,record){
+        //this.firestore.doc('Students/' + recordID).update(record);
+    }
+
+    deleteProduct(record_id) {
+        //this.firestore.doc('Students/' + record_id).delete();
+    }
+    async allProduct():Promise<any>{
+        return new Promise(resolve => {
+            let datas = localStorage.getItem('products');
+            datas = JSON.parse(datas);
+            //console.log(produits);
+            resolve(datas);
+        })
+    }
+    Panier(){
+            let datas = localStorage.getItem('panier');
+            datas = JSON.parse(datas);
+            return datas;
+
+    }
+    async allCategoris():Promise<any>{
+        return new Promise(resolve => {
+            let datas = localStorage.getItem('categories');
+            datas = JSON.parse(datas);
+            //console.log(produits);
+            resolve(datas);
+        })
+    }
+    allCategoris2(){
+            let datas = localStorage.getItem('categories');
+              return JSON.parse(datas);
+    }
+    async ProductResto():Promise<any>{
+        return new Promise(resolve => {
+            let produit = localStorage.getItem('products');
+            let restoId = this.curentUserInfo()[0].restoId;
+            let produitResto = new Array();
+            //console.log(restoId);
+            let conv = JSON.parse(produit);
+                 //console.log(produit);
+                for (let i = 0; i < conv.length;i++){
+                    if (conv[i].restoId == restoId){
+
+						produitResto.push( conv[i]);
+                        //resolve(produit);
+                    }
+                }
+                if (produitResto.length > 0){
+                    resolve(produitResto);
+				}else {
+                	reject('pas de produit pour votre restaurant');
+				}
+
+        })
+    }
+    curentUserInfo(){
+        let curentcy = localStorage.getItem('userconnected');
+        return JSON.parse(curentcy);
+    }
+    async Product(id):Promise<any>{
+        return new Promise(resolve => {
+            let produit = localStorage.getItem('products');
+            let conv = JSON.parse(produit);
+            if (id !==null ){
+                for (let i = 0; i < conv.length;i++){
+                    if (conv[i].id == id){
+                        produit = conv[i];
+                        resolve(produit);
+                    }
+                }
+			} else {
+            	reject("id is undefined");
+			}
+        })
+    }
+    async categorisNameById(id):Promise<any>{
+        return new Promise(resolve => {
+            let categorie = localStorage.getItem('categories');
+            let conv = JSON.parse(categorie);
+            if (id !==null ){
+                for (let i = 0; i < conv.length;i++){
+                    if (conv[i].id == id){
+                        categorie = conv[i].id+"=>"+conv[i].name;
+                        resolve(categorie);
+                    }
+                }
+            } else {
+                reject("id is undefined");
+            }
+        })
+    }
+    categorie(id){
+            let categorie = localStorage.getItem('categories');
+            let conv = JSON.parse(categorie);
+            if (id !== null ){
+                for (let i = 0; i < conv.length;i++){
+                    if (conv[i].id == id){
+                      return  categorie = conv[i];
+                    }
+                }
+            } else {
+                //reject("id is undefined");
+            }
+
+    }
 
 	public getAllPlats():Array<any>{
 
@@ -165,7 +303,7 @@ export class ProduitService {
 		return [];
 	}
 
-  	constructor() { 
+  	constructor() {
 	  	this.items = [
 	      {
 	        id: 1,
@@ -276,4 +414,5 @@ export class ProduitService {
 		console.log(this.items.filter(item=>{item.id == id})[0]);
 		return this.items.filter(item=>{item.id == id})[0];
 	}
+
 }

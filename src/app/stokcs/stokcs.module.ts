@@ -17,7 +17,7 @@ const routes: Routes = [
     component: StokcsPage,
   },
   {
-    path: 'add',
+    path: 'add-produit',
     component: AddProduitComponent,
   },
   {

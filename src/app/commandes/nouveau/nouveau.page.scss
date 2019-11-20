@@ -7,8 +7,15 @@
 	.panier{
 		min-width: 70px;
 		min-height: 70px;
-		position: fixed;
+		position: fixed!important;
 		bottom: 8px;
+		position: relative;
+		overflow: hidden;
+		left: 4%;
+	}
+	.shoper{
+		position: relative;
+		overflow: hidden;
 	}
 
 	ion-icon{
@@ -194,7 +201,10 @@
 			}
 		}
 	}
-
+	#categoriesList> div{
+		float: left;
+		max-width: 100px;
+	}
 	#shwitchIcons {
 		button {
 			margin: 10px;
@@ -296,4 +306,16 @@
 	#contentList{
 		/*height: 80%;
 		overflow:scroll;*/
+	}
+	.query_status{
+		max-width: 50px;
+		margin: 0 auto;
+		position: absolute;
+		top: 20%;
+		z-index: 99999;
+		left: 0;
+		right: 0;
+	}
+	.query_status>img{
+		width: 100%;
 	}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProduitService } from "../services/produit.service";
+import { UsersService } from "../services/users.service";
 
 @Component({
   selector: 'app-stokcs',
@@ -20,13 +21,18 @@ export class StokcsPage implements OnInit {
 
 	public produitsPages:any;
 
-	public showList:boolean = true;
+	public showList:boolean = false;
 
 
-  constructor(private router: Router,private prod : ProduitService) { }
+  constructor(
+      private router: Router,
+      private prod: ProduitService,
+      private user: UsersService
+      ) { }
 
   ngOnInit() {
-  	this.produits = this.prod.getAll();
+  	//this.getProduct();
+  	/*this.produits = this.prod.getAll();
   	   let commandesList = ["Fruit","Glace","Boissons","légumes","Céréales","féculents","Produits","Viande","poisson","œuf","Sucre","Corps gras"];
     this.commandes = [];
     for (var i = 1; i <= commandesList.length ; ++i) {
@@ -34,15 +40,39 @@ export class StokcsPage implements OnInit {
       
     }
   	this.commandePages = this.convertArrayToPagible(this.commandes, 6);
-  	this.produitsPages = this.convertArrayToPagible(this.produits, 3);
-    this.setToCard();
+  	this.produitsPages = this.convertArrayToPagible(this.produits, 3);*/
+
+  	//this.produitsPages = this.convertArrayToPagible(this.produits, 3);
+    //this.setToCard();
+
+  }
+    ionViewWillEnter(){
+        this.getProduct();
+        this.prod.ProductResto().then(produitResto=>{
+                this.produits = produitResto;
+            },error=>{
+                console.log(error);
+            }
+        );
+    }
+
+
+  public rechercher() {}
+  getProduct(){
+      let datas = localStorage.getItem('produits');
+      //this.produits = JSON.parse(datas);
   }
 
-  public rechercher() {
-  	
-  }
+    public setToList(){
+        console.log('show list');
+        this.showList = true;
+    }
 
-  public convertArrayToPagible(datas: Array<any>, pagesize: number):Array<Array<any>>{
+    public setToCard(){
+        console.log('show cart');
+        this.showList = false;
+    }
+  /*public convertArrayToPagible(datas: Array<any>, pagesize: number):Array<Array<any>>{
   	let result:Array<Array<any>> = [];
   	for (var i = 0; i < (datas.length / pagesize); ++i) {
   		if (i!=((datas.length / pagesize)-1))
@@ -64,14 +94,7 @@ export class StokcsPage implements OnInit {
   	}
 
   }
-
-  public setToList(){
-  	this.showList = true;
-  }
-
-  public setToCard(){
-  	this.showList = false;
-  }
+  */
 
   public editer(produit){
   	this.router.navigate(["/stokcs/edit/"+produit.id],{queryParams:produit});
@@ -84,8 +107,13 @@ export class StokcsPage implements OnInit {
   public supprimer(produit:any){
   	return null;
   }
-
-  public ajoutGlobal(){
-  	 this.router.navigate(["/stokcs/add"]);
+  categorieByID(id){
+      //console.log(this.prod.categorie(id).name);
+     return this.prod.categorie(id).name;
+    // console.log(this.prod.categorie(id));
   }
+ public ajoutGlobal(){
+        this.router.navigate(["/stokcs/add-produit"]);
+ }
+
 }

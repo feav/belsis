@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content text-center>
-	
+
 	<ion-grid>
 		<ion-row id="searchRow">
 			<ion-col>
@@ -31,7 +31,7 @@
 				<button
 					*ngIf="!item.statusFilter"
 					(click)="addOrRemoveCategorieToFilter(i, j)" >{{item.name}}</button>
-				<button 
+				<button
 					*ngIf="item.statusFilter"
 					(click)="addOrRemoveCategorieToFilter(i, j)"
 					style="background-color: #142768; color:white;"
@@ -52,8 +52,10 @@
 		</ion-row>
 		<ion-row>
 			<ion-col>
-				<p id="contentList">
-					<ion-grid *ngIf="showList" class="hide-only-xs hide-only-sm">
+				<p id="contentListd">
+					<!--<ion-grid *ngIf="showList" class="hide-only-xs hide-only-sm">-->
+					<!--<ion-grid  class="hide-only-xs hide-only-sm">-->
+					<ion-grid  class="hide-only-xs hide-only-sm">
 						<ion-row text-center>
 							<ion-col col-2>
 								N° Commande
@@ -61,9 +63,9 @@
 							<ion-col col-3>
 								Quantité
 							</ion-col>
-							<ion-col col-3>
+							<!--<ion-col col-3>
 								Table
-							</ion-col>
+							</ion-col>-->
 							<ion-col col-3>
 								Montant Total
 							</ion-col>
@@ -72,7 +74,7 @@
 							</ion-col>
 
 						</ion-row>
-						<ion-row align-self-center text-center *ngFor="let order of orders; let i = index" class="list-row-item">
+						<!--<ion-row align-self-center text-center *ngFor="let order of orders; let i = index" class="list-row-item">
 							<ion-col col-2>
 								{{order.id}}
 							</ion-col>
@@ -88,13 +90,35 @@
 							<ion-col col-1>
 								<ion-icon class="digits" name="eye"></ion-icon>
 							</ion-col>
+						</ion-row>-->
+						<ion-row align-self-center text-center *ngFor="let order of comdes; let i = index" class="list-row-item">
+							<ion-col col-2>
+								{{order.id}}
+							</ion-col>
+							<ion-col col-3>
+								<!--<span>{{ order.qte }}</span>-->
+							</ion-col>
+							<ion-col col-3>
+								<!--<span>{{ order.total }}</span>-->
+							</ion-col>
+							<ion-col col-1>
+								<ion-icon class="digits" name="eye"></ion-icon>
+							</ion-col>
+							<!--
+
+							<ion-col col-3>
+								<span> {{ order.totalAmount }} FCFA</span>
+							</ion-col>
+							<ion-col col-1>
+								<ion-icon class="digits" name="eye"></ion-icon>
+							</ion-col>-->
 						</ion-row>
 					</ion-grid>
 				</p>
 				<div>
 					<ion-grid class="hide-only-lg hide-only-md hide-only-xl">
 						<ion-row align-self-center text-center  class="list-row-item">
-							<ion-col *ngFor="let order of orders; let i = index">
+							<ion-col *ngFor="let order of comdes; let i = index">
 								<ion-card>
 									<ion-card-header>
 									</ion-card-header>
@@ -106,22 +130,27 @@
 										</ion-item>
 										<ion-item>
 											<ion-label>
-												Quantité : {{ order.quantityOrdered }}
+												Date : {{ order.date }}
 											</ion-label>
 										</ion-item>
 										<ion-item>
 											<ion-label>
-												Table : 
+												etat : {{ order.etat }}
 											</ion-label>
 										</ion-item>
 										<ion-item>
 											<ion-label>
-												Montant total : {{ order.totalAmount }}
+												Montant total : {{ TotalPrice(order.id) }}
 											</ion-label>
 										</ion-item>
 										<ion-item>
 											<ion-label>
-												<ion-icon class="digits" name="eye"></ion-icon>
+												Produit : {{ TotalProtuit(order.id) }}
+											</ion-label>
+										</ion-item>
+										<ion-item>
+											<ion-label>
+												<ion-icon class="digits" (click)="detail(order.id)" name="eye"></ion-icon>
 											</ion-label>
 										</ion-item>
 									</ion-card-content>
@@ -129,7 +158,7 @@
 							</ion-col>
 						</ion-row>
 					</ion-grid>
-				</div>	
+				</div>
 			</ion-col>
 		</ion-row>
 	</ion-grid>

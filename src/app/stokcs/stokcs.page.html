@@ -1,144 +1,150 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button id="menu" color="light"></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Stock</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button id="menu" color="light"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Stock</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content text-center>
-	
-	<ion-grid>
-		<ion-row id="searchRow">
-			<ion-col>
-				<ion-searchbar placeholder="Filtrer les produit" class="hide-only-lg hide-only-xl hide-only-md"></ion-searchbar>
-				<div style="text-align:center;" class="hide-only-sm hide-only-xs">
+
+    <ion-grid>
+        <ion-row id="searchRow">
+            <ion-col>
+                <div style="text-align:center;">
 					<span>
 					<input type="text" placeholder="Recherche..." />
-					<!--<ion-input class="searchInput" placeholder="Recherche..." type="text" ></ion-input>-->
+                        <!--<ion-input class="searchInput" placeholder="Recherche..." type="text" ></ion-input>-->
 					<button>
 						<ion-icon name="search"></ion-icon>
 					</button>
 					</span>
-				</div>
-			</ion-col>
-		</ion-row>
-		<ion-row id="categoriesList" *ngFor="let page of commandePages ; let i = index" class="hide-only-sm hide-only-xs">
-			<ion-col col-2 *ngFor="let item of page; let j = index">
-				<button
-					*ngIf="!item.statusFilter"
-					(click)="addOrRemoveCategorieToFilter(i, j)" >{{item.name}}</button>
-				<button 
-					*ngIf="item.statusFilter"
-					(click)="addOrRemoveCategorieToFilter(i, j)"
-					style="background-color: #142768; color:white;"
-					>{{item.name}}</button>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col id="horiszontalBar">
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col id="shwitchIcons" text-right class="hide-only-sm hide-only-xs">
-				<button class="on" *ngIf="showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
-				<button class="off" *ngIf="!showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
-				<button class="on" *ngIf="!showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
-				<button click="off" *ngIf="showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
-			</ion-col>
-		</ion-row>
-		<ion-row >
-			<ion-col>
-				<p id="contentList">
-					<ion-grid *ngIf="showList">
-						<ion-row text-center>
-							<ion-col col-1>
-							</ion-col>
-							<ion-col col-4>
-								Nom
-							</ion-col>
-							<ion-col col-2>
-								Prix
-							</ion-col>
-							<ion-col col-2>
-								Stock
-							</ion-col>
-							<ion-col col-1>
-								Opérations
-							</ion-col>
-							<ion-col col-1>
-							</ion-col>
-						</ion-row>
-						<ion-row (click)="details(produit)" text-center *ngFor="let produit of produits; let i = index" class="list-row-item">
-							<ion-col col-1>
-								<img src="{{produit.url}}" />
-							</ion-col>
-							<ion-col col-4>
-								{{produit.nom}}
-							</ion-col>
-							<ion-col col-2>
-								<span class="digits">{{produit.prix}}</span> €
-							</ion-col>
-							<ion-col col-2>
-								<span class="digits">{{produit.stock}}</span>
-							</ion-col>
-							<ion-col col-1>
-								<button class="nonCirculaire" (click)="editer(produit)">Modifier</button>
-							</ion-col>
-							<ion-col col-1>
-								<button class="nonCirculaire red" (click)="supprimer(produit)">Supprimer</button>
-							</ion-col>
-						</ion-row>
-					</ion-grid>
-					<ion-grid *ngIf="!showList">
-						<ion-row *ngFor="let page of produitsPages; let li = index ">
-							<ion-col col-4 *ngFor="let produit of page; let co = index ">
-								<ion-card>
-						        	<img class="cardImg" src="{{produit.url}}" />
-						        	<ion-card-header>
-						          		<ion-card-title text-center>{{produit.nom}}</ion-card-title>
-						        	</ion-card-header>
-						        	<ion-card-content>
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row id="categoriesList" *ngFor="let page of commandePages ; let i = index">
+            <ion-col col-2 *ngFor="let item of page; let j = index">
+                <button
+                        *ngIf="!item.statusFilter"
+                        (click)="addOrRemoveCategorieToFilter(i, j)" >{{item.name}}</button>
+                <button
+                        *ngIf="item.statusFilter"
+                        (click)="addOrRemoveCategorieToFilter(i, j)"
+                        style="background-color: #142768; color:white;"
+                >{{item.name}}</button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col id="horiszontalBar">
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col id="shwitchIcons" text-right>
+                <button class="on" *ngIf="showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
+                <button class="off" *ngIf="!showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
+                <button class="on" *ngIf="!showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
+                <button click="off" *ngIf="showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
+            </ion-col>
+        </ion-row>
+        <ion-row >
+            <ion-col>
+                <p id="contentList">
+                    <ion-grid *ngIf="showList">
+                        <ion-row text-center>
+                            <ion-col col-1>
+                            </ion-col>
+                            <ion-col col-4>
+                                Nom
+                            </ion-col>
+                            <ion-col col-2>
+                                Prix
+                            </ion-col>
+                            <ion-col col-2>
+                                Stock
+                            </ion-col>
+                            <ion-col col-1>
+                                Opérations
+                            </ion-col>
+                            <ion-col col-1>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row (click)="details(produit)" text-center *ngFor="let produit of produits; let i = index" class="list-row-item">
+                            <ion-col col-1>
+                                <img src="{{produit.url}}" />
+                            </ion-col>
+                            <ion-col col-4>
+                                {{produit.name}}
+                            </ion-col>
+                            <ion-col col-2>
+                                <span class="digits">{{produit.pu}}</span> €
+                            </ion-col>
+                            <ion-col col-2>
+                                <span class="digits">{{produit.qte}}</span>
+                            </ion-col>
+                            <ion-col col-1>
+                                <button class="nonCirculaire" (click)="editer(produit)">Modifier</button>
+                            </ion-col>
+                            <ion-col col-1>
+                                <button class="nonCirculaire red" (click)="supprimer(produit)">Supprimer</button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                    <ion-grid *ngIf="!showList">
+                        <ion-row >
+                            <ion-col size-md="12" size-lg="4" size-xs="12" size-sm="12" *ngFor="let produit of produits; let co = index ">
+                                <ion-card>
+                                    <div class="img-ctn">
+                                        <img class="cardImg" src="{{produit.url}}" />
+                                    </div>
+                                    <ion-card-header>
+                                        <ion-card-title text-center></ion-card-title>
+                                    </ion-card-header>
+                                    <ion-card-content>
 
-						          		<ion-grid>
-						          			<ion-row>
-						          				<ion-col>
-									          		<p text-center>
-									          			<ion-chip>
-														  	<ion-label>Categorie</ion-label>
-														</ion-chip>
-									          			<ion-chip>
-														  	<ion-label>Categorie</ion-label>
-														</ion-chip>
-									          			<ion-chip>
-														  	<ion-label>Categorie</ion-label>
-														</ion-chip>
-									        		</p>
-						          				</ion-col>
-						          			</ion-row>
-						          			<ion-row>
-						          				<ion-col>
-						          					<button class="nonCirculaire" (click)="editer(produit)">Modifier</button>
-						          					<button class="nonCirculaire" (click)="details(produit)">Details</button>
-						          					<button class="nonCirculaire red" (click)="supprimer(produit)">Supprimer</button>
-						          				</ion-col>
-						          			</ion-row>
-						          		</ion-grid>
-						        	</ion-card-content>
-						      	</ion-card>
-							</ion-col>
-						</ion-row>
-					</ion-grid>
-				</p>
-			</ion-col>
-		</ion-row>
-		<ion-row text-right>
-			<ion-col >
-				<button class="addButton" (click)="ajoutGlobal()">
-					+
-				</button>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
+                                        <ion-grid>
+                                            <ion-row>
+                                                <ion-col >
+                                                    <span class="produit-title">{{produit.name}}</span>
+                                                </ion-col>
+                                                <ion-col size-md="12" size-lg="12" size-xs="12" size-sm="12">
+                                                    <span class="produit-title">{{produit.pu}}</span>
+                                                </ion-col>
+                                                <ion-col size-md="12" size-lg="12" size-xs="12" size-sm="12">
+                                                    <span class="produit-title">{{produit.qte}}</span>
+                                                </ion-col>
+                                            </ion-row>
+                                            <ion-row>
+                                                <ion-col>
+                <p text-center>
+                    <ion-chip>
+                        <ion-label>{{categorieByID(produit.catID)}}</ion-label>
+                    </ion-chip>
+                </p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <button class="nonCirculaire" (click)="editer(produit)">Modifier</button>
+              <!--  <button class="nonCirculaire" (click)="details(produit)">Details</button>-->
+                <button class="nonCirculaire red" (click)="supprimer(produit)">Supprimer</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    </ion-card-content>
+    </ion-card>
+    </ion-col>
+    </ion-row>
+    </ion-grid>
+    </p>
+    </ion-col>
+    </ion-row>
+    <ion-row text-right>
+        <ion-col >
+            <button class="addButton" (click)="ajoutGlobal()">
+                +
+            </button>
+        </ion-col>
+    </ion-row>
+    </ion-grid>
 </ion-content>

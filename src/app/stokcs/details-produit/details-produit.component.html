@@ -21,7 +21,7 @@
 		</ion-row>
 		<ion-row>
 			<ion-col col-2>
-				<img class="circular" [src]="produit.url" alt="IMAGE" />
+				<img class="" [src]="produit.url" alt="IMAGE" />
 			</ion-col>
 		</ion-row>
 		<ion-row>
@@ -36,23 +36,23 @@
 					<ion-row>
 						<ion-col col-1>Prix : </ion-col>
 						<ion-col col-11>
-							{{produit.prix}}
+							{{produit.pu}}
 						</ion-col>
 					</ion-row>
 					<ion-row>
 						<ion-col col-1>Stock : </ion-col>
 						<ion-col col-11>
-							{{produit.stock}}
+							{{produit.qte}}
 						</ion-col>
 					</ion-row>
-					<ion-row>
+					<!--<ion-row>
 						<ion-col col-1>Categories : </ion-col>
 						<ion-col col-11>
-							<ion-chip *ngFor="let categorie of produit.categories">
+							<ion-chip ngIf="let categorie" *ngFor="let categorie of produit.categories">
 							  	<ion-label>{{categorie}}</ion-label>
 							</ion-chip>
 						</ion-col>
-					</ion-row>
+					</ion-row>-->
 				</ion-grid>
 			</ion-col>
 		</ion-row>

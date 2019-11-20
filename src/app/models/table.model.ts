@@ -7,7 +7,22 @@ export class Table {
 	serveur: any;
 	etat: any;
 	location: any;
-	orders: any
+	orders: any;
+    restoId: number;
+    status:number;
+	public table=[
+		{
+			id:0,
+			label:'',
+            value: '',
+			logo: 'any',
+			color: 'any',
+			serveur: '',
+			restoId:0,
+			etat:'',
+			location:'',
+			orders: []
+		}];
 
 	constructor(id){
 		
@@ -16,6 +31,7 @@ export class Table {
  			{color:"red",value:"Terminee"},
  			{color:"orange",value:"Annulee"}
  		];
+
  		let auteur = ["BIANCA","STEPHANIE","ELODIE","TRESOR"];
  		let location = ["Pres du Salon","Cote Gauche","Pres Cuisine","Allee droite"];
 

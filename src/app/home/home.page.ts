@@ -20,13 +20,22 @@ export class HomePage {
   private stocks: Array<number> = [];
   private bars: any;
   private bars2:any;
-  constructor() { }
+
+  constructor() {
+
+  }
 
   ionViewDidEnter() {
-    
+    //let verify = localStorage.getItem('reload');
+    if (localStorage.getItem('reload') !== "1"){
+        window.location.reload(true);
+        localStorage.setItem('reload',"1");
+	}else {
+        //localStorage.setItem('reload',0);
+	}
     if(localStorage.getItem('recentLogged') === "1"){
     	localStorage.setItem('recentLogged', "0");
-    	window.location.reload();
+
     }else{
 		this.createBarChart();    	
     }
