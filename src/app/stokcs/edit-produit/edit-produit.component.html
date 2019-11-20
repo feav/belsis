@@ -12,7 +12,7 @@
 	<ion-grid>
 		<ion-row>
 			<ion-col id="newProduct" text-center>
-				<b>EDITER UN PRODUIT</b>
+				<b>EDITER UN PRODUIT EN STOCK</b>
 			</ion-col>
 		</ion-row>
 		<ion-row>
@@ -20,26 +20,44 @@
 			</ion-col>
 		</ion-row>
 		<ion-row>
-			<ion-col col-1>
-				<img class="circular" src="" alt="IMAGE" />
+			<ion-col size-md="4" size-lg="4" size-sm="4" size-md="4" size-xl="4" size-sm="12" size-xs="12">
+				<img class="product-image" (click)="openChooser()" src="{{produit.url}}" alt="IMAGE" />
+				<input id="file-input" (change)="onFileSelected($event)" type="file" name="name" style="display: none;" />
 			</ion-col>
-			<ion-col col-11>
+			<ion-col size-md="8" size-lg="8" size-sm="8" size-md="8" size-xl="8" size-sm="12" size-xs="12">
 				<ion-grid class="color-text" text-left>
 					<ion-row>
-						<ion-col col-1>Nom : </ion-col>
-						<ion-col col-11> <input class="input-text-my" type="text" [(ngModel)]="produit.name" /> </ion-col>
+						<ion-col size-md="3" size-lg="3" size-sm="3" size-md="3" size-xl="3" size-sm="12" size-xs="12">Nom </ion-col>
+						<ion-col size-md="9" size-lg="9" size-sm="9" size-md="9" size-xl="9" size-sm="12" size-xs="12">
+							<ion-input type="text" placeholder="Nom" [(ngModel)]="produit.name"></ion-input>
+						</ion-col>
 					</ion-row>
 					<ion-row>
-						<ion-col col-1>Prix : </ion-col>
-						<ion-col col-11> <input class="input-text-my" type="text" [(ngModel)]="produit.prix" /> </ion-col>
+						<ion-col size-md="3" size-lg="3" size-sm="3" size-md="3" size-xl="3" size-sm="12" size-xs="12">Prix </ion-col>
+						<ion-col size-md="9" size-lg="9" size-sm="9" size-md="9" size-xl="9" size-sm="12" size-xs="12">
+							<ion-input type="number" placeholder="Prix" [(ngModel)]="produit.prix"></ion-input>
+						</ion-col>
 					</ion-row>
 					<ion-row>
-						<ion-col col-1>Quantite : </ion-col>
-						<ion-col col-11> <input class="input-text-my" type="text" [(ngModel)]="produit.stock" /> </ion-col>
+						<ion-col size-md="3" size-lg="3" size-sm="3" size-md="3" size-xl="3" size-sm="3" size-xs="3">Type </ion-col>
+						<ion-col size-md="9" size-lg="9" size-sm="9" size-md="9" size-xl="9" size-sm="12" size-xs="12">
+						    <ion-select [(ngModel)]="produit.type" placeholder="Select One">
+						      <ion-select-option value="Ingredient">Ingredient</ion-select-option>
+						      <ion-select-option value="Boisson">Boisson</ion-select-option>
+						    </ion-select>
+						</ion-col>
 					</ion-row>
 					<ion-row>
-						<ion-col col-1>Categories : </ion-col>
-						<ion-col col-11> <input class="input-text-my" type="text" /> </ion-col>
+						<ion-col size-md="3" size-lg="3" size-sm="3" size-md="3" size-xl="3" size-sm="12" size-xs="12">Quantite </ion-col>
+						<ion-col size-md="9" size-lg="9" size-sm="9" size-md="9" size-xl="9" size-sm="12" size-xs="12"> 
+							<ion-input type="number" placeholder="Quantite" [(ngModel)]="produit.stock"></ion-input>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col size-md="3" size-lg="3" size-sm="3" size-md="3" size-xl="3" size-sm="12" size-xs="12">Categories </ion-col>
+						<ion-col size-md="9" size-lg="9" size-sm="9" size-md="9" size-xl="9" size-sm="12" size-xs="12">
+							<ion-input type="text" placeholder="Categories" [(ngModel)]="categorie"></ion-input>
+						</ion-col>
 					</ion-row>
 				</ion-grid>
 			</ion-col>

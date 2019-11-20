@@ -1,3 +1,35 @@
-<p>
-  select-ingrediants works!
-</p>
+<div class="ion-content">
+	<ion-grid>
+		<ion-row>
+			<ion-col text-center>
+				<h5>Liste des ingrédiants</h5>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col text-center>
+				<ion-searchbar [(ngModel)]="filter" placeholder="Filtrer les ingerdiants"></ion-searchbar>
+			</ion-col>
+		</ion-row>
+		<ion-row *ngFor="let ingrediant of ingrediants; let i=index">
+			<ion-col size="7" text-center>
+				{{ingrediant.nom}}
+			</ion-col >
+			<ion-col size="5" text-center>
+				<button class="circular" (click)="moins(i)" style="background-color:#EC0000;">-</button>
+				<span  class = "nonDigits" >
+					<input type="text" [(value)]="ingrediant.quantite" style="width: 40px;" />
+				</span>
+				<button class="circular" (click)="plus(i)" style="background-color:#00B79A;">+</button>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col text-center>
+				<ion-fab id="addButton">
+					<ion-fab-button (click)="ajoutGlobal()">
+						<ion-icon class="icon-size" name="checkmark"></ion-icon>
+					</ion-fab-button>
+				</ion-fab>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</div>

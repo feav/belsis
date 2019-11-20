@@ -102,6 +102,29 @@ export class AddProduitComponent implements OnInit {
 					this.boissons = this.produitService.getAllBoissons();
 				else
 					this.categories = this.categorieService.getAll();
+
+				this.ingrediants = [
+					{
+						id: 10,
+						nom: "Viande de bœuf",
+						quantite: 0
+					},
+					{
+						id: 10,
+						nom: "Viande de chat",
+						quantite: 0
+					},
+					{
+						id: 10,
+						nom: "Poulet",
+						quantite: 0
+					},
+					{
+						id: 10,
+						nom: "Patte d'arrachide",
+						quantite: 0
+					}
+				];
 			}
 		});
 
@@ -186,9 +209,10 @@ export class AddProduitComponent implements OnInit {
 	}
 
 	public ajouterIngrediant(){
+		console.log(this.ingrediants);
 		this.openModal(SelectIngrediantsComponent, {
 			"parent": this,
-			"ingredian": this.ingrediants,
+			"ingrediants": this.ingrediants,
 			"edit": this.edit
 		});
 	}

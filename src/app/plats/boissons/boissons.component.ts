@@ -19,8 +19,7 @@ export class BoissonsComponent implements OnInit {
 				public categorieService: CategorieService,
 				public produitService:ProduitService,
 				public router:Router,
-				public alertController: AlertController,
-				public filtersComponent:FiltersComponent) {
+				public alertController: AlertController) {
 
 	}
 
