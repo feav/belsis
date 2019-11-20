@@ -2,7 +2,7 @@
 	<ion-grid>
 		<ion-row>
 			<ion-col>
-			<ion-searchbar (click)="openSearch()" [(ngModel)]="filterParam.searchInput" placeholder="Filtrer les produits"></ion-searchbar>
+			<ion-searchbar (click)="openSearch($event)" [(ngModel)]="filterParam.searchInput" placeholder="Filtrer les produits"></ion-searchbar>
 			</ion-col>
 		</ion-row>
 		<ion-row>

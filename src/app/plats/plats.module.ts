@@ -16,6 +16,7 @@ import { SelectIngrediantsComponent } from './select-ingrediants/select-ingredia
 import { IonicModule } from '@ionic/angular';
 
 import { PlatsPage } from './plats.page';
+import { IngrediantSelectPipe } from './ingrediant-select.pipe';
 
 const routes: Routes = [
   {
@@ -54,7 +55,9 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [PlatsPage, FiltersComponent, BoissonsComponent, PlatsComponent, 
-                 DessertsComponent, EntreesComponent, AddProduitComponent, SelectIngrediantsComponent],
-  exports:[FiltersComponent, SelectIngrediantsComponent]
+                 DessertsComponent, EntreesComponent, AddProduitComponent, 
+                 SelectIngrediantsComponent, IngrediantSelectPipe],
+  exports:[FiltersComponent, SelectIngrediantsComponent],
+  entryComponents:[SelectIngrediantsComponent, FiltersComponent]
 })
 export class PlatsPageModule {}

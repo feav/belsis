@@ -29,15 +29,20 @@
       </ion-grid>
       <ion-grid>
         <ion-card-title class="ion-text-center">Les Commandes</ion-card-title>
+<<<<<<< HEAD
         <ion-row class="ion-margin">
 
           <ion-col size-md="12" size-lg="4" size-xs="12" size-sm="4" *ngFor="let commande of etatCommendes">
+=======
+        <ion-row class="ion-margin part-encart">
+          <ion-col *ngFor="let commande of etatCommendes">
+>>>>>>> 095f933d0b3ed0269e62cc3c2cc63509db3e1f10
             <ion-card>
               <ion-card-header>
                 <ion-card-subtitle class="primary" [ngStyle]="{'background-color': commande.color}" >{{commande.value}}</ion-card-subtitle>
               </ion-card-header>
 
-              <ion-card-content>
+              <ion-card-content >
                 <div class="img-content">
                   <img [src]="commande.logo">
                 </div>

@@ -74,4 +74,48 @@
 		    font-size: x-large;
 		}
 	}
-	
+
+@media (min-width : 200px) and (max-width : 500px) {
+	ion-row.ion-margin.part-encart.hydrated.part-encart{
+		    margin: 0;
+		ion-card {
+		    margin: 5px;
+		}
+		ion-card  ion-card-content .img-content img {
+			width: 10vw;
+	    	height: 10vw;
+	    	max-width: 100px;
+			max-height: 100px;
+		}
+		ion-card ion-card-content .foot{
+		    font-size: 3vw;
+		    text-align: center;
+		    background: rgba(255, 255, 255, 0.8);
+		    line-height: 30px;
+		    color: black;
+		    font-weight: bold;
+		}
+		ion-card-header.hydrated {
+		    padding: 5px;
+		}
+		ion-col.hydrated {
+		    width: 32%;
+		    margin: 1px;
+		    padding: 0;
+		}
+		ion-card{
+			ion-card-subtitle {
+				position: absolute;
+			    color: white;    
+			    right: -2vw;
+    			top: -5px;
+			    width: 10vw;
+			    height: 10vw;
+			    border-radius: 100%;
+			    text-align: center;
+			    line-height: 10vw;
+			    font-size: 4vw;
+			}
+		}
+	}
+}

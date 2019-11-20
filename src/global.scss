@@ -29,6 +29,22 @@ ion-popover {
   --min-width: 80%!important;
 }
 
+ion-header{
+  ion-toolbar{
+      --background : #142768!important; 
+      ion-title{
+        text-align: center;
+        color: white;
+      }
+      ion-button{
+        color: white;
+        ion-menu-button{
+          color: white;
+        }
+      }
+  }
+}
+
 @media (min-width: 0) and (max-width: 576px) {
   .hide-only-xs {
     display: none;

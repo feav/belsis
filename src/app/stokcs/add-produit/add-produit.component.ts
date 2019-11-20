@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { ProduitService } from '../../services/produit.service';
 import { UsersService } from '../../services/users.service';
 import { MenuController , ToastController, } from '@ionic/angular';
 import {test} from "@angular-devkit/core/src/virtual-fs/host";
 import * as $ from 'jquery';
+=======
+
+declare var fileTrigger:any;
+
+>>>>>>> 095f933d0b3ed0269e62cc3c2cc63509db3e1f10
 @Component({
   selector: 'app-add-produit',
   templateUrl: './add-produit.component.html',
@@ -11,6 +17,7 @@ import * as $ from 'jquery';
 })
 export class AddProduitComponent implements OnInit {
 
+<<<<<<< HEAD
 	public produits:any = {
 	    id:0,
 		url: "",
@@ -64,6 +71,20 @@ export class AddProduitComponent implements OnInit {
 	    this.restoId = this.user.curentUserInfo()[0].restoId;
         localStorage.setItem("categories",JSON.stringify(this.produitCategoris));
     }
+=======
+	public produit:any = {
+		id: 0,
+		name:"",
+		prix:"",
+		quantite:"",
+		categories: [],
+		url:"../../assets/prod_1.png"
+	};
+
+	public categorie:string = "";
+
+	constructor() { }
+>>>>>>> 095f933d0b3ed0269e62cc3c2cc63509db3e1f10
 
 	ngOnInit() {}
 
@@ -103,6 +124,7 @@ export class AddProduitComponent implements OnInit {
         return storages.length;
 	}
 
+<<<<<<< HEAD
 
     async presentToast(message,color) {
         const toast = await this.toast.create({
@@ -124,4 +146,21 @@ class Product{
     quantite:"";
     categories: '';
     logo:"../../assets/prod_1.png"
+=======
+	private openChooser(){
+		fileTrigger();
+	}
+
+	private onFileSelected(event): void {
+    	if (event.target.files && event.target.files[0]) {
+        	const file = event.target.files[0];
+
+        	const reader = new FileReader();
+        	reader.onload = e => this.produit.url = reader.result;
+
+        	reader.readAsDataURL(file);
+    	}
+	}
+
+>>>>>>> 095f933d0b3ed0269e62cc3c2cc63509db3e1f10
 }

@@ -31,4 +31,14 @@ export class TablePage implements OnInit {
 	  	});
 	}
 
+	public newcommande(table){
+
+		this.router.navigate(['/commandes/new'],{
+	  		queryParams: {
+		      tableId: table
+		    }
+		});
+
+	}
+
 }
