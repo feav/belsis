@@ -13,6 +13,7 @@ import { TableService } from './services/table.service';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  
   public appPages = [
     {
       title: 'Plan de Tables',
@@ -45,7 +46,9 @@ export class AppComponent {
       icon: '/assets/logo-stat.svg'
     }
   ];
+
   public user:any = {};
+  
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -56,7 +59,7 @@ export class AppComponent {
   ) {
     this.initializeApp();
   }
-    curentUserInfo(){
+    /*curentUserInfo(){
         let curentcy = localStorage.getItem('userconnected');
         return JSON.parse(curentcy);
     }
@@ -88,7 +91,7 @@ export class AppComponent {
     }
     options(){
       this.presentToast("test","succes");
-    }
+    }*/
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();

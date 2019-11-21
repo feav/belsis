@@ -1,15 +1,11 @@
-
-
 $white-color: #fff;
 $height100: 100%;
 
 ion-grid {
-    width:100%;
-    height: $height100;
+    //width:100%;
 }
 
 ion-row {
-    height: $height100;
 }
 
 ion-col {
@@ -21,8 +17,28 @@ ion-button {
     font-weight: 300;
 }
 form{
-	padding-top: 5%;
+	// padding-top: 5%;
 }
+
+.login-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: inherit;
+	height: 100vh;
+	background: linear-gradient(190deg, #142768 50%, #142768 34%, #142768 52%, #394F99 100%);
+}
+
+.login-form {
+	min-width: 90%;
+}
+
+ion-col {
+    border: none;
+}
+
+
+/*
 @media (min-width: 240px) and (max-width: 768px) {
     ion-grid {
         background: $white-color;
@@ -31,9 +47,4 @@ form{
         border: none;
     }
 }
-ion-content.md.hydrated {
-    	--background: linear-gradient(190deg, #142768 50%, #142768 34%, #142768 52%, #394F99 100%) !important;
-}
-app-login {
-    
-}
+*/
