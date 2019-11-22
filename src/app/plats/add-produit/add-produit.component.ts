@@ -3,7 +3,12 @@ import { ProduitService, CategorieService } from '../../services';
 import { PopoverController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuController , ToastController, } from '@ionic/angular';
+import { PlatModel } from "../../models/plat.model";
+import { ProduitsPlat } from "../../models/produitsPlat";
 import { SelectIngrediantsComponent } from '../select-ingrediants/select-ingrediants.component';
+import { ProduitService } from '../../services/produit.service';
+import { UtilsService } from '../../services/utils.service';
+import {ArrayType} from '@angular/compiler';
 
 
 declare var fileTrigger:any;
@@ -27,15 +32,29 @@ export class AddProduitComponent implements OnInit {
 	private categories:Array<any>;
 	public ingrediants:Array<any>;
 	public imageSrc:string = "";
-
+	public produits:any;
+    public products: Array<any>;
+    public plats=[];
+    public name: any;
+    public prix: any;
+    public restoId: any;
 	constructor(public route:ActivatedRoute,
 				public router:Router,
 				public produitService:ProduitService,
 				public categorieService:CategorieService,
 				public toaster: ToastController,
-				public popoverController:PopoverController) {
-
+				public popoverController:PopoverController,
+				public utilservice: UtilsService
+				) {
+        this.restoId = this.utilservice.curentUserInfo()[0].restoId;
 		this.ngInit();
+        this.products = localStorage.getItem('products');
+        if (this.products != null){
+            this.ingrediants = JSON.parse(this.products);
+            console.log(this.ingrediants);
+        }
+        //this.ingrediants = localStorage.getItem('ingrePlat');
+
 	}
 
 	ngOnInit() {}
@@ -88,6 +107,8 @@ export class AddProduitComponent implements OnInit {
 							break;
 
 						case "TYPE_PLAT":
+                            this.categories = this.categorieService.getAll();
+
 							this.headerMessage = "NOUVEAU PLAT";
 							break;
 
@@ -100,10 +121,11 @@ export class AddProduitComponent implements OnInit {
 
 				if(this.isBoisson)
 					this.boissons = this.produitService.getAllBoissons();
-				else
-					this.categories = this.categorieService.getAll();
+				else{
 
-				this.ingrediants = [
+				}
+
+				/*this.ingrediants = [
 					{
 						id: 10,
 						nom: "Viande de bœuf",
@@ -124,7 +146,7 @@ export class AddProduitComponent implements OnInit {
 						nom: "Patte d'arrachide",
 						quantite: 0
 					}
-				];
+				];*/
 			}
 		});
 
@@ -141,11 +163,88 @@ export class AddProduitComponent implements OnInit {
 	}
 
 	public soumettre(){
-		if (this.verifier()) { 
+		if (this.verifier2()) {
 			if(this.isBoisson) {
                 //this.produitService.save(this.produit);
             }else{
-				
+				let data = new Array();
+                let news = new Array();
+				let oldplat = localStorage.getItem('plats');
+				let oldDatas = JSON.parse(oldplat);
+				if (oldplat != null){
+					for (let i = 0;i < oldDatas.length;i ++){
+						//let newProdPlat = new ProduitsPlat(oldDatas[i].id,ingrePlat[i].produitId,ingrePlat[i].qte,this.restoId,ingrePlat[i].name);
+						let recup:any = new PlatModel(oldDatas[i].id,oldDatas[i].name,oldDatas[0].prix,this.restoId,1,4);
+						news.push(recup);
+					}
+				}else {
+
+				}
+
+
+
+				if (oldplat != null){
+                    let datas:any = new PlatModel(oldDatas.length+1,this.name,this.prix,this.restoId,1,4);
+                    news.push(datas);
+                    console.log(news);
+                    localStorage.setItem('plats',JSON.stringify(news));
+                    let ingrePlat = localStorage.getItem('ingrePlat');
+                    if (ingrePlat != null){
+                        ingrePlat = JSON.parse(ingrePlat);
+                        news =[];
+
+                        /* odl compos plat */
+                        let compoOld = localStorage.getItem('compoPlat');
+                        compoOld = JSON.parse(compoOld);
+                        for (let i = 0;i < compoOld.length;i++){
+                            let recup:any = new ProduitsPlat(compoOld[i].platId,compoOld[i].produitId,compoOld[i].qte,this.restoId,compoOld[i].name);
+                            news.push(recup);
+                        }
+                        let ngPlats = localStorage.getItem('ingrePlat');
+							if (ngPlats != null){
+								ngPlats = JSON.parse(ngPlats);
+								for (let i = 0;i < ngPlats.length;i++){
+									let newProdPlat = new ProduitsPlat(oldDatas.length+1,ngPlats[i].productId,ngPlats[i].qte,this.restoId,ngPlats[i].name);
+									news.push(newProdPlat);
+								}
+                                console.log('bingo');
+                                localStorage.setItem('compoPlat',JSON.stringify(news));
+
+							}else {
+								/* nos ingradiant selected */
+							}
+
+
+                        localStorage.removeItem('ingrePlat');
+                    }else{
+
+                    }
+				}else {
+                   let datas:any = new PlatModel(1 ,this.name,this.prix,this.utilservice.curentUserInfo()[0].restoId,1,4);
+				    data.push(datas);
+				    localStorage.setItem('plats',JSON.stringify(data));
+                    let ingrePlat = localStorage.getItem('ingrePlat');
+                    //let news = new Array();
+                    if (ingrePlat != null){
+                        ingrePlat = JSON.parse(ingrePlat);
+                        console.log(ingrePlat);
+                        for (let i = 0;i < ingrePlat.length;i ++){
+                            let newProdPlat = new ProduitsPlat(1,ingrePlat[i].productId,ingrePlat[i].qte,this.restoId,ingrePlat[i].name);
+                            news.push(newProdPlat);
+                        }
+                        console.log('bingo');
+                        localStorage.setItem('compoPlat',JSON.stringify(news));
+                        localStorage.removeItem('ingrePlat');
+                    }else {
+
+					}
+				}
+
+				console.log(this.name);
+				console.log(this.prix);
+
+
+
 			}
 				//this.produitService.update(this.produit);
 			this.presentToast(
@@ -209,8 +308,21 @@ export class AddProduitComponent implements OnInit {
 
 		return true;
 	}
+    private verifier2(){
+        if(this.name == "" || this.name == undefined)
+            return false;
 
-	public ajouterIngrediant(){
+        if(this.prix == "" || this.prix == undefined)
+            return false;
+
+        if(this.isBoisson && this.boissonId == undefined)
+            return false;
+
+        return true;
+    }
+
+
+    public ajouterIngrediant(){
 		console.log(this.ingrediants);
 		this.openModal(SelectIngrediantsComponent, {
 			"parent": this,
@@ -229,5 +341,38 @@ export class AddProduitComponent implements OnInit {
 	    });
 	    return await popover.present();
 	}
+
+    public savePlat(){
+
+        //localStorage.setItem("categories",JSON.stringify(this.produitCategoris));
+        localStorage.setItem('catplat',JSON.stringify(this.platCat));
+        let testObject = localStorage.getItem('products');
+        let oldProduct = new Array();
+        if ( testObject != null ){
+            this.produits.url = "../../../assets/prod_2.jpg";
+            this.produits.id = 0;
+            this.produits.id = parseInt(this.lastId()) + 1;
+            this.produits.categories = parseInt(this.cat);
+            this.produits.restoID = this.user.curentUserInfo()[0].restoId;
+            let newProduct = this.produit.pushProduct(this.produits.id,this.produits.name,this.produits.prix,this.produits.quantite,this.user.curentUserInfo()[0].restoId,this.produits.categories,this.produits.url);
+            let rec = JSON.parse(testObject);
+            rec.push(newProduct);
+            console.log(rec);
+            localStorage.setItem("products",JSON.stringify(rec));
+            this.presentToast(" produit "+this.produits.name+" enregistré ","success");
+        }else {
+            this.produits.url = "../../../assets/prod_2.jpg";
+            this.produits.id = 1;
+            this.produits.categories = parseInt(this.cat);
+            this.produits.restoID = this.user.curentUserInfo()[0].restoId;
+            let newProduct = this.produit.pushProduct(this.produits.id,this.produits.name,this.produits.prix,this.produits.quantite,this.user.curentUserInfo()[0].restoId,this.produits.categories,this.produits.url);
+            oldProduct.push(newProduct);
+            console.log(oldProduct);
+            localStorage.setItem("products", JSON.stringify(oldProduct));
+            this.presentToast("produit "+this.produits.name+" enregistré ","success");
+        }
+    }
+
+
 
 }

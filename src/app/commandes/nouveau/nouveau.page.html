@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content text-center>
-	
+
 	<ion-grid>
 		<ion-row id="searchRow">
 			<ion-col>
@@ -72,7 +72,7 @@
 								Quantité
 							</ion-col>
 							<ion-col col-2>
-								
+
 							</ion-col>
 							<!--
 								<ion-col col-2>
@@ -119,27 +119,28 @@
 					</ion-grid>
 					<ion-grid *ngIf="!showList">
 						<ion-row>
-							<ion-col *ngFor="let produit of products; let i = index " size-md="4" size-lg="4" size-xl="4" size-xm="3" size-sm="4">
-								<ion-card>
-						        	<img class="cardImg" src="{{produit.url}}" />
+							<ion-col *ngFor="let produit of plats; let i = index " >
+								<ion-card size-md="6" size-lg="4" size-xl="6" size-xm="6" size-sm="4">
+						        	<!--<img class="cardImg" src="{{produit.url}}" />-->
+									<img class="cardImg" src="../../../assets/prod_2.jpg" />
 						        	<ion-card-header>
 						          		<ion-card-title text-center style="text-align: center!important;width: 100%;">{{produit.name}}</ion-card-title>
 						        	</ion-card-header>
 						        	<ion-card-content text-cente>
 						        		<div>
 						          			<ion-chip text-center>
-											  	<ion-label>{{catname(produit.id)}}</ion-label>
+											  	<!--<ion-label>{{catname(produit.id)}}</ion-label>-->
 											</ion-chip>
-											<p>{{produit.pu}}</p>
+											<p>{{produit.prix}}</p>
 						        		</div>
 						        		<ion-item text-center>
 											<ion-label>
-												<button class="circular" (click)="moins(produit.id+'_mois')" style="background-color:#EC0000;">-</button>
+												<button class="circular" (click)="moins(produit.id+'_mois')" style="display:inline-block;background-color:#EC0000;">-</button>
 												<span  class = "nonDigits" >
-												<input type="text" class="qtitis qte_{{produit.id}}" type="text" value="0" style="width: 40px;" />
+												<input type="text" class="qtitis qte_{{produit.id}}" type="text" value="0" style="width: 18px;" />
                                                 <input type="hidden" class="digits prix_{{produit.id}}" value="{{produit.pu}}"  name="prix">
 												</span>
-												<button class="circular add {{produit.id}}_adder plus" (click)="plus(produit.id+'_add')" style="background-color:#00B79A;">+</button>
+												<button class="circular add {{produit.id}}_adder plus" (click)="plus(produit.id+'_add')" style="display: inline-block;background-color:#00B79A;">+</button>
                                                 <input class="{{produit.id}}_stock" type="hidden" name="" value="{{produit.qte}}">
 											</ion-label>
 						        		</ion-item>

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { PlatModel } from '../models/plat.model';
+import { ProduitsPlat } from '../models/produitsPlat';
 import { ProduitModel } from '../models/produit.model';
 import { PanierModel } from '../models/panier.model';
 import {reject} from "q";
@@ -70,6 +72,49 @@ export class ProduitService {
             return datas;
 
     }
+
+    PlatCompose(){
+        let datas = localStorage.getItem('compoPlat');
+        if (datas != null){
+            datas = JSON.parse(datas);
+            return datas;
+        }else {
+            let data = new Array();
+            let datas:any = new PlatModel(1 ,'test',3000,1,1,4);
+            data.push(datas);
+            localStorage.setItem('plats',JSON.stringify(data));
+            data = [];
+            let newProdPlat = new ProduitsPlat(1,1,3,1,'tomate');
+            data.push(newProdPlat);
+            console.log('bingo');
+            localStorage.setItem('compoPlat',JSON.stringify(data));
+            let compoplats = localStorage.getItem('compoPlat');
+            return JSON.parse(compoplats);
+        }
+
+    }
+
+    Plats(){
+        let datas = localStorage.getItem('plats');
+        if(datas != null){
+            datas = JSON.parse(datas);
+            return datas;
+        }else{
+            let data = new Array();
+            let datas:any = new PlatModel(1 ,'test',3000,1,1,14);
+            data.push(datas);
+            localStorage.setItem('plats',JSON.stringify(data));
+            data = [];
+            let newProdPlat = new ProduitsPlat(1,1,13,1,'tomate');
+            data.push(newProdPlat);
+            console.log('bingo');
+            localStorage.setItem('compoPlat',JSON.stringify(data));
+            let compoplats = localStorage.getItem('plats');
+            return JSON.parse(compoplats);
+        }
+
+    }
+
     async allCategoris():Promise<any>{
         return new Promise(resolve => {
             let datas = localStorage.getItem('categories');
@@ -337,61 +382,6 @@ export class ProduitService {
 	        	"Legume", "Céréal", "Viande", "Poisson"
 	        ],
 	        url:"../../assets/prod_4.jpeg"
-	      },
-	      {
-	        id: 4,
-	        nom: "Salade de fruits",
-	        prix: "15000",
-	        stock: 6,
-	        quantite: 0,
-	        categories: [
-	        	"Legume", "Céréal", "Viande", "Poisson"
-	        ],
-	        url:"../../assets/prod_1.png"
-	      },
-	      {
-	        id: 5,
-	        nom: "Les lefombos",
-	        prix: "1000",
-	        stock: 54,
-	        quantite: 0,
-	        categories: [
-	        	"Legume", "Céréal", "Viande", "Poisson"
-	        ],
-	        url:"../../assets/prod_5.jpeg"
-	      },
-	      {
-	        id: 6,
-	        nom: "Beignet sucré au blé entier",
-	        prix: "3000",
-	        stock: 4,
-	        quantite: 0,
-	        categories: [
-	        	"Legume", "Céréal", "Viande", "Poisson"
-	        ],
-	        url:"../../assets/prod_6.jpeg"
-	      },
-	      {
-	        id: 7,
-	        nom: "Gâteau ou met de pistache",
-	        prix: "1000",
-	        stock: 114,
-	        quantite: 0,
-	        categories: [
-	        	"Legume", "Céréal", "Viande", "Poisson"
-	        ],
-	        url:"../../assets/prod_7.png"
-	      },
-	      {
-	        id: 8,
-	        nom: "Koki",
-	        prix: "3000",
-	        stock: 9,
-	        quantite: 0,
-	        categories: [
-	        	"Legume", "Céréal", "Viande", "Poisson"
-	        ],
-	        url:"../../assets/prod_9.jpg"
 	      }
 	    ];
 	}
@@ -408,7 +398,7 @@ export class ProduitService {
 	    return this.items.filter(item => {
 	      return item.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
 	    });
-	  }
+  	}
 
 	getProduct(id){
 		console.log(this.items.filter(item=>{item.id == id})[0]);

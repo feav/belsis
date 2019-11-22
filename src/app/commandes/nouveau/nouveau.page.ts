@@ -25,6 +25,7 @@ export class NouveauPage implements OnInit {
 	public commandePages:Array<Array<any>>;
     public qte:number = 0;
 	public produits:Array<any>;
+    public plats:Array<any>;
     public products :Array<any>;
 	public produitsPages:any;
 
@@ -101,7 +102,9 @@ export class NouveauPage implements OnInit {
             $('.query_status').html("");
             this.products = datas;
             console.log(this.products);
-        })
+        });
+        this.plats = this.prod.Plats();
+        console.log(this.plats);
         this.prod.allCategoris().then(datas=>{
                 this.produitCategoris = datas;
                 console.log(this.produitCategoris);
@@ -288,7 +291,7 @@ export class NouveauPage implements OnInit {
       console.log(stock);
       console.log(qte);
       if (stock > qte){
-          return true
+          return true;
       }else {
           this.utilsService.presentToast('la quantité demandée '+qte+' est superieur a la quantité en stock '+stock, 2000, 'danger');
           return false;

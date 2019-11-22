@@ -31,7 +31,7 @@
 							Nom :
 						</ion-col>
 						<ion-col align-self-center size="10">
-							<ion-input [(ngModel)]="produit.nom" placeholder="Nom"></ion-input>
+							<ion-input [(ngModel)]="name" name="name" placeholder="Nom"></ion-input>
 						</ion-col>
 					</ion-row>
 					<ion-row>
@@ -39,7 +39,7 @@
 							Prix :
 						</ion-col>
 						<ion-col align-self-center size="10">
-							<ion-input [(ngModel)]="produit.prix" type="number" placeholder="Prix"></ion-input>
+							<ion-input [(ngModel)]="prix" name="prix" type="number" placeholder="Prix"></ion-input>
 						</ion-col>
 					</ion-row>
 					<ion-row *ngIf="isBoisson">

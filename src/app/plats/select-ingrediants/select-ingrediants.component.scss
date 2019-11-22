@@ -22,6 +22,11 @@
 
 	}
 
-	ion-fab-button {
-	  --background: #142768;
+
+	ion-fab-button{
+		--background: #142768;
+		position: absolute;
+		left: 0;
+		right: 0;
+		margin: 0 auto;
 	}
