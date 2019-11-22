@@ -6,10 +6,14 @@ import { MenuController , ToastController, } from '@ionic/angular';
 })
 export class UsersService {
   constructor( private toast: ToastController) { }
+
     async Authenticate(userLogin,userPassword):Promise<any>{
+
         return new Promise(resolve => {
+            
             let users = localStorage.getItem('users');
             let conv = JSON.parse(users);
+
             if (userLogin !== null && userPassword !== null){
                 for (let i = 0; i < conv.length;i++){
                     if (conv[i].name === userLogin && conv[i].password === userPassword){
@@ -28,6 +32,7 @@ export class UsersService {
             }
         })
     }
+
     saveCurentUserInfo(userconnected){
          console.log(userconnected);
          let userConnected =
@@ -39,10 +44,12 @@ export class UsersService {
             }];
           localStorage.setItem('userconnected',JSON.stringify(userConnected));
     }
+
     curentUserInfo(){
         let curentcy = localStorage.getItem('userconnected');
         return JSON.parse(curentcy);
     }
+    
     async UserIsConnec():Promise<boolean>{
         return new Promise(resolve => {
             let users = localStorage.getItem('userconnected');

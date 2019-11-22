@@ -12,6 +12,8 @@ import {error} from 'util';
 export class LoginPage implements OnInit {
 	public userName:any;
 	public userPassword:any;
+    
+
     public user: any = [
         {
             id: 1,
@@ -104,7 +106,6 @@ export class LoginPage implements OnInit {
         private router: Router,
         private userService:UsersService
         ) {
-  		/*this.user = {name:"",password:"",role:""};*/
         localStorage.setItem("users",JSON.stringify(this.user));
         localStorage.setItem("resto",JSON.stringify(this.resto));
         localStorage.setItem("roles",JSON.stringify(this.roles));
@@ -116,7 +117,7 @@ export class LoginPage implements OnInit {
         },error=>{
             console.log('empty');
         });
-	  this.menuCtrl.enable(false);
+        this.menuCtrl.enable(false);
 	}
 	async presentToast(message,color) {
 	    const toast = await this.toast.create({
@@ -130,16 +131,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
   }
-  logForm() {
-   /* if(this.user.name=="test@gmail.com" && this.user.password=="test"){
-    	this.presentToast("Bienvenue "+this.user.name,"success");
-    	localStorage.setItem('user', JSON.stringify(this.user));
-    	this.router.navigate(["/home"],{queryParams:{}});
-      localStorage.setItem('recentLogged', "1");
-    }else{
-    	this.presentToast("Mot de passe ou nom d'utilisateur incorrect","warning");
-    }*/
-  }
+  
   Authenticate(){
       this.userService.Authenticate(this.userName,this.userPassword).then(users=>{
               console.log(users);
