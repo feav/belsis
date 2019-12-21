@@ -28,7 +28,7 @@
     "@types/chart.js": "^2.8.6",
     "@types/jquery": "^3.3.31",
     "chart.js": "^2.8.0",
-    "cordova-android": "^5.2.2",
+    "cordova-android": "^8.1.0",
     "cordova-plugin-filechooser": "^1.2.0",
     "core-js": "^2.5.4",
     "firebase": "^7.3.0",
@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.801.2",
-    "@angular-devkit/build-angular": "~0.801.2",
+    "@angular-devkit/build-angular": "^0.803.21",
     "@angular-devkit/core": "~8.1.2",
     "@angular-devkit/schematics": "~8.1.2",
     "@angular/cli": "8.1.3",

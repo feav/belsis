@@ -6,7 +6,6 @@ import { MenuController , ToastController, } from '@ionic/angular';
 import { PlatModel } from "../../models/plat.model";
 import { ProduitsPlat } from "../../models/produitsPlat";
 import { SelectIngrediantsComponent } from '../select-ingrediants/select-ingrediants.component';
-import { ProduitService } from '../../services/produit.service';
 import { UtilsService } from '../../services/utils.service';
 import {ArrayType} from '@angular/compiler';
 
@@ -38,6 +37,11 @@ export class AddProduitComponent implements OnInit {
     public name: any;
     public prix: any;
     public restoId: any;
+    platCat: any;
+    lastId:any;
+    cat:any;
+    user:any;
+    
 	constructor(public route:ActivatedRoute,
 				public router:Router,
 				public produitService:ProduitService,
@@ -48,9 +52,9 @@ export class AddProduitComponent implements OnInit {
 				) {
         this.restoId = this.utilservice.curentUserInfo()[0].restoId;
 		this.ngInit();
-        this.products = localStorage.getItem('products');
+        this.products = JSON.parse(localStorage.getItem('products'));
         if (this.products != null){
-            this.ingrediants = JSON.parse(this.products);
+            this.ingrediants = this.products;
             console.log(this.ingrediants);
         }
         //this.ingrediants = localStorage.getItem('ingrePlat');
@@ -194,13 +198,13 @@ export class AddProduitComponent implements OnInit {
                         news =[];
 
                         /* odl compos plat */
-                        let compoOld = localStorage.getItem('compoPlat');
+                        let compoOld = JSON.parse(localStorage.getItem('compoPlat'));
                         compoOld = JSON.parse(compoOld);
                         for (let i = 0;i < compoOld.length;i++){
                             let recup:any = new ProduitsPlat(compoOld[i].platId,compoOld[i].produitId,compoOld[i].qte,this.restoId,compoOld[i].name);
                             news.push(recup);
                         }
-                        let ngPlats = localStorage.getItem('ingrePlat');
+                        let ngPlats = JSON.parse(localStorage.getItem('ingrePlat'));
 							if (ngPlats != null){
 								ngPlats = JSON.parse(ngPlats);
 								for (let i = 0;i < ngPlats.length;i++){
@@ -223,10 +227,10 @@ export class AddProduitComponent implements OnInit {
                    let datas:any = new PlatModel(1 ,this.name,this.prix,this.utilservice.curentUserInfo()[0].restoId,1,4);
 				    data.push(datas);
 				    localStorage.setItem('plats',JSON.stringify(data));
-                    let ingrePlat = localStorage.getItem('ingrePlat');
+                    let ingrePlat : [{productId:string,qte:string,name:string}] = JSON.parse(localStorage.getItem('ingrePlat'));
                     //let news = new Array();
                     if (ingrePlat != null){
-                        ingrePlat = JSON.parse(ingrePlat);
+                        ingrePlat = ingrePlat;
                         console.log(ingrePlat);
                         for (let i = 0;i < ingrePlat.length;i ++){
                             let newProdPlat = new ProduitsPlat(1,ingrePlat[i].productId,ingrePlat[i].qte,this.restoId,ingrePlat[i].name);
