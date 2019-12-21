@@ -4,10 +4,12 @@ import { UsersService } from "./services/users.service";
 
 let home = 'login';
 
-let user_exist = localStorage.getItem('userconnected');
-if(user_exist){
+let user_exist = localStorage.getItem('recentLogged');
+if(user_exist == 'null' || user_exist == null ){
   home = 'home';
   localStorage.setItem('recentLogged', "0");
+}else{
+  home = 'login';
 }
 console.log(home)
 const routes: Routes = [
@@ -16,6 +18,7 @@ const routes: Routes = [
     redirectTo: home,
     pathMatch: 'full'
   },
+  { path: 'login', loadChildren: './user/login/login.module#LoginPageModule' },
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
@@ -46,7 +49,9 @@ const routes: Routes = [
   { path: 'panier', loadChildren: './commandes/panier/panier.module#PanierPageModule' },
   { path: 'detail', loadChildren: './commandes/detail/detail.module#DetailPageModule' },
 
-  { path: 'plats', loadChildren: './plats/plats.module#PlatsPageModule' }
+  { path: 'plats', loadChildren: './plats/plats.module#PlatsPageModule' },
+  { path: 'register', loadChildren: './auth/register/register.module#RegisterPageModule' }
+
 ];
 
 @NgModule({
