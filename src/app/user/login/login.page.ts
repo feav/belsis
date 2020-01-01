@@ -110,16 +110,18 @@ export class LoginPage implements OnInit {
         localStorage.setItem("resto",JSON.stringify(this.resto));
         localStorage.setItem("roles",JSON.stringify(this.roles));
   	}
+      
 	ionViewWillEnter() {
 
         this.userService.UserIsConnec().then(status=>{
             console.log('connected');
         },error=>{
-            console.log('empty');
+            console.log(error);
         });
         this.menuCtrl.enable(false);
 	}
-	async presentToast(message,color) {
+
+	async presentToast(message, color) {
 	    const toast = await this.toast.create({
 	    	position:'top',
 	    	message:message,

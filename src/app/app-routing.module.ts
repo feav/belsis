@@ -5,11 +5,12 @@ import { UsersService } from "./services/users.service";
 let home = 'login';
 
 let user_exist = localStorage.getItem('userconnected');
+
 if(user_exist){
   home = 'home';
   localStorage.setItem('recentLogged', "0");
 }
-console.log(home)
+
 const routes: Routes = [
   {
     path: '',

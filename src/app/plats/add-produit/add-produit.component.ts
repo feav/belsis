@@ -37,7 +37,12 @@ export class AddProduitComponent implements OnInit {
     public name: any;
     public prix: any;
     public restoId: any;
+
     private platCat: any;
+	private user: any;
+	private cat: any;
+	private lastId: any;
+
 	constructor(public route:ActivatedRoute,
 				public router:Router,
 				public produitService:ProduitService,

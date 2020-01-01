@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges } from '@angular/core';
 
 import { Platform,ToastController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 
 import { TableService } from './services/table.service';
+import { UtilsService } from './services/utils.service';
 
 @Component({
   selector: 'app-root',
@@ -49,12 +50,15 @@ export class AppComponent {
 
   public user:any = {};
   
+  userIsLogged:boolean = false;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private router: Router,
     private toast: ToastController,
+    private utilsService: UtilsService,
     private tableService: TableService
   ) {
     this.initializeApp();
@@ -92,10 +96,29 @@ export class AppComponent {
     options(){
       this.presentToast("test","succes");
     }*/
+
+    ngOnChanges(){
+      
+      if(this.utilsService.isLogged()){
+        this.userIsLogged = true;
+      }else{
+        this.userIsLogged = false;
+      }
+
+    }
+
   initializeApp() {
+    
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      
+      // this.statusBar.styleDefault();
+      this.statusBar.styleLightContent();
+      
+      // let status bar overlay webview
+      this.statusBar.overlaysWebView(false);
+
       this.splashScreen.hide();
+      
       this.tableService.initializeTables();
     });
   }
