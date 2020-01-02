@@ -1,12 +1,10 @@
-import { Component, OnChanges } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { Platform,ToastController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Router } from '@angular/router';
 
 import { TableService } from './services/table.service';
-import { UtilsService } from './services/utils.service';
 
 @Component({
   selector: 'app-root',
@@ -14,111 +12,46 @@ import { UtilsService } from './services/utils.service';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  
   public appPages = [
     {
       title: 'Plan de Tables',
       url: '/table',
-      icon: '/assets/logo-tables.svg'
-    },
-    {
+      icon: 'wine'//'/assets/logo-tables.svg'
+    },{
       title: 'Nouvelle Commande',
       url: '/commandes/new',
-      icon: '/assets/logo-commande.svg'
+      icon: 'add-circle'//'/assets/logo-commande.svg'
     },
     {
       title: 'Les Commandes',
       url: '/commandes',
-      icon: '/assets/logo-commande.svg'
+      icon: 'restaurant'//'/assets/logo-commande.svg'
     },
     {
       title: 'Le Stock',
       url: '/stokcs',
-      icon: '/assets/logo-stock.svg'
-    },
-    {
-      title: 'Les Produits',
-      url: '/plats',
-      icon: '/assets/logo-commande.svg'
+      icon: 'archive'//'/assets/logo-stock.svg'
     },
     {
       title: 'Comptabilite',
-      url: '/comptabilite/stats',
-      icon: '/assets/logo-stat.svg'
+      url: '/list',
+      icon: 'podium'//'/assets/logo-stat.svg'
     }
   ];
-
-  public user:any = {};
-  
-  userIsLogged:boolean = false;
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private router: Router,
-    private toast: ToastController,
-    private utilsService: UtilsService,
     private tableService: TableService
   ) {
     this.initializeApp();
   }
-    /*curentUserInfo(){
-        let curentcy = localStorage.getItem('userconnected');
-        return JSON.parse(curentcy);
-    }
-
-  async presentToast(message,color) {
-      const toast = await this.toast.create({
-            header: 'Bonjour '+this.curentUserInfo()[0].name,
-            message: "",
-            position: 'middle',
-            buttons: [
-              {
-                side: 'start',
-                icon: 'user',
-                text: 'Profile',
-                handler: () => {
-                  this.router.navigate(["/profile"],{queryParams:{}});
-                }
-              }, {
-                text: 'Se deconnecter',
-                role: 'log-out',
-                handler: () => {
-                  localStorage.setItem('user',null);
-                  this.router.navigate(["/login"],{queryParams:{}});
-                }
-              }
-            ]
-          });
-      toast.present();
-    }
-    options(){
-      this.presentToast("test","succes");
-    }*/
-
-    ngOnChanges(){
-      
-      if(this.utilsService.isLogged()){
-        this.userIsLogged = true;
-      }else{
-        this.userIsLogged = false;
-      }
-
-    }
 
   initializeApp() {
-    
     this.platform.ready().then(() => {
-      
-      // this.statusBar.styleDefault();
-      this.statusBar.styleLightContent();
-      
-      // let status bar overlay webview
-      this.statusBar.overlaysWebView(false);
-
+      this.statusBar.styleDefault();
       this.splashScreen.hide();
-      
       this.tableService.initializeTables();
     });
   }

@@ -10,44 +10,49 @@
 </ion-header>
 
 <ion-content>
-      <ion-grid>
-            <ion-card-title>Les Rapports</ion-card-title>
-            <ion-row>
-              <ion-col size-sm="6" size-xs="12">
-                <div>
-                  <canvas #barChart></canvas>
-                  <ion-card-subtitle class="ion-text-center">Commades</ion-card-subtitle>
-                </div>
-              </ion-col>
-              <ion-col size-sm="6" size-xs="12">
-                <div>
-                  <canvas #barChartSecond></canvas>
-                  <ion-card-subtitle class="ion-text-center">Stocks</ion-card-subtitle>
-                </div>
-              </ion-col>
-            </ion-row>
+        <ion-grid class="header-bg">
+          <div >
+            <ion-fab-button color="secondary">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+            <ion-label color="light ion-text-center block label-title">Ventes de la journee</ion-label>
+            <ion-label color="light ion-text-center price-label block">{{workMoney}} CFA</ion-label>
+            <div class="flex-center-row">
+              <ion-label color="light ion-text-center date-label block">{{time}}</ion-label>
+            </div>
+          </div>
       </ion-grid>
       <ion-grid>
-        <ion-card-title class="ion-text-center">Les Commandes</ion-card-title>
-
-        <ion-row class="ion-margin">
-
-          <ion-col size-md="12" size-lg="4" size-xs="12" size-sm="4" *ngFor="let commande of etatCommendes">
-            <ion-card>
-              <ion-card-header>
-                <ion-card-subtitle class="primary" [ngStyle]="{'background-color': commande.color}" >{{commande.value}}</ion-card-subtitle>
-              </ion-card-header>
-
-              <ion-card-content >
-                <div class="img-content">
-                  <img [src]="commande.logo">
-                </div>
-                <div class="foot ion-text-center">
-                  {{commande.label}}
-                </div>
-              </ion-card-content>
-            </ion-card>
+      </ion-grid>
+      <ion-grid>
+        <ion-card-title class="ion-text-center activite">Activite</ion-card-title>
+        <ion-row>
+          <ion-col  *ngFor="let commande of etatCommendes" class="rectangle">
+             <ion-label color="light ion-text-center">{{commande.value}}</ion-label>
+            <div>
+               
+              {{commande.label}}
+            </div>
           </ion-col>
         </ion-row>
       </ion-grid>
+
+      <ion-card-title class="ion-text-center activite">Historique</ion-card-title>
+      <ion-virtual-scroll [items]="commandes" approxItemHeight="320px">
+        <ion-item *virtualItem="let commande">
+         <div class="list-commande">
+            <div class="flex">
+              <span class="round"><ion-icon [name]="commande.icon" [className]="commande.icon=='refresh' ? 'rotating' : ' '"></ion-icon></span>
+              <div>
+                <ion-label class="name">{{commande.name}}</ion-label>
+                <span class="table">Table {{commande.table}}</span>
+              </div>
+            </div>
+            <div class="somme"  [className]="commande.icon=='trash' ? 'red' : 'green'">
+              {{commande.price}} FCFA
+            </div>
+          </div>
+        </ion-item>
+      </ion-virtual-scroll>
+
 </ion-content>
