@@ -27,7 +27,7 @@
 			</ion-col>
 		</ion-row>
 		<ion-row id="categoriesList" *ngFor="let page of commandePages ; let i = index" class="hide-only-xs hide-only-sm">
-			<ion-col col-2 *ngFor="let item of page; let j = index">
+			<ion-col   *ngFor="let item of page; let j = index">
 				<button
 					*ngIf="!item.statusFilter"
 					(click)="addOrRemoveCategorieToFilter(i, j)" >{{item.name}}</button>

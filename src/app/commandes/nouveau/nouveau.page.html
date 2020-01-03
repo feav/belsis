@@ -16,7 +16,6 @@
 				<div style="text-align:center;" class="hide-only-sm hide-only-xs">
 					<span>
 					<input type="text" placeholder="Recherche..." />
-					<!--<ion-input class="searchInput" placeholder="Recherche..." type="text" ></ion-input>-->
 					<button (click)="random()">
   						<ion-icon name="search"></ion-icon>
 					</button>
@@ -25,16 +24,17 @@
 			</ion-col>
 		</ion-row>
 
-		<ion-row id="categoriesList" >
-			<ion-col col-2 class="cat-filter" *ngFor="let cate of produitCategoris ; let i = index">
-				<!--<button (click)="addOrRemoveCategorieToFilter(i, j)" >{{cate.name}}</button>-->
-				<button (click)="filtrerParID(cate.id)" >{{cate.name}}</button>
+		<ion-row id="categoriesList-" >
+			<ion-col col-md-2 class="catory-item-" *ngFor="let cate of produitCategoris ; let i = index" (click)="moveToFirst()">
+				<img [src]="cate.icon">
+				<button (click)="filtrerParID(cate.id)" [ngStyle]="{'background':cate.color}">{{cate.name}}</button>
 			</ion-col>
 		</ion-row>
 		<ion-row>
 			<ion-col id="horiszontalBar">
 			</ion-col>
 		</ion-row>
+		<!--
 		<ion-row>
 			<ion-col>
 				<ion-item text-center>
@@ -74,10 +74,6 @@
 							<ion-col col-2>
 
 							</ion-col>
-							<!--
-								<ion-col col-2>
-								</ion-col>
-							-->
 						</ion-row>
 						<div class="query_status">
 
@@ -104,14 +100,6 @@
 								</span>
 								<button id="{{produit.id}}_adder" class="circular add {{produit.id}}_adder plus" (click)="plus(produit.id+'_add')" style="background-color:#00B79A;">+</button>
 							</ion-col>
-							<!--
-							<ion-col align-self-center col-1>
-								<ion-select value="brown" okText="Okay" cancelText="Dismiss" [(ngModel)]="tableId">
-							      <ion-select-option value="">Aucune</ion-select-option>
-							      <ion-select-option *ngFor="let table of tables" value="{{ table.id }}">{{ table.label }}</ion-select-option>
-							    </ion-select>
-							</ion-col>
-							-->
 							<ion-col align-self-center col-2>
 								<button class="nonCirculaire" (click)="ajouter(produit, produit.quantite,  tableId,produit.quantite,produit.id)">AJOUTER</button>
 							</ion-col>
@@ -121,7 +109,6 @@
 						<ion-row>
 							<ion-col *ngFor="let produit of plats; let i = index " >
 								<ion-card size-md="6" size-lg="4" size-xl="6" size-xm="6" size-sm="4">
-						        	<!--<img class="cardImg" src="{{produit.url}}" />-->
 									<img class="cardImg" src="../../../assets/prod_2.jpg" />
 						        	<ion-card-header>
 						          		<ion-card-title text-center style="text-align: center!important;width: 100%;">{{produit.name}}</ion-card-title>
@@ -129,7 +116,6 @@
 						        	<ion-card-content text-cente>
 						        		<div>
 						          			<ion-chip text-center>
-											  	<!--<ion-label>{{catname(produit.id)}}</ion-label>-->
 											</ion-chip>
 											<p>{{produit.prix}}</p>
 						        		</div>
@@ -144,11 +130,10 @@
                                                 <input class="{{produit.id}}_stock" type="hidden" name="" value="{{produit.qte}}">
 											</ion-label>
 						        		</ion-item>
-						        		<!-- <ion-item>
 						        			<ion-label text-center>
 						        				<button class="nonCirculaire" (click)="pushToCart(produit.pu, produit.id)">AJOUTER</button>
 						        			</ion-label>
-						        		</ion-item> -->
+						        		</ion-item> 
 						        	</ion-card-content>
 						      	</ion-card>
 							</ion-col>
@@ -175,5 +160,6 @@
 				</ion-fab>
 			</ion-col>
 		</ion-row>
+		 -->
 	</ion-grid>
 </ion-content>

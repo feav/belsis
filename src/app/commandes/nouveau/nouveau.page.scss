@@ -43,6 +43,25 @@
 		    }
 		}
 	}
+	#categoriesList-{
+		ion-col img {
+		    width: 50px;
+		}
+		ion-col:hover img{
+			transform: scale(1.3);
+			transition: .75s easear;
+		}
+		ion-col{
+			    max-width: 75px;
+			    button{
+			    	width: 100%;
+					    color: white;
+					    padding-top: 4px;
+					    padding-bottom: 4px;
+					font-size: 10px;
+			    }
+		}
+	}
 	ion-content{
 		margin:10px;
 		div.ion-content{
@@ -54,106 +73,6 @@
 		}
 		
 	}
-	ion-card{
-		border-radius: 5px;
-		background:rgba(247,247,247,1);
-		overflow: visible;
-		ion-card-content{
-			padding: 0;
-			.img-content{
-				display: flex;
-	    		justify-content: center;
-	    		flex-direction: column;
-			    margin: 20px;
-			    text-align: center;
-			    img{
-			    	width: 100px;
-			    	height: 100px;
-				}
-			}
-			ion-card-subtitle{
-				font-size: x-large;
-				transform: uppercase;
-			}
-			ion-card-title{
-				font-size: 50px;
-			}
-			.foot{
-				padding: 5px;
-				div{
-				    display: flex;
-				    flex-direction: row;
-				}
-				img{
-					width: 25px;
-				    height: 20px;
-				    background: rgb(200,200,200);
-				    border-radius: 100%;
-				    padding: 4px;
-				    margin-left: 5px;	
-				}
-				button{
-					font-weight: 800;
-				    border-radius: 100%;
-				    background: #c8c8c8;
-				    color: white;
-				    width: 40px;
-				    height: 40px;
-				    font-size: x-large;
-				    position: absolute;
-				    right: 10px;
-				    bottom: 10px;
-				    line-height: 15px;
-				}
-			}
-		}
-		ion-card-header{
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-			ion-label.round{
-				width: 10px !important;
-			    height: 10px !important;
-			    position: absolute;
-			    border-radius: 100%;
-			    margin-top: 4px;
-			}
-			img{
-				width: 20px;
-			    height: 20px;
-			    padding: 4px;
-			    border-radius: 100%;
-			    background: white;
-			    margin-top: 0px;
-			    margin-left: 4px;
-			    box-shadow: 0px 1px 1px #0000003b;
-			}
-			.left-part{
-			    display: flex;
-    			flex-direction: row;
-			}
-			ion-label.title{
-				margin-left: 15px;
-				span {
-    				font-size: x-small;
-    			}
-			}
-			ion-card-subtitle {
-				position: absolute;
-			    color: white;
-			    right: -25px;
-			    top: -25px;
-			    /*background: green;*/
-			    width: 100%;
-			    height: 100%;
-			    border-radius: 100%;
-			    text-align: center;
-			    line-height: 50px;
-			    font-size: x-large;
-			}
-		}
-	}
-
 	ion-input {
 		border:10px;
 	}
@@ -190,14 +109,12 @@
 		ion-col{
 			border-width: 2px;
 			border-color: #142768;
+			position: relative;
 			button{
-				width: 95%;
-				border-raduis: 0px;
-				min-height: 35px;
-				border-style: solid;
-				border-color: #142768;
-				border-width: 2px;
-				background-color: white;
+				width: 100%;
+			    background-color: #14276814;
+			    padding: 5px;
+			    color: white;
 			}
 		}
 	}

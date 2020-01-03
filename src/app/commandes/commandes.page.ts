@@ -6,6 +6,7 @@ import { ProduitService } from "../services/produit.service";
 import { CommandeService } from "../services/commande.service";
 import { UtilsService } from "../services/utils.service";
 import {reject} from 'q';
+import {ChoiceProduitPage} from "../commandes/choice-produit/choice-produit.page" ;
 
 @Component({
   selector: 'app-commandes',

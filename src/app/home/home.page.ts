@@ -2,7 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { MenuController , ToastController, } from '@ionic/angular';
 import { Chart } from 'chart.js';
 // import * as HighCharts from 'highcharts';
-
+import { ModalController } from '@ionic/angular';
+import { CommandesPage } from '../commandes/commandes.page';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -23,7 +24,7 @@ export class HomePage {
   private bars: any;
   private bars2:any;
   private time:String="";
-  constructor(public menuCtlr: MenuController) {
+  constructor(public menuCtlr: MenuController,public modalController: ModalController) {
   	this.menuCtlr.enable(true);
 
   }
@@ -55,7 +56,7 @@ export class HomePage {
       function(){
          seconds = date.getSeconds();
          minutes = date.getMinutes();
-         hour = date.getHours();
+           hour = date.getHours();
         this.time = hour+" : "+minutes;
       },60000
     );

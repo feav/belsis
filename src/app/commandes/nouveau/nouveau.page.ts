@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { LoadingController, ToastController, AlertController } from '@ionic/angular';
+import { LoadingController, ToastController, AlertController ,ModalController} from '@ionic/angular';
 import { Commande } from "../../models/commande.model";
 
 import { ProduitService } from "../../services/produit.service";
@@ -10,6 +10,7 @@ import { UtilsService } from "../../services/utils.service";
 import * as $ from 'jquery';
 import {reject} from "q";
 import {ArrayType} from "@angular/compiler";
+import {ChoiceProduitPage} from "../../commandes/choice-produit/choice-produit.page" ;
 
 @Component({
   selector: 'app-nouveau',
@@ -38,6 +39,7 @@ export class NouveauPage implements OnInit {
     public loader = '<img src="../../../assets/loader/loader7.gif" alt="">';
 
   constructor(
+      private modalCtrl:ModalController,
       private router: Router,
       private prod : ProduitService,
       private commandeService: CommandeService,
@@ -65,7 +67,11 @@ export class NouveauPage implements OnInit {
 
   }
 
-
+  async moveToFirst()
+    {
+      const modal = await this.modalCtrl.create({component: ChoiceProduitPage});
+     return await modal.present();
+  }
   private panier:Array<any> = [];
 
 
@@ -79,7 +85,6 @@ export class NouveauPage implements OnInit {
 
 
   ngOnInit() {
-
   	this.produits = this.prod.getAll();
     //this.produits = this.products;
   	this.tables = this.tableService.getTables();
@@ -97,22 +102,80 @@ export class NouveauPage implements OnInit {
   
   }
     ionViewWillEnter(){
-        $('.query_status').html(this.loader);
-        this.prod.allProduct().then(datas=>{
-            $('.query_status').html("");
-            this.products = datas;
-            console.log(this.products);
-        });
-        this.plats = this.prod.Plats();
-        console.log(this.plats);
-        this.prod.allCategoris().then(datas=>{
-                this.produitCategoris = datas;
-                console.log(this.produitCategoris);
-            },error=>{
-                console.log(error);
-            }
-        );
+        // $('.query_status').html(this.loader);
+        // this.prod.allProduct().then(datas=>{
+        //     $('.query_status').html("");
+        //     this.products = datas;
+        //     console.log(this.products);
+        // });
+        // this.plats = this.prod.Plats();
+        // console.log(this.plats);
+        // this.prod.allCategoris().then(datas=>{
+        //         this.produitCategoris = datas;
+        //         console.log(this.produitCategoris);
+        //     },error=>{
+        //         console.log(error);
+        //     }
+        // );
+         this.produitCategoris = [
+           {
+             id:1,
+             name:"WHISKY",
+             icon:"assets/cat/beer.png",
+             total:10,
+             color:"#870b3d"
+           }, {
+             id:1,
+             name:"FROMAGE",
+             icon:"assets/cat/fromage.png",
+             total:10,
+             color:"#fdc400"
+           }, {
+             id:1,
+             name:"FRUIT",
+             icon:"assets/cat/fruit.png",
+             total:10,
+             color:"#55ae31"
+           },
 
+           {
+             id:1,
+             name:"BIERE",
+             icon:"assets/cat/biere.png",
+             total:10,
+             color:"#a85f4e"
+           }, {
+             id:1,
+             name:"LEGUME",
+             icon:"assets/cat/legume.png",
+             total:10,
+             color:"#d37f6e"
+           }, {
+             id:1,
+             name:"OEUF",
+             icon:"assets/cat/oeuf.png",
+             total:10,
+             color:"#009bb5"
+           }, {
+             id:1,
+             name:"POISSON",
+             icon:"assets/cat/poisson.png",
+             total:10,
+             color:"#009ee2"
+           }, {
+             id:1,
+             name:"VIANDE",
+             icon:"assets/cat/viande.png",
+             total:10,
+             color:"#e74038"
+           }, {
+             id:1,
+             name:"VIN",
+             icon:"assets/cat/vin.png",
+             total:10,
+             color:"#af0f49"
+           }
+         ];
     }
   public Produits(){
 

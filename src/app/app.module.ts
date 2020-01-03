@@ -15,14 +15,17 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import * as HighCharts from 'highcharts';
+import {ChoiceProduitPage} from "./commandes/choice-produit/choice-produit.page" ;
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent,ChoiceProduitPage],
+  entryComponents: [ChoiceProduitPage],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
       ChartsModule,
       AngularFireModule.initializeApp(environment.firebase),
       AngularFirestoreModule,
+      FormsModule,
       AngularFireDatabaseModule
   ],
   providers: [
