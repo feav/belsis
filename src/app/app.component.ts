@@ -4,7 +4,6 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-import { TableService } from './services/table.service';
 
 @Component({
   selector: 'app-root',
@@ -42,9 +41,7 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private tableService: TableService
-  ) {
+    private statusBar: StatusBar  ) {
     this.initializeApp();
   }
 
@@ -52,7 +49,6 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.tableService.initializeTables();
     });
   }
 }

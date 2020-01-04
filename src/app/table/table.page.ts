@@ -20,7 +20,6 @@ export class TablePage implements OnInit {
   	//this.tables = this.tableService.getTables();
   }
   ionViewWillEnter(){
-      this.tables = this.tableService.tableResto();
   }
 	public openTable(tab, tableId){
 	    //this.router.naigate(['/table/details/' + tab.id]);

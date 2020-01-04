@@ -7,159 +7,101 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content text-center>
-
+<ion-content text-center id="nouveau-commande" class="hide-list-category">
+ 	<ion-grid class="header-bg">
+          <div >
+            <ion-label color="light ion-text-center block label-title">Montant de la Facture</ion-label>
+            <ion-label color="light ion-text-center price-label block">{{cardTotal}} CFA</ion-label>
+            <div class="select-table">
+	            <div class="flex-center-row table-choice">
+	            	<div>
+	            		 <!-- <ion-label color="light ion-text-center date-label block">Numero de Table</ion-label> -->
+			              <ion-select value="0" >
+			              	<ion-select-option value="0" disabled="disabled" selected="selected">Choisir la Table</ion-select-option>
+			              	<ion-select-option value="1">Table 1</ion-select-option>
+			              	<ion-select-option value="2">Table 2</ion-select-option>
+			              	<ion-select-option value="3">Table 3</ion-select-option>
+			              </ion-select>
+	            	</div>
+	            </div>
+            </div>
+            <!-- <div class="action-button">
+            	<div class="action-button-valid">
+            		<button>
+            			<label><ion-icon name="checkmark-circle-outline"></ion-icon></label>
+            			<label>Valider</label>
+            		</button>
+            	</div>
+            	<div class="action-button-receive">
+            		<button>  
+            			<label><ion-icon name="calculator"></ion-icon></label>
+            			<label>Encaisser</label>
+            		</button>
+            	</div>
+            </div> -->
+          </div>
+      </ion-grid>
 	<ion-grid>
-		<ion-row id="searchRow">
-			<ion-col>
-				<ion-searchbar placeholder="Filtrer les produit" class="hide-only-lg hide-only-xl hide-only-md"></ion-searchbar>
-				<div style="text-align:center;" class="hide-only-sm hide-only-xs">
-					<span>
-					<input type="text" placeholder="Recherche..." />
-					<button (click)="random()">
-  						<ion-icon name="search"></ion-icon>
-					</button>
-					</span>
-				</div>
-			</ion-col>
-		</ion-row>
+		
+		<div style="display: flex;justify-content: center;margin: 13px;" class="loading"><img _ngcontent-fvw-c1="" src="assets/loader/extended_loading.gif" style="width: 60px;"></div>
 
-		<ion-row id="categoriesList-" >
-			<ion-col col-md-2 class="catory-item-" *ngFor="let cate of produitCategoris ; let i = index" (click)="moveToFirst()">
-				<img [src]="cate.icon">
-				<button (click)="filtrerParID(cate.id)" [ngStyle]="{'background':cate.color}">{{cate.name}}</button>
-			</ion-col>
-		</ion-row>
+		<div id="categoriesList-" >
+
+			<div class="title-details" (click)="hideListCategory()">
+				  <ion-icon name="arrow-down" style="color:black"></ion-icon>
+			</div>
+			<div>
+				<div col-md-2 class="catory-item-" *ngFor="let cate of produitCategoris ; let i = index" (click)="moveToFirst(cate.name,cate.id)">
+					<img [src]="cate.icon">
+					<button (click)="filtrerParID(cate.id)" [ngStyle]="{'background':cate.color}">{{cate.name}}</button>
+				</div>
+			</div>
+		</div>
 		<ion-row>
 			<ion-col id="horiszontalBar">
 			</ion-col>
 		</ion-row>
-		<!--
-		<ion-row>
-			<ion-col>
-				<ion-item text-center>
-					<ion-label>Choisir une table</ion-label>
-					<ion-select okText="Ok" cancelText="Annuler" [(ngModel)]="tableId">
-				    	<ion-select-option value="">Aucune</ion-select-option>
-				    	<ion-select-option *ngFor="let table of tables" value="{{ table.id }}">{{ table.label }}</ion-select-option>
-				    </ion-select>
-				</ion-item>
-			</ion-col>
-			<ion-col id="shwitchIcons" text-right class="hide-only-xs hide-only-sm">
-				<button class="on" *ngIf="showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
-				<button class="off" *ngIf="!showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
-				<button class="on" *ngIf="!showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
-				<button click="off" *ngIf="showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col>
-				<p id="contentList">
-					<ion-grid *ngIf="showList" class="hide-only-xs hide-only-sm">
-						<ion-row text-center>
-							<ion-col col-1>
-							</ion-col>
-							<ion-col col-3>
-								Nom
-							</ion-col>
-							<ion-col col-1>
-								Prix
-							</ion-col>
-							<ion-col col-1>
-								Stock
-							</ion-col>
-							<ion-col col-3>
-								Quantité
-							</ion-col>
-							<ion-col col-2>
-
-							</ion-col>
-						</ion-row>
-						<div class="query_status">
-
-						</div>
-						<ion-row text-center *ngFor="let produit of products; let i = index" class="list-row-item">
-
-							<ion-col align-self-center col-1>
-								<img src="{{produit.url}}" />
-							</ion-col>
-							<ion-col align-self-center col-3>
-								{{produit.name}}
-							</ion-col>
-							<ion-col align-self-center col-2>
-								<span class="digits">{{produit.prix}}</span> €
-							</ion-col>
-							<ion-col align-self-center col-1>
-								<span class="digits qtity_{{produit.id}}">{{produit.quantite}}</span>
-								<input class="{{produit.id}}_stock" type="hidden" name="" value="{{produit.quantite}}">
-							</ion-col>
-							<ion-col align-self-center col-3>
-								<button class="circular {{produit.id}}_reduise mois" (click)="moins(produit.id+'_mois')" style="background-color:#EC0000;">-</button>
-								<span  class = "nonDigits" >
-									<input class="qte_{{produit.id}}" type="text" value="0" style="width: 40px;" />
-								</span>
-								<button id="{{produit.id}}_adder" class="circular add {{produit.id}}_adder plus" (click)="plus(produit.id+'_add')" style="background-color:#00B79A;">+</button>
-							</ion-col>
-							<ion-col align-self-center col-2>
-								<button class="nonCirculaire" (click)="ajouter(produit, produit.quantite,  tableId,produit.quantite,produit.id)">AJOUTER</button>
-							</ion-col>
-						</ion-row>
-					</ion-grid>
-					<ion-grid *ngIf="!showList">
-						<ion-row>
-							<ion-col *ngFor="let produit of plats; let i = index " >
-								<ion-card size-md="6" size-lg="4" size-xl="6" size-xm="6" size-sm="4">
-									<img class="cardImg" src="../../../assets/prod_2.jpg" />
-						        	<ion-card-header>
-						          		<ion-card-title text-center style="text-align: center!important;width: 100%;">{{produit.name}}</ion-card-title>
-						        	</ion-card-header>
-						        	<ion-card-content text-cente>
-						        		<div>
-						          			<ion-chip text-center>
-											</ion-chip>
-											<p>{{produit.prix}}</p>
-						        		</div>
-						        		<ion-item text-center>
-											<ion-label>
-												<button class="circular" (click)="moins(produit.id+'_mois')" style="display:inline-block;background-color:#EC0000;">-</button>
-												<span  class = "nonDigits" >
-												<input type="text" class="qtitis qte_{{produit.id}}" type="text" value="0" style="width: 18px;" />
-                                                <input type="hidden" class="digits prix_{{produit.id}}" value="{{produit.pu}}"  name="prix">
-												</span>
-												<button class="circular add {{produit.id}}_adder plus" (click)="plus(produit.id+'_add')" style="display: inline-block;background-color:#00B79A;">+</button>
-                                                <input class="{{produit.id}}_stock" type="hidden" name="" value="{{produit.qte}}">
-											</ion-label>
-						        		</ion-item>
-						        			<ion-label text-center>
-						        				<button class="nonCirculaire" (click)="pushToCart(produit.pu, produit.id)">AJOUTER</button>
-						        			</ion-label>
-						        		</ion-item> 
-						        	</ion-card-content>
-						      	</ion-card>
-							</ion-col>
-						</ion-row>
-					</ion-grid>
-				</p>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col class="cartshop">
-				<ion-label class="panier" text-center>
-					<div class="shoper" (click)="Mycart()">
-						<ion-badge style="top: 25px;z-index: 22;position: absolute;right: 0;left: 0;height: 20px;width: 20px;margin: 0 auto;" slot="start">{{Cartshop.length}}</ion-badge>
-						<ion-icon style="font-size: 50pt; color: #D76800" name="basket">
-						</ion-icon>
-					</div>
-				</ion-label>
-			</ion-col>
-			<ion-col text-right>
-				<ion-fab id="addButton">
-					<ion-fab-button (click)="ajoutGlobal()">
-						<ion-icon class="icon-size" name="checkmark"></ion-icon>
-					</ion-fab-button>
-				</ion-fab>
-			</ion-col>
-		</ion-row>
-		 -->
+		<ion-list class="parent-wrapper" style="margin-top: 5px;">
+	        <ion-item-sliding *ngFor="let cate of products ; let i = index" >
+	        	<ion-item >
+	        		<div>
+		        		<img [src]="cate.icon">
+				      	<label class="name-prod">x{{cate.qty}}</label>
+					    <label class="name-prod">{{cate.name}}</label>
+				      	<label class="price">{{cate.price}} <span>FCFA</span></label>
+				      </div>
+			    </ion-item>
+	            <ion-item-options  >
+					<ion-item-option color="light" (click)="openDetailProduct(i)">
+				        <ion-icon slot="start" name="create"></ion-icon>
+				    </ion-item-option>
+				    <ion-item-option color="danger" (click)="deleteProduct(i)">
+				        <ion-icon slot="start" name="trash"></ion-icon>
+				   	</ion-item-option>
+				</ion-item-options>
+	        </ion-item-sliding>
+	    </ion-list>
 	</ion-grid>
+
+	<ion-fab class="fab-show-list" vertical="bottom" horizontal="end" slot="fixed">
+		<ion-fab-button>
+	      <ion-icon name="more"></ion-icon>
+	    </ion-fab-button>
+	     <ion-fab-list side="start">
+		    <ion-fab-button color="danger" >
+		      <ion-icon name="trash"></ion-icon>
+		    </ion-fab-button>
+		    <ion-fab-button (click)="showListCategory()"   color="dark" >
+		      <ion-icon name="add"></ion-icon> 
+		    </ion-fab-button>
+	     </ion-fab-list>
+	     <ion-fab-list  side="top">
+		    <ion-fab-button color="success" >
+		      <ion-icon name="checkmark-circle-outline"></ion-icon> 
+		    </ion-fab-button>
+		    <ion-fab-button color="light" >
+		      <ion-icon name="calculator"></ion-icon>
+		    </ion-fab-button>
+	     </ion-fab-list>
+	</ion-fab>
 </ion-content>

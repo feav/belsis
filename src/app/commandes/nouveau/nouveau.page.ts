@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingController, ToastController, AlertController ,ModalController} from '@ionic/angular';
-import { Commande } from "../../models/commande.model";
 
 import { ProduitService } from "../../services/produit.service";
+import { CategorieService } from "../../services/categorie.service";
 import { CommandeService } from "../../services/commande.service";
 import { TableService } from "../../services/table.service";
 import { UtilsService } from "../../services/utils.service";
@@ -25,9 +25,9 @@ export class NouveauPage implements OnInit {
 
 	public commandePages:Array<Array<any>>;
     public qte:number = 0;
-	public produits:Array<any>;
+	public produits:any;
     public plats:Array<any>;
-    public products :Array<any>;
+    public products :any=[];
 	public produitsPages:any;
 
 	public showList:boolean = true;
@@ -35,8 +35,10 @@ export class NouveauPage implements OnInit {
 	private tables = [];
 	private tableId = null;
 
+    private  shop_id : number;
     public produitCategoris:{};
     public loader = '<img src="../../../assets/loader/loader7.gif" alt="">';
+    private cardTotal : number = 0;
 
   constructor(
       private modalCtrl:ModalController,
@@ -45,31 +47,38 @@ export class NouveauPage implements OnInit {
       private commandeService: CommandeService,
       private utilsService: UtilsService,
       private toastController: ToastController,
+      private catService: CategorieService,
       private tableService: TableService) {
-      /*let com = new Array();
-      let cmd = new Commande(1,2,12,200,1);
-      let cmd2 = new Commande(1,2,12,200,1);
-      cmd2.commande[0].push(
-          {
-              productId:4,
-              qte:5,
-              pu:6,
-              date:'',
-              status:0,
-              totalPrice:0,
-              tableId:0,
-              author:4,}
-      )
-      com.push(cmd);
-      com.push(cmd2);
-      localStorage.setItem('commandes',JSON.stringify(com));
-      console.log(cmd);*/
 
   }
 
-  async moveToFirst()
+  async moveToFirst(cat_name , cat_id)
     {
-      const modal = await this.modalCtrl.create({component: ChoiceProduitPage});
+      const modal = await this.modalCtrl.create(
+        {
+          component: ChoiceProduitPage,
+          componentProps: { 
+            cat_id: cat_id,
+            cat_name : cat_name
+          }
+        }
+     );
+      modal.onDidDismiss()
+      /**
+      ** @TODO faire en sorte de bien mettre a jour le panier genre
+      **/
+      .then((data) => {
+          console.log(data.data);
+          let somme = 0 ;
+          for (let i = 0; i < data.data.length;i++){
+            let produit = data.data[i];
+              somme += produit.price*produit.qty;
+             this.products.push(produit);
+                this.hideListCategory();
+          }
+          this.cardTotal = somme;
+      });
+
      return await modal.present();
   }
   private panier:Array<any> = [];
@@ -85,320 +94,42 @@ export class NouveauPage implements OnInit {
 
 
   ngOnInit() {
-  	this.produits = this.prod.getAll();
-    //this.produits = this.products;
-  	this.tables = this.tableService.getTables();
-    this.setToCard();
-
   	this.commandes = [
 	 ];
-   let produitsList = ["Salade de fruits",""];
-   let commandesList = ["Fruit","Glace","Boissons","légumes","Céréales","féculents","Produits","Viande","poisson","œuf","Sucre","Corps gras"];
     
-    for (var i = 1; i <= commandesList.length ; ++i) {
-      this.commandes.push({id: i,name:commandesList[i-1],statusFilter: false});
+  }
+  showListCategory(){
+    if($("#nouveau-commande").hasClass("hide-list-category")){
+      $("#nouveau-commande").removeClass("hide-list-category");
     }
-
-  
+  }
+  hideListCategory(){
+    if(!$("#nouveau-commande").hasClass("hide-list-category")){
+      $("#nouveau-commande").addClass("hide-list-category");
+    }
   }
     ionViewWillEnter(){
         // $('.query_status').html(this.loader);
-        // this.prod.allProduct().then(datas=>{
-        //     $('.query_status').html("");
-        //     this.products = datas;
-        //     console.log(this.products);
-        // });
-        // this.plats = this.prod.Plats();
-        // console.log(this.plats);
-        // this.prod.allCategoris().then(datas=>{
-        //         this.produitCategoris = datas;
-        //         console.log(this.produitCategoris);
+
+        this.catService.getAllByUser().then(datas=>{
+            this.produitCategoris = datas;
+            $("#nouveau-commande .loading").hide(1000);
+            console.log(datas);
+        });
+        // this.prod.getProductByCategory(0).then(
+        //    datas =>{
+        //         this.products = datas;
+        //         let somme = 0 ;
+        //         for (let i = 0; i < this.products.length;i++){
+        //           let produit = this.products[i];
+        //            somme += produit.price*produit.qty;
+        //         }
+        //         this.cardTotal = somme;
+        //         $("#page-choice-product .loading").hide(1000);
         //     },error=>{
         //         console.log(error);
         //     }
         // );
-         this.produitCategoris = [
-           {
-             id:1,
-             name:"WHISKY",
-             icon:"assets/cat/beer.png",
-             total:10,
-             color:"#870b3d"
-           }, {
-             id:1,
-             name:"FROMAGE",
-             icon:"assets/cat/fromage.png",
-             total:10,
-             color:"#fdc400"
-           }, {
-             id:1,
-             name:"FRUIT",
-             icon:"assets/cat/fruit.png",
-             total:10,
-             color:"#55ae31"
-           },
-
-           {
-             id:1,
-             name:"BIERE",
-             icon:"assets/cat/biere.png",
-             total:10,
-             color:"#a85f4e"
-           }, {
-             id:1,
-             name:"LEGUME",
-             icon:"assets/cat/legume.png",
-             total:10,
-             color:"#d37f6e"
-           }, {
-             id:1,
-             name:"OEUF",
-             icon:"assets/cat/oeuf.png",
-             total:10,
-             color:"#009bb5"
-           }, {
-             id:1,
-             name:"POISSON",
-             icon:"assets/cat/poisson.png",
-             total:10,
-             color:"#009ee2"
-           }, {
-             id:1,
-             name:"VIANDE",
-             icon:"assets/cat/viande.png",
-             total:10,
-             color:"#e74038"
-           }, {
-             id:1,
-             name:"VIN",
-             icon:"assets/cat/vin.png",
-             total:10,
-             color:"#af0f49"
-           }
-         ];
-    }
-  public Produits(){
-
-  }
-  public catname(id){
-      return this.prod.categorie(id).name;
-  }
-  public rechercher(tab) {
-
-  }
-
-  filtrerParID(id) {
-      //$('.query_status').html(this.loader);
-      let produit = localStorage.getItem('produits');
-      let conv = JSON.parse(produit);
-      let dataFilter = new Array();
-      if (id !==null ){
-          for (let i = 0; i < conv.length;i++){
-              console.log('passer')
-              if (conv[i].categories === id){
-                  dataFilter.push(conv[i]);
-              }
-          }
-          $('.query_status').html("");
-          this.products = dataFilter;
-      } else {
-
-      }
-
-  }
-
-
-    public savepanier(){
-
-    }
-
-  public random(){
-    this.produits = this.prod.randomlly();
-  }
-  public convertArrayToPagible(datas: Array<any>, pagesize: number):Array<Array<any>>{
-  	let result:Array<Array<any>> = [];
-  	for (var i = 0; i < (datas.length / pagesize); ++i) {
-  		if (i!=((datas.length / pagesize)-1))
-  			result.push(datas.slice(i*pagesize, (i+1)*pagesize));
-  		else
-  			result.push(datas.slice(i*pagesize, datas.length));
-  		
-  	}
-  	return result;
-  }
-
-  public addOrRemoveCategorieToFilter(line, col){
-  	if (this.commandePages[line][col].statusFilter) {
-	  	this.commandePages[line][col].statusFilter = false;
-	  	this.commandes[line*6 + col].statusFilter = false;
-  	}else{
-	  	this.commandePages[line][col].statusFilter = true;
-	  	this.commandes[line*6 + col].statusFilter = true;
-  	}
-  }
-
-  public setToList(){
-  	this.showList = true;
-  }
-
-  public setToCard(){
-  	this.showList = false;
-  }
-
-  public pushToCart(prix,produitId){
-
-      let qte:any = "qte_"+produitId;
-      let pu:any = prix;
-      let self:any = $('.'+qte+'').val();
-      let stoc = "qtity_"+produitId;
-      let stocHidden:any = produitId+"_stock";
-      //let total:any = parseInt(quantityOrdered) - parseInt(self);
-     // $('.'+stoc+'').text(total);
-      //$('.'+stocHidden+'').val(quantityOrdered - self);
-      let datas = this.prod.pushPanier(produitId,self,pu,this.utilsService.curentUserInfo()[0].restoId,this.tableId);
-      this.Cartshop.push(datas);
-      let panier = localStorage.getItem('panier');
-      let older = JSON.parse(panier);
-
-      if ( panier != null ){
-          let oldProduct = new Array();
-
-           older.push(datas);
-          localStorage.setItem("panier",JSON.stringify(older));
-          //this.presentToast(" produit ajouté dans le panier ","success");
-      }else {
-          localStorage.setItem("panier", JSON.stringify(this.Cartshop));
-          //this.Cartshop=[];
-      }
-
-      //this.updateStockQuantitis(produitId,self);
-
-
-
-      this.Cartshop.push(datas);
-      console.log(this.Cartshop);
-  }
-  updateCommande(){}
-
-  
-  public ajouter(produit, quantityOrdered){
-    if(quantityOrdered > 0){
-      let found = this.panier.find(function (item) {
-        return item.id == produit.id;
-      });
-
-      if(found != undefined)
-        found.quantite = quantityOrdered;
-        else{
-        produit.quantite = quantityOrdered;
-        this.panier.push(produit);
-      }
-      //this.commandeService.addOrder(produit, quantityOrdered, quantityOrdered, this.tableId );
-      this.utilsService.presentToast('Produit ajouté dans votre panier', 2000, 'success');
-    }
-
-  }
-
-  updateStockQuantitis(idProduit,Qte){
-      let testObject = localStorage.getItem('produits');
-      let newArray = new Array();
-      let datas = localStorage.getItem('produits');
-      let conv = JSON.parse(datas);
-      for (let i = 0; i < conv.length;i++){
-          if (conv[i].id == idProduit){
-              conv[i].quantite = conv[i].quantite - Qte;
-              newArray.push(conv[i]);
-          }else {
-              newArray.push(conv[i]);
-          }
-      }
-      if (newArray.length>0){
-          localStorage.setItem("produits",JSON.stringify(newArray));
-          console.log(newArray);
-      }
-      this.utilsService.presentToast("modification de la quantité en stock ",2000,"success");
-  }
-  public plus(index){
-      console.log(index);
-      let convert = index.split("_");
-      let qte:any = "qte_"+convert[0];
-      let self:any = $('.'+qte+'');
-      let stock:any = convert[0]+"_stock";
-      let selfStock:any = $('.'+stock+'').val();
-      let oldQte:any = parseInt(self.val().trim());
-      console.log(oldQte);
-      console.log(selfStock);
-      if(this.stockControl(selfStock,oldQte)){
-          self.val( oldQte + 1);
-      }else {
-          let t:any = selfStock - 1;
-          self.val(t);
-      }
-
-  }
-
-  public moins(index){
-      let convert = index.split("_");
-      let qte:any = "qte_"+convert[0];
-      let self:any = $('.'+qte+'');
-      let oldQte:any = parseInt(self.val().trim());
-      console.log(oldQte);
-      if(oldQte >0){
-          let g:any = oldQte - 1;
-          self.val(g);
-      }else {
-          self.val( 1);
-      }
-  }
-  public stockControl(stock,qte):boolean{
-      console.log(stock);
-      console.log(qte);
-      if (stock > qte){
-          return true;
-      }else {
-          this.utilsService.presentToast('la quantité demandée '+qte+' est superieur a la quantité en stock '+stock, 2000, 'danger');
-          return false;
-      }
-  }
-
-  public ajoutGlobal(){
-     if(this.nombrePanier() > 0 && this.tableId != null){
-       this.utilsService.presentToast('Commande validée', 2000, 'success');
-       this.commandeService.saveCommande(this.panier, this.tableId);
-       this.router.navigate(["/commandes/commandes"]);
-     }else{
-       if(this.tableId == null)
-         this.utilsService.presentToast('Veillez choisir la table', 3000, 'danger');
-       else
-         this.utilsService.presentToast("Aucun produit n'a été choisi", 3000, 'danger');
-     }
-  }
-
-  public montantPanier(){
-    let montant:any = 0;
-    for (var produit in this.panier) {
-      montant = montant + this.montantProduit(produit);
-    }
-    return montant;
-  }
-
-  public montantProduit(produit){
-    return produit.quantite * produit.prix;
-  }
-
-  public nombrePanier(){
-    let result = 0;
-    for (var i in this.produits) {
-      result = result + this.produits[i].quantite;
-    }
-    return result;
-  }
-
-  public detailsPanier(){
-
-  }
-    public Mycart(){
-        this.router.navigate(["/panier"]);
     }
 
 }

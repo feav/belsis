@@ -36,25 +36,6 @@ export class ComptabilitePage  {
   }
 
 
-  ionViewDidEnter() {
-      this.product.allCategoris().then(datas=>{
-              this.listCmd = datas;
-              console.log(this.listCmd);
-          },error=>{
-              console.log(error);
-          }
-      );
-    this.createBarChart();
-  }
-
-  public setToEntrees(){
-  	this.router.navigate(["/comptabilite/list-entrees"]);
-  }
-
-  public setToSorties(){
-  	this.router.navigate(["/comptabilite/list-sorties"]);
-  }
-
   createBarChart() {
   	//let commandesList = ["Fruit","Glace","Boissons","légumes","Céréales","féculents","Produits","Viande","poisson","œuf","Sucre","Corps gras"];
   	/*let commandesList = this.listCmd;*/

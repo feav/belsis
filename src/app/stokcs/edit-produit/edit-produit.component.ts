@@ -33,13 +33,13 @@ export class EditProduitComponent implements OnInit {
         this.getSelectedProduct();
 	}
     ionViewWillEnter(){
-        this.products.allCategoris().then(datas=>{
-                this.produitCategoris = datas;
-                console.log(this.produitCategoris);
-            },error=>{
-                console.log(error);
-            }
-        );
+        // this.products.allCategoris().then(datas=>{
+        //         this.produitCategoris = datas;
+        //         console.log(this.produitCategoris);
+        //     },error=>{
+        //         console.log(error);
+        //     }
+        // );
     }
 
     public valider(){
@@ -51,15 +51,15 @@ export class EditProduitComponent implements OnInit {
             if (this.cat != 'NAN' && this.cat != undefined){
                 for (let i = 0; i < conv.length;i++){
                     if (conv[i].id == this.id){
-                        let newProduct = this.products.pushProduct(
-                            this.id,
-                            this.produit.name,
-                            this.produit.pu,
-                            this.produit.qte,
-                            this.utilService.curentUserInfo()[0].restoId,
-                            this.cat,
-                            this.produit.url);
-                        newArray.push(newProduct);
+                        // let newProduct = this.products.pushProduct(
+                        //     this.id,
+                        //     this.produit.name,
+                        //     this.produit.pu,
+                        //     this.produit.qte,
+                        //     this.utilService.curentUserInfo()[0].restoId,
+                        //     this.cat,
+                        //     this.produit.url);
+                        // newArray.push(newProduct);
                     }else {
                         newArray.push(conv[i]);
                     }

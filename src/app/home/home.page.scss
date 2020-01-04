@@ -86,6 +86,17 @@ height: 20px;
     	color: white;
     	font-size: 25px;
     }
+    .table-choice{
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        ion-select{
+            color: white;
+        }
+        > div{
+            width: max-content;
+        }
+    }
     .date-label{
 	    color: black;
 	    font-size: 15px;
@@ -97,6 +108,7 @@ height: 20px;
 	    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
 	    margin-top: 10px;
     }
+
 }
 
 @media (min-width : 200px) and (max-width : 500px) {

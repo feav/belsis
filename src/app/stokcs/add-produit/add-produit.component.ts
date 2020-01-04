@@ -87,9 +87,9 @@ export class AddProduitComponent implements OnInit {
         	this.produits.id = parseInt(this.lastId()) + 1;
         	this.produits.categories = parseInt(this.cat);
         	this.produits.restoID = this.user.curentUserInfo()[0].restoId;
-        	let newProduct = this.produit.pushProduct(this.produits.id,this.produits.name,this.produits.prix,this.produits.quantite,this.user.curentUserInfo()[0].restoId,this.produits.categories,this.produits.url);
+        	// let newProduct = this.produit.pushProduct(this.produits.id,this.produits.name,this.produits.prix,this.produits.quantite,this.user.curentUserInfo()[0].restoId,this.produits.categories,this.produits.url);
         	let rec = JSON.parse(testObject);
-            rec.push(newProduct);
+            // rec.push(newProduct);
             console.log(rec);
             localStorage.setItem("products",JSON.stringify(rec));
             this.presentToast(" produit "+this.produits.name+" enregistré ","success");
@@ -98,8 +98,8 @@ export class AddProduitComponent implements OnInit {
         	this.produits.id = 1;
             this.produits.categories = parseInt(this.cat);
             this.produits.restoID = this.user.curentUserInfo()[0].restoId;
-            let newProduct = this.produit.pushProduct(this.produits.id,this.produits.name,this.produits.prix,this.produits.quantite,this.user.curentUserInfo()[0].restoId,this.produits.categories,this.produits.url);
-            oldProduct.push(newProduct);
+            // let newProduct = this.produit.pushProduct(this.produits.id,this.produits.name,this.produits.prix,this.produits.quantite,this.user.curentUserInfo()[0].restoId,this.produits.categories,this.produits.url);
+            // oldProduct.push(newProduct);
             console.log(oldProduct);
             localStorage.setItem("products", JSON.stringify(oldProduct));
             this.presentToast("produit "+this.produits.name+" enregistré ","success");

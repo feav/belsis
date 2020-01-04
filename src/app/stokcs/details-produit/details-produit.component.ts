@@ -33,12 +33,7 @@ export class DetailsProduitComponent implements OnInit {
 		});
 	}
     ionViewWillEnter(){
-	    this.products.Product(this.id).then(produit=>{
-            this.produit = produit;
-            },error=>{
-	           console.log(error);
-            }
-        );
+	  
     }
 
 	public editer(id:number){

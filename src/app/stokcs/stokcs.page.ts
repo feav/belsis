@@ -48,12 +48,12 @@ export class StokcsPage implements OnInit {
   }
     ionViewWillEnter(){
         this.getProduct();
-        this.prod.ProductResto().then(produitResto=>{
-                this.produits = produitResto;
-            },error=>{
-                console.log(error);
-            }
-        );
+        // this.prod.ProductResto().then(produitResto=>{
+        //         this.produits = produitResto;
+        //     },error=>{
+        //         console.log(error);
+        //     }
+        // );
     }
 
 
@@ -108,8 +108,6 @@ export class StokcsPage implements OnInit {
   	return null;
   }
   categorieByID(id){
-      console.log(this.prod.categorie(id).name);
-     return this.prod.categorie(id).name;
     // console.log(this.prod.categorie(id));
   }
  public ajoutGlobal(){
