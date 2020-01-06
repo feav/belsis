@@ -13,13 +13,14 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent {
   public appPages = [
     {
-      title: 'Plan de Tables',
+      title: 'Acceuil',
+      url: '/',
+      icon: 'home'//'/assets/logo-tables.svg'
+    },
+    {
+      title: 'Tables',
       url: '/table',
       icon: 'wine'//'/assets/logo-tables.svg'
-    },{
-      title: 'Nouvelle Commande',
-      url: '/commandes/new',
-      icon: 'add-circle'//'/assets/logo-commande.svg'
     },
     {
       title: 'Les Commandes',
@@ -27,15 +28,20 @@ export class AppComponent {
       icon: 'restaurant'//'/assets/logo-commande.svg'
     },
     {
-      title: 'Le Stock',
-      url: '/stokcs',
-      icon: 'archive'//'/assets/logo-stock.svg'
+      title: 'Profil',
+      url: '/profile',
+      icon: 'person'//'/assets/logo-commande.svg'
     },
-    {
-      title: 'Comptabilite',
-      url: '/list',
-      icon: 'podium'//'/assets/logo-stat.svg'
-    }
+    // {
+    //   title: 'Le Stock',
+    //   url: '/stokcs',
+    //   icon: 'archive'//'/assets/logo-stock.svg'
+    // },
+    // {
+    //   title: 'Comptabilite',
+    //   url: '/list',
+    //   icon: 'podium'//'/assets/logo-stat.svg'
+    // }
   ];
 
   constructor(

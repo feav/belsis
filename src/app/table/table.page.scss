@@ -1,138 +1,171 @@
+
 	#menu{
 		ion-icon{
 			color: white;
 		}
 	}
-	
-	.welcome-card img {
-	  max-height: 35vh;
-	  overflow: hidden;
+	.flex-center-row {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+.hide{
+	display: none;
+}
+.flex{
+	display: flex;
+}
+.gris{
+	background: gray !important;
+}
+.rectangle {
+    height: 69px;
+    // width: 20%;
+    max-width: 50%;
+    min-width: 30%;
+    border-radius: 8px;
+    background-color: #194c6f;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    margin: 5px;
+    ion-label {
+	    font-size: 15px;
+	    width: 100%;
+	    text-align: center !important;
+	    margin-left: 35px;
+	    font-weight: 20;
 	}
-	ion-card-title{
-		text-align:center;
+	div {
+	    color: white;
+	    font-size: 10px;
+	    position: absolute;
+	    bottom: 10px;
+	    text-align: center !important;
+	    width: 90%;
 	}
-	ion-header{
-		ion-toolbar{
-		    --background : #142768!important; 
-		    ion-title{
-		    	text-align: center;
-		    	color: white;
-		    }
-		    ion-button{
-		    	color: white;
-		    	ion-menu-button{
-		    		color: white;
-		    	}
-		    }
-		}
+	b{
+		display: block;
+	    text-align: center;
+	    color: #FF9800;
+	    font-size: 17px;
 	}
-	ion-content{
-		div.ion-content{
-			//--background-image:url("/assets/bg-belsis.svg");
-			background-image: url(/assets/bg-belsis.svg);
-		    height: 100%;
-		    width: 100%;
-		    background-size: 500px 500px;
-		}
-		
-	}
-	ion-card{
-		border-radius: 5px;
-		background:rgba(247,247,247,1);
-		overflow: visible;
-		ion-card-content{
-			padding: 0;
-			.img-content{
-				display: flex;
-	    		justify-content: center;
-	    		flex-direction: column;
-			    margin: 20px;
-			    text-align: center;
-			    img{
-			    	width: 100px;
-			    	height: 100px;
-				}
-			}
-			ion-card-subtitle{
-				font-size: x-large;
-				transform: uppercase;
-			}
-			ion-card-title{
-				font-size: 50px;
-			}
-			.foot{
-				padding: 5px;
-				div{
-				    display: flex;
-				    flex-direction: row;
-				}
-				img{
-					width: 25px;
-				    height: 20px;
-				    background: rgb(200,200,200);
-				    border-radius: 100%;
-				    padding: 4px;
-				    margin-left: 5px;	
-				}
-				button{
-					font-weight: 800;
-				    border-radius: 100%;
-				    background: #c8c8c8;
-				    color: white;
-				    width: 40px;
-				    height: 40px;
-				    font-size: x-large;
-				    position: absolute;
-				    right: 10px;
-				    bottom: 10px;
-				    line-height: 15px;
-				}
-			}
-		}
-		ion-card-header{
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-			ion-label.round{
-				width: 10px !important;
-			    height: 10px !important;
-			    position: absolute;
-			    border-radius: 100%;
-			    margin-top: 4px;
-			}
-			img{
-				width: 20px;
-			    height: 20px;
-			    padding: 4px;
-			    border-radius: 100%;
-			    background: white;
-			    margin-top: 0px;
-			    margin-left: 4px;
-			    box-shadow: 0px 1px 1px #0000003b;
-			}
-			.left-part{
-			    display: flex;
-    			flex-direction: row;
-			}
-			ion-label.title{
-				margin-left: 15px;
-				span {
-    				font-size: x-small;
-    			}
-			}
-			ion-card-subtitle {
-				position: absolute;
-			    color: white;
-			    right: -25px;
-			    top: -25px;
-			    /*background: green;*/
-			    width: 50px;
-			    height: 50px;
-			    border-radius: 100%;
-			    text-align: center;
-			    line-height: 50px;
-			    font-size: x-large;
-			}
-		}
-	}
-	
+}
+div.list-commande {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+        width: 100%;
+    .somme{
+    	font-size: 12px;
+    }
+    .table{
+    	font-size: 10px;
+    }
+}
+.ion-color-secondary {
+    --ion-color-base: #9E9E9E !important;
+}
+ion-fab-button {
+    position: absolute;
+    right: 0;
+    top: 73px;
+    right: 5px;
+}
+.activite {
+height: 20px;
+    color: #111010;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 20px;
+}
+.header-bg{
+// background: url(background.svg); 
+    background-repeat: no-repeat;
+    min-height: 100px;
+    background-position: 100% 100%;
+    border-color: #142766;
+    background: #142767;
+    padding-bottom: 15px;
+    .label-title{
+    	font-size: 10px;
+    }
+    .ion-text-center{
+    	text-align: center;
+
+    }
+    .block{
+    	display: block;
+    }
+    .price-label{
+    	color: white;
+    	font-size: 25px;
+    }
+    .table-choice{
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        ion-select{
+            color: white;
+        }
+        > div{
+            width: max-content;
+        }
+    }
+    .date-label{
+	    color: black;
+	    font-size: 15px;
+	    height: max-content;
+	    width: max-content;
+	    padding: 5px 20px 5px 20px;
+	    border-radius: 8px;
+	    background-color: #FFF;
+	    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+	    margin-top: 10px;
+    }
+
+}
+
+@media (min-width : 200px) and (max-width : 500px) {
+
+}
+
+.green{
+	color: green;
+}
+.red{
+	color: red;
+}
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.rotating {
+  -webkit-animation: rotating 2s linear infinite;
+  -moz-animation: rotating 2s linear infinite;
+  -ms-animation: rotating 2s linear infinite;
+  -o-animation: rotating 2s linear infinite;
+  animation: rotating 2s linear infinite;
+}

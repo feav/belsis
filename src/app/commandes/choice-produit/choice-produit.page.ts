@@ -5,6 +5,7 @@ import * as $ from 'jquery';
 import { MenuController , ToastController, } from '@ionic/angular';
 // import { Toast } from '@ionic-native/toast/ngx';
 import { ProduitService } from "../../services/produit.service";
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-choice-produit',
@@ -15,16 +16,17 @@ export class ChoiceProduitPage implements OnInit {
    @Input() cat_name  : String;
    @Input() cat_id : number;
 	private produits: any;
-	private selected:number = 1;
+	private selected:number = -1;
 	private showProduct:boolean = false;
 	private choice:Array<{id:number,qty:number}>=[];
+  private loading : any;
   constructor(
   	// private toast: Toast,
   	private nav:NavController,
   	private modalCtrl:ModalController,
- 	public toaster: ToastController,
- 	      private prod : ProduitService,
-
+ 	  public toaster: ToastController,
+    private prod : ProduitService,
+    public loadingController: LoadingController
 
   	) { }
   showListSelectedProduct(){
@@ -38,10 +40,12 @@ export class ChoiceProduitPage implements OnInit {
   	}
   }
   ngOnInit() {
+    this.presentLoading("Chargement des Produits...") ;
          this.prod.getProductByCategory(this.cat_id).then(
          	datas =>{
                 this.produits = datas;
                 $("#page-choice-product .loading").hide(1000);
+                this.loading.onDidDismiss();
             },error=>{
                 console.log(error);
             }
@@ -67,6 +71,17 @@ export class ChoiceProduitPage implements OnInit {
 	    });
 	    toast.present();
 	}
+  async presentLoading(title) {
+    this.loading = await this.loadingController.create({
+      message: title,
+      duration: 2000
+    });
+    this.loading.present();
+
+    // const { role, data } = await loading.onDidDismiss();
+
+    // console.log('Loading dismissed!');
+  }
   addProduct(){
   	let product = this.produits[this.selected];
   	if(product.qty){
@@ -81,7 +96,7 @@ export class ChoiceProduitPage implements OnInit {
   openDetailProductModal(){
   	$(".modalShow").slideDown(1000);
   }
-  openDetailProduct(id,qty){
+  openDetailProduct(id){
   	this.selected = id;
   	this. openDetailProductModal();
   }

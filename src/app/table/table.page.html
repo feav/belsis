@@ -3,49 +3,51 @@
     <ion-buttons slot="start">
       <ion-menu-button id="menu" color="light"></ion-menu-button>
     </ion-buttons>
-    <ion-title>PLAN DE TABLE</ion-title>
+    <ion-title>
+      TABLES
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-	<ion-grid class="ion-margin">
-        <!-- <ion-card-title class="ion-text-center">Plan de Travail</ion-card-title> -->
+        <ion-grid class="header-bg">
+          <div >
+            <ion-fab-button color="secondary" (click)="goToAnoterPage('/commandes/new')">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+            <ion-label color="light ion-text-center block label-title">Ventes de la journee</ion-label>
+            <ion-label color="light ion-text-center price-label block">{{workMoney}} CFA</ion-label>
+            <div class="flex-center-row">
+              <ion-label color="light ion-text-center date-label block">{{time}}</ion-label>
+            </div>
+          </div>
+      </ion-grid>
+      <ion-grid>
+      </ion-grid>
+      <ion-grid>
+        <ion-card-title class="ion-text-center activite">EN ACTIVITE</ion-card-title>
         <ion-row>
-          <ion-col *ngFor="let table of tables" size-md="4" size-lg="4" size-xs="12" size-sm="12">
-            <ion-card>
-              <ion-card-header>
-                <div>
-                	<ion-label class="primary round" [ngStyle]="{'background-color': table.color}" ></ion-label>
-                	<ion-label class="title"> -<span>{{table.etat}}</span>- </ion-label>
-                </div>
-                <div class="left-part">
-                	<ion-label class="title"> <span>SERVEUR - {{table.serveur}}</span> </ion-label>
-                	<img src="/assets/profile-2.svg">
-                </div>
-              </ion-card-header>
-
-              <ion-card-content>
-                <div class="img-content">
-                  
-                	<ion-card-subtitle class="secondary">{{table.label}}</ion-card-subtitle>
-                	<ion-card-title class="primary">{{table.orders.length}}</ion-card-title>
-                	<b>COMMANDE</b>
-                </div>
-                <div class="foot ion-text-center">
-                	<div>
-                		<img (click)="openTable(tab, table.id)" src="/assets/logo-oeil.svg">
-
-                		<ion-label style="margin-left: 5px" > 
-                			<span> {{table.location}} </span> 
-                		</ion-label>
-                	</div>
-                	<div>
-                		<button (click)="newcommande(table.id)" >+</button>
-                	</div>
-                </div>
-              </ion-card-content>
-            </ion-card>
+          <ion-col  *ngFor="let table of tableShop" [className]="table.commandes>0?'rectangle':'hide'">
+             <ion-label color="light ion-text-center">{{table.name}}</ion-label>
+              <b>{{table.commandes}}</b>
+            <div>
+              {{table.description}}
+            </div>
           </ion-col>
         </ion-row>
-    </ion-grid>
+      </ion-grid>
+     
+      <ion-grid>
+        <ion-card-title class="ion-text-center activite"> AUTRES </ion-card-title>
+        <ion-row>
+          <ion-col  *ngFor="let table of tableShop" [className]="table.commandes==0?'rectangle gris':'hide'">
+             <ion-label color="light ion-text-center">{{table.name}}</ion-label>
+            <div>
+              {{table.description}}
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
 </ion-content>

@@ -11,7 +11,7 @@
 				<ion-searchbar placeholder="Filtrer les produit" class="hide-only-lg hide-only-xl hide-only-md"></ion-searchbar>
 			</ion-col>
 		</ion-row>
-	<div class="modalShow">
+	<div class="modalShow" *ngIf="selected>=0">
 		<ion-row class="head">
 			<ion-col class="top-main-product">
 				<!-- <button class="close-btn" (click)="closeDetailProductModal()">x</button> -->
@@ -20,12 +20,12 @@
 			<ion-col>
 				<div>{{produits[selected].name}}</div>
 				<div>Prix : <b>{{produits[selected].price}} CFA</b></div>
-				<label>Quantite : {{produits[selected].quantite}}</label>
+				<label>Disponible : {{produits[selected].total}}</label>
 				<table>
 					<tr>
-						<td><button class="reduce" (click)="produits[selected].qty=produits[selected].qty-1">-</button></td>
-						<td><input type="number" step="0.1" [(ngModel)]="produits[selected].qty"></td>
-						<td><button class="add" (click)="produits[selected].qty=produits[selected].qty+1">+</button></td>
+						<td><button class="reduce" *ngIf="produits[selected].qty>0" (click)="produits[selected].qty=produits[selected].qty-1">-</button></td>
+						<td><input type="number" min="0" max="{{produits[selected].total}}" step="0.1" [(ngModel)]="produits[selected].qty"></td>
+						<td><button class="add" (click)="produits[selected].qty=produits[selected].qty+1" *ngIf="produits[selected].qty<produits[selected].total">+</button></td>
 					</tr>
 				</table>
 				<button class="btn-product" (click)="addProduct(selected)">VALIDER</button>
@@ -36,7 +36,7 @@
 
 	    <div class="parent-wrapper">
 	        <div class="parent">
-	            <div class="child" *ngFor="let cate of produits ; let i = index" (click)="openDetailProduct(i,cate.qty)">
+	            <div class="child" *ngFor="let cate of produits ; let i = index" (click)="openDetailProduct(i)" >
 					<label  [ngStyle]="{'background':cate.color}">{{cate.name}}</label>
 					<label class="price">{{cate.price}} FCFA</label>
 					<img [src]="cate.icon">

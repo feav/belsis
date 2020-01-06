@@ -3,11 +3,33 @@
     <ion-buttons slot="start">
       <ion-menu-button id="menu" color="light"></ion-menu-button>
     </ion-buttons>
-    <ion-title>Nouvelle commande</ion-title>
+    <ion-title *ngIf="order_id">COM #{{order_id}}</ion-title>
+    <ion-title *ngIf="order_id==0">CREER COM </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content text-center id="nouveau-commande" class="hide-list-category">
+	<div class="modalShow" *ngIf="selected>=0">
+		<ion-row class="head">
+			<ion-col class="top-main-product">
+				<!-- <button class="close-btn" (click)="closeDetailProductModal()">x</button> -->
+				<img [src]="products[selected].icon">
+			</ion-col>
+			<ion-col>
+				<div>{{products[selected].name}}</div>
+				<div>Prix : <b>{{products[selected].price}} CFA</b></div>
+				<label>Disponible : {{products[selected].total}}</label>
+				<table>
+					<tr>
+						<td><button class="reduce" *ngIf="products[selected].qty>0" (click)="products[selected].qty=products[selected].qty-1">-</button></td>
+						<td><input type="number" min="0" max="{{products[selected].total}}" step="0.1" [(ngModel)]="products[selected].qty"></td>
+						<td><button class="add" (click)="products[selected].qty=products[selected].qty+1" *ngIf="products[selected].qty<products[selected].total">+</button></td>
+					</tr>
+				</table>
+				<button class="btn-product" (click)="addProduct()">VALIDER</button>
+			</ion-col>
+		</ion-row>
+	</div>
  	<ion-grid class="header-bg">
           <div >
             <ion-label color="light ion-text-center block label-title">Montant de la Facture</ion-label>
@@ -15,30 +37,13 @@
             <div class="select-table">
 	            <div class="flex-center-row table-choice">
 	            	<div>
-	            		 <!-- <ion-label color="light ion-text-center date-label block">Numero de Table</ion-label> -->
 			              <ion-select value="0" >
 			              	<ion-select-option value="0" disabled="disabled" selected="selected">Choisir la Table</ion-select-option>
-			              	<ion-select-option value="1">Table 1</ion-select-option>
-			              	<ion-select-option value="2">Table 2</ion-select-option>
-			              	<ion-select-option value="3">Table 3</ion-select-option>
+			              	<ion-select-option value="{{table.id}}" *ngFor="let table of tableShop ; let i = index" >{{table.name}}</ion-select-option>
 			              </ion-select>
 	            	</div>
 	            </div>
             </div>
-            <!-- <div class="action-button">
-            	<div class="action-button-valid">
-            		<button>
-            			<label><ion-icon name="checkmark-circle-outline"></ion-icon></label>
-            			<label>Valider</label>
-            		</button>
-            	</div>
-            	<div class="action-button-receive">
-            		<button>  
-            			<label><ion-icon name="calculator"></ion-icon></label>
-            			<label>Encaisser</label>
-            		</button>
-            	</div>
-            </div> -->
           </div>
       </ion-grid>
 	<ion-grid>
@@ -75,7 +80,7 @@
 					<ion-item-option color="light" (click)="openDetailProduct(i)">
 				        <ion-icon slot="start" name="create"></ion-icon>
 				    </ion-item-option>
-				    <ion-item-option color="danger" (click)="deleteProduct(i)">
+				    <ion-item-option (click)="removeProduct(cate)" color="danger" (click)="deleteProduct(i)">
 				        <ion-icon slot="start" name="trash"></ion-icon>
 				   	</ion-item-option>
 				</ion-item-options>
@@ -88,18 +93,18 @@
 	      <ion-icon name="more"></ion-icon>
 	    </ion-fab-button>
 	     <ion-fab-list side="start">
-		    <ion-fab-button color="danger" >
+		    <ion-fab-button color="danger" (click)="deleteOrder()">
 		      <ion-icon name="trash"></ion-icon>
 		    </ion-fab-button>
 		    <ion-fab-button (click)="showListCategory()"   color="dark" >
 		      <ion-icon name="add"></ion-icon> 
 		    </ion-fab-button>
 	     </ion-fab-list>
-	     <ion-fab-list  side="top">
+	     <ion-fab-list  side="top" (click)="prepareOrder()">
 		    <ion-fab-button color="success" >
 		      <ion-icon name="checkmark-circle-outline"></ion-icon> 
 		    </ion-fab-button>
-		    <ion-fab-button color="light" >
+		    <ion-fab-button color="light" (click)="casheOrder()">
 		      <ion-icon name="calculator"></ion-icon>
 		    </ion-fab-button>
 	     </ion-fab-list>

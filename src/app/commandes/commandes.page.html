@@ -4,162 +4,64 @@
       <ion-menu-button id="menu" color="light"></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Les commandes
+      COMMANDES
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content text-center>
+<ion-content>
+        <ion-grid class="header-bg">
+          <div >
+            <ion-fab-button color="secondary" (click)="goToAnoterPage('/commandes/new')">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+            <ion-label color="light ion-text-center block label-title">Ventes de la journee</ion-label>
+            <ion-label color="light ion-text-center price-label block">{{workMoney}} CFA</ion-label>
+            <div class="flex-center-row">
+              <ion-label color="light ion-text-center date-label block">{{time}}</ion-label>
+            </div>
+          </div>
+      </ion-grid>
+      <ion-grid>
+      </ion-grid>
+      <ion-grid>
+        <ion-card-title class="ion-text-center activite">PRETTES</ion-card-title>
+        <ion-row>
+          <ion-col  *ngFor="let commande of commandes" (click)="openOder(commande.id)" [className]="commande.etat==1?'rectangle':'hide'">
+             <ion-label color="light ion-text-center">C#{{commande.id}}</ion-label>
+              <b>{{commande.price}} <i>FCFA</i></b>
+            <div>
+              {{commande.table}}
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+     
+      <ion-grid>
+        <ion-card-title class="ion-text-center activite"> ENCAISSEES </ion-card-title>
+        <ion-row>
+          <ion-col  *ngFor="let commande of commandes" [className]="commande.etat==2?'rectangle gris':'hide'">
+             <ion-label color="light ion-text-center">C#{{commande.id}}</ion-label>
+              <b>{{commande.price}} <i>FCFA</i></b>
+            <div>
+              {{commande.table}}
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
-	<ion-grid>
-		<ion-row id="searchRow">
-			<ion-col>
-				<ion-searchbar placeholder="Filtrer les produit" class="hide-only-lg hide-only-xl hide-only-md"></ion-searchbar>
-				<div style="text-align:center;" class="hide-only-sm hide-only-xs">
-					<span>
-					<input type="text" placeholder="Recherche..." />
-					<!--<ion-input class="searchInput" placeholder="Recherche..." type="text" ></ion-input>-->
-					<button (click)="random()">
-  						<ion-icon name="search"></ion-icon>
-					</button>
-					</span>
-				</div>
-			</ion-col>
-		</ion-row>
-		<ion-row id="categoriesList" *ngFor="let page of commandePages ; let i = index" class="hide-only-xs hide-only-sm">
-			<ion-col   *ngFor="let item of page; let j = index">
-				<button
-					*ngIf="!item.statusFilter"
-					(click)="addOrRemoveCategorieToFilter(i, j)" >{{item.name}}</button>
-				<button
-					*ngIf="item.statusFilter"
-					(click)="addOrRemoveCategorieToFilter(i, j)"
-					style="background-color: #142768; color:white;"
-					>{{item.name}}</button>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col id="horiszontalBar">
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<!--<ion-col id="shwitchIcons" text-right>
-				<button class="on" *ngIf="showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
-				<button class="off" *ngIf="!showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
-				<button class="on" *ngIf="!showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
-				<button click="off" *ngIf="showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
-			</ion-col>-->
-		</ion-row>
-		<ion-row>
-			<ion-col>
-				<p id="contentListd">
-					<!--<ion-grid *ngIf="showList" class="hide-only-xs hide-only-sm">-->
-					<!--<ion-grid  class="hide-only-xs hide-only-sm">-->
-					<ion-grid  class="hide-only-xs hide-only-sm">
-						<ion-row text-center>
-							<ion-col col-2>
-								N° Commande
-							</ion-col>
-							<ion-col col-3>
-								Quantité
-							</ion-col>
-							<!--<ion-col col-3>
-								Table
-							</ion-col>-->
-							<ion-col col-3>
-								Montant Total
-							</ion-col>
-							<ion-col col-1>
-								Détail
-							</ion-col>
+      <ion-grid>
+        <ion-card-title class="ion-text-center activite"> ANNULEES </ion-card-title>
+        <ion-row>
+          <ion-col  *ngFor="let commande of commandes" [className]="commande.etat==-1?'rectangle redin':'hide'">
+              <ion-label color="light ion-text-center">C#{{commande.id}}</ion-label>
+              <b>{{commande.price}} <i>FCFA</i></b>
+            <div>
+              {{commande.table}}
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
-						</ion-row>
-						<!--<ion-row align-self-center text-center *ngFor="let order of orders; let i = index" class="list-row-item">
-							<ion-col col-2>
-								{{order.id}}
-							</ion-col>
-							<ion-col col-3>
-								<span>{{ order.quantityOrdered }}</span>
-							</ion-col>
-							<ion-col col-3>
-								<span>vide</span>
-							</ion-col>
-							<ion-col col-3>
-								<span> {{ order.totalAmount }} FCFA</span>
-							</ion-col>
-							<ion-col col-1>
-								<ion-icon class="digits" name="eye"></ion-icon>
-							</ion-col>
-						</ion-row>-->
-						<ion-row align-self-center text-center *ngFor="let order of comdes; let i = index" class="list-row-item">
-							<ion-col col-2>
-								{{order.id}}
-							</ion-col>
-							<ion-col col-3>
-								<!--<span>{{ order.qte }}</span>-->
-							</ion-col>
-							<ion-col col-3>
-								<!--<span>{{ order.total }}</span>-->
-							</ion-col>
-							<ion-col col-1>
-								<ion-icon class="digits" name="eye"></ion-icon>
-							</ion-col>
-							<!--
 
-							<ion-col col-3>
-								<span> {{ order.totalAmount }} FCFA</span>
-							</ion-col>
-							<ion-col col-1>
-								<ion-icon class="digits" name="eye"></ion-icon>
-							</ion-col>-->
-						</ion-row>
-					</ion-grid>
-				</p>
-				<div>
-					<ion-grid class="hide-only-lg hide-only-md hide-only-xl">
-						<ion-row align-self-center text-center  class="list-row-item">
-							<ion-col *ngFor="let order of comdes; let i = index">
-								<ion-card>
-									<ion-card-header>
-									</ion-card-header>
-									<ion-card-content>
-										<ion-item>
-											<ion-label>
-												Commande N° {{ order.id }}
-											</ion-label>
-										</ion-item>
-										<ion-item>
-											<ion-label>
-												Date : {{ order.date }}
-											</ion-label>
-										</ion-item>
-										<ion-item>
-											<ion-label>
-												etat : {{ order.etat }}
-											</ion-label>
-										</ion-item>
-										<ion-item>
-											<ion-label>
-												Montant total : {{ TotalPrice(order.id) }}
-											</ion-label>
-										</ion-item>
-										<ion-item>
-											<ion-label>
-												Produit : {{ TotalProtuit(order.id) }}
-											</ion-label>
-										</ion-item>
-										<ion-item>
-											<ion-label>
-												<ion-icon class="digits" (click)="detail(order.id)" name="eye"></ion-icon>
-											</ion-label>
-										</ion-item>
-									</ion-card-content>
-								</ion-card>
-							</ion-col>
-						</ion-row>
-					</ion-grid>
-				</div>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
 </ion-content>
