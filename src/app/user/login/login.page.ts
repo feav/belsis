@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController , ToastController, } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 import { UsersService } from "../../services/users.service";
+import { AuthService } from './../../services/auth.service';
 import {error} from 'util';
 
 @Component({
@@ -12,6 +14,20 @@ import {error} from 'util';
 export class LoginPage implements OnInit {
 	public userName:any;
 	public userPassword:any;
+
+    public userLogin : { 
+        client_id: string, 
+        client_secret: string, 
+        grant_type: string, 
+        username: string, 
+        password: string 
+    } = {
+        client_id: null, 
+        client_secret: null, 
+        grant_type: 'password', 
+        username: '', 
+        password: '' 
+    };
     
 
     public user: any = [
@@ -104,7 +120,8 @@ export class LoginPage implements OnInit {
         public menuCtrl: MenuController,
         private toast: ToastController,
         private router: Router,
-        private userService:UsersService
+        private userService:UsersService,
+        private authService: AuthService
         ) {
         localStorage.setItem("users",JSON.stringify(this.user));
         localStorage.setItem("resto",JSON.stringify(this.resto));
@@ -112,12 +129,6 @@ export class LoginPage implements OnInit {
   	}
       
 	ionViewWillEnter() {
-
-        this.userService.UserIsConnec().then(status=>{
-            console.log('connected');
-        },error=>{
-            console.log(error);
-        });
         this.menuCtrl.enable(false);
 	}
 
@@ -134,17 +145,38 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
   
-  Authenticate(){
-      this.userService.Authenticate(this.userName,this.userPassword).then(users=>{
-              console.log(users);
-              this.userService.saveCurentUserInfo(users);
-              this.router.navigate(["/home"]);
-          },error=>{
-              console.log(error);
+    Authenticate(){
 
-          }
-      );
+        if(this.authService.getClientID() && this.authService.getClientSecret()){
+            this.userLogin.client_id = this.authService.getClientID();
+            this.userLogin.client_secret = this.authService.getClientSecret();
+            this.authService.login(this.userLogin).subscribe(
+                data=>{
+                    if(data.status){
+                        this.router.navigate(['/home']);
+                    }else{
+                        if(data.error.status === 400 && data.error.error == "invalid_request"){
+                            // console.log(error)
+                        }
+                    }
+                }
+            );
+        }else{
+
+          this.authService.createClient({"redirect-uri": "/home", "grant-type": "password" }).subscribe(
+              (client)=>{
+                if(client){
+                    this.authService.storeClient(client);
+                    this.userLogin.client_id = client.client_id;
+                    this.userLogin.client_secret = client.client_secret;
+                }
+          });
+    }
 
   }
+
+    goToGeneralSettings(){
+        this.router.navigate(['/general-settings']);
+    }
 
 }

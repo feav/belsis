@@ -1,9 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content>
 	<div class="login-container">
 		<form class="login-form" (ngSubmit)="Authenticate()">
@@ -16,11 +10,11 @@
 							</div>
 							<div class="ion-padding">
 								<ion-item>
-									<ion-input type="text" [(ngModel)]="userName" name="userName" placeholder="Username"></ion-input>
+									<ion-input type="text" [(ngModel)]="userLogin.username" name="userName" placeholder="Username"></ion-input>
 								</ion-item>
 
 								<ion-item>
-									<ion-input type="password" [(ngModel)]="userPassword"  name="userPassword" placeholder="Password"></ion-input>
+									<ion-input type="password" [(ngModel)]="userLogin.password"  name="userPassword" placeholder="Password"></ion-input>
 								</ion-item>
 							</div>
 
@@ -31,6 +25,10 @@
 				</ion-row>
 			</ion-grid>
 		</form>
+		<div class="ion-text-right">
+			<div class="settings-container" (click)="goToGeneralSettings()">
+				<ion-text class="settings-text">Paramètres généraux</ion-text><ion-icon name="settings"></ion-icon>
+			</div>
+		</div>
 	</div>
-	
 </ion-content>

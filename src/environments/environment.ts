@@ -1,9 +1,41 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+import { Settings } from './../app/models/settings.model';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { DOCUMENT } from '@angular/common';
+
+let isApp = (!document.URL.startsWith('http') || document.URL.startsWith('http://localhost:8080'));
+let settings: Settings = new Settings();
+const hostItem = 'host';
+
+if(isApp){
+
+    const nativeStorage: NativeStorage = new NativeStorage();
+    nativeStorage.getItem(hostItem)
+    .then(
+        data => {
+            if(data){
+                settings.setHostAddress(data['host_address']);   
+            }
+            // console.log(settings);
+        },
+        error => {
+            console.log(error);
+        }
+    );    
+}else{
+
+    const host_settings = localStorage.getItem(hostItem);
+    if(host_settings){
+        settings.setHostAddress(JSON.parse(host_settings)['host_address']);
+    }
+    
+}
 
 export const environment = {
     production: false,
+    host: settings.getHostAddress(),
     firebase: {
         apiKey: "AIzaSyD2sjUZjC3K1EVkmxmMO2b3rx8TjaQKHl4",
         authDomain: "belsis-da714.firebaseapp.com",
