@@ -22,6 +22,7 @@ form{
 
 .login-container {
 	display: flex;
+    flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	width: inherit;
@@ -35,6 +36,19 @@ form{
 
 ion-col {
     border: none;
+}
+
+.settings-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1em;
+    color: $white-color;
+}
+
+.settings-container .settings-text {
+    font-size: .8em;
+    margin-right: .5em; 
 }
 
 

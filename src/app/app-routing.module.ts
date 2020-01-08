@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+
 import { UsersService } from "./services/users.service";
+import  { AuthGuard } from './guards/auth.guard';
+
 
 let home = 'login';
 
@@ -14,7 +17,7 @@ if(user_exist){
 const routes: Routes = [
   {
     path: '',
-    redirectTo: home,
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -40,13 +43,14 @@ const routes: Routes = [
     path: 'comptabilite', 
     loadChildren: './comptabilite/comptabilite.module#ComptabilitePageModule' 
   },
-  { path: 'login', loadChildren: './user/login/login.module#LoginPageModule' },
+  { path: 'login', loadChildren: './user/login/login.module#LoginPageModule', canActivate: [AuthGuard] },
   { path: 'profile', loadChildren: './user/profile/profile.module#ProfilePageModule' },
   { path: 'commandes/new', loadChildren: './commandes/nouveau/nouveau.module#NouveauPageModule' },
   { path: 'modal-details', loadChildren: './table/modal-details/modal-details.module#ModalDetailsPageModule' },
   { path: 'detail', loadChildren: './commandes/detail/detail.module#DetailPageModule' },
-
-  { path: 'choice-produit', loadChildren: './commandes/choice-produit/choice-produit.module#ChoiceProduitPageModule' }
+  
+  { path: 'choice-produit', loadChildren: './commandes/choice-produit/choice-produit.module#ChoiceProduitPageModule' },
+  { path: 'general-settings', loadChildren: './pages/settings/general-settings/general-settings.module#GeneralSettingsPageModule' }
 
 ];
 

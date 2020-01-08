@@ -56,7 +56,7 @@ export class UsersService {
             let conv = JSON.parse(users);
             let status = false;
             if (conv.length >0  && conv != "undefined"){
-                console.log('connected');
+                //console.log('connected');
                resolve(status);
 
             } else {
