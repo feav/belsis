@@ -156,7 +156,7 @@ export class LoginPage implements OnInit {
                         this.router.navigate(['/home']);
                     }else{
                         if(data.error.status === 400 && data.error.error == "invalid_request"){
-                            // console.log(error)
+                            console.log(error)
                         }
                     }
                 }
@@ -169,6 +169,8 @@ export class LoginPage implements OnInit {
                     this.authService.storeClient(client);
                     this.userLogin.client_id = client.client_id;
                     this.userLogin.client_secret = client.client_secret;
+
+                    this.Authenticate();
                 }
           });
     }

@@ -196,7 +196,7 @@ export class NouveauPage implements OnInit {
   ** permet d envoyer la commande a la cuisine en preparation cas d un restaurant
   **/
   prepareOrder(){
-    this.commandeService.repareOrder(this.order_id).then(
+    this.commandeService.prepareOrder(this.order_id).then(
              datas =>{
                    this.presentToast("La commande a ete envoye en preparation","success");
                   this.refreshCommande();
