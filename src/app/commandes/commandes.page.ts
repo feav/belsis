@@ -6,6 +6,7 @@ import {error} from 'util';
 import { CommandeService } from "../services/commande.service";
 import { NavigationExtras } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-commandes',
@@ -27,17 +28,21 @@ export class CommandesPage implements OnInit {
   private bars2:any;
   private time:String="";
       private tableShop : any;
-
+  private table_id: number;
    private tables : any;  
-   constructor(public navCtrl: NavController,private commandeService:CommandeService,private router: Router, private tableService: TableService){
+   constructor(public navCtrl: NavController,private commandeService:CommandeService,private router: Router,private route: ActivatedRoute, private tableService: TableService){
         //this.tableService.tableResto();
+
+    this.route.queryParams.subscribe(params => {
+        this.table_id = params["table_id"];
+    });
     }
 
   goToAnoterPage(url){
     this.router.navigateByUrl(url);
   }
   ionViewDidEnter() {
-    this.createBarChart();
+    this.initItems();
     this.tableService.getAllOfMyShop().then(datas=>{
         this.tableShop = datas;
             console.log(datas);
@@ -51,7 +56,7 @@ export class CommandesPage implements OnInit {
     };
     this.navCtrl.navigateForward(['/commandes/new'], navigationExtras);
   }
-  createBarChart() {
+  initItems() {
     this.stocks = [ Math.floor(Math.random() * 600) + 1,Math.floor(Math.random() * 600) + 1];
     var date = new Date();
 
@@ -67,14 +72,14 @@ export class CommandesPage implements OnInit {
         this.time = hour+" : "+minutes;
       },60000
     );
-    this.commandeService.getCurrentOrder().then(
+    this.commandeService.getOrderByTable(this.table_id).then(
     datas =>{
         this.commandes = datas;
         this.commandes.forEach(function(item,id){
-        if(item.etat == 1){
+        if(item.etat == 'en_cours'){
           cours+=1;
           count += item.price;
-        }else if(item.etat == 2){
+        }else if(item.etat == 'paye'){
           fin += 1;
         }else{
           annule += 1;

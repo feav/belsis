@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavigationExtras } from '@angular/router';
 
 import { TableService } from './../services/table.service';
 import {error} from 'util';
 import { CommandeService } from "../services/commande.service";
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-table',
@@ -27,7 +29,7 @@ export class TablePage implements OnInit {
       private tableShop : any;
 
  	private tables : any;  
- 	constructor(private commandeService:CommandeService,private router: Router, private tableService: TableService){
+ 	constructor(public navCtrl: NavController,private commandeService:CommandeService,private router: Router, private tableService: TableService){
         //this.tableService.tableResto();
   	}
 
@@ -41,7 +43,14 @@ export class TablePage implements OnInit {
             console.log(datas);
     });
   }
-
+  openOrder(table_id){
+    let navigationExtras: NavigationExtras = {
+        queryParams: {
+            table_id: table_id
+        }
+    };
+    this.navCtrl.navigateForward(['/commandes'], navigationExtras);
+  }
   createBarChart() {
   	this.stocks = [ Math.floor(Math.random() * 600) + 1,Math.floor(Math.random() * 600) + 1];
     var date = new Date();

@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { ProduitService } from './../services/produit.service';
 import {reject} from "q";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommandeService {
   public items:any;
-  constructor() { 
+  public host :string = 'http://belsis.cm/index.php';
+  public base : string = "/api/commande/"
+  constructor(private http: HttpClient) { 
   	this.items = [];
   }
   public commandes = [
@@ -117,6 +120,18 @@ export class CommandeService {
              total:0
            }
          ];
+   getOrderByTable(table_id){
+     let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
+     let attr :string = "get-by-user";
+     if(table_id)
+        attr = "get-by-table?table_id="+table_id;
+      return new Promise(resolve => {
+      this.http.get(this.host+this.base+attr,httpOptions)
+        .subscribe(data => {
+          resolve(data);
+        })
+      });
+   }
   getCurrentOrder(){
        return new Promise(resolve => {
                 if (this.commandes.length > 0){

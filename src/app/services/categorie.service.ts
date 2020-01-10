@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import {reject} from "q";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategorieService {
 
-  constructor() { }
+  public host :string = 'http://belsis.cm/index.php';
+  public base : string = "/api/categorie/"
+  constructor(private http: HttpClient) { }
 
   public categories = [
            {
@@ -68,13 +71,12 @@ export class CategorieService {
            }
          ];
    	getAllByUser(){
-         	return new Promise(resolve => {
-                if (this.categories.length > 0){
-                    resolve(this.categories);
-				}else {
-                	reject('pas de produit pour votre restaurant');
-				}
-
-        	})
-         }
+     let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
+      return new Promise(resolve => {
+      this.http.get(this.host+this.base+"get-by-shop",httpOptions)
+        .subscribe(data => {
+          resolve(data);
+        })
+      });
+  }
 }

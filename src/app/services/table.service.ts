@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import {reject} from 'q';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TableService {
+	public base:string = "/api/table/";
+	public host:string;
 	public tables : Array<any> = [
 		{
 			id: 1,
@@ -31,17 +35,18 @@ export class TableService {
 			commandes : 0
 		}
 	];
-  constructor() { }
+    constructor(private http: HttpClient,private nativeStorage:NativeStorage) {
+    	 // this.host = localStorage.getItem('host');
+    	 this.host = 'http://belsis.cm/index.php';
+    }
+  	getAllOfMyShop(){
+  		let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
+	    return new Promise(resolve => {
+		  this.http.get(this.host+this.base+"get-by-shop",httpOptions)
+		    .subscribe(data => {
+		      resolve(data);
+		    })
+		  });
+	}
 
-  getAllOfMyShop(){
-
-       return new Promise(resolve => {
-                if (this.tables.length > 0){
-                    resolve(this.tables);
-        }else {
-                  reject('pas de produit pour votre restaurant');
-        }
-
-        })
-  }
 }

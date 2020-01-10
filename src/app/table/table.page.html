@@ -27,7 +27,7 @@
       <ion-grid>
         <ion-card-title class="ion-text-center activite">EN ACTIVITE</ion-card-title>
         <ion-row>
-          <ion-col  *ngFor="let table of tableShop" [className]="table.commandes>0?'rectangle':'hide'">
+          <ion-col  *ngFor="let table of tableShop" (click)="openOrder(table.id)" [className]="table.commandes>0?'rectangle':'hide'">
              <ion-label color="light ion-text-center">{{table.name}}</ion-label>
               <b>{{table.commandes}}</b>
             <div>
