@@ -133,20 +133,24 @@ export class CommandeService {
       });
    }
   getCurrentOrder(){
-       return new Promise(resolve => {
-                if (this.commandes.length > 0){
-                    resolve(this.commandes);
-        }else {
-                  reject('pas de produit pour votre restaurant');
-        }
-
+     let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
+     let attr :string  = "get-by-user";
+      return new Promise(resolve => {
+      this.http.get(this.host+this.base+attr,httpOptions)
+        .subscribe(data => {
+          resolve(data);
         })
+      });
   }
   deleteOrder(order_id:number){
-    return new Promise(resolve => {
-        resolve({status:200,message:"La commande a bel et bien ete supprimer"});
-
+     let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
+     let attr :string  = "delete?order_id="+order_id;
+      return new Promise(resolve => {
+      this.http.get(this.host+this.base+attr,httpOptions)
+        .subscribe(data => {
+          resolve(data);
         })
+      });
   }
   getCommandeById(id:number){
        return new Promise(resolve => {
@@ -159,10 +163,14 @@ export class CommandeService {
         })
   }
   removeProduct(order_id:number, product_id:number){
-    return new Promise(resolve => {
-        resolve({status:200,message:"3 produits ont ete supprimes"});
-
+     let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
+     let attr :string  = "remove-product?order_id="+order_id+"&product_id="+product_id;
+      return new Promise(resolve => {
+      this.http.get(this.host+this.base+attr,httpOptions)
+        .subscribe(data => {
+          resolve(data);
         })
+      });
   }
   /**
   ** @TODO mettre a jour la commande si un produit existe deja il faut mettre a jour la quantite 

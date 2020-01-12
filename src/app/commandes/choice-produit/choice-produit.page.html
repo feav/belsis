@@ -15,7 +15,7 @@
 		<ion-row class="head">
 			<ion-col class="top-main-product">
 				<!-- <button class="close-btn" (click)="closeDetailProductModal()">x</button> -->
-				<img [src]="produits[selected].icon">
+				<img [src]="removeText(produits[selected].icon)">
 			</ion-col>
 			<ion-col>
 				<div>{{produits[selected].name}}</div>
@@ -39,7 +39,8 @@
 	            <div class="child" *ngFor="let cate of produits ; let i = index" (click)="openDetailProduct(i)" >
 					<label  [ngStyle]="{'background':cate.color}">{{cate.name}}</label>
 					<label class="price">{{cate.price}} FCFA</label>
-					<img [src]="cate.icon">
+					<!-- {{removeText(cate.icon,'index.php/')}} -->
+					<img [src]="removeText(cate.icon)">
 				</div>
 	        </div>
 	    </div>
@@ -50,7 +51,7 @@
 		<div class="items">
 			<div *ngFor="let cate of produits ; let i = index"  [className]="cate.qty <=0 ? 'hide' : 'show'"  (click)="openDetailProduct(i,cate.qty)">
 				<span class="number">{{cate.qty }}</span>
-				<img [src]="cate.icon">
+				<img [src]="removeText(cate.icon)">
 			</div>
 		</div>
 	</div>

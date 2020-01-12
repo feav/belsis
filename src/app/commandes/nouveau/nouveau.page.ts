@@ -150,6 +150,10 @@ export class NouveauPage implements OnInit {
                   console.log(error);
               }
           );
+       this.prod.getProductByOrder(this.order_id).then(datas=>{
+            this.products = datas;
+            console.log(datas);
+        });
   }
   deleteOrder(){
       /**
@@ -218,7 +222,9 @@ export class NouveauPage implements OnInit {
               }
           );
   }
-
+  removeText(text, repl){
+    return text.replace(repl,"");
+  }
     ionViewWillEnter(){
         // $('.query_status').html(this.loader);
         this.refreshCommande();
@@ -227,6 +233,7 @@ export class NouveauPage implements OnInit {
             $("#nouveau-commande .loading").hide(1000);
             console.log(datas);
         });
+        
         this.tableService.getAllOfMyShop().then(datas=>{
             this.tableShop = datas;
             console.log(datas);

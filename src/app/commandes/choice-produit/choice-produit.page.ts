@@ -61,6 +61,9 @@ export class ChoiceProduitPage implements OnInit {
 		    //   duration: 2000
 		    // });
   }
+  removeText(text){
+    return text.replace("index.php/","");
+  }
 
 	async presentToast(message,color) {
 	    const toast = await this.toaster.create({

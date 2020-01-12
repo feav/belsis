@@ -57,8 +57,8 @@
 			</div>
 			<div>
 				<div col-md-2 class="catory-item-" *ngFor="let cate of produitCategoris ; let i = index" (click)="moveToFirst(cate.name,cate.id)">
-					<img [src]="cate.icon">
-					<button (click)="filtrerParID(cate.id)" [ngStyle]="{'background':cate.color}">{{cate.name}}</button>
+					<img src="http://belsis.cm/images/uploads/categorie/{{cate.image}}">
+					<button (click)="filtrerParID(cate.id)">{{cate.nom}}</button>
 				</div>
 			</div>
 		</div>
@@ -70,7 +70,7 @@
 	        <ion-item-sliding *ngFor="let cate of products ; let i = index" >
 	        	<ion-item >
 	        		<div>
-		        		<img [src]="cate.icon">
+		        		<img [src]="removeText(cate.icon,'index.php/')">
 				      	<label class="name-prod">x{{cate.qty}}</label>
 					    <label class="name-prod">{{cate.name}}</label>
 				      	<label class="price">{{cate.price}} <span>FCFA</span></label>
@@ -80,7 +80,7 @@
 					<ion-item-option color="light" (click)="openDetailProduct(i)">
 				        <ion-icon slot="start" name="create"></ion-icon>
 				    </ion-item-option>
-				    <ion-item-option (click)="removeProduct(cate)" color="danger" (click)="deleteProduct(i)">
+				    <ion-item-option (click)="removeProduct(cate.id)" color="danger" (click)="deleteProduct(i)">
 				        <ion-icon slot="start" name="trash"></ion-icon>
 				   	</ion-item-option>
 				</ion-item-options>

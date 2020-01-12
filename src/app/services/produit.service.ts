@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import {reject} from "q";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProduitService {
   	private items:any;
+    public base:string = "/api/commande/";
+    public host:string;
   	public produit = {
 		id: '',
 		nom: "",
@@ -72,18 +75,30 @@ export class ProduitService {
            }
          ];
 
+    constructor(private http: HttpClient) {
+         // this.host = localStorage.getItem('host');
+         this.host = 'http://belsis.cm/index.php';
+    }
      /**
      @TODO frank implement this API
      **/
      getProductByCategory(cat_id){
-     	return new Promise(resolve => {
-                if (this.products.length > 0){
-                    resolve(this.products);
-				}else {
-                	reject('pas de produit pour votre restaurant');
-				}
-
-        })
+          let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
+        return new Promise(resolve => {
+          this.http.get(this.host+"/api/produit/get-by-categorie?cat_id="+cat_id,httpOptions)
+            .subscribe(data => {
+              resolve(data);
+            })
+          });
+     }
+     getProductByOrder(order_id){
+          let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
+        return new Promise(resolve => {
+          this.http.get(this.host+this.base+"get-product-by-order?order_id="+order_id,httpOptions)
+            .subscribe(data => {
+              resolve(data);
+            })
+          });
      }
 
 }

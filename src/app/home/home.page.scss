@@ -114,7 +114,11 @@ height: 20px;
 @media (min-width : 200px) and (max-width : 500px) {
 
 }
-
+.round{
+    ion-icon {
+        margin-right: 10px;
+    }
+}
 .green{
 	color: green;
 }

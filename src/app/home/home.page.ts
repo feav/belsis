@@ -69,11 +69,11 @@ export class HomePage {
     datas =>{
         this.commandes = datas;
         this.commandes.forEach(function(item,id){
-        if(item.etat == 1){
-          cours+=1;
-          count += item.price;
-        }else if(item.etat == 2){
+        if(item.etat == 'paye'){
           fin += 1;
+          count += item.price;
+        }else if(item.etat == 'en_cours'){
+          cours+=1;
         }else{
           annule += 1;
         }

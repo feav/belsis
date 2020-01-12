@@ -39,16 +39,20 @@
 
       <ion-card-title class="ion-text-center activite">Historique</ion-card-title>
       <ion-virtual-scroll [items]="commandes" approxItemHeight="320px">
-        <ion-item *virtualItem="let commande">
+        <ion-item *virtualItem="let commande" >
          <div class="list-commande">
             <div class="flex">
-              <span class="round"><ion-icon [name]="commande.icon" [className]="commande.icon=='refresh' ? 'rotating' : ' '"></ion-icon></span>
+              <span class="round">
+                <ion-icon name="refresh" class="rotating" *ngIf="commande.etat=='en_cours'"></ion-icon>
+                <ion-icon name="checkmark" *ngIf="commande.etat=='paye'"></ion-icon>
+                <ion-icon name="trash" *ngIf="commande.etat==''"></ion-icon>
+              </span>
               <div>
                 <ion-label class="name">{{commande.name}}</ion-label>
                 <span class="table">Table {{commande.table}}</span>
               </div>
             </div>
-            <div class="somme"  [className]="commande.icon=='trash' ? 'red' : 'green'">
+            <div class="somme"  [ngClass]="{'red': commande.etat === '','green': commande.etat === 'paye'}" >
               {{commande.price}} FCFA
             </div>
           </div>
