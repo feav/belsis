@@ -43,6 +43,8 @@ export class NouveauPage implements OnInit {
     private tableShop : any;
     private selected : number = -1;
     private order_id:number;
+    private order:any;
+    private order_etat:string = "en_cours";
 
   constructor(
          public toaster: ToastController,
@@ -57,6 +59,21 @@ export class NouveauPage implements OnInit {
     this.route.queryParams.subscribe(params => {
         this.order_id = params["order_id"];
     });
+  }
+  public updateData(data){
+          let somme = 0 ;
+          for (let i = 0; i < data.data.length;i++){
+            let produit = data.data[i], count = 0;
+              somme += produit.price*produit.qty;
+                this.commandeService.addProductByOrder(this.order_id,produit.id,produit.qty).then(
+                   datas =>{
+                      this. refreshCommande();
+                    },error=>{
+                      console.log(error);
+                    }
+                );
+              this.hideListCategory();
+          }
   }
 
   async moveToFirst(cat_name , cat_id)
@@ -76,21 +93,22 @@ export class NouveauPage implements OnInit {
       **/
       .then((data) => {
           console.log(data.data);
-          let somme = 0 ;
-          for (let i = 0; i < data.data.length;i++){
-            let produit = data.data[i];
-              somme += produit.price*produit.qty;
-             this.products.push(produit);
-                this.hideListCategory();
+          if(this.order_id ){
+            this.updateData(data);
+          }else{
+            if(data.data.length>0){
+              this.commandeService.createOrder(this.tableId,data.data).then(
+                   datas =>{
+                      this. refreshCommande();
+                    },error=>{
+                      console.log(error);
+                    }
+                );
+            }
           }
-          this.commandeService.addProductByOrder(this.order_id,data.data).then(
-             datas =>{
-                this. refreshCommande();
-              },error=>{
-                console.log(error);
-              }
-          );
-          this.cardTotal = somme;
+          
+          
+          // this.cardTotal = somme;
       });
 
      return await modal.present();
@@ -120,7 +138,7 @@ export class NouveauPage implements OnInit {
       somme += produit.price*produit.qty;
     }
     this.cardTotal = somme;
-    this.commandeService.addProductByOrder(this.order_id,[this.products[this.selected]]).then(
+    this.commandeService.addProductByOrder(this.order_id,this.products[this.selected].id,this.products[this.selected].qty).then(
     datas =>{
         this. refreshCommande();
       },error=>{
@@ -145,15 +163,27 @@ export class NouveauPage implements OnInit {
   refreshCommande(){
        this.commandeService.getCommandeById(this.order_id).then(
              datas =>{
-                  this.produits = datas;
+                 this.order  = datas;
+                 console.log(datas['detail']);
+                 this.order_etat = datas['etat'];
+                  this.products = datas['detail'];
+                  let somme = 0 ;
+                  for (let i = 0; i < this.products.length;i++){
+                    let produit = this.products[i], count = 0;
+                      somme += produit.price*produit.qty;
+                  }
+                  this.cardTotal = somme;
+
+                  this.tableId = datas['table'];
+
               },error=>{
                   console.log(error);
               }
           );
-       this.prod.getProductByOrder(this.order_id).then(datas=>{
-            this.products = datas;
-            console.log(datas);
-        });
+       // this.prod.getProductByOrder(this.order_id).then(datas=>{
+       //    //  this.products = datas;
+       //      console.log(datas);
+       //  });
   }
   deleteOrder(){
       /**

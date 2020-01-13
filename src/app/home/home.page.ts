@@ -72,9 +72,9 @@ export class HomePage {
         if(item.etat == 'paye'){
           fin += 1;
           count += item.price;
-        }else if(item.etat == 'en_cours'){
+        }else if(item.etat == 'en_cours' || item.etat == 'prete' ){
           cours+=1;
-        }else{
+        }else if(item.etat == 'trash'){
           annule += 1;
         }
       });

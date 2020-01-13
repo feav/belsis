@@ -20,12 +20,12 @@
 			<ion-col>
 				<div>{{produits[selected].name}}</div>
 				<div>Prix : <b>{{produits[selected].price}} CFA</b></div>
-				<label>Disponible : {{produits[selected].total}}</label>
+				<label>Disponible : {{produits[selected].qty_stock}}</label>
 				<table>
 					<tr>
 						<td><button class="reduce" *ngIf="produits[selected].qty>0" (click)="produits[selected].qty=produits[selected].qty-1">-</button></td>
-						<td><input type="number" min="0" max="{{produits[selected].total}}" step="0.1" [(ngModel)]="produits[selected].qty"></td>
-						<td><button class="add" (click)="produits[selected].qty=produits[selected].qty+1" *ngIf="produits[selected].qty<produits[selected].total">+</button></td>
+						<td><input type="number" min="0" max="{{produits[selected].qty_stock}}" step="0.1" [(ngModel)]="produits[selected].qty"></td>
+						<td><button class="add" (click)="produits[selected].qty=produits[selected].qty+1" *ngIf="produits[selected].qty<produits[selected].qty_stock">+</button></td>
 					</tr>
 				</table>
 				<button class="btn-product" (click)="addProduct(selected)">VALIDER</button>

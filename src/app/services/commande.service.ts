@@ -152,15 +152,15 @@ export class CommandeService {
         })
       });
   }
-  getCommandeById(id:number){
-       return new Promise(resolve => {
-                if (this.products.length > 0){
-                    resolve(this.products);
-        }else {
-                  reject('pas de produit pour votre restaurant');
-        }
-
+  getCommandeById(order_id:number){
+     let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
+     let attr :string  = "get?order_id="+order_id;
+      return new Promise(resolve => {
+      this.http.get(this.host+this.base+attr,httpOptions)
+        .subscribe(data => {
+          resolve(data);
         })
+      });
   }
   removeProduct(order_id:number, product_id:number){
      let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
@@ -176,11 +176,35 @@ export class CommandeService {
   ** @TODO mettre a jour la commande si un produit existe deja il faut mettre a jour la quantite 
   ** si un produit est indisponible il faut dans le stock il faut le retirer
   **/
-  addProductByOrder(order_id:number, products : Array<any>){
+  addProductByOrder(order_id:number, prod_id : number,prod_qty : number){
+     let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
+     let attr :string  = "add";
+     let postData = {
+            "order_id": order_id,
+            "product_id": prod_id,
+            "qty": prod_qty
+    }
       return new Promise(resolve => {
-        resolve({status:200,message:"8 produits one ete ajoutes"});
-
+      this.http.post(this.host+this.base+attr,postData,httpOptions)
+        .subscribe(data => {
+          resolve(data);
         })
+      });
+  }
+  createOrder(table_id:number, products:any){
+     let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
+     let attr :string  = "add-many";
+     let postData = {
+            "order_id": "",
+            "table_id": table_id,
+            "products_cmd": products
+    }
+      return new Promise(resolve => {
+      this.http.post(this.host+this.base+attr,postData,httpOptions)
+        .subscribe(data => {
+          resolve(data);
+        })
+      });
   }
   getProductByOrder(order_id:number, products : Array<any>){
       return new Promise(resolve => {

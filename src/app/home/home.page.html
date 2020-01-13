@@ -44,15 +44,16 @@
             <div class="flex">
               <span class="round">
                 <ion-icon name="refresh" class="rotating" *ngIf="commande.etat=='en_cours'"></ion-icon>
-                <ion-icon name="checkmark" *ngIf="commande.etat=='paye'"></ion-icon>
-                <ion-icon name="trash" *ngIf="commande.etat==''"></ion-icon>
+                <ion-icon name="checkmark" class="green" *ngIf="commande.etat=='prete'"></ion-icon>
+                <ion-icon name="cart" *ngIf="commande.etat=='paye'"></ion-icon>
+                <ion-icon name="trash"  class="red" *ngIf="commande.etat==''"></ion-icon>
               </span>
               <div>
                 <ion-label class="name">{{commande.name}}</ion-label>
                 <span class="table">Table {{commande.table}}</span>
               </div>
             </div>
-            <div class="somme"  [ngClass]="{'red': commande.etat === '','green': commande.etat === 'paye'}" >
+            <div class="somme"  [ngClass]="{'red': commande.etat === 'trash','green': commande.etat === 'paye'}" >
               {{commande.price}} FCFA
             </div>
           </div>

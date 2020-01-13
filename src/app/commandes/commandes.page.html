@@ -27,6 +27,18 @@
       <ion-grid>
         <ion-card-title class="ion-text-center activite">PRETTES</ion-card-title>
         <ion-row>
+          <ion-col  *ngFor="let commande of commandes" (click)="openOder(commande.id)" [className]="commande.etat=='prete'?'rectangle':'hide'">
+             <ion-label color="light ion-text-center">C#{{commande.id}}</ion-label>
+              <b>{{commande.price}} <i>FCFA</i></b>
+            <div>
+              {{commande.table}}
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-card-title class="ion-text-center activite">ENCOURS</ion-card-title>
+        <ion-row>
           <ion-col  *ngFor="let commande of commandes" (click)="openOder(commande.id)" [className]="commande.etat=='en_cours'?'rectangle':'hide'">
              <ion-label color="light ion-text-center">C#{{commande.id}}</ion-label>
               <b>{{commande.price}} <i>FCFA</i></b>
@@ -40,7 +52,7 @@
       <ion-grid>
         <ion-card-title class="ion-text-center activite"> ENCAISSEES </ion-card-title>
         <ion-row>
-          <ion-col  *ngFor="let commande of commandes" [className]="commande.etat=='paye'?'rectangle gris':'hide'">
+          <ion-col  *ngFor="let commande of commandes" (click)="openOder(commande.id)" [className]="commande.etat=='paye'?'rectangle gris':'hide'">
              <ion-label color="light ion-text-center">C#{{commande.id}}</ion-label>
               <b>{{commande.price}} <i>FCFA</i></b>
             <div>
@@ -53,7 +65,7 @@
       <ion-grid>
         <ion-card-title class="ion-text-center activite"> ANNULEES </ion-card-title>
         <ion-row>
-          <ion-col  *ngFor="let commande of commandes" [className]="commande.etat==''?'rectangle redin':'hide'">
+          <ion-col  *ngFor="let commande of commandes"  (click)="openOder(commande.id)" [className]="commande.etat=='trash'?'rectangle redin':'hide'">
               <ion-label color="light ion-text-center">C#{{commande.id}}</ion-label>
               <b>{{commande.price}} <i>FCFA</i></b>
             <div>

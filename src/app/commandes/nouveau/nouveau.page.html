@@ -13,7 +13,7 @@
 		<ion-row class="head">
 			<ion-col class="top-main-product">
 				<!-- <button class="close-btn" (click)="closeDetailProductModal()">x</button> -->
-				<img [src]="products[selected].icon">
+				<img [src]="removeText(products[selected].icon,'index.php/')">
 			</ion-col>
 			<ion-col>
 				<div>{{products[selected].name}}</div>
@@ -37,8 +37,8 @@
             <div class="select-table">
 	            <div class="flex-center-row table-choice">
 	            	<div>
-			              <ion-select value="0" >
-			              	<ion-select-option value="0" disabled="disabled" selected="selected">Choisir la Table</ion-select-option>
+			              <ion-select  [(ngModel)]="tableId" okText="Confirmer" cancelText="Annuler">
+			              	<ion-select-option value="0" disabled="disabled" selected="selected">Choisir la Table - Table {{tableId}}</ion-select-option>
 			              	<ion-select-option value="{{table.id}}" *ngFor="let table of tableShop ; let i = index" >{{table.name}}</ion-select-option>
 			              </ion-select>
 	            	</div>
@@ -88,23 +88,23 @@
 	    </ion-list>
 	</ion-grid>
 
-	<ion-fab class="fab-show-list" vertical="bottom" horizontal="end" slot="fixed">
+	<ion-fab class="fab-show-list" vertical="bottom" horizontal="end" slot="fixed" >
 		<ion-fab-button>
 	      <ion-icon name="more"></ion-icon>
 	    </ion-fab-button>
 	     <ion-fab-list side="start">
-		    <ion-fab-button color="danger" (click)="deleteOrder()">
+		    <ion-fab-button color="danger" (click)="deleteOrder()" [ngClass]="{'hide': order_etat === '','hide': order_etat === 'paye'}">
 		      <ion-icon name="trash"></ion-icon>
 		    </ion-fab-button>
-		    <ion-fab-button (click)="showListCategory()"   color="dark" >
+		    <ion-fab-button (click)="showListCategory()"   color="dark"  [ngClass]="{'hide': order_etat === '','hide': order_etat === 'paye'}" >
 		      <ion-icon name="add"></ion-icon> 
 		    </ion-fab-button>
 	     </ion-fab-list>
 	     <ion-fab-list  side="top" (click)="prepareOrder()">
-		    <ion-fab-button color="success" >
+		    <ion-fab-button color="success" [ngClass]="{'hide':	 order_etat === '','hide': order_etat === 'paye'}">
 		      <ion-icon name="checkmark-circle-outline"></ion-icon> 
 		    </ion-fab-button>
-		    <ion-fab-button color="light" (click)="casheOrder()">
+		    <ion-fab-button color="light" (click)="casheOrder()" [ngClass]="{'hide': order_etat === '','hide': order_etat === 'paye'}">
 		      <ion-icon name="calculator"></ion-icon>
 		    </ion-fab-button>
 	     </ion-fab-list>
