@@ -1,10 +1,20 @@
-<ion-header >
+<ion-header [ngClass]="{
+ 	'trash': order_etat === 'trash' ,
+ 	'paye': order_etat === 'paye' ,
+ 	'head-bg' : 1,
+ 	'en_cours': order_etat === 'en_cours' ,
+ 	'edition': order_etat === 'edition',
+ 	'prete': order_etat === 'prete'}">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button id="menu" color="light"></ion-menu-button>
     </ion-buttons>
     <ion-title *ngIf="order_id">COM #{{order_id}}</ion-title>
     <ion-title *ngIf="!order_id">Nouvelle </ion-title>
+
+    <ion-buttons slot="arrow-back">
+      <ion-menu-button id="back" color="light"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content text-center id="nouveau-commande" class="hide-list-category  ">
@@ -108,7 +118,13 @@
 	</ion-grid>
 
 	<ion-fab class="fab-show-list" vertical="bottom" horizontal="end" slot="fixed" [ngClass]="{'hide': order_etat === 'trash' || order_etat === 'paye'}">
-		<ion-fab-button>
+		<ion-fab-button [ngClass]="{
+ 	'trash': order_etat === 'trash' ,
+ 	'paye': order_etat === 'paye' ,
+ 	'head-bg' : 1,
+ 	'en_cours': order_etat === 'en_cours' ,
+ 	'edition': order_etat === 'edition',
+ 	'prete': order_etat === 'prete'}">
 	      <ion-icon name="more"></ion-icon>
 	    </ion-fab-button>
 	     <ion-fab-list side="start">

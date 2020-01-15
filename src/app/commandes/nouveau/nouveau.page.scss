@@ -1,4 +1,4 @@
-	#menu{
+	#menu,#back{
 		ion-icon{
 			color: white;
 		}
@@ -18,13 +18,26 @@
     max-height: 200px;
 
 }
-	.header-bg.prete{
+
+	ion-header.prete ion-toolbar,ion-fab-button.prete {
+		--background: #196f43 !important;
+	}
+	ion-header.trash ion-toolbar,ion-fab-button.trash {
+		--background: #b95050  !important;
+	}
+	ion-header.paye ion-toolbar,ion-fab-button.paye {
+		--background: gray  !important;
+	}
+	ion-header.edition ion-toolbar,ion-fab-button.edition {
+		--background: #09112d  !important;
+	}
+	.header-bg.prete {
 		background: #196f43;
 	}
 	.header-bg.trash{
 		background: #b95050 ;
 	}
-	.header-bg.paye{
+	.header-bg.paye {
 		background: gray ;
 	}
 	.header-bg.edition{

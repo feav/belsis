@@ -9,7 +9,7 @@
 
 
 
-<ion-content class="ion-padding">
+<!-- <ion-content class="ion-padding">
 	<ion-grid>
 		<ion-row>
 			<ion-col class="ion-text-center"><ion-text><h5>{{ restaurant.nom }}</h5></ion-text></ion-col>
@@ -41,7 +41,6 @@
 		</ion-row>
 	</ion-grid>
 
-	<!-- Reset Password Form -->
 	<form #resetPasswordForm="ngForm">
 		<ion-grid>
 			<ion-row>
@@ -67,40 +66,49 @@
 			</ion-row>
 		</ion-grid>
 	</form>
+</ion-content> -->
 
 
-  <!--form #formCtrl="ngForm">
 
-	  <ion-list *ngIf="profil.roleName == 'serveur' ">
-		  <ion-item>
-			 <ion-label floating>Ancien mot de passe </ion-label>
-			 <ion-input type="password"  name="password" required></ion-input>
-		  </ion-item>
-		  <ion-item>
-			  <ion-label floating>Nouveau mot de passe </ion-label>
-			  <ion-input type="password"  name="repassword" required></ion-input>
-		  </ion-item>
-	      <ion-item>
-	      </ion-item>
-	  </ion-list>
-	  <ion-list *ngIf="profil.roleName == 'gerant'">
-		  <ion-item>
-			  <ion-label floating>Ancien mot de passe </ion-label>
-			  <ion-input type="password"  name="password" required></ion-input>
-		  </ion-item>
-		  <ion-item>
-			  <ion-label floating>Nouveau mot de passe </ion-label>
-			  <ion-input type="password"  name="repassword" required></ion-input>
-		  </ion-item>
-		  <ion-item>
-		  </ion-item>
-	  </ion-list>
-	 <button color="secondary" [disabled]="!formCtrl.form.valid" ion-button block (click)="save()">Save</button>
-	  <ion-button color="danger" ion-button block (click)="reset()">Reset</ion-button>
-
-
-	</form-->
-
-
+<ion-content>
+        <ion-grid class="header-bg">
+          <div >
+            <ion-label color="light ion-text-center block label-title">
+            	<img class="profile-image" src="/assets/profile.svg">
+            </ion-label>
+            <ion-label color="light ion-text-center block label-title">{{ user.role }}, {{ user.prenom }}</ion-label>
+            <ion-label color="light ion-text-center price-label block">{{restaurant.nom}} </ion-label>
+            <div class="flex-center-row">
+              <ion-label color="light ion-text-center date-label block">Modifier la Photo</ion-label>
+            </div>
+          </div>
+      </ion-grid> 
+      <ion-grid>
+      </ion-grid>
+      <ion-grid>
+        <ion-card-title class="ion-text-center activite">Reinitialiser le Mot de Passe</ion-card-title>
+        <ion-row>
+          <ion-col>
+            <div>
+               	<form #resetPasswordForm="ngForm">
+					<ion-grid>
+						<ion-row>
+							<input required placeholder="Ancien mot de passe" />
+						</ion-row>
+						<ion-row>
+							<input required placeholder="Nouveau mot de passe" />
+						</ion-row>
+						<ion-row>
+							<ion-col class="ion-text-center">
+								<ion-button type="submit">Reinitialiser</ion-button>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+				</form>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
 </ion-content>
+

@@ -102,4 +102,6 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-x-toast" spec="^2.7.2" />
+    <engine name="android" spec="^8.1.0" />
+    <engine name="ios" spec="4.5.5" />
 </widget>
