@@ -34,7 +34,7 @@ export class NouveauPage implements OnInit {
 	public showList:boolean = true;
 
 	private tables = [];
-	private tableId = null;
+	private tableId = 0;
 
     private  shop_id : number;
     public produitCategoris:{};
@@ -42,10 +42,11 @@ export class NouveauPage implements OnInit {
     private cardTotal : number = 0;
     private tableShop : any;
     private selected : number = -1;
-    private order_id:number;
+    private order_id: any = 0;
     private order:any;
-    private order_etat:string = "en_cours";
-
+    private order_etat:string = "endition";
+    private loading:any;
+    private tableName : any = "Non definie";
   constructor(
          public toaster: ToastController,
       private modalCtrl:ModalController,
@@ -55,18 +56,34 @@ export class NouveauPage implements OnInit {
       private utilsService: UtilsService,
       private toastController: ToastController,
       private catService: CategorieService,
-      private tableService: TableService,) {
+      private tableService: TableService,
+          public loadingController: LoadingController) {
     this.route.queryParams.subscribe(params => {
         this.order_id = params["order_id"];
     });
   }
+
+
+  async presentLoading(title) {
+    this.loading = await this.loadingController.create({
+      message: title,
+      duration: 2000
+    });
+    this.loading.present();
+
+    // const { role, data } = await loading.onDidDismiss();
+
+    // console.log('Loading dismissed!');
+  }
   public updateData(data){
           let somme = 0 ;
+          this.presentLoading("Modification de la Commande") ;
           for (let i = 0; i < data.data.length;i++){
             let produit = data.data[i], count = 0;
               somme += produit.price*produit.qty;
                 this.commandeService.addProductByOrder(this.order_id,produit.id,produit.qty).then(
                    datas =>{
+                       this.loading.onDidDismiss();
                       this. refreshCommande();
                     },error=>{
                       console.log(error);
@@ -97,11 +114,14 @@ export class NouveauPage implements OnInit {
             this.updateData(data);
           }else{
             if(data.data.length>0){
+
+          this.presentLoading("Creation de la Commande") ;
               this.commandeService.createOrder(this.tableId,data.data).then(
                    datas =>{
+                     this.order_id =  datas;
                       this. refreshCommande();
                     },error=>{
-                      console.log(error);
+                      alert("Verifez que vous avez dabord renseigne la TABLE");
                     }
                 );
             }
@@ -138,9 +158,13 @@ export class NouveauPage implements OnInit {
       somme += produit.price*produit.qty;
     }
     this.cardTotal = somme;
+
+    this.presentLoading("Modification de la quantite") ;
     this.commandeService.addProductByOrder(this.order_id,this.products[this.selected].id,this.products[this.selected].qty).then(
     datas =>{
+      this.loading.onDidDismiss();
         this. refreshCommande();
+
       },error=>{
         console.log(error);
       }
@@ -160,7 +184,21 @@ export class NouveauPage implements OnInit {
       $("#nouveau-commande").addClass("hide-list-category");
     }
   }
-  refreshCommande(){
+  findNameOfCurrentTable(){
+      if(this.tableShop.length && this.tableId){
+          for(var i=0; i<this.tableShop.length;i++){
+            if(this.tableId==this.tableShop[i].id){
+              this.tableName = this.tableShop[i].name;
+              break;
+            }
+          }
+                   
+      }
+  }
+  refreshCommande(event=null){
+    if(this.order_id){
+       if(event==null)
+    this.presentLoading("Chargement de la Commande") ;
        this.commandeService.getCommandeById(this.order_id).then(
              datas =>{
                  this.order  = datas;
@@ -175,11 +213,16 @@ export class NouveauPage implements OnInit {
                   this.cardTotal = somme;
 
                   this.tableId = datas['table'];
-
+                  if(event==null)
+                    this.loading.onDidDismiss();
+                  else
+                     event.target.complete();
+                   this.findNameOfCurrentTable();
               },error=>{
                   console.log(error);
               }
           );
+    }
        // this.prod.getProductByOrder(this.order_id).then(datas=>{
        //    //  this.products = datas;
        //      console.log(datas);
@@ -233,7 +276,7 @@ export class NouveauPage implements OnInit {
     this.commandeService.prepareOrder(this.order_id).then(
              datas =>{
                    this.presentToast("La commande a ete envoye en preparation","success");
-                  this.refreshCommande();
+               this.router.navigate(["/"]);
               },error=>{
                   console.log(error);
               }
@@ -242,11 +285,11 @@ export class NouveauPage implements OnInit {
   /**
   ** permet d encaisser une commande. une commande encaissee ne peut etre supprimee 
   **/
-  casheOrder(){
+  cashOrder(){
     this.commandeService.cashOrder(this.order_id).then(
              datas =>{
                    this.presentToast("La commande a ete en caissee avec succes","success");
-                  this.refreshCommande();
+                  this.router.navigate(["/"]);
               },error=>{
                   console.log(error);
               }
@@ -266,7 +309,7 @@ export class NouveauPage implements OnInit {
         
         this.tableService.getAllOfMyShop().then(datas=>{
             this.tableShop = datas;
-            console.log(datas);
+            this.findNameOfCurrentTable();
         });
     }
 

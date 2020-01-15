@@ -1,14 +1,15 @@
-<ion-header>
+<ion-header >
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button id="menu" color="light"></ion-menu-button>
     </ion-buttons>
     <ion-title *ngIf="order_id">COM #{{order_id}}</ion-title>
-    <ion-title *ngIf="order_id==0">CREER COM </ion-title>
+    <ion-title *ngIf="!order_id">Nouvelle </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content text-center id="nouveau-commande" class="hide-list-category  ">
 
-<ion-content text-center id="nouveau-commande" class="hide-list-category">
+ 
 	<div class="modalShow" *ngIf="selected>=0">
 		<ion-row class="head">
 			<ion-col class="top-main-product">
@@ -18,28 +19,38 @@
 			<ion-col>
 				<div>{{products[selected].name}}</div>
 				<div>Prix : <b>{{products[selected].price}} CFA</b></div>
-				<label>Disponible : {{products[selected].total}}</label>
+				<label>Disponible : {{products[selected].qty_stock}}</label>
 				<table>
 					<tr>
-						<td><button class="reduce" *ngIf="products[selected].qty>0" (click)="products[selected].qty=products[selected].qty-1">-</button></td>
-						<td><input type="number" min="0" max="{{products[selected].total}}" step="0.1" [(ngModel)]="products[selected].qty"></td>
-						<td><button class="add" (click)="products[selected].qty=products[selected].qty+1" *ngIf="products[selected].qty<products[selected].total">+</button></td>
+						<td><button class="reduce" [disabled]="products[selected].qty<=0" (click)="products[selected].qty=products[selected].qty-1">-</button></td>
+						<td><input type="number" min="0" max="{{products[selected].qty_stock}}" step="0.1" [(ngModel)]="products[selected].qty"></td>
+						<td><button class="add" (click)="products[selected].qty=products[selected].qty+1" [disabled]="produits[selected].qty>=produits[selected].qty_stock">+</button></td>
 					</tr>
 				</table>
 				<button class="btn-product" (click)="addProduct()">VALIDER</button>
 			</ion-col>
 		</ion-row>
 	</div>
- 	<ion-grid class="header-bg">
+ 	<ion-grid  [ngClass]="{
+ 	'trash': order_etat === 'trash' ,
+ 	'paye': order_etat === 'paye' ,
+ 	'header-bg' : 1,
+ 	'en_cours': order_etat === 'en_cours' ,
+ 	'edition': order_etat === 'edition',
+ 	'prete': order_etat === 'prete'}">
           <div >
             <ion-label color="light ion-text-center block label-title">Montant de la Facture</ion-label>
             <ion-label color="light ion-text-center price-label block">{{cardTotal}} CFA</ion-label>
+
+            <ion-label color="light ion-text-center block label-title">Table ID : {{tableName}}</ion-label>
             <div class="select-table">
 	            <div class="flex-center-row table-choice">
 	            	<div>
-			              <ion-select  [(ngModel)]="tableId" okText="Confirmer" cancelText="Annuler">
-			              	<ion-select-option value="0" disabled="disabled" selected="selected">Choisir la Table - Table {{tableId}}</ion-select-option>
-			              	<ion-select-option value="{{table.id}}" *ngFor="let table of tableShop ; let i = index" >{{table.name}}</ion-select-option>
+			              <ion-select  (ionChange)="findNameOfCurrentTable()" [(ngModel)]="tableId" okText="Confirmer" cancelText="Annuler">
+			              	<ion-select-option value="0" disabled="disabled" >Choisir la Table - Table {{tableId}}</ion-select-option>
+			              	<ion-select-option value="{{table.id}}" [selected]="table.id==tableId" *ngFor="let table of tableShop ; let i = index" >
+			              		<b *ngIf="table.id==tableId"> -> </b>  {{table.name}} 
+			              	</ion-select-option>
 			              </ion-select>
 	            	</div>
 	            </div>
@@ -47,7 +58,15 @@
           </div>
       </ion-grid>
 	<ion-grid>
-		
+	
+  <ion-refresher slot="fixed"  (ionRefresh)="refreshCommande($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>	
+</ion-refresher>
 		<div style="display: flex;justify-content: center;margin: 13px;" class="loading"><img _ngcontent-fvw-c1="" src="assets/loader/extended_loading.gif" style="width: 60px;"></div>
 
 		<div id="categoriesList-" >
@@ -88,23 +107,23 @@
 	    </ion-list>
 	</ion-grid>
 
-	<ion-fab class="fab-show-list" vertical="bottom" horizontal="end" slot="fixed" >
+	<ion-fab class="fab-show-list" vertical="bottom" horizontal="end" slot="fixed" [ngClass]="{'hide': order_etat === 'trash' || order_etat === 'paye'}">
 		<ion-fab-button>
 	      <ion-icon name="more"></ion-icon>
 	    </ion-fab-button>
 	     <ion-fab-list side="start">
-		    <ion-fab-button color="danger" (click)="deleteOrder()" [ngClass]="{'hide': order_etat === '','hide': order_etat === 'paye'}">
+		    <ion-fab-button color="danger" (click)="deleteOrder()" [ngClass]="{'hide': order_etat === 'trash' || order_etat === 'paye' }">
 		      <ion-icon name="trash"></ion-icon>
 		    </ion-fab-button>
-		    <ion-fab-button (click)="showListCategory()"   color="dark"  [ngClass]="{'hide': order_etat === '','hide': order_etat === 'paye'}" >
+		    <ion-fab-button (click)="showListCategory()"   color="dark"  [ngClass]="{'hide': order_etat === 'trash' ||  order_etat === 'paye' ||  order_etat === 'prete' ||  order_etat === 'en_cours'}" >
 		      <ion-icon name="add"></ion-icon> 
 		    </ion-fab-button>
 	     </ion-fab-list>
-	     <ion-fab-list  side="top" (click)="prepareOrder()">
-		    <ion-fab-button color="success" [ngClass]="{'hide':	 order_etat === '','hide': order_etat === 'paye'}">
+	     <ion-fab-list  side="top" >
+		    <ion-fab-button (click)="prepareOrder()" color="success" [ngClass]="{'hide':	 order_etat === 'trash' ||  order_etat === 'paye' ||  order_etat === 'prete'||  order_etat === 'en_cours'}">
 		      <ion-icon name="checkmark-circle-outline"></ion-icon> 
 		    </ion-fab-button>
-		    <ion-fab-button color="light" (click)="casheOrder()" [ngClass]="{'hide': order_etat === '','hide': order_etat === 'paye'}">
+		    <ion-fab-button color="light" (click)="cashOrder()" [ngClass]="{'hide': order_etat === 'trash' || order_etat === 'paye'}">
 		      <ion-icon name="calculator"></ion-icon>
 		    </ion-fab-button>
 	     </ion-fab-list>

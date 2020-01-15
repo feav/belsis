@@ -142,16 +142,6 @@ export class CommandeService {
         })
       });
   }
-  deleteOrder(order_id:number){
-     let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
-     let attr :string  = "delete?order_id="+order_id;
-      return new Promise(resolve => {
-      this.http.get(this.host+this.base+attr,httpOptions)
-        .subscribe(data => {
-          resolve(data);
-        })
-      });
-  }
   getCommandeById(order_id:number){
      let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
      let attr :string  = "get?order_id="+order_id;
@@ -206,22 +196,31 @@ export class CommandeService {
         })
       });
   }
+  changeState(order_id,state){
+     let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
+     let attr :string  = "change-etat?order_id="+order_id+"&etat="+state;
+      return new Promise(resolve => {
+      this.http.get(this.host+this.base+attr,httpOptions)
+        .subscribe(data => {
+          resolve(data);
+        })
+      });
+  }
   getProductByOrder(order_id:number, products : Array<any>){
       return new Promise(resolve => {
         resolve({status:200,message:"8 produits one ete ajoutes"});
 
         })
   }
-  cashOrder(order_id:number){
-      return new Promise(resolve => {
-        resolve({status:200,message:"Commande encaissee"});
 
-        })
+  deleteOrder(order_id:number){
+    return this.changeState(order_id,"trash");
   }
+  cashOrder(order_id:number){
+    return this.changeState(order_id,"paye");
+  }
+  //http://belsis.cm/index.php/api/commande/change-etat      order_id& etat
   prepareOrder(order_id:number){
-      return new Promise(resolve => {
-        resolve({status:200,message:"Commande encaissee"});
-
-        })
+    return this.changeState(order_id,"en_cours");
   }
 }

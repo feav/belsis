@@ -71,36 +71,12 @@ export class TablePage implements OnInit {
     datas =>{
         this.commandes = datas;
         this.commandes.forEach(function(item,id){
-        if(item.etat == 1){
-          cours+=1;
+        if(item.etat == 'paye'){
           count += item.price;
-        }else if(item.etat == 2){
-          fin += 1;
-        }else{
-          annule += 1;
         }
       });
       this.workMoney = count;
-        this.etatCommendes = [
-        {
-          label:"En cours",
-          value:cours,
-          logo:"/assets/logo-commande-en-cours.svg",
-          color:"red"
-        },
-        {
-          label:"Finalisees",
-          value:fin,
-          logo:"/assets/logo-commande-finalisee.svg",
-          color:"rgba(54, 162, 235, 0.2)"
-        },
-        {
-          label:"Annulees",
-          value:annule,
-          logo:"/assets/logo-commande-annulee.svg",
-          color:"rgba(255, 206, 86, 1)"
-        }
-      ];
+        
       },error=>{
         console.log(error);
       }

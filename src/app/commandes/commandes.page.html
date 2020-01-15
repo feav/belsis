@@ -24,10 +24,10 @@
       </ion-grid>
       <ion-grid>
       </ion-grid>
-      <ion-grid>
+      <ion-grid *ngIf="etatCommendes.prete">
         <ion-card-title class="ion-text-center activite">PRETTES</ion-card-title>
         <ion-row>
-          <ion-col  *ngFor="let commande of commandes" (click)="openOder(commande.id)" [className]="commande.etat=='prete'?'rectangle':'hide'">
+          <ion-col  *ngFor="let commande of commandes" (click)="openOder(commande.id)" [className]="commande.etat=='prete'?'rectangle prete':'hide'">
              <ion-label color="light ion-text-center">C#{{commande.id}}</ion-label>
               <b>{{commande.price}} <i>FCFA</i></b>
             <div>
@@ -36,8 +36,8 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-      <ion-grid>
-        <ion-card-title class="ion-text-center activite">ENCOURS</ion-card-title>
+      <ion-grid *ngIf="etatCommendes.en_cours">
+        <ion-card-title class="ion-text-center activite">PREPARATION</ion-card-title>
         <ion-row>
           <ion-col  *ngFor="let commande of commandes" (click)="openOder(commande.id)" [className]="commande.etat=='en_cours'?'rectangle':'hide'">
              <ion-label color="light ion-text-center">C#{{commande.id}}</ion-label>
@@ -49,7 +49,7 @@
         </ion-row>
       </ion-grid>
      
-      <ion-grid>
+      <ion-grid *ngIf="etatCommendes.paye">
         <ion-card-title class="ion-text-center activite"> ENCAISSEES </ion-card-title>
         <ion-row>
           <ion-col  *ngFor="let commande of commandes" (click)="openOder(commande.id)" [className]="commande.etat=='paye'?'rectangle gris':'hide'">
@@ -62,10 +62,22 @@
         </ion-row>
       </ion-grid>
 
-      <ion-grid>
+      <ion-grid *ngIf="etatCommendes.trash">
         <ion-card-title class="ion-text-center activite"> ANNULEES </ion-card-title>
         <ion-row>
           <ion-col  *ngFor="let commande of commandes"  (click)="openOder(commande.id)" [className]="commande.etat=='trash'?'rectangle redin':'hide'">
+              <ion-label color="light ion-text-center">C#{{commande.id}}</ion-label>
+              <b>{{commande.price}} <i>FCFA</i></b>
+            <div>
+              {{commande.table}}
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid *ngIf="etatCommendes.edition">
+        <ion-card-title class="ion-text-center activite"> EDITION </ion-card-title>
+        <ion-row>
+          <ion-col  *ngFor="let commande of commandes"  (click)="openOder(commande.id)" [className]="commande.etat=='edition'?'rectangle redin':'hide'">
               <ion-label color="light ion-text-center">C#{{commande.id}}</ion-label>
               <b>{{commande.price}} <i>FCFA</i></b>
             <div>

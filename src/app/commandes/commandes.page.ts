@@ -15,12 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CommandesPage implements OnInit {
 
-  private etatCommendes : Array<{
-          label:String,
-          value:Number,
-          logo:String,
-          color:String
-        }> = [];
+  private etatCommendes : any = [];
   private workMoney: any = 0;
   private commandes: any = [];
   private stocks: Array<number> = [];
@@ -72,40 +67,36 @@ export class CommandesPage implements OnInit {
         this.time = hour+" : "+minutes;
       },60000
     );
+    var etatCommendes = {
+        en_cours: 0,
+        paye:0,
+        trash:0,
+        edition:0,
+        prete:0
+      };
     this.commandeService.getOrderByTable(this.table_id).then(
     datas =>{
         this.commandes = datas;
+        console.log(datas);
         this.commandes.forEach(function(item,id){
-        if(item.etat == 'en_cours'){
-          cours+=1;
-          count += item.price;
-        }else if(item.etat == 'paye'){
-          fin += 1;
-        }else{
-          annule += 1;
-        }
+          if(item.etat == 'paye'){
+            etatCommendes.paye+=1; 
+            count += item.price;
+          }else if(item.etat == 'en_cours'  ){
+            etatCommendes.en_cours+=1; 
+          }else if(item.etat == 'prete'  ){
+            etatCommendes.prete+=1; 
+          }else if(item.etat == 'edition'  ){
+            etatCommendes.trash+=1; 
+          }else {
+             etatCommendes.trash +=1; 
+          }
+          
       });
+
+      this.etatCommendes = etatCommendes;
       this.workMoney = count;
-        this.etatCommendes = [
-        {
-          label:"En cours",
-          value:cours,
-          logo:"/assets/logo-commande-en-cours.svg",
-          color:"red"
-        },
-        {
-          label:"Finalisees",
-          value:fin,
-          logo:"/assets/logo-commande-finalisee.svg",
-          color:"rgba(54, 162, 235, 0.2)"
-        },
-        {
-          label:"Annulees",
-          value:annule,
-          logo:"/assets/logo-commande-annulee.svg",
-          color:"rgba(255, 206, 86, 1)"
-        }
-      ];
+        
       },error=>{
         console.log(error);
       }

@@ -43,7 +43,7 @@ i {
 	}
 	div {
 	    color: white;
-	    font-size: 10px;
+	    font-size: 7px;
 	    position: absolute;
 	    bottom: 10px;
 	    text-align: center !important;
@@ -55,6 +55,9 @@ i {
 	    color: #FF9800;
 	    font-size: 17px;
 	}
+}
+.rectangle.prete{
+    background: #196f43;
 }
 div.list-commande {
     display: flex;

@@ -5,8 +5,8 @@ import { LoadingController, ToastController, AlertController } from '@ionic/angu
   providedIn: 'root'
 })
 export class UtilsService {
-
-  constructor(private toastController: ToastController) { }
+  private loading:any;
+  constructor(private toastController: ToastController,private loadingController:LoadingController) { }
 
   async presentToast(message, duration=2000, color) {
     const toast = await this.toastController.create({
@@ -16,6 +16,16 @@ export class UtilsService {
       color: color
     });
     toast.present();
+  }
+  async presentLoading(title) {
+    this.loading = await this.loadingController.create({
+      message: title,
+      duration: 2000
+    });
+    this.loading.present();
+  }
+  dismissLoading(){
+    this.loading.onDidDismiss();
   }
     curentUserInfo(){
         let curentcy = localStorage.getItem('userconnected');

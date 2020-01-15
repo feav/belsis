@@ -39,14 +39,15 @@
 
       <ion-card-title class="ion-text-center activite">Historique</ion-card-title>
       <ion-virtual-scroll [items]="commandes" approxItemHeight="320px">
-        <ion-item *virtualItem="let commande" >
-         <div class="list-commande">
+        <ion-item *virtualItem="let commande"  >
+         <div class="list-commande" (click)="openOder(commande.id)" >
             <div class="flex">
               <span class="round">
+                <ion-icon name="create" *ngIf="commande.etat=='edition'"></ion-icon>
                 <ion-icon name="refresh" class="rotating" *ngIf="commande.etat=='en_cours'"></ion-icon>
                 <ion-icon name="checkmark" class="green" *ngIf="commande.etat=='prete'"></ion-icon>
                 <ion-icon name="cart" *ngIf="commande.etat=='paye'"></ion-icon>
-                <ion-icon name="trash"  class="red" *ngIf="commande.etat==''"></ion-icon>
+                <ion-icon name="trash"  class="red" *ngIf="commande.etat=='trash'"></ion-icon>
               </span>
               <div>
                 <ion-label class="name">{{commande.name}}</ion-label>

@@ -5,7 +5,11 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { CommandesPage } from '../commandes/commandes.page';
 import { CommandeService } from "../services/commande.service";
+import { NavigationExtras } from '@angular/router';
 
+import { NavController } from '@ionic/angular';
+
+import { UtilsService } from "../services/utils.service";
 
 @Component({
   selector: 'app-home',
@@ -27,9 +31,18 @@ export class HomePage {
   private bars: any;
   private bars2:any;
   private time:String="";
-  constructor(private commandeService:CommandeService,private router: Router,public menuCtlr: MenuController,public modalController: ModalController) {
+  constructor(private utilService:UtilsService,public navCtrl: NavController,private commandeService:CommandeService,private router: Router,public menuCtlr: MenuController,public modalController: ModalController) {
   	this.menuCtlr.enable(true);
 
+  }
+
+  openOder(order_id){
+    let navigationExtras: NavigationExtras = {
+        queryParams: {
+            order_id: order_id
+        }
+    };
+    this.navCtrl.navigateForward(['/commandes/new'], navigationExtras);
   }
   goToAnoterPage(url){
     this.router.navigateByUrl(url);
@@ -65,6 +78,7 @@ export class HomePage {
         this.time = hour+" : "+minutes;
       },60000
     );
+    this.utilService.presentLoading("Chargement des pages");
     this.commandeService.getCurrentOrder().then(
     datas =>{
         this.commandes = datas;
@@ -99,6 +113,7 @@ export class HomePage {
           color:"rgba(255, 206, 86, 1)"
         }
       ];
+      this.utilService.dismissLoading();
       },error=>{
         console.log(error);
       }
