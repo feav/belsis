@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import {User} from './models/user.model';
+import { UsersService } from './services/users.service';
 
 
 @Component({
@@ -43,8 +45,10 @@ export class AppComponent {
     //   icon: 'podium'//'/assets/logo-stat.svg'
     // }
   ];
-
+  private user : any;
+  private user_name:any;
   constructor(
+    private userService:UsersService,
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar  ) {
@@ -56,5 +60,12 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+    this.userService.getUser().subscribe(data => {
+          this.user = data;
+          this.user_name = this.user.username;
+          console.log(data);
+      }, error => {
+          console.log(error);
+      });
   }
 }

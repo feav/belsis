@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UtilsService } from "../services/utils.service";
 
 import { TableService } from './../services/table.service';
 import {error} from 'util';
@@ -25,7 +26,7 @@ export class CommandesPage implements OnInit {
       private tableShop : any;
   private table_id: number;
    private tables : any;  
-   constructor(public navCtrl: NavController,private commandeService:CommandeService,private router: Router,private route: ActivatedRoute, private tableService: TableService){
+   constructor(public utilService:UtilsService,public navCtrl: NavController,private commandeService:CommandeService,private router: Router,private route: ActivatedRoute, private tableService: TableService){
         //this.tableService.tableResto();
 
     this.route.queryParams.subscribe(params => {
@@ -38,6 +39,7 @@ export class CommandesPage implements OnInit {
   }
   ionViewDidEnter() {
     this.initItems();
+    this.dateInit();
     this.tableService.getAllOfMyShop().then(datas=>{
         this.tableShop = datas;
             console.log(datas);
@@ -51,7 +53,7 @@ export class CommandesPage implements OnInit {
     };
     this.navCtrl.navigateForward(['/commandes/new'], navigationExtras);
   }
-  initItems() {
+  dateInit(){
     this.stocks = [ Math.floor(Math.random() * 600) + 1,Math.floor(Math.random() * 600) + 1];
     var date = new Date();
 
@@ -67,6 +69,9 @@ export class CommandesPage implements OnInit {
         this.time = hour+" : "+minutes;
       },60000
     );
+  }
+
+  initItems(event=null) {
     var etatCommendes = {
         en_cours: 0,
         paye:0,
@@ -74,11 +79,15 @@ export class CommandesPage implements OnInit {
         edition:0,
         prete:0
       };
+    let utilService = this.utilService;
+    if(event==null)
+      this.utilService.presentLoading("Chargement de Commandes");
     this.commandeService.getOrderByTable(this.table_id).then(
     datas =>{
         this.commandes = datas;
         console.log(datas);
         this.commandes.forEach(function(item,id){
+
           if(item.etat == 'paye'){
             etatCommendes.paye+=1; 
             count += item.price;
@@ -91,7 +100,11 @@ export class CommandesPage implements OnInit {
           }else {
              etatCommendes.trash +=1; 
           }
-          
+
+          if(event==null)
+            utilService.dismissLoading();
+          else
+            event.target.complete();
       });
 
       this.etatCommendes = etatCommendes;

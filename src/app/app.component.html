@@ -1,35 +1,10 @@
-<!-- <ion-app>
-  <ion-split-pane>
-    <ion-menu type="overlay">
-      <ion-header>
-        <ion-toolbar>
-          <img src="/assets/profile.svg" alt="" />
-          <ion-title>Julien</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <div class="ion-list">
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <div class="ion-item" [routerDirection]="'root'" [routerLink]="[p.url]">
-              <img [src]="p.icon" alt="" />
-                <ion-label>
-                  {{p.title}}
-                </ion-label>
-            </div>
-          </ion-menu-toggle>
-        </div>
-      </ion-content>
-    </ion-menu>
-    <ion-router-outlet main></ion-router-outlet>
-  </ion-split-pane>
-</ion-app>
- -->
+
  <ion-app>
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-header>
         <ion-toolbar>
-          <ion-title>Julien</ion-title>
+          <ion-title>{{ user_name }}</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>

@@ -10,6 +10,15 @@
 </ion-header>
 
 <ion-content>
+  
+  <ion-refresher slot="fixed"  (ionRefresh)="initItems($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>  
+</ion-refresher>
         <ion-grid class="header-bg">
           <div >
             <ion-fab-button color="secondary" (click)="goToAnoterPage('/commandes/new')">

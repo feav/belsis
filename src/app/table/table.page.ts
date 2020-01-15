@@ -6,6 +6,7 @@ import { TableService } from './../services/table.service';
 import {error} from 'util';
 import { CommandeService } from "../services/commande.service";
 import { NavController } from '@ionic/angular';
+import { UtilsService } from "../services/utils.service";
 
 @Component({
   selector: 'app-table',
@@ -29,7 +30,7 @@ export class TablePage implements OnInit {
       private tableShop : any;
 
  	private tables : any;  
- 	constructor(public navCtrl: NavController,private commandeService:CommandeService,private router: Router, private tableService: TableService){
+ 	constructor(public utilService:UtilsService,public navCtrl: NavController,private commandeService:CommandeService,private router: Router, private tableService: TableService){
         //this.tableService.tableResto();
   	}
 
@@ -37,7 +38,8 @@ export class TablePage implements OnInit {
     this.router.navigateByUrl(url);
   }
   ionViewDidEnter() {
-    this.createBarChart();
+    this.initItems();
+    this.dateInit();
     this.tableService.getAllOfMyShop().then(datas=>{
         this.tableShop = datas;
             console.log(datas);
@@ -51,8 +53,8 @@ export class TablePage implements OnInit {
     };
     this.navCtrl.navigateForward(['/commandes'], navigationExtras);
   }
-  createBarChart() {
-  	this.stocks = [ Math.floor(Math.random() * 600) + 1,Math.floor(Math.random() * 600) + 1];
+  dateInit(){
+    this.stocks = [ Math.floor(Math.random() * 600) + 1,Math.floor(Math.random() * 600) + 1];
     var date = new Date();
 
     var seconds = date.getSeconds();
@@ -67,6 +69,12 @@ export class TablePage implements OnInit {
         this.time = hour+" : "+minutes;
       },60000
     );
+  }
+  initItems(event=null) {
+  	
+    let utilService = this.utilService;
+    if(event==null)
+      this.utilService.presentLoading("Chargement de Tables");
     this.commandeService.getCurrentOrder().then(
     datas =>{
         this.commandes = datas;
@@ -77,6 +85,10 @@ export class TablePage implements OnInit {
       });
       this.workMoney = count;
         
+          if(event==null)
+            utilService.dismissLoading();
+          else
+            event.target.complete();
       },error=>{
         console.log(error);
       }
