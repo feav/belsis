@@ -1,3 +1,13 @@
+/* Variables */
+$placeholder-color: #888;
+
+/* Ionic Components */
+ion-content {
+  ion-input : {
+    --placeholder-color: $placeholder-color !important;
+  }
+}
+
 ion-header{
 	ion-toolbar{
 	    --background : #142768!important; 
@@ -20,4 +30,12 @@ page-profile {
         height: 200px;
         border-radius: 50%;
     }
+}
+
+.edit {
+	--background: gray;
+}
+
+.save {
+	--background: #3dc85e;
 }
