@@ -1,6 +1,6 @@
 export class Settings {
 
-	private host_address;
+	private host_address: string = 'http://belsis.cm/index.php';
 
 	constructor() { }
 

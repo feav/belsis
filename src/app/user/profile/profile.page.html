@@ -1,8 +1,3 @@
-<!--
-  Generated template for the ProfilePage page.
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -14,15 +9,68 @@
 
 
 
-<ion-content padding>
-  
-  
-  <form #formCtrl="ngForm">
-	     <div align="center" *ngIf="formCtrl.form.valid">
-	        <img class="profile-image" src="/assets/profile.svg">
-			 <h4>{{profil.name}}, {{profil.roleName}}</h4>
-			 <h4>Restaurant : {{profil.restoName}}</h4>
-	      </div>
+<ion-content class="ion-padding">
+	<ion-grid>
+		<ion-row>
+			<ion-col class="ion-text-center"><ion-text><h5>{{ restaurant.nom }}</h5></ion-text></ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<div class="ion-text-center">
+					<img class="profile-image" src="/assets/profile.svg">
+				</div>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col class="ion-text-center">
+				<h6>{{ user.prenom }}, {{ user.nom }}</h6>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col class="ion-text-center">
+				<h6>{{ user.role }}</h6>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col class="ion-text-center">
+				<ion-button class="save">Save</ion-button>
+			</ion-col>
+			<ion-col class="ion-text-center">
+				<ion-button class="edit">Edit</ion-button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+	<!-- Reset Password Form -->
+	<form #resetPasswordForm="ngForm">
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<ion-item>
+						<ion-label position="stacked">Ancien mot de passe</ion-label>
+						<ion-input></ion-input>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<ion-item>
+						<ion-label position="stacked">Nouveau mot de passe</ion-label>
+						<ion-input></ion-input>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col class="ion-text-center">
+					<ion-button type="submit">Reset</ion-button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</form>
+
+
+  <!--form #formCtrl="ngForm">
+
 	  <ion-list *ngIf="profil.roleName == 'serveur' ">
 		  <ion-item>
 			 <ion-label floating>Ancien mot de passe </ion-label>
@@ -47,7 +95,12 @@
 		  <ion-item>
 		  </ion-item>
 	  </ion-list>
-	 <!-- <button color="secondary" [disabled]="!formCtrl.form.valid" ion-button block (click)="save()">Save</button>-->
+	 <button color="secondary" [disabled]="!formCtrl.form.valid" ion-button block (click)="save()">Save</button>
 	  <ion-button color="danger" ion-button block (click)="reset()">Reset</ion-button>
-	</form>
+
+
+	</form-->
+
+
+
 </ion-content>

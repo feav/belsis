@@ -30,12 +30,12 @@ export class AuthService {
     constructor(private http: HttpClient, private nativeStorage: NativeStorage) { }
 
     createClient(client: {"redirect-uri": "/home", "grant-type": "password" }): Observable<{client_id: string, client_secret: string}> {
-        return this.http.post<any>(`${this.getHostAddress()}/createClient`, client);
+        return this.http.post<any>(`${this.settings.getHostAddress()}/createClient`, client);
     }
 
     login(user: { client_id: string, client_secret: string, grant_type: string, username: string, password: string }): Observable<any> {
 
-    	return this.http.post(`${this.getHostAddress()}/oauth/v2/token`, user)
+    	return this.http.post(`${this.settings.getHostAddress()}/oauth/v2/token`, user)
     		.pipe(
     			tap((tokens: {access_token: string, expires_in: string, token_type: string, scope: string, refresh_token: string}) => {console.log(tokens);this.doLoginUser(user.username, {jwt: tokens.access_token, refreshToken: tokens.refresh_token})}),
     			mapTo({status: true}),
@@ -46,7 +46,7 @@ export class AuthService {
     }
 
     logout() {
-    	return  this.http.post<any>(`${this.getHostAddress()}/logout`, {
+    	return  this.http.post<any>(`${this.settings.getHostAddress()}/logout`, {
     		'refreshToken': this.getRefreshToken()
     	}).pipe(
     		tap(() => this.doLogoutUser()),
@@ -125,21 +125,23 @@ export class AuthService {
     	localStorage.removeItem(this.CLIENT_SECRET);
     }
 
-    private getHostAddress(): Settings{
+    private getHostAddress(): string {
 
         if(this.isApp){
             this.nativeStorage.getItem(this.hostItem)
             .then(
                 data => {
                     if(data){
-                        this.settings.setHostAddress(data['host_address']);   
+                        this.settings.setHostAddress(data['host_address']);
+                    }else{
+                        this.settings.setHostAddress('')
                     }
                     // console.log(settings);
                 },
                 error => {
                     console.log(error);
                 }
-            );    
+            );
         }else{
 
             const host_settings = localStorage.getItem(this.hostItem);

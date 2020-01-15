@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
+import {User} from '../../models/user.model';
+import {Restaurant} from '../../models/restaurant.model';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -8,9 +10,9 @@ import { Router } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
 
+    user: User = new User();
+    restaurant: Restaurant = new Restaurant();
 
-  ngOnInit() {
-  }
   /*public person: {company: string, birthdate?: any};*/
   public profil={
       id: 0,
@@ -22,31 +24,18 @@ export class ProfilePage implements OnInit {
   };
   dob: any;
   age: any;
-  user:any;
+
   showProfile: boolean;
    constructor(
       private userService: UsersService,
-      private router: Router
-  )
-  {
-    this.userControl();
+      private router: Router) { }
 
-    /*this.person = {company: "serveur", birthdate: ""};
-    this.dob = undefined;
-    let user_exist = localStorage.getItem('user');
-    if(user_exist){
-      this.user = JSON.parse(user_exist);
-    }*/
-  }
-  async userControl(){
-      await this.userService.UserIsConnec().then(status=>{
-          console.log('connected');
-      },error=>{
-          this.router.navigate(["/login"]);
-      });
-  }
+    ngOnInit() {
+        this.init();
+    }
 
     async ionViewWillEnter(){
+        /*
         await this.userService.UserIsConnec().then(status=>{
              let rec = this.userService.curentUserInfo()[0];
               this.profil.name = rec.name;
@@ -58,6 +47,7 @@ export class ProfilePage implements OnInit {
         },error=>{
             this.router.navigate(["/login"]);
         });
+         */
     }
  /* async ionViewDidLoad() {
 
@@ -69,7 +59,7 @@ export class ProfilePage implements OnInit {
     }*!/
   }*/
 
-  reset(){
+  reset() {
     /*this.person = {company: null, birthdate: null};
     this.dob = null;
     this.showProfile = false;*/
@@ -83,8 +73,29 @@ export class ProfilePage implements OnInit {
   }
 
   getAge(birthdate){
-    let currentTime = new Date().getTime();
+    /*
+     let currentTime = new Date().getTime();
      return ((currentTime - birthdate)/31556952000).toFixed(0);
+     */
+  }
+
+  init() {
+
+      // Getting the Current User
+      this.userService.getUser().subscribe(data => {
+          this.user = data;
+          console.log(data);
+      }, error => {
+          console.log(error);
+      });
+
+      // Getting Restaurant of the Current User
+      this.userService.getRestaurantOfUser().subscribe( data => {
+         // console.log(data);
+          this.restaurant = data;
+      }, error => {
+          console.log(error);
+      });
   }
 
 }

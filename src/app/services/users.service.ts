@@ -1,36 +1,27 @@
 import { Injectable } from '@angular/core';
 import {reject} from 'q';
 import { MenuController , ToastController, } from '@ionic/angular';
+import {HttpClient} from '@angular/common/http';
+import {UtilsService} from './utils.service';
+import {Observable} from 'rxjs';
+import {User} from '../models/user.model';
+import {Restaurant} from '../models/restaurant.model';
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  constructor( private toast: ToastController) { }
 
-    async Authenticate(userLogin,userPassword):Promise<any>{
+    public user: any;
+    public HOST_BASE: string = this.utilsService.getHostAddress();
 
-        return new Promise(resolve => {
-            
-            let users = localStorage.getItem('users');
-            let conv = JSON.parse(users);
+  constructor( private toast: ToastController, private http: HttpClient, private utilsService: UtilsService) { }
 
-            if (userLogin !== null && userPassword !== null){
-                for (let i = 0; i < conv.length;i++){
-                    if (conv[i].name === userLogin && conv[i].password === userPassword){
-                        users = conv[i];
-                        this.presentToast("Bienvenue "+userLogin,"success");
-                        console.log(users);
-                        resolve(users);
-                    }else {
-                        //this.presentToast("Mot de passe ou nom d'utilisateur incorrect","warning");
-                        reject("utilisateur inconu");
-                    }
-                }
-            } else {
-                this.presentToast("Mot de passe ou nom d'utilisateur incorrect","warning");
-                reject("utilisateur inconu");
-            }
-        })
+    getUser(): Observable<User> {
+        return this.http.get<User>(`${ this.HOST_BASE }/api/user/get-infos`);
+    }
+
+    getRestaurantOfUser(): Observable<Restaurant>{
+        return this.http.get<Restaurant>(`${ this.HOST_BASE }/api/restaurant/get-by-user`);
     }
 
     saveCurentUserInfo(userconnected){
@@ -49,7 +40,7 @@ export class UsersService {
         let curentcy = localStorage.getItem('userconnected');
         return JSON.parse(curentcy);
     }
-    
+
     async UserIsConnec():Promise<boolean>{
         return new Promise(resolve => {
             let users = localStorage.getItem('userconnected');

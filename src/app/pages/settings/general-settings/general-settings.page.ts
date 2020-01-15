@@ -66,10 +66,13 @@ export class GeneralSettingsPage implements OnInit {
 		        data => {
 		            if(data){
 		                this.settings.setHostAddress(data['host_address']);   
-		            }
+		            }else{
+						this.settings.setHostAddress('http://belsis.cm/index.php');
+					}
 		            console.log(this.settings);
 		        },
 		        error => {
+					this.settings.setHostAddress('http://belsis.cm/index.php');
 		            console.log(error);
 		        }
 		    );    
@@ -80,7 +83,9 @@ export class GeneralSettingsPage implements OnInit {
 		    if(host_settings){
 		        this.settings.setHostAddress(JSON.parse(host_settings)['host_address']);
 		        // console.log(this.settings);
-		    }
+		    }else{
+				this.settings.setHostAddress('http://belsis.cm/index.php');
+			}
 
 		    return this.settings;
 		    
