@@ -1,150 +1,81 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-menu-button id="menu" color="light"></ion-menu-button>
-        </ion-buttons>
-        <ion-title>Stock</ion-title>
-    </ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button id="menu" color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      STOCKS
+    </ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content text-center>
+<ion-content id="stock-produits" >
+<div class="modalShow" *ngIf="selected>=0">
+        <ion-row class="head">
+            <ion-col class="top-main-product">
+                <!-- <button class="close-btn" (click)="closeDetailProductModal()">x</button> -->
+                <img [src]="removeText(produits[selected].icon)">
+            </ion-col>
+            <ion-col>
+                <div>{{produits[selected].name}}</div>
+                <div>Prix : <b>{{produits[selected].price}} CFA</b></div>
+                <label>Disponible : {{produits[selected].qty_stock}}</label>
+                <table>
+                    <tr>
+                        <td><button class="reduce" [disabled]="produits[selected].qty<=0" (click)="produits[selected].qty=produits[selected].qty-1">-</button></td>
+                        <td><input type="number" min="0" max="{{produits[selected].qty_stock}}" step="0.1" [(ngModel)]="produits[selected].qty"></td>
+                        <td><button class="add" (click)="produits[selected].qty=produits[selected].qty+1" [disabled]="produits[selected].qty>=produits[selected].qty_stock">+</button></td>
+                    </tr>
+                </table>
+                <button class="btn-product" (click)="addProduct(selected)">VALIDER</button>
+            </ion-col>
+        </ion-row>
+    </div>
+
+    <ion-refresher slot="fixed"  (ionRefresh)="initItems($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="circles"
+          refreshingText="Rafraichissement...">
+        </ion-refresher-content>  
+    </ion-refresher>
+            
+    <!-- <ion-fab vertical="top" horizontal="start" > -->
+        <ion-fab-button  class="fab-show-list" (click)="showListCategory()" color="dark" vertical="top" horizontal="start" slot="fixed" >
+          <ion-icon name="eye"></ion-icon>
+        </ion-fab-button>
+      <!-- </ion-fab> -->
 
     <ion-grid>
+        <!-- <ion-card-title class="ion-text-center activite">{{cat_name}}</ion-card-title> -->
         <ion-row id="searchRow">
             <ion-col>
-                <div style="text-align:center;">
-					<span>
-					<input type="text" placeholder="Recherche..." />
-                        <!--<ion-input class="searchInput" placeholder="Recherche..." type="text" ></ion-input>-->
-					<button>
-						<ion-icon name="search"></ion-icon>
-					</button>
-					</span>
-                </div>
+                <ion-searchbar placeholder="Filtrer les produit" class="hide-only-lg hide-only-xl hide-only-md"></ion-searchbar>
             </ion-col>
         </ion-row>
-        <ion-row id="categoriesList" *ngFor="let page of commandePages ; let i = index">
-            <ion-col col-2 *ngFor="let item of page; let j = index">
-                <button
-                        *ngIf="!item.statusFilter"
-                        (click)="addOrRemoveCategorieToFilter(i, j)" >{{item.name}}</button>
-                <button
-                        *ngIf="item.statusFilter"
-                        (click)="addOrRemoveCategorieToFilter(i, j)"
-                        style="background-color: #142768; color:white;"
-                >{{item.name}}</button>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col id="horiszontalBar">
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col id="shwitchIcons" text-right>
-                <button class="on" *ngIf="showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
-                <button class="off" *ngIf="!showList"  (click)="setToCard()"><ion-icon name="grid"></ion-icon></button>
-                <button class="on" *ngIf="!showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
-                <button click="off" *ngIf="showList" (click)="setToList()"><ion-icon name="reorder"></ion-icon></button>
-            </ion-col>
-        </ion-row>
-        <ion-row >
-            <ion-col>
-                <p id="contentList">
-                    <ion-grid *ngIf="showList">
-                        <ion-row text-center>
-                            <ion-col col-1>
-                            </ion-col>
-                            <ion-col col-4>
-                                Nom
-                            </ion-col>
-                            <ion-col col-2>
-                                Prix
-                            </ion-col>
-                            <ion-col col-2>
-                                Stock
-                            </ion-col>
-                            <ion-col col-1>
-                                Opérations
-                            </ion-col>
-                            <ion-col col-1>
-                            </ion-col>
-                        </ion-row>
-                        <ion-row (click)="details(produit)" text-center *ngFor="let produit of produits; let i = index" class="list-row-item">
-                            <ion-col col-1>
-                                <img src="{{produit.url}}" />
-                            </ion-col>
-                            <ion-col col-4>
-                                {{produit.name}}
-                            </ion-col>
-                            <ion-col col-2>
-                                <span class="digits">{{produit.pu}}</span> €
-                            </ion-col>
-                            <ion-col col-2>
-                                <span class="digits">{{produit.qte}}</span>
-                            </ion-col>
-                            <ion-col col-1>
-                                <button class="nonCirculaire" (click)="editer(produit)">Modifier</button>
-                            </ion-col>
-                            <ion-col col-1>
-                                <button class="nonCirculaire red" (click)="supprimer(produit)">Supprimer</button>
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
-                    <ion-grid *ngIf="!showList">
-                        <ion-row >
-                            <ion-col size-md="12" size-lg="4" size-xs="12" size-sm="12" *ngFor="let produit of produits; let co = index ">
-                                <ion-card>
-                                    <div class="img-ctn">
-                                        <img class="cardImg" src="{{produit.url}}" />
-                                    </div>
-                                    <ion-card-header>
-                                        <ion-card-title text-center></ion-card-title>
-                                    </ion-card-header>
-                                    <ion-card-content>
 
-                                        <ion-grid>
-                                            <ion-row>
-                                                <ion-col >
-                                                    <span class="produit-title">{{produit.name}}</span>
-                                                </ion-col>
-                                                <ion-col size-md="12" size-lg="12" size-xs="12" size-sm="12">
-                                                    <span class="produit-title">{{produit.pu}}</span>
-                                                </ion-col>
-                                                <ion-col size-md="12" size-lg="12" size-xs="12" size-sm="12">
-                                                    <span class="produit-title">{{produit.qte}}</span>
-                                                </ion-col>
-                                            </ion-row>
-                                            <ion-row>
-                                                <ion-col>
-                <p text-center>
-                    <ion-chip>
-                        <ion-label>{{categorieByID(produit.catID)}}</ion-label>
-                    </ion-chip>
-                </p>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <button class="nonCirculaire" (click)="editer(produit)">Modifier</button>
-              <!--  <button class="nonCirculaire" (click)="details(produit)">Details</button>-->
-                <button class="nonCirculaire red" (click)="supprimer(produit)">Supprimer</button>
-            </ion-col>
-        </ion-row>
+        <div class="parent-wrapper">
+            <div class="parent">
+                <div class="child" *ngFor="let cate of produits ; let i = index" (click)="openDetailProduct(i)" >
+                    <label  [ngStyle]="{'background':cate.color}">{{cate.name}}</label>
+                    <label class="price">QTE : {{cate.qty_stock}}</label>
+                    <img [src]="removeText(cate.icon)">
+                </div>
+            </div>
+        </div>
+
     </ion-grid>
-    </ion-card-content>
-    </ion-card>
-    </ion-col>
-    </ion-row>
-    </ion-grid>
-    </p>
-    </ion-col>
-    </ion-row>
-    <ion-row text-right>
-        <ion-col >
-            <button class="addButton" (click)="ajoutGlobal()">
-                +
-            </button>
-        </ion-col>
-    </ion-row>
-    </ion-grid>
+
+    <div id="categoriesList-" >
+        <div class="title-details" (click)="hideListCategory()">
+              <ion-icon name="arrow-down" style="color:black"></ion-icon>
+        </div>
+        <div>
+            <div col-md-2 class="catory-item-" *ngFor="let cate of categories ; let i = index" (click)="initItems(0,cate.id,cate.name)">
+                <img src="http://belsis.cm/images/uploads/categorie/{{cate.image}}">
+                <button (click)="filtrerParID(cate.id)">{{cate.nom}}</button>
+            </div>
+        </div>
+    </div>
 </ion-content>

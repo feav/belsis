@@ -32,7 +32,7 @@
 			</ion-col>
 		</ion-row>
 	</div>
-			<div style="display: flex;justify-content: center;margin: 13px;" class="loading"><img _ngcontent-fvw-c1="" src="assets/loader/extended_loading.gif" style="width: 60px;"></div>
+			<div style="display: flex;justify-content: center;margin: 13px;" class="loading"><img _ngcontent-fvw-c1="" src="assets/loader/extended_loading.gif" style="width: 40px;"></div>
 
 	    <div class="parent-wrapper">
 	        <div class="parent">
@@ -54,12 +54,12 @@
 				<img [src]="removeText(cate.icon)">
 			</div>
 		</div>
-	</div>
-	<ion-fab (click)="showListSelectedProduct()" class="fab-show-list" vertical="bottom" horizontal="start" slot="fixed">
-	    <ion-fab-button color="light" >
-	      <ion-icon name="eye"></ion-icon>
-	    </ion-fab-button>
-	  </ion-fab>
+		</div>
+		<ion-fab (click)="showListSelectedProduct()" class="fab-show-list" vertical="bottom" horizontal="start" slot="fixed">
+		    <ion-fab-button color="light" >
+		      <ion-icon name="eye"></ion-icon>
+		    </ion-fab-button>
+		  </ion-fab>
 	<ion-fab (click)="choiceProduct(0)" vertical="bottom" horizontal="end" slot="fixed">
 	    <ion-fab-button color="dark" >
 	      <ion-icon name="arrow-dropleft"></ion-icon>
