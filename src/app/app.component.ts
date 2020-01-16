@@ -4,9 +4,10 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-import {User} from './models/user.model';
+import { User } from './models/user.model';
 import { UsersService } from './services/users.service';
-import {MenuController} from 'ionic-angular';
+import { MenuController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 import { AuthService } from './services/auth.service';
 
@@ -34,15 +35,15 @@ export class AppComponent {
       icon: 'restaurant'//'/assets/logo-commande.svg'
     },
     {
+      title: 'Stock',
+      url: '/stokcs',
+      icon: 'filing'//'/assets/logo-stock.svg'
+    },
+    {
       title: 'Profil',
       url: '/profile',
       icon: 'person'//'/assets/logo-commande.svg'
     },
-    // {
-    //   title: 'Le Stock',
-    //   url: '/stokcs',
-    //   icon: 'archive'//'/assets/logo-stock.svg'
-    // },
     // {
     //   title: 'Comptabilite',
     //   url: '/list',
@@ -56,7 +57,8 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    // public menuController: MenuController,
+    public menuController: MenuController,
+    public router: Router,
     private  authService: AuthService) {
     this.initializeApp();
   }
@@ -77,10 +79,11 @@ export class AppComponent {
 
   logout() {
     this.authService.logout();
+    this.router.navigateByUrl('/login');
   }
 
   closeMenu() {
-    // this.menuController.close();
+    this.menuController.close();
   }
 
 

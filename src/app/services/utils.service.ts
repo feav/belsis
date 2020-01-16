@@ -34,7 +34,10 @@ export class UtilsService {
     this.loading.present();
   }
   dismissLoading(){
-    this.loading.onDidDismiss();
+    if(this.loading && this.loading != undefined){
+      this.loading.onDidDismiss();  
+    }
+    
   }
     curentUserInfo(){
         let curentcy = localStorage.getItem('userconnected');
