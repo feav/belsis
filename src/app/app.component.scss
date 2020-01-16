@@ -8,3 +8,13 @@ ion-grid {
     }
   }
 }
+
+ion-grid.bottom-area{
+	height: min-content;
+    background: #142767;
+    color: white;
+    border-radius: 25px;
+    max-height: 50px;
+    /* border: 2px solid white; */
+    box-shadow: 1px 1px 5px 1px #0000007a;
+}
