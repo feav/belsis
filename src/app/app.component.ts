@@ -3,8 +3,12 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+
 import {User} from './models/user.model';
 import { UsersService } from './services/users.service';
+import {MenuController} from 'ionic-angular';
+
+import { AuthService } from './services/auth.service';
 
 
 @Component({
@@ -51,7 +55,9 @@ export class AppComponent {
     private userService:UsersService,
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar  ) {
+    private statusBar: StatusBar,
+    // public menuController: MenuController,
+    private  authService: AuthService) {
     this.initializeApp();
   }
 
@@ -68,4 +74,14 @@ export class AppComponent {
           console.log(error);
       });
   }
+
+  logout() {
+    this.authService.logout();
+  }
+
+  closeMenu() {
+    // this.menuController.close();
+  }
+
+
 }

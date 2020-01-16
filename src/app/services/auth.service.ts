@@ -45,17 +45,8 @@ export class AuthService {
     		);
     }
 
-    logout() {
-    	return  this.http.post<any>(`${this.settings.getHostAddress()}/logout`, {
-    		'refreshToken': this.getRefreshToken()
-    	}).pipe(
-    		tap(() => this.doLogoutUser()),
-    			mapTo(true),
-    			catchError(error =>{
-    				alert(error.error);
-    				return of(false);
-    			})
-    	)
+    logout(): void {
+        this.doLogoutUser();
     }
 
     isLoggedIn() {
