@@ -79,11 +79,12 @@ export class AppComponent {
 
   logout() {
     this.authService.logout();
-    this.router.navigateByUrl('/login');
+    this.menuController.toggle();
+    this.router.navigateByUrl('/');
   }
 
   closeMenu() {
-    this.menuController.close();
+    this.menuController.toggle();
   }
 
 
