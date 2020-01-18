@@ -22,9 +22,9 @@
                 <label>Disponible : {{produits[selected].qty_stock}}</label>
                 <table>
                     <tr>
-                        <td><button class="reduce" [disabled]="produits[selected].qty<=0" (click)="produits[selected].qty=produits[selected].qty-1">-</button></td>
+                        <td><button class="reduce" [disabled]="produits[selected].qty<=(-1*produits[selected].qty_stock)" (click)="produits[selected].qty=produits[selected].qty-1">-</button></td>
                         <td><input type="number" min="0" max="{{produits[selected].qty_stock}}" step="0.1" [(ngModel)]="produits[selected].qty"></td>
-                        <td><button class="add" (click)="produits[selected].qty=produits[selected].qty+1" [disabled]="produits[selected].qty>=produits[selected].qty_stock">+</button></td>
+                        <td><button class="add" (click)="produits[selected].qty=produits[selected].qty+1" >+</button></td>
                     </tr>
                 </table>
                 <button class="btn-product" (click)="addProduct(selected)">VALIDER</button>

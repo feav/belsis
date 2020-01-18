@@ -17,7 +17,6 @@ import * as $ from 'jquery';
   styleUrls: ['./stokcs.page.scss'],
 })
 export class StokcsPage implements OnInit {
-
   private workMoney: any = 0;
   private time:String="";
   private categories: any;
@@ -26,7 +25,7 @@ export class StokcsPage implements OnInit {
   private cat_id:any;
   private selected:number=-1;
   private cat_name:any;
-   constructor(     private prod : ProduitService,private catService: CategorieService,public utilService:UtilsService,public navCtrl: NavController,private commandeService:CommandeService,private router: Router,private route: ActivatedRoute, private tableService: TableService){
+   constructor(  private prod : ProduitService,private catService: CategorieService,public utilService:UtilsService,public navCtrl: NavController,private commandeService:CommandeService,private router: Router,private route: ActivatedRoute, private tableService: TableService){
 
     }
 
@@ -92,8 +91,35 @@ export class StokcsPage implements OnInit {
         });
     
   }
-  openDetailProduct(indice){
-    this.selected = this.produits[indice];
+
+  addProduct(){
+
+    let utilService = this.utilService;
+    let product = this.produits[this.selected];
+    if(product.qty != 0){
+      this.utilService.presentLoading("Mise a jour du stock...") ;
+       this.prod.updateStock(product.id,product.qty).then(
+        datas =>{
+          this.produits = datas;
+          utilService.dismissLoading();
+          this.initItems(null,this.cat_id,this.cat_name);
+          this.utilService.presentToast(product.qty+" "+product.name+" ajoute avec succes",2000,"success");
+        },error=>{
+          console.log(error);
+        }
+      );
+    }
+    this.closeDetailProductModal();
+  }
+  closeDetailProductModal(){
+    $(".modalShow").slideUp(1000);
+  }
+  openDetailProductModal(){
+    $(".modalShow").slideDown(1000);
+  }
+  openDetailProduct(id){
+    this.selected = id;
+    this. openDetailProductModal();
   }
   initItems(event=null,cat_id=null,cat_name) {
     if(cat_id){

@@ -87,5 +87,9 @@ export class AppComponent {
     this.menuController.toggle();
   }
 
+  toggleMenu() {
+    this.menuController.toggle();
+  }
+
 
 }

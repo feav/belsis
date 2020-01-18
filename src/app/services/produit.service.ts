@@ -100,5 +100,19 @@ export class ProduitService {
             })
           });
      }
+     updateStock(product_id,qty){
+          let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
+          let operation ="add";
+          if(qty<0){
+            qty *= -1;
+            operation ="reduction";
+          }
+        return new Promise(resolve => {
+          this.http.get(this.host+ "/api/produit/"+"edit-stock?product_id="+product_id+"&qty="+qty+"&operation="+operation,httpOptions)
+            .subscribe(data => {
+              resolve(data);
+            })
+          });
+     }
 
 }
