@@ -34,6 +34,9 @@ export class TablePage implements OnInit {
         //this.tableService.tableResto();
   	}
 
+  openModalMenu(){
+    this.utilService.openMenu();
+  }
   goToAnoterPage(url){
     this.router.navigateByUrl(url);
   }

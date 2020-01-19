@@ -90,7 +90,8 @@ export class AppComponent {
   }
   closeMenu() {
     // $("body > app-root > ion-app > ion-split-pane > ion-menu").toggle();
-    this.menuController.close();
+    this.menuController.enable(true, 'first');
+    console.log(this.menuController.close());
   }
 
   toggleMenu() {

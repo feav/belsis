@@ -35,7 +35,9 @@ export class HomePage {
   	this.menuCtlr.enable(true);
 
   }
-
+  openModalMenu(){
+     this.utilService.openMenu();
+  }
   openOder(order_id){
     let navigationExtras: NavigationExtras = {
         queryParams: {

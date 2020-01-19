@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { LoadingController, ToastController, AlertController } from '@ionic/angular';
+import { LoadingController, ToastController, AlertController ,ModalController} from '@ionic/angular';
 import {Settings} from '../models/settings.model';
 import {NativeStorage} from '@ionic-native/native-storage/ngx';
+import {MenuPage} from "../menu/menu.page" ;
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +16,33 @@ export class UtilsService {
   private hostItem = 'host';
   private loading:any;
 
-  constructor(private toastController: ToastController,
+  constructor(
+              private  authService: AuthService,
+              private modalController:ModalController,
+              private toastController: ToastController,
               private nativeStorage: NativeStorage,
+              private router: Router,
               private loadingController:LoadingController) { }
 
+  async openMenu()
+    {
+      const modal = await this.modalController.create(
+        {
+          component: MenuPage
+        }
+     );
+      modal.onDidDismiss()
+      .then((data) => {
+        if(data['data']==-1){
+          this.authService.logout();
+          this.router.navigateByUrl('/login');
+        }else if(data['data']){
+          this.router.navigate([data['data']]);
+        }
+      });
+
+     return await modal.present();
+  }
   async presentToast(message, duration= 2000, color) {
     const toast = await this.toastController.create({
       position: 'top',
@@ -33,6 +59,7 @@ export class UtilsService {
     });
     this.loading.present();
   }
+
   dismissLoading(){
     if(this.loading && this.loading != undefined){
       this.loading.onDidDismiss();  

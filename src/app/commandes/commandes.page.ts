@@ -37,6 +37,10 @@ export class CommandesPage implements OnInit {
   goToAnoterPage(url){
     this.router.navigateByUrl(url);
   }
+  
+  openModalMenu(){
+    this.utilService.openMenu();
+  }
   ionViewDidEnter() {
     this.initItems();
     this.dateInit();

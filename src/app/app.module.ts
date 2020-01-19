@@ -19,14 +19,15 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import * as HighCharts from 'highcharts';
 import {ChoiceProduitPage} from "./commandes/choice-produit/choice-produit.page" ;
+import {MenuPage} from "./menu/menu.page" ;
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 
 
 @NgModule({
-  declarations: [AppComponent,ChoiceProduitPage],
-  entryComponents: [ChoiceProduitPage],
+  declarations: [AppComponent,ChoiceProduitPage,MenuPage],
+  entryComponents: [ChoiceProduitPage,MenuPage],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
       ChartsModule,
       AngularFireModule.initializeApp(environment.firebase),
