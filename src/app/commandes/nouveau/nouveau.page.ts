@@ -47,6 +47,7 @@ export class NouveauPage implements OnInit {
     private order_etat:string = "endition";
     private loading:any;
     private tableName : any = "Non definie";
+    private role : any = "";
   constructor(
          public toaster: ToastController,
       private modalCtrl:ModalController,
@@ -289,6 +290,16 @@ export class NouveauPage implements OnInit {
     this.commandeService.cashOrder(this.order_id).then(
              datas =>{
                    this.presentToast("La commande a ete en caissee avec succes","success");
+                  this.router.navigate(["/"]);
+              },error=>{
+                  console.log(error);
+              }
+          );
+  }
+  readyOrder(){
+    this.commandeService.readyOrder(this.order_id).then(
+             datas =>{
+                   this.presentToast("La commande est prete a etre livree","success");
                   this.router.navigate(["/"]);
               },error=>{
                   console.log(error);

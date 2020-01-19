@@ -26,6 +26,10 @@
       console.log(fileEl.click);
       fileEl.click();
     }
+     function toggleMenu() {
+        $("body > app-root > ion-app > ion-split-pane > ion-menu").toggle();
+        // this.menuController.close();
+      }
   </script>
   <app-root></app-root>
 </body>
