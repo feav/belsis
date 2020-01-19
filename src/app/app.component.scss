@@ -11,10 +11,34 @@ ion-grid {
 
 ion-grid.bottom-area{
 	height: min-content;
-    background: #142767;
+    background: white;
     color: white;
     border-radius: 25px;
     max-height: 50px;
     /* border: 2px solid white; */
     box-shadow: 1px 1px 5px 1px #0000007a;
+}
+
+ion-split-pane{ 
+    --border: none !important;
+    ion-menu{
+     --background: var(--ion-color-primary) !important; 
+        ion-content{            
+            --background: var(--ion-color-primary) !important; 
+            ion-list-header{ 
+                --background: var(--ion-color-primary) !important;
+                --color: #FFFFFF !important;   
+            }
+            ion-item{
+                 --background: var(--ion-color-primary) !important;
+                 color:white; 
+                 ion-icon{ padding-right: 10px !important; }
+                 --border:none !important;
+                 .item-inner{
+                    border: none !important;
+                 }
+            }
+
+        }
+    }
 }

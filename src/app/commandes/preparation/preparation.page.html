@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button id="menu" color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      CUISINE
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed"  (ionRefresh)="initItems($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>  
+</ion-refresher>
+
+        <ion-grid class="header-bg">
+          <div>
+            <ion-label color="light ion-text-center block label-title">Ventes de la journee</ion-label>
+            <ion-label color="light ion-text-center price-label block">{{workMoney}} CFA</ion-label>
+            <div class="flex-center-row">
+              <ion-label color="light ion-text-center date-label block">{{time}}</ion-label>
+            </div>
+          </div>
+      </ion-grid>
+      <ion-grid>
+      </ion-grid>
+      <ion-grid *ngIf="etatCommendes.en_cours">
+        <ion-card-title class="ion-text-center activite">COMMANDES A PREPARER</ion-card-title>
+        <ion-row>
+          <ion-col  *ngFor="let commande of commandes" (click)="openOder(commande.id)" [className]="commande.etat=='en_cours'?'rectangle':'hide'">
+             <ion-label color="light ion-text-center">C#{{commande.id}}</ion-label>
+              <b>{{commande.price}} <i>FCFA</i></b>
+            <div>
+              {{commande.table}}
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+     
+      <ion-grid *ngIf="etatCommendes.prete">
+        <ion-card-title class="ion-text-center activite">PRETTES POUR LIVRAISON</ion-card-title>
+        <ion-row>
+          <ion-col  *ngFor="let commande of commandes" (click)="openOder(commande.id)" [className]="commande.etat=='prete'?'rectangle prete':'hide'">
+             <ion-label color="light ion-text-center">C#{{commande.id}}</ion-label>
+              <b>{{commande.price}} <i>FCFA</i></b>
+            <div>
+              {{commande.table}}
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+</ion-content>

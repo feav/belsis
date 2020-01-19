@@ -10,6 +10,7 @@ import { MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 import { AuthService } from './services/auth.service';
+import * as $ from 'jquery';
 
 
 @Component({
@@ -30,9 +31,14 @@ export class AppComponent {
       icon: 'wine'//'/assets/logo-tables.svg'
     },
     {
-      title: 'Les Commandes',
+      title: 'Commandes',
       url: '/commandes',
       icon: 'restaurant'//'/assets/logo-commande.svg'
+    },
+    {
+      title:'Preparation',
+      url:"/preparation",
+      icon:'basket'
     },
     {
       title: 'Stock',
@@ -79,12 +85,13 @@ export class AppComponent {
 
   logout() {
     this.authService.logout();
-    this.menuController.toggle();
-    this.router.navigateByUrl('/');
+    this.closeMenu() ;
+    this.router.navigateByUrl('/login');
   }
-
+  
   closeMenu() {
-    this.menuController.toggle();
+    // $("body > app-root > ion-app > ion-split-pane > ion-menu").toggle();
+    this.menuController.close();
   }
 
   toggleMenu() {

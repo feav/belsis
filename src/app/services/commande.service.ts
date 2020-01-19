@@ -112,6 +112,9 @@ export class CommandeService {
   cashOrder(order_id:number){
     return this.changeState(order_id,"paye");
   }
+  readyOrder(order_id:number){
+    return this.changeState(order_id,"prete");
+  }
   //http://belsis.cm/index.php/api/commande/change-etat      order_id& etat
   prepareOrder(order_id:number){
     return this.changeState(order_id,"en_cours");
