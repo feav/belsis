@@ -32,6 +32,10 @@ export class StokcsPage implements OnInit {
   goToAnoterPage(url){
     this.router.navigateByUrl(url);
   }
+  
+  openModalMenu(){
+    this.utilService.openMenu();
+  }
   ionViewDidEnter() {
     this.initCategory();
     this.dateInit();

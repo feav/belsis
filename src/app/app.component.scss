@@ -25,6 +25,8 @@ ion-split-pane{
      --background: var(--ion-color-primary) !important; 
         ion-content{            
             --background: var(--ion-color-primary) !important; 
+            padding-top: 0;
+            padding-bottom: 0;
             ion-list-header{ 
                 --background: var(--ion-color-primary) !important;
                 --color: #FFFFFF !important;   
@@ -42,3 +44,5 @@ ion-split-pane{
         }
     }
 }
+
+  

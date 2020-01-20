@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UtilsService } from "../../services/utils.service";
-
 import { TableService } from '../../services/table.service';
 import {error} from 'util';
 import { CommandeService } from "../../services/commande.service";
@@ -34,6 +33,9 @@ export class PreparationPage implements OnInit {
     });
     }
 
+  openModalMenu(){
+    this.utilService.openMenu();
+  }
   goToAnoterPage(url){
     this.router.navigateByUrl(url);
   }

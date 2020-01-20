@@ -51,6 +51,7 @@ const routes: Routes = [
   
   { path: 'choice-produit', loadChildren: './commandes/choice-produit/choice-produit.module#ChoiceProduitPageModule' },
   { path: 'general-settings', loadChildren: './pages/settings/general-settings/general-settings.module#GeneralSettingsPageModule' },  { path: 'preparation', loadChildren: './commandes/preparation/preparation.module#PreparationPageModule' },
+  { path: 'menu', loadChildren: './menu/menu.module#MenuPageModule' },
 
 
 

@@ -3,6 +3,8 @@ import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
 import {User} from '../../models/user.model';
 import {Restaurant} from '../../models/restaurant.model';
+import { UtilsService } from "../../services/utils.service";
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -27,6 +29,7 @@ export class ProfilePage implements OnInit {
 
   showProfile: boolean;
    constructor(
+       private utilService: UtilsService,
       private userService: UsersService,
       private router: Router) { }
 
@@ -34,6 +37,9 @@ export class ProfilePage implements OnInit {
         this.init();
     }
 
+  openModalMenu(){
+    this.utilService.openMenu();
+  }
     async ionViewWillEnter(){
         /*
         await this.userService.UserIsConnec().then(status=>{

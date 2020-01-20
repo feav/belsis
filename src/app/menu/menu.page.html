@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>MENU</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	    <div class="parent-wrapper">
+	        <div class="parent">
+	            <div class="child" *ngFor="let cate of appPages ; let i = index" (click)="selectPage(cate.url)" >
+      					<ion-icon  [ngStyle]="{'color':cate.color}"[name]="cate.icon"></ion-icon>
+                <ion-label >{{cate.title}}</ion-label>
+      				</div>
+	        </div>
+	    </div>
+      <ion-fab (click)="logOut()" vertical="bottom" horizontal="start" slot="fixed">
+        <ion-fab-button color="danger" >
+          <ion-icon name="log-out"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+      <ion-fab (click)="closeMenu()" vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="dark" >
+        <ion-icon name="close"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+</ion-content>
