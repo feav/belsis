@@ -50,8 +50,13 @@
     <ion-grid>
         <!-- <ion-card-title class="ion-text-center activite">{{cat_name}}</ion-card-title> -->
         <ion-row id="searchRow">
-            <ion-col>
+            <ion-col size="12">
                 <ion-searchbar placeholder="Filtrer les produit" class="hide-only-lg hide-only-xl hide-only-md"></ion-searchbar>
+            </ion-col>
+            <ion-col class="ion-text-right">
+                <ion-fab>
+                    <ion-fab-button (click)="presentModal()"><ion-icon name="add"></ion-icon></ion-fab-button>
+                </ion-fab>  
             </ion-col>
         </ion-row>
 

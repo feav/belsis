@@ -3,10 +3,17 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import {reject} from "q";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
+import { UtilsService } from './utils.service';
+import { Product } from './../models/product.model';
+import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ProduitService {
+
+  public HOST_BASE: string = this.utilsService.getHostAddress();
+
   	private items:any;
     public base:string = "/api/commande/";
     public host:string;
@@ -75,8 +82,7 @@ export class ProduitService {
            }
          ];
 
-    constructor(private http: HttpClient) {
-         // this.host = localStorage.getItem('host');
+    constructor(private http: HttpClient, private utilsService: UtilsService ) {
          this.host = 'http://belsis.cm/index.php';
     }
      /**
@@ -113,6 +119,10 @@ export class ProduitService {
               resolve(data);
             })
           });
+     }
+
+     saveProduct(product: any): Observable<any>{
+       return this.http.post<any>( `${this.HOST_BASE}/api/produit/add`, product);
      }
 
 }

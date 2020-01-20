@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { UtilsService } from "../services/utils.service";
 import { CategorieService } from "../services/categorie.service";
 import { ProduitService } from "../services/produit.service";
@@ -10,6 +11,9 @@ import { NavigationExtras } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
+
+import { AddProduitComponent } from './add-produit/add-produit.component';
+
 
 @Component({
   selector: 'app-stokcs',
@@ -25,7 +29,9 @@ export class StokcsPage implements OnInit {
   private cat_id:any;
   private selected:number=-1;
   private cat_name:any;
-   constructor(  private prod : ProduitService,private catService: CategorieService,public utilService:UtilsService,public navCtrl: NavController,private commandeService:CommandeService,private router: Router,private route: ActivatedRoute, private tableService: TableService){
+   constructor(  private prod : ProduitService,private catService: CategorieService,public utilService:UtilsService,public navCtrl: NavController,private commandeService:CommandeService,private router: Router,private route: ActivatedRoute, private tableService: TableService,
+     private modalController: ModalController
+     ){
 
     }
 
@@ -150,6 +156,13 @@ export class StokcsPage implements OnInit {
   }
   ngOnInit() {
    
+  }
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: AddProduitComponent
+    });
+    return await modal.present();
   }
 }
 

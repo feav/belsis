@@ -1,8 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
+import { MenuController , ToastController, ActionSheetController, Platform } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+
+import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera/ngx';
+import { File, FileEntry } from '@ionic-native/file/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
+
+
 import { ProduitService } from '../../services/produit.service';
 import { UsersService } from '../../services/users.service';
-import { MenuController , ToastController, } from '@ionic/angular';
-import {test} from "@angular-devkit/core/src/virtual-fs/host";
+
+import { Product } from '../../models/product.model';
+
 import * as $ from 'jquery';
 
 declare var fileTrigger:any;
@@ -14,6 +24,8 @@ declare var fileTrigger:any;
 })
 export class AddProduitComponent implements OnInit {
 
+
+    public product: Product = new Product();
 
 	public produits:any = {
 	    id:0,
@@ -64,17 +76,173 @@ export class AddProduitComponent implements OnInit {
 
 	public categorie:string = "";
 
+    public images = [];
+
     constructor(
-        private produit: ProduitService,
+        private platform: Platform,
+        private camera: Camera,
+        private file: File,
+        private webView: WebView,
+        private storage: Storage,
+        private filePath: FilePath,
+        private actionSheetController: ActionSheetController,
+        private ref: ChangeDetectorRef,
+        private produitService: ProduitService,
         private toast: ToastController,
         private user: UsersService
-        ) {
-        this.restoId = this.user.curentUserInfo()[0].restoId;
-        localStorage.setItem("categories",JSON.stringify(this.produitCategoris));
+    ) { }
+
+
+	ngOnInit() {
+
+        this.platform.ready().then(() => {
+            this.loadStoredImages();
+        });
     }
 
+    loadStoredImages() {
 
-	ngOnInit() {}
+        this.storage.get('test').then(images => {
+            if(images){
+                let arr = JSON.parse(images);
+                this.images = [];
+                for(let img of arr){
+                    let filePath = this.file.dataDirectory + img;
+                    let resPath = this.pathForImage(filePath);
+                    this.images.push({name: img, path: resPath, filePath: filePath});
+                }
+            }
+        });
+
+    }
+
+    pathForImage(img) {
+
+        if(img === null){
+            return '';
+        } else {
+            let converted = this.webView.convertFileSrc(img);
+            return converted;
+        }
+    }
+
+    async selectImage(){
+        
+        const actionSheet = await this.actionSheetController.create({
+            header: "Select Image Source",
+            buttons: [
+                {
+                    text: 'Load From Library',
+                    handler: ()=>{
+                        this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+                    }
+                },
+                {
+                    text: 'Use Camera',
+                    handler: ()=>{
+                        this.takePicture(this.camera.PictureSourceType.CAMERA);
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    role: 'cancel'
+                }
+            ]
+        });
+
+        await actionSheet.present();
+    }
+
+    takePicture(sourceType: PictureSourceType) {
+
+        const options : CameraOptions = {
+            quality: 100,
+            sourceType: sourceType,
+            saveToPhotoAlbum: false,
+            correctOrientation: true
+        };
+
+        this.camera.getPicture(options).then(imagePath =>{
+
+            if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
+            this.filePath.resolveNativePath(imagePath)
+                .then(filePath => {
+                    let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+                    let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
+                    this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+                });
+            } else {
+                let currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+                let correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+                this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+            }
+
+        });
+    }
+
+    createFileName() {
+        const date = new Date();
+        const time = date.getTime();
+        const newFileName = time +  '.jpg';
+        console.log(newFileName);
+        return newFileName;
+    }
+
+    copyFileToLocalDir(namePath, currentName, newFileName) {
+        this.file.copyFile(namePath, currentName, this.file.dataDirectory, newFileName).then(()=>{
+            this.updateStoredImages(newFileName);
+        }, error => {
+            console.log(error);
+        });
+    }
+        
+    updateStoredImages(name) {
+        
+        this.storage.get('test').then(images => {
+            
+            let arr = JSON.parse(images);
+
+            if (!arr) {
+                let newImages = [name];
+                this.storage.set('test', JSON.stringify(newImages));
+            } else {
+                arr.push(name);
+                this.storage.set('test', JSON.stringify(arr));
+            }
+     
+            let filePath = this.file.dataDirectory + name;
+            let resPath = this.pathForImage(filePath);
+     
+            let newEntry = {
+                name: name,
+                path: resPath,
+                filePath: filePath
+            };
+     
+            //this.images = [newEntry, ...this.images];
+            this.images = [newEntry];
+            this.ref.detectChanges(); // trigger change detection cycle
+        });
+    }
+
+    deleteImage(imgEntry, position) {
+
+        this.images.splice(position, 1);
+     
+        this.storage.get('test').then(images => {
+            let arr = JSON.parse(images);
+            let filtered = arr.filter(name => name != imgEntry.name);
+            this.storage.set('test', JSON.stringify(filtered));
+     
+            var correctPath = imgEntry.filePath.substr(0, imgEntry.filePath.lastIndexOf('/') + 1);
+     
+            this.file.removeFile(correctPath, imgEntry.name).then(res => {
+                // this.presentToast('File removed.');
+            });
+        });
+    }
+
+    /*
 
 	public valider(){
 
@@ -106,11 +274,60 @@ export class AddProduitComponent implements OnInit {
 		}
 	}
 
+    */
+
 	public lastId():any{
         let storage = localStorage.getItem('products');
         let  storages = JSON.parse(storage);
         return storages.length;
 	}
+
+ 
+    startUpload(imgEntry) {
+        this.file.resolveLocalFilesystemUrl(imgEntry.filePath)
+            .then(entry => {
+                ( < FileEntry > entry).file(file => this.readFile(file))
+            })
+            .catch(err => {
+                this.presentToast('Error while reading file.', 'danger');
+            });
+    }
+     
+    readFile(file: any) {
+        const reader = new FileReader();
+        reader.onload = () => {
+            const formData = new FormData();
+            const imgBlob = new Blob([reader.result], {
+                type: file.type
+            });
+            formData.append('file', imgBlob, file.name);
+            this.uploadImageData(formData);
+        };
+        reader.readAsArrayBuffer(file);
+    }
+     
+    async uploadImageData(formData: FormData) {
+        /*
+        const loading = await this.loadingController.create({
+            message: 'Uploading image...',
+        });
+        await loading.present();
+     
+        this.http.post("http://localhost:8888/upload.php", formData)
+            .pipe(
+                finalize(() => {
+                    loading.dismiss();
+                })
+            )
+            .subscribe(res => {
+                if (res['success']) {
+                    this.presentToast('File upload complete.', "success")
+                } else {
+                    this.presentToast('File upload failed.', "danger")
+                }
+            });
+            */
+    }
 
 
 
@@ -124,8 +341,27 @@ export class AddProduitComponent implements OnInit {
         toast.present();
     }
 
+    addProduct() {
+
+        let formData = new FormData();
+        formData.append('test', 'test');
+        for(let key in this.product){
+            console.log({key: key, value: this.product[key]});
+            formData.append(key, this.product[key]);
+        }
+
+        this.produitService.saveProduct(formData).subscribe(data => {
+            console.log(data);
+        }, error => {
+            console.log(error);
+        });
+    }
+
 
 }
+
+
+/*
 class Product{
     url: "";
     id: 0;
@@ -152,3 +388,4 @@ class Product{
 
 
 }
+*/
