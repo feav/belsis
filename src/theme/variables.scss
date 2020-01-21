@@ -75,3 +75,14 @@
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 }
+
+/*
+* Global style
+*/
+
+// Menu
+ion-icon#menu {
+    font-size: 25px;
+            color: white;
+    margin-left: 5px;
+}
