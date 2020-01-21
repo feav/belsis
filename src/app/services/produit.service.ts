@@ -124,5 +124,23 @@ export class ProduitService {
      saveProduct(product: any): Observable<any>{
        return this.http.post<any>( `${this.HOST_BASE}/api/produit/add`, product);
      }
+     addProduct(prix, quantite,restaurant,categorie,nom,description,image){
+          let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
+          let product = {
+            prix:prix,
+            quantite:quantite,
+            restaurant:restaurant,
+            categorie:categorie,
+            nom:nom,
+            description:description,
+            image:image
+          };
+        return new Promise(resolve => {
+          this.http.post(this.host+ "/api/produit/add",product,httpOptions)
+            .subscribe(data => {
+              resolve(data);
+            })
+          });
+     }
 
 }

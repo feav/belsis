@@ -53,13 +53,10 @@
             <ion-col size="12">
                 <ion-searchbar placeholder="Filtrer les produit" class="hide-only-lg hide-only-xl hide-only-md"></ion-searchbar>
             </ion-col>
-            <ion-col class="ion-text-right">
-                <ion-fab>
-                    <ion-fab-button (click)="presentModal()"><ion-icon name="add"></ion-icon></ion-fab-button>
-                </ion-fab>  
-            </ion-col>
         </ion-row>
-
+        <ion-row style="justify-content: center;">
+            <button *ngIf="cat_id" class="add" (click)="presentModal()">AJOUTER UN PRODUIT</button>
+        </ion-row>
         <div class="parent-wrapper">
             <div class="parent">
                 <div class="child" *ngFor="let cate of produits ; let i = index" (click)="openDetailProduct(i)" >

@@ -30,6 +30,7 @@ import {MenuPage} from "./menu/menu.page" ;
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { Base64 } from '@ionic-native/base64/ngx';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     SplashScreen,
     NativeStorage,
     Camera,
+    Base64,
     File,
     FilePath,
     Platform,

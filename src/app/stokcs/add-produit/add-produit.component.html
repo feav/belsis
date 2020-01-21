@@ -1,72 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-icon id="menu" ion-button ion-btn color="light" name="close" (click)="closeModal()"></ion-icon>
+    </ion-buttons>
+    <ion-title >NOUVEAU</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
-	
-	<ion-grid>
-		<ion-row>
-			<ion-col id="newProduct" text-center>
-				<b>NOUVEAU PRODUIT EN STOCK</b>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col id="horiszontalBar">
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col class="ion-text-center">
-				<div class="image-container">
-					<img *ngIf='images.length == 0' class="circular" src="../../../assets/prod_2.jpg" alt="IMAGE" />
-					<ion-img *ngIf='images.length > 0'class="circular" [src]="images[0].path" alt="IMAGE" ></ion-img>
-					<div class="take-image">
-						<ion-fab-button size="small" (click)="selectImage()">
-							<ion-icon name="camera"></ion-icon>
-						</ion-fab-button>
-					</div>
+        <ion-grid class="header-bg">
+          <div >
+            <ion-label color="light ion-text-center block label-title">
+            	<img class="profile-image" [src]="produits.logo">
+            </ion-label>
+			<ion-img *ngIf='images.length > 0'class="circular" [src]="images[0].path" alt="IMAGE" ></ion-img>
+				<div class="take-image">
+					<ion-fab-button size="small"  color="light" (click)="selectImage()">
+						<ion-icon name="camera"></ion-icon>
+					</ion-fab-button>
 				</div>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col size-md="8" size-lg="8" size-sm="8" size-md="8" size-xl="8" size-sm="12" size-xs="12">
-				<ion-grid class="color-text" text-left>
-					<ion-row>
+            <ion-label color="light ion-text-center price-label block">{{restaurant.nom}} </ion-label>
+            <ion-label color="light ion-text-center block label-title">{{cat_name}}</ion-label>
+          </div>
+      </ion-grid> 
+      <ion-grid>
+      </ion-grid>
+      <ion-grid>
+        <ion-card-title class="ion-text-center activite">Ajouter un produit</ion-card-title>
+        <ion-row>
+          <ion-col>
+            <div>
+               	<form #resetPasswordForm="ngForm">
+					<ion-grid>
 
-						<ion-col col-1>Nom : </ion-col>
-						<ion-col col-11> <input class="input-text-my" type="text" [(ngModel)]="product.nom" /> </ion-col>
-					</ion-row>
-					<ion-row>
-						<ion-col col-1>Prix : </ion-col>
-						<ion-col col-11> <input class="input-text-my" type="text" [(ngModel)]="product.prix" /> </ion-col>
-					</ion-row>
-					<ion-row>
-						<ion-col col-1>Quantite : </ion-col>
-						<ion-col col-11> <input class="input-text-my" type="text" [(ngModel)]="product.quantite" /> </ion-col>
-					</ion-row>
-					<ion-row>
-						<ion-col col-1>Description : </ion-col>
-						<ion-col col-11> <input class="input-text-my" type="text" [(ngModel)]="product.description" /> </ion-col>
-					</ion-row>
-					<ion-row>
-						<ion-col col-1>Categorie : </ion-col>
-						<ion-col col-11> <input class="input-text-my" type="text" [(ngModel)]="product.categorie" /> </ion-col>
-					</ion-row>
-					<!--ion-row>
-						<ion-col col-11>
-							<ion-item>
-								<ion-label>Categories</ion-label>
-								<ion-select value="brown" okText="Valider" cancelText="Annuler" name="cat" [(ngModel)]="cat">
-									<ion-select-option *ngFor="let categorie of produitCategoris" value="{{categorie.id}}">{{categorie.name}}</ion-select-option>
-								</ion-select>
-							</ion-item>
-						</ion-col>
-					</ion-row-->
-				</ion-grid>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col>
-				<button (click)="addProduct()" class="addProductButton">
-					AJOUTER LE PRODUIT
-				</button>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
+						<ion-row>
+							<input required placeholder="Nom : " name="name" [(ngModel)]="produits.name" />
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<input required placeholder="Prix : " name="prix"   [(ngModel)]="produits.prix"  />
+							</ion-col>
+							<ion-col>
+								<input required placeholder="Quantite : " name="quantite"   [(ngModel)]="produits.quantite"  />
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<input required placeholder="Description : "  name="description"  [(ngModel)]="produits.description"  />
+						</ion-row>
+						<ion-row>
+							<ion-col class="ion-text-center">
+								<ion-button (click)="addProduct()" class="addProductButton" type="submit">AJOUTER</ion-button>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+				</form>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
 </ion-content>
+
+

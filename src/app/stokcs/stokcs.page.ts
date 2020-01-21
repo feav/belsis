@@ -160,8 +160,27 @@ export class StokcsPage implements OnInit {
 
   async presentModal() {
     const modal = await this.modalController.create({
-      component: AddProduitComponent
+      component: AddProduitComponent,
+          componentProps: { 
+            cat_id: this.cat_id,
+            cat_name : this.cat_name
+          }
     });
+      modal.onDidDismiss()
+      /**
+      ** @TODO faire en sorte de bien mettre a jour le panier genre
+      **/
+      .then((data) => {
+          console.log(data.data);
+          if(data.data ){
+            this.initItems(null,this.cat_id,this.cat_name);
+          }else{
+
+          }
+          
+          
+          // this.cardTotal = somme;
+      });
     return await modal.present();
   }
 }
