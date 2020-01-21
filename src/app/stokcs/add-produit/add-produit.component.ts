@@ -13,6 +13,7 @@ import { ProduitService } from '../../services/produit.service';
 import { UsersService } from '../../services/users.service';
 
 import { Product } from '../../models/product.model';
+import { Restaurant } from '../../models/restaurant.model';
 
 import * as $ from 'jquery';
 import { UtilsService } from "../../services/utils.service";
@@ -29,7 +30,7 @@ export class AddProduitComponent implements OnInit {
 
     public product: Product = new Product();
 
-   @Input() cat_name  : String;
+   @Input() cat_name  : string;
    @Input() cat_id : number;
 	public produits:any = {
 	    id:0,
@@ -50,7 +51,8 @@ export class AddProduitComponent implements OnInit {
 	public categorie:string = "";
 
     public images = [];
-    private restaurant:any;
+    public restaurant: Restaurant = new Restaurant();
+
     constructor(
         private base64: Base64,
         private platform: Platform,
@@ -79,7 +81,7 @@ export class AddProduitComponent implements OnInit {
 
         // Getting Restaurant of the Current User
         this.user.getRestaurantOfUser().subscribe( data => {
-            // console.log(data);
+            console.log(data);
             this.restaurant = data;
         }, error => {
             console.log(error);
@@ -305,8 +307,8 @@ export class AddProduitComponent implements OnInit {
         this.produitService.addProduct(
             this.produits.prix,
             this.produits.quantite,
-            this.cat_id,
             this.restaurant.id,
+            this.cat_id,
             this.produits.name,
             this.produits.description,
             this.produits.logo

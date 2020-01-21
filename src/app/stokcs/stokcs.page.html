@@ -60,7 +60,7 @@
         <div class="parent-wrapper">
             <div class="parent">
                 <div class="child" *ngFor="let cate of produits ; let i = index" (click)="openDetailProduct(i)" >
-                    <label  [ngStyle]="{'background':cate.color}">{{cate.name}}</label>
+                    <label  [ngStyle]="{'background':cate.color}">{{cate.nom}}</label>
                     <label class="price">QTE : {{cate.qty_stock}}</label>
                     <img [src]="removeText(cate.icon)">
                 </div>
@@ -74,7 +74,7 @@
               <ion-icon name="arrow-down" style="color:black"></ion-icon>
         </div>
         <div>
-            <div col-md-2 class="catory-item-" *ngFor="let cate of categories ; let i = index" (click)="initItems(0,cate.id,cate.name)">
+            <div col-md-2 class="catory-item-" *ngFor="let cate of categories ; let i = index" (click)="initItems(0,cate.id,cate.nom)">
                 <img src="{{cate.image}}">
                 <button (click)="filtrerParID(cate.id)">{{cate.nom}}</button>
             </div>

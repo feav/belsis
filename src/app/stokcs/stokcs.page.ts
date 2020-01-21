@@ -28,7 +28,7 @@ export class StokcsPage implements OnInit {
   private produits : any;
   private cat_id:any;
   private selected:number=-1;
-  private cat_name:any;
+  private cat_name: string;
    constructor(  private prod : ProduitService,private catService: CategorieService,public utilService:UtilsService,public navCtrl: NavController,private commandeService:CommandeService,private router: Router,private route: ActivatedRoute, private tableService: TableService,
      private modalController: ModalController
      ){
