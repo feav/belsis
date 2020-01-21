@@ -1,7 +1,5 @@
-
-
 import { Component, OnInit,Input, ChangeDetectorRef  } from '@angular/core';
-import { MenuController , ToastController, ActionSheetController, Platform ,ModalController} from '@ionic/angular';
+import { MenuController , ToastController, ActionSheetController, Platform ,ModalController, AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera/ngx';
@@ -70,7 +68,8 @@ export class DetailsProduitComponent implements OnInit {
         private toast: ToastController,
         private user: UsersService,
         private utilService:UtilsService,
-        private modalCtrl:ModalController
+        private modalCtrl:ModalController,
+        private alertController: AlertController
     ) { }
     closeModal(){
         this.modalCtrl.dismiss(0);
@@ -284,7 +283,7 @@ export class DetailsProduitComponent implements OnInit {
             this.presentToast("Nom non defini","warning");
             bad = false;
         }
-        if(this.produits.image==''){
+        if(this.produits.logo==''){
             this.presentToast("Image non definie","warning");
             // bad = false;
         }
@@ -336,5 +335,29 @@ export class DetailsProduitComponent implements OnInit {
                 }
               );
     }
+
+    async confirmDelete() {
+	    const alert = await this.alertController.create({
+	      header: 'Confirmation',
+	      message: `Voulez vous supprimer : <strong> ${this.produits.name} </strong> ?`,
+	      buttons: [
+	        {
+	          text: 'Annuler',
+	          role: 'cancel',
+	          cssClass: 'secondary',
+	          handler: () => {
+	            console.log('Confirmation annulée');
+	          }
+	        }, {
+	          text: 'Okay',
+	          handler: () => {
+	            this.removeProduct();
+	          }
+	        }
+	      ]
+	    });
+
+	    await alert.present();
+	  }
 
 }
