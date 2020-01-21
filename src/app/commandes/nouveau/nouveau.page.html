@@ -86,7 +86,7 @@
 			</div>
 			<div>
 				<div col-md-2 class="catory-item-" *ngFor="let cate of produitCategoris ; let i = index" (click)="moveToFirst(cate.name,cate.id)">
-					<img src="http://belsis.cm/images/uploads/categorie/{{cate.image}}">
+					<img src="{{cate.image}}">
 					<button (click)="filtrerParID(cate.id)">{{cate.nom}}</button>
 				</div>
 			</div>

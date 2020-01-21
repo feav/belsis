@@ -96,6 +96,7 @@ export class StokcsPage implements OnInit {
 
     this.utilService.presentLoading("Chargement de Categories");
     this.catService.getAllByUser().then(datas=>{
+      console.log(datas);
             this.categories = datas;
             utilService.dismissLoading();
         });
@@ -183,5 +184,10 @@ export class StokcsPage implements OnInit {
       });
     return await modal.present();
   }
+
+  filtrerParID() {
+
+  }
+
 }
 
