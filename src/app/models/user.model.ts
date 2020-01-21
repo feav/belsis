@@ -6,6 +6,8 @@ export class User {
     nom: string;
     prenom: string;
     role: string;
+    totalCommande: number;
+    totalPrice: number;
 
     constructor(id?: number, username?: string, email?: string, name?: string, surname?: string, role?: string) {
         this.id = id;
@@ -14,5 +16,7 @@ export class User {
         this.nom = name;
         this.prenom = surname;
         this.role = role;
+        this.totalPrice = 0;
+        this.totalCommande = 0;
     }
 }

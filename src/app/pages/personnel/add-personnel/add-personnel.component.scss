@@ -1,0 +1,139 @@
+
+ion-icon#menu {
+    font-size: 30px;
+            color: white;
+    margin-left: 5px;
+}
+	.flex-center-row {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+input{
+    border: 2px solid #1d1e1f;
+    border-radius: 18px;
+    padding-left: 5px;
+    width: 100%;
+    height: 45px;
+    margin-top: 10px;
+    padding-left: 15px;
+    font-size: 11px;
+    outline: none;
+}
+img{
+	background: white;
+    border-radius: 100%;
+    padding: 5px;
+    width: 75px;
+    height: 75px;
+}
+.flex{
+	display: flex;
+}
+.rectangle {
+    height: 69px;
+    width: 20%;
+    border-radius: 8px;
+    background-color: #194c6f;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    margin: 5px;
+    ion-label {
+	    font-size: 25px;
+	    width: 100%;
+	    text-align: center;
+	    margin-left: 23px;
+	    font-weight: 20
+	}
+	div {
+	    color: white;
+	    font-size: 10px;
+	    position: absolute;
+	    bottom: 10px;
+	    text-align: center !important;
+	    width: 90%;
+	}
+
+}
+div.list-commande {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+        width: 100%;
+    .somme{
+    	font-size: 12px;
+    }
+    .table{
+    	font-size: 10px;
+    }
+}
+.ion-color-secondary {
+    --ion-color-base: #9E9E9E !important;
+}
+ion-fab-button {
+    position: absolute;
+    right: 0;
+    top: 73px;
+    right: 5px;
+}
+ion-button {
+    --background: #1d1e1f;
+    background: #1d1e1f;
+    font-size: 15px;
+}
+
+.activite {
+height: 20px;
+    color: #111010;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 20px;
+}
+.header-bg{
+    background-repeat: no-repeat;
+    min-height: 100px;
+    background-position: 100% 100%;
+    border-color: #142766;
+    padding-bottom: 15px;
+    .label-title{
+    	font-size: 10px;
+    }
+    .ion-text-center{
+    	text-align: center;
+
+    }
+    .block{
+    	display: block;
+    }
+    .price-label{
+    	color: white;
+    	font-size: 25px;
+    }
+    .table-choice{
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        ion-select{
+            color: white;
+        }
+        > div{
+            width: max-content;
+        }
+    }
+    .date-label{
+	    color: black;
+	    font-size: 15px;
+	    height: max-content;
+	    width: max-content;
+	    padding: 5px 20px 5px 20px;
+	    border-radius: 8px;
+	    background-color: #FFF;
+	    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+	    margin-top: 10px;
+    }
+
+}
+
+ion-header ion-toolbar ,.header-bg,.header-bg{
+    --background: #1d1e1f!important;
+    background: #1d1e1f!important;
+}

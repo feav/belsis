@@ -92,4 +92,10 @@ export class UsersService {
 
         }
     }
+
+    // All all user of a restaurant
+    getAllUsersOfRestaurant(restaurant_id): Observable<User[]> {
+    	return this.http.get<User[]>(`${ this.HOST_BASE }/api/user/get-by-restaurant?restaurant_id=${restaurant_id}`);
+    }
+    
 }
