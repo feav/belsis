@@ -10,32 +10,10 @@
 </ion-header>
 
 <ion-content id="stock-produits" >
-<div class="modalShow" *ngIf="selected>=0">
-        <ion-row class="head">
-            <ion-col class="top-main-product">
-                <!-- <button class="close-btn" (click)="closeDetailProductModal()">x</button> -->
-                <img [src]="removeText(produits[selected].icon)">
-            </ion-col>
-            <ion-col>
-                <div>{{produits[selected].name}}</div>
-                <div>Prix : <b>{{produits[selected].price}} CFA</b></div>
-                <label>Disponible : {{produits[selected].qty_stock}}</label>
-                <table>
-                    <tr>
-                        <td><button class="reduce" [disabled]="produits[selected].qty<=(-1*produits[selected].qty_stock)" (click)="produits[selected].qty=produits[selected].qty-1">-</button></td>
-                        <td><input type="number" min="0" max="{{produits[selected].qty_stock}}" step="0.1" [(ngModel)]="produits[selected].qty"></td>
-                        <td><button class="add" (click)="produits[selected].qty=produits[selected].qty+1" >+</button></td>
-                    </tr>
-                </table>
-                <button class="btn-product" (click)="addProduct(selected)">VALIDER</button>
-            </ion-col>
-        </ion-row>
-    </div>
-
     <ion-refresher slot="fixed"  (ionRefresh)="initItems($event)">
         <ion-refresher-content
           pullingIcon="arrow-dropdown"
-          pullingText="Pull to refresh"
+          pullingText="Tirer pour actualiser"
           refreshingSpinner="circles"
           refreshingText="Rafraichissement...">
         </ion-refresher-content>  
@@ -59,7 +37,7 @@
         </ion-row>
         <div class="parent-wrapper">
             <div class="parent">
-                <div class="child" *ngFor="let cate of produits ; let i = index" (click)="openDetailProduct(i)" >
+                <div class="child" *ngFor="let cate of produits ; let i = index" (click)="openProduct(cate)" >
                     <label  [ngStyle]="{'background':cate.color}">{{cate.nom}}</label>
                     <label class="price">QTE : {{cate.qty_stock}}</label>
                     <img [src]="removeText(cate.icon)">

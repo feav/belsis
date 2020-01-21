@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
 
 import { AddProduitComponent } from './add-produit/add-produit.component';
+import { DetailsProduitComponent } from './details-produit/details-produit.component';
 
 
 @Component({
@@ -159,6 +160,42 @@ export class StokcsPage implements OnInit {
    
   }
 
+  async openProduct(produit) {
+    const modal = await this.modalController.create({
+      component: DetailsProduitComponent,
+          componentProps: { 
+            cat_id: this.cat_id,
+            cat_name : this.cat_name,
+            produits:{
+              id:produit.id,
+              url: "",
+              name:produit.name,
+              prix:produit.price,
+              quantite:produit.qty_stock,
+              description:"",
+              categories: this.cat_id,
+              logo: this.removeText(produit.icon),
+              restoID:0,
+            }
+          }
+    });
+      modal.onDidDismiss()
+      /**
+      ** @TODO faire en sorte de bien mettre a jour le panier genre
+      **/
+      .then((data) => {
+          console.log(data.data);
+          if(data.data ){
+            this.initItems(null,this.cat_id,this.cat_name);
+          }else{
+
+          }
+          
+          
+          // this.cardTotal = somme;
+      });
+    return await modal.present();
+  }
   async presentModal() {
     const modal = await this.modalController.create({
       component: AddProduitComponent,

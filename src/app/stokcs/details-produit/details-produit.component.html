@@ -1,69 +1,66 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+    <ion-buttons slot="end">
+      <ion-icon id="menu" ion-button ion-btn color="light" name="close" (click)="closeModal()"></ion-icon>
     </ion-buttons>
-    <ion-title>BELSIS</ion-title>
+    <ion-title >Modifier</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content>
+        <ion-grid class="header-bg">
+          <div >
+            <ion-label color="light ion-text-center block label-title">
+            	<img class="profile-image" [src]="produits.logo">
+            </ion-label>
+			<ion-img *ngIf='images.length > 0'class="circular" [src]="images[0].path" alt="IMAGE" ></ion-img>
+				<div class="take-image">
+					<ion-fab-button size="small"  color="light" (click)="selectImage()">
+						<ion-icon name="camera"></ion-icon>
+					</ion-fab-button>
+				</div>
+            <ion-label color="light ion-text-center price-label block">{{restaurant.nom}} </ion-label>
+            <ion-label color="light ion-text-center block label-title">{{cat_name}}</ion-label>
+          </div>
+      </ion-grid> 
+      <ion-grid>
+      </ion-grid>
+      <ion-grid>
+        <ion-card-title class="ion-text-center activite">Modifier un produit</ion-card-title>
+        <ion-row>
+          <ion-col>
+            <div>
+               	<form #resetPasswordForm="ngForm">
+					<ion-grid>
 
-<ion-content text-center>
-	
-	<ion-grid>
-		<ion-row>
-			<ion-col id="newProduct" text-center>
-				<b>DETAILS PRODUIT</b>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col id="horiszontalBar">
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col col-2>
-				<img class="" [src]="produit.url" alt="IMAGE" />
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col>
-				<ion-grid class="color-text" text-left>
-					<ion-row>
-						<ion-col col-1>Nom : </ion-col>
-						<ion-col col-11>
-							{{produit.name}}
-						</ion-col>
-					</ion-row>
-					<ion-row>
-						<ion-col col-1>Prix : </ion-col>
-						<ion-col col-11>
-							{{produit.pu}}
-						</ion-col>
-					</ion-row>
-					<ion-row>
-						<ion-col col-1>Stock : </ion-col>
-						<ion-col col-11>
-							{{produit.qte}}
-						</ion-col>
-					</ion-row>
-					<!--<ion-row>
-						<ion-col col-1>Categories : </ion-col>
-						<ion-col col-11>
-							<ion-chip ngIf="let categorie" *ngFor="let categorie of produit.categories">
-							  	<ion-label>{{categorie}}</ion-label>
-							</ion-chip>
-						</ion-col>
-					</ion-row>-->
-				</ion-grid>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col col-6>
-				<button class="nonCirculaire" (click)="editer(id)">Modifier</button>
-			</ion-col>
-			<ion-col col-6>
-				<button class="nonCirculaire red"  (click)="supprimer(id)">Supprimer</button>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
+						<ion-row>
+							<input required placeholder="Nom : " name="name" [(ngModel)]="produits.name" />
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<input required placeholder="Prix : " name="prix"   [(ngModel)]="produits.prix"  />
+							</ion-col>
+							<ion-col>
+								<input required placeholder="Quantite : " name="quantite"   [(ngModel)]="produits.quantite"  />
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<input required placeholder="Description : "  name="description"  [(ngModel)]="produits.description"  />
+						</ion-row>
+						<ion-row>
+							<ion-col class="ion-text-center">
+								<ion-button (click)="removeProduct()" class="addProductButton remove" type="submit">SUPPRIMER</ion-button>
+							</ion-col>
+							<ion-col class="ion-text-center">
+								<ion-button (click)="addProduct()" class="addProductButton" type="submit">MODIFIER</ion-button>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+				</form>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
 </ion-content>
+
+

@@ -305,6 +305,7 @@ export class AddProduitComponent implements OnInit {
         this.utilService.presentLoading("Ajout du produit dans le stock");
 
         this.produitService.addProduct(
+            0,
             this.produits.prix,
             this.produits.quantite,
             this.restaurant.id,
