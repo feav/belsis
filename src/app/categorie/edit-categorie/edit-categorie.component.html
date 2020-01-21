@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-icon id="menu" ion-button ion-btn color="light" name="close" (click)="closeModal()"></ion-icon>
+    </ion-buttons>
+    <ion-title >{{label}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+        <ion-grid class="header-bg">
+          <div >
+            <ion-label color="light ion-text-center block label-title">
+              <img class="profile-image" src="{{image}}"/>
+            </ion-label>
+        <div class="take-image">
+          <ion-fab-button size="small"  color="light" (click)="selectImage()">
+            <ion-icon name="camera"></ion-icon>
+          </ion-fab-button>
+        </div>
+            <ion-label color="light ion-text-center price-label block" *ngIf="restaurant">{{restaurant.nom}} </ion-label>
+            <ion-label color="light ion-text-center block label-title">{{cat_name}}</ion-label>
+          </div>
+      </ion-grid> 
+      <ion-grid>
+      </ion-grid>
+      <ion-grid>
+
+      <ion-grid class="show-cat-images" style="display: none">
+        <ion-card-title class="ion-text-center activite">Choisir une illustration</ion-card-title>
+        <ion-row>
+          <ion-col size="4" *ngFor="let source of categories ; let i = index" (click)="getImage(source)"><img src="{{source}}"/></ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+      <ion-grid class="show-cat-input">
+        <ion-card-title class="ion-text-center activite">{{label}} une categorie</ion-card-title>
+        <ion-row>
+          <ion-col>
+            <div>
+                <form #resetPasswordForm="ngForm">
+          <ion-grid>
+
+            <ion-row>
+              <input required placeholder="Nom : " name="name" [(ngModel)]="cat_name" />
+            </ion-row>
+            <ion-row>
+              <input required placeholder="Description : "  name="description"  [(ngModel)]="description"  />
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-text-center">
+                <ion-button (click)="addProduct()" class="addProductButton" type="submit">{{label}}</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+            </div>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+ </ion-grid>
+
+</ion-content>
+
+
