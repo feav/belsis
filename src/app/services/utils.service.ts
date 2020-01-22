@@ -62,7 +62,7 @@ export class UtilsService {
 
   dismissLoading(){
     if(this.loading && this.loading != undefined){
-      this.loading.onDidDismiss();  
+      // this.loading.onDidDismiss();  
     }
     
   }

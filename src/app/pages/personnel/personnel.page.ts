@@ -83,7 +83,8 @@ export class PersonnelPage implements OnInit {
 
   	const modal = await this.modalController.create({
       component: DetailPersonnelComponent,
-          componentProps: { 
+          componentProps: {
+          	user_id: user_id
           }
     });
     

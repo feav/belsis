@@ -10,22 +10,19 @@
         <ion-grid class="header-bg">
           <div >
             <ion-label color="light ion-text-center block label-title">
-            	<img class="profile-image" [src]="produits.logo">
-            </ion-label>
-			<ion-img *ngIf='images.length > 0'class="circular" [src]="images[0].path" alt="IMAGE" ></ion-img>
-				<div class="take-image">
-					<ion-fab-button size="small"  color="light" (click)="selectImage()">
-						<ion-icon name="camera"></ion-icon>
-					</ion-fab-button>
-				</div>
-            <ion-label color="light ion-text-center price-label block">{{restaurant.nom}} </ion-label>
-            <ion-label color="light ion-text-center block label-title">{{cat_name}}</ion-label>
+            	<img class="profile-image" [src]="user.avatar">
+        	</ion-label>
+			<div class="take-image">
+				<ion-fab-button size="small"  color="light" (click)="selectImage()">
+					<ion-icon name="camera"></ion-icon>
+				</ion-fab-button>
+			</div>
           </div>
       </ion-grid> 
       <ion-grid>
       </ion-grid>
       <ion-grid>
-        <ion-card-title class="ion-text-center activite">Modifier un produit</ion-card-title>
+        <ion-card-title class="ion-text-center activite">Modifier un personnel</ion-card-title>
         <ion-row>
           <ion-col>
             <div>
@@ -44,7 +41,9 @@
 							<input required placeholder="Email : " name="email" [(ngModel)]="user.email" />
 						</ion-row>
 						<ion-row>
-							<input required placeholder="Rôle : " name="role" [(ngModel)]="user.role" />
+							<ion-select placeholder="Choisissez un rôle" name="role" [(ngModel)]="user.role" okText="Okay" cancelText="Annuler">
+						      <ion-select-option *ngFor="let role of roles" value="{{ role }}">{{ role }}</ion-select-option>
+						    </ion-select>
 						</ion-row>
 						<ion-row>
 							<ion-col class="ion-text-center">

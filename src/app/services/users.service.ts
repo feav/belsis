@@ -102,9 +102,13 @@ export class UsersService {
     saveUser( user: User ): Observable<any>{
     	return this.http.post(`${ this.HOST_BASE + this.API_BASE }add`, user);
     }
+    
+    getUserById(user_id: number): Observable<User> {
+        return this.http.get<User>(`${ this.HOST_BASE + this.API_BASE }get-by-id?user_id=${ user_id }`);
+    }
 
-    updateUser(user: User, user_id: number) {
-    	//	return this.http.put(`${ this.HOST_BASE + this.HOST_BASE }add?`);	
+    updateUser(user: User): Observable<any> {
+    	return this.http.post(`${ this.HOST_BASE + this.API_BASE }add`, user);	
     }
     
 }
