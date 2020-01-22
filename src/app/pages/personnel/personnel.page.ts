@@ -7,6 +7,7 @@ import { UsersService } from "./../../services/users.service";
 import { RestaurantService } from "./../../services/restaurant.service";
 import { UtilsService } from "./../../services/utils.service";
 import { AddPersonnelComponent } from './add-personnel/add-personnel.component';
+import { DetailPersonnelComponent } from './detail-personnel/detail-personnel.component';
 
 @Component({
   selector: 'app-personnel',
@@ -76,6 +77,18 @@ export class PersonnelPage implements OnInit {
     });
     
     return await modal.present();
+  }
+
+  async showUserDetail(user_id){
+
+  	const modal = await this.modalController.create({
+      component: DetailPersonnelComponent,
+          componentProps: { 
+          }
+    });
+    
+    return await modal.present();
+
   }
 
 }

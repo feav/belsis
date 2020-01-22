@@ -9,7 +9,7 @@ ion-icon#menu {
     justify-content: center;
     flex-direction: row;
 }
-input, ion-select{
+input{
     border: 2px solid #1d1e1f;
     border-radius: 18px;
     padding-left: 5px;
@@ -23,7 +23,7 @@ input, ion-select{
 img{
 	background: white;
     border-radius: 100%;
-    padding: 5px;
+    pPing: 5px;
     width: 75px;
     height: 75px;
 }
@@ -79,6 +79,12 @@ ion-button {
     --background: #1d1e1f;
     background: #1d1e1f;
     font-size: 15px;
+}
+ion-button.remove{
+    /*border: 1px solid red; */
+    color: black;
+    background: #FF5722;
+    --background: #FF5722;
 }
 
 .activite {

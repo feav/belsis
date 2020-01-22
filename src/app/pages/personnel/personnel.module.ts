@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { PersonnelPage } from './personnel.page';
 import { AddPersonnelComponent } from './add-personnel/add-personnel.component';
+import { DetailPersonnelComponent } from './detail-personnel/detail-personnel.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'new',
     component: AddPersonnelComponent,
+  },
+  {
+    path: 'detial/:id',
+    component: DetailPersonnelComponent,
   }
 ];
 
@@ -26,6 +31,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [PersonnelPage, AddPersonnelComponent]
+  declarations: [PersonnelPage, AddPersonnelComponent, DetailPersonnelComponent]
 })
 export class PersonnelPageModule {}

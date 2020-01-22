@@ -19,7 +19,7 @@
 
 	<!-- List of Text Items -->
 	<ion-list>
-	  <ion-item *ngFor="let user of users">
+	  <ion-item *ngFor="let user of users" (click)="showUserDetail(user.id)">
 		    <ion-avatar slot="start">
 	   			 <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
 	  		</ion-avatar>

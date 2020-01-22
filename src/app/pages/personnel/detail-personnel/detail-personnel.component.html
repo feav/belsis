@@ -3,31 +3,33 @@
     <ion-buttons slot="end">
       <ion-icon id="menu" ion-button ion-btn color="light" name="close" (click)="closeModal()"></ion-icon>
     </ion-buttons>
-    <ion-title >NOUVEAU</ion-title>
+    <ion-title >Modifier</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
         <ion-grid class="header-bg">
           <div >
             <ion-label color="light ion-text-center block label-title">
-            	<img class="profile-image" [src]="">
+            	<img class="profile-image" [src]="produits.logo">
             </ion-label>
-			<div class="take-image">
-				<ion-fab-button size="small"  color="light">
-					<ion-icon name="camera"></ion-icon>
-				</ion-fab-button>
-			</div>
-            <!--ion-label color="light ion-text-center price-label block">{{restaurant.nom}} </ion-label-->
+			<ion-img *ngIf='images.length > 0'class="circular" [src]="images[0].path" alt="IMAGE" ></ion-img>
+				<div class="take-image">
+					<ion-fab-button size="small"  color="light" (click)="selectImage()">
+						<ion-icon name="camera"></ion-icon>
+					</ion-fab-button>
+				</div>
+            <ion-label color="light ion-text-center price-label block">{{restaurant.nom}} </ion-label>
+            <ion-label color="light ion-text-center block label-title">{{cat_name}}</ion-label>
           </div>
       </ion-grid> 
       <ion-grid>
       </ion-grid>
       <ion-grid>
-        <ion-card-title class="ion-text-center activite">Ajouter un personnel</ion-card-title>
+        <ion-card-title class="ion-text-center activite">Modifier un produit</ion-card-title>
         <ion-row>
           <ion-col>
             <div>
-               	<form>
+               	<form #resetPasswordForm="ngForm">
 					<ion-grid>
 						<ion-row>
 							<input required placeholder="Nom : " name="name" [(ngModel)]="user.nom" />
@@ -42,17 +44,14 @@
 							<input required placeholder="Email : " name="email" [(ngModel)]="user.email" />
 						</ion-row>
 						<ion-row>
-							<input required placeholder="Mot de passe : " name="password" [(ngModel)]="user.password" />
-						</ion-row>
-						<ion-row>
-							<ion-select placeholder="Choisissez un rôle" name="role" [(ngModel)]="user.role" okText="Okay" cancelText="Annuler">
-						      <ion-select-option *ngFor="let role of roles" value="{{ role }}">{{ role }}</ion-select-option>
-						    </ion-select>
-							<!-- input required placeholder="Rôle : " name="role" [(ngModel)]="user.role" /-->
+							<input required placeholder="Rôle : " name="role" [(ngModel)]="user.role" />
 						</ion-row>
 						<ion-row>
 							<ion-col class="ion-text-center">
-								<ion-button (click)="addPersonnel()" class="addProductButton" type="submit">AJOUTER</ion-button>
+								<ion-button (click)="confirmDelete()" class="addProductButton remove" type="submit">SUPPRIMER</ion-button>
+							</ion-col>
+							<ion-col class="ion-text-center">
+								<ion-button (click)="updatePersonnel()" class="addProductButton" type="submit">MODIFIER</ion-button>
 							</ion-col>
 						</ion-row>
 					</ion-grid>
@@ -63,5 +62,3 @@
       </ion-grid>
 
 </ion-content>
-
-
