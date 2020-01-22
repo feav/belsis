@@ -13,6 +13,7 @@ export class UsersService {
 
     public user: any;
     public HOST_BASE: string = this.utilsService.getHostAddress();
+    public API_BASE: string = '/api/user/';
 
   constructor( private toast: ToastController, private http: HttpClient, private utilsService: UtilsService) { }
 
@@ -92,4 +93,22 @@ export class UsersService {
 
         }
     }
+
+    // All all user of a restaurant
+    getAllUsersOfRestaurant(restaurant_id): Observable<User[]> {
+    	return this.http.get<User[]>(`${ this.HOST_BASE + this.API_BASE }get-by-restaurant?restaurant_id=${restaurant_id}`);
+    }
+
+    saveUser( user: User ): Observable<any>{
+    	return this.http.post(`${ this.HOST_BASE + this.API_BASE }add`, user);
+    }
+    
+    getUserById(user_id: number): Observable<User> {
+        return this.http.get<User>(`${ this.HOST_BASE + this.API_BASE }get-by-id?user_id=${ user_id }`);
+    }
+
+    updateUser(user: User): Observable<any> {
+    	return this.http.post(`${ this.HOST_BASE + this.API_BASE }add`, user);	
+    }
+    
 }

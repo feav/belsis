@@ -55,14 +55,14 @@ export class UtilsService {
   async presentLoading(title) {
     this.loading = await this.loadingController.create({
       message: title,
-      duration: 2000
+      duration: 5000
     });
     this.loading.present();
   }
 
   dismissLoading(){
     if(this.loading && this.loading != undefined){
-      this.loading.onDidDismiss();  
+      // this.loading.onDidDismiss();  
     }
     
   }

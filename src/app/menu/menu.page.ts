@@ -49,6 +49,12 @@ export class MenuPage implements OnInit {
       url: '/categorie',
       icon: 'apps',
       color:'#9E9E9E'
+  	},
+  	{
+      title: 'Personnel',
+      url: '/personnel',
+      icon: 'people',
+      color:'#f1c40f'
     },
     // {
     //   title: 'Comptabilite',

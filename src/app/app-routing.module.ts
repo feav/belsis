@@ -50,9 +50,11 @@ const routes: Routes = [
   { path: 'detail', loadChildren: './commandes/detail/detail.module#DetailPageModule' },
   
   { path: 'choice-produit', loadChildren: './commandes/choice-produit/choice-produit.module#ChoiceProduitPageModule' },
-  { path: 'general-settings', loadChildren: './pages/settings/general-settings/general-settings.module#GeneralSettingsPageModule' },  { path: 'preparation', loadChildren: './commandes/preparation/preparation.module#PreparationPageModule' },
+  { path: 'general-settings', loadChildren: './pages/settings/general-settings/general-settings.module#GeneralSettingsPageModule' },
+  { path: 'preparation', loadChildren: './commandes/preparation/preparation.module#PreparationPageModule' },
   { path: 'menu', loadChildren: './menu/menu.module#MenuPageModule' },
   { path: 'categorie', loadChildren: './categorie/categorie.module#CategoriePageModule' },
+  { path: 'personnel', loadChildren: './pages/personnel/personnel.module#PersonnelPageModule' }
 
 
 
