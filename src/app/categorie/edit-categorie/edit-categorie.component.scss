@@ -4,7 +4,7 @@ ion-icon#menu {
             color: white;
     margin-left: 5px;
 }
-	.flex-center-row {
+    .flex-center-row {
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -21,14 +21,14 @@ input{
     outline: none;
 }
 img{
-	background: white;
+    background: white;
     border-radius: 100%;
-    pPing: 5px;
+    padding: 5px;
     width: 75px;
     height: 75px;
 }
 .flex{
-	display: flex;
+    display: flex;
 }
 .rectangle {
     height: 69px;
@@ -38,20 +38,20 @@ img{
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
     margin: 5px;
     ion-label {
-	    font-size: 25px;
-	    width: 100%;
-	    text-align: center;
-	    margin-left: 23px;
-	    font-weight: 20
-	}
-	div {
-	    color: white;
-	    font-size: 10px;
-	    position: absolute;
-	    bottom: 10px;
-	    text-align: center !important;
-	    width: 90%;
-	}
+        font-size: 25px;
+        width: 100%;
+        text-align: center;
+        margin-left: 23px;
+        font-weight: 20
+    }
+    div {
+        color: white;
+        font-size: 10px;
+        position: absolute;
+        bottom: 10px;
+        text-align: center !important;
+        width: 90%;
+    }
 
 }
 div.list-commande {
@@ -60,10 +60,10 @@ div.list-commande {
     font-size: 15px;
         width: 100%;
     .somme{
-    	font-size: 12px;
+        font-size: 12px;
     }
     .table{
-    	font-size: 10px;
+        font-size: 10px;
     }
 }
 .ion-color-secondary {
@@ -80,18 +80,6 @@ ion-button {
     background: #1d1e1f;
     font-size: 15px;
 }
-ion-button.remove{
-    /*border: 1px solid red; */
-    color: black;
-    background: #FF5722;
-    --background: #FF5722;
-}
-ion-button.remove:hover{
-    border: 1px solid red;
-    color: black;
-    background: white;
-    --background: white;
-  }
 
 .activite {
 height: 20px;
@@ -107,18 +95,18 @@ height: 20px;
     border-color: #142766;
     padding-bottom: 15px;
     .label-title{
-    	font-size: 10px;
+        font-size: 10px;
     }
     .ion-text-center{
-    	text-align: center;
+        text-align: center;
 
     }
     .block{
-    	display: block;
+        display: block;
     }
     .price-label{
-    	color: white;
-    	font-size: 25px;
+        color: white;
+        font-size: 25px;
     }
     .table-choice{
         margin: auto;
@@ -132,15 +120,15 @@ height: 20px;
         }
     }
     .date-label{
-	    color: black;
-	    font-size: 15px;
-	    height: max-content;
-	    width: max-content;
-	    padding: 5px 20px 5px 20px;
-	    border-radius: 8px;
-	    background-color: #FFF;
-	    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-	    margin-top: 10px;
+        color: black;
+        font-size: 15px;
+        height: max-content;
+        width: max-content;
+        padding: 5px 20px 5px 20px;
+        border-radius: 8px;
+        background-color: #FFF;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+        margin-top: 10px;
     }
 
 }

@@ -26,6 +26,7 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import * as HighCharts from 'highcharts';
 import {ChoiceProduitPage} from "./commandes/choice-produit/choice-produit.page" ;
+import {EditCategorieComponent} from "./categorie/edit-categorie/edit-categorie.component" ;
 import {MenuPage} from "./menu/menu.page" ;
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
@@ -34,8 +35,8 @@ import { Base64 } from '@ionic-native/base64/ngx';
 
 
 @NgModule({
-  declarations: [AppComponent,ChoiceProduitPage,MenuPage],
-  entryComponents: [ChoiceProduitPage,MenuPage],
+  declarations: [AppComponent,ChoiceProduitPage,MenuPage,EditCategorieComponent],
+  entryComponents: [ChoiceProduitPage,MenuPage,EditCategorieComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
       ChartsModule,
       AngularFireModule.initializeApp(environment.firebase),

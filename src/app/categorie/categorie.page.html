@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon id="menu" ion-button ion-btn color="light" name="menu" (click)="openModalMenu()"></ion-icon>
+    </ion-buttons>
+    <ion-title>CATEGORIES</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-icon  ion-button ion-btn  class="back-btn" color="light" name="arrow-back" (click)="goBack()"></ion-icon>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+      <div class="parent-wrapper">
+          <div class="parent">
+              <div class="child" *ngFor="let cate of categories ; let i = index" (click)="openCategori(i)" >
+                <img  src="{{cate.image}}"/>
+                <ion-label >{{cate.nom}}</ion-label>
+              </div>
+          </div>
+      </div>
+      <ion-fab (click)="openCategori(-1)" vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="dark" >
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+</ion-content>

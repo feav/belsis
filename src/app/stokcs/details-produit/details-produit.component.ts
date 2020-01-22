@@ -78,7 +78,6 @@ export class DetailsProduitComponent implements OnInit {
 	ngOnInit() {
 
         this.platform.ready().then(() => {
-            this.loadStoredImages();
         });
 
         // Getting Restaurant of the Current User
@@ -88,32 +87,6 @@ export class DetailsProduitComponent implements OnInit {
         }, error => {
             console.log(error);
         });
-    }
-
-    loadStoredImages() {
-
-        this.storage.get('test').then(images => {
-            if(images){
-                let arr = JSON.parse(images);
-                this.images = [];
-                for(let img of arr){
-                    let filePath = this.file.dataDirectory + img;
-                    let resPath = this.pathForImage(filePath);
-                    this.images.push({name: img, path: resPath, filePath: filePath});
-                }
-            }
-        });
-
-    }
-
-    pathForImage(img) {
-
-        if(img === null){
-            return '';
-        } else {
-            let converted = this.webView.convertFileSrc(img);
-            return converted;
-        }
     }
     /* FONCTION UTILISEE */
     async selectImage(){
@@ -162,105 +135,6 @@ export class DetailsProduitComponent implements OnInit {
             //   console.log(err);
             // });
         });
-    }
-
-
-    /* Fontion is use */
-    createFileName() {
-        const date = new Date();
-        const time = date.getTime();
-        const newFileName = time +  '.jpg';
-        console.log(newFileName);
-        return newFileName;
-    }
-
-    /* Fontion is use */
-    copyFileToLocalDir(namePath, currentName, newFileName) {
-        this.file.copyFile(namePath, currentName, this.file.dataDirectory, newFileName).then(()=>{
-            this.updateStoredImages(newFileName);
-        }, error => {
-            console.log(error);
-        });
-    }
-
-    /* Fontion is use */
-    updateStoredImages(name) {
-        
-        this.storage.get('test').then(images => {
-            
-            let arr = JSON.parse(images);
-
-            if (!arr) {
-                let newImages = [name];
-                this.storage.set('test', JSON.stringify(newImages));
-            } else {
-                arr.push(name);
-                this.storage.set('test', JSON.stringify(arr));
-            }
-     
-            let filePath = this.file.dataDirectory + name;
-            let resPath = this.pathForImage(filePath);
-     
-            let newEntry = {
-                name: name,
-                path: resPath,
-                filePath: filePath
-            };
-     
-            //this.images = [newEntry, ...this.images];
-            this.images = [newEntry];
-            this.ref.detectChanges(); // trigger change detection cycle
-        });
-    }
-
-    deleteImage(imgEntry, position) {
-
-        this.images.splice(position, 1);
-     
-        this.storage.get('test').then(images => {
-            let arr = JSON.parse(images);
-            let filtered = arr.filter(name => name != imgEntry.name);
-            this.storage.set('test', JSON.stringify(filtered));
-     
-            var correctPath = imgEntry.filePath.substr(0, imgEntry.filePath.lastIndexOf('/') + 1);
-     
-            this.file.removeFile(correctPath, imgEntry.name).then(res => {
-                // this.presentToast('File removed.');
-            });
-        });
-    }
-
-	startUpload(imgEntry) {
-        this.file.resolveLocalFilesystemUrl(imgEntry.filePath)
-            .then(entry => {
-                ( < FileEntry > entry).file(file => this.readFile(file))
-            })
-            .catch(err => {
-                this.presentToast('Error while reading file.', 'danger');
-            });
-    }
-     
-    readFile(file: any) {
-        const reader = new FileReader();
-        reader.onload = () => {
-            const formData = new FormData();
-            const imgBlob = new Blob([reader.result], {
-                type: file.type
-            });
-            formData.append('file', imgBlob, file.name);
-            this.uploadImageData(formData);
-        };
-        reader.readAsArrayBuffer(file);
-    }
-     
-    async uploadImageData(formData: FormData) {
-        /*
-        const loading = await this.loadingController.create({
-            message: 'Uploading image...',
-        });
-        await loading.present();
-     
-        */
     }
 
 
