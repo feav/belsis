@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-        <ion-grid class="header-bg">
+        <!-- <ion-grid class="header-bg">
           <div>
             <ion-label color="light ion-text-center block label-title">Ventes de la journee</ion-label>
             <ion-label color="light ion-text-center price-label block">{{workMoney}} CFA</ion-label>
@@ -18,23 +18,72 @@
               <ion-label color="light ion-text-center date-label block">{{time}}</ion-label>
             </div>
           </div>
-      </ion-grid>
+      </ion-grid> -->
+  <ion-row class="duration">
+    <ion-col [ngClass]="{'selected': item === 'semaine'}" (click)="goto('semaine')">Semaine</ion-col>
+    <ion-col [ngClass]="{'selected': item === 'mois'}"  (click)="goto('mois')" >Mois</ion-col>
+    <ion-col [ngClass]="{'selected': item === 'annee'}"  (click)="goto('annee')">Annee</ion-col>
+  </ion-row>
+  <ion-grid>
+    <ion-row>
+        <ion-card-title class="ion-text-center activite">Evolution</ion-card-title> 
+        <ion-grid>                  
+          <canvas #barChart></canvas>
+          <ion-row class="type">
+            <ion-col [ngClass]="{'selected': type === 'prix'}" (click)="setType('prix')">Prix</ion-col>
+            <ion-col [ngClass]="{'selected': item === 'commande'}"  (click)="setType('commande')" >Commande</ion-col>
+            <ion-col [ngClass]="{'selected': item === 'produit'}"  (click)="setType('produit')">Produit</ion-col>
+          </ion-row>
+        </ion-grid>
+          <!-- <ion-card-title class="ion-text-center activite">Meilleures Ventes</ion-card-title> -->
+        <!-- <ion-row class="principal-products">
+          <ion-row style='background-image: url(https://yzgeneration.com/wp-content/uploads/2013/09/Anonymous-Facebook-620x350.png)' class="principal">
+            <ion-label>MACCARONI FROMAGE - 1500 - 100.000 CFA</ion-label>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4"><img src="https://yzgeneration.com/wp-content/uploads/2013/09/Anonymous-Facebook-620x350.png"></ion-col>
+            <ion-col size="4"><img src="https://yzgeneration.com/wp-content/uploads/2013/09/Anonymous-Facebook-620x350.png"></ion-col>
+            <ion-col size="4"><img src="https://yzgeneration.com/wp-content/uploads/2013/09/Anonymous-Facebook-620x350.png"></ion-col>
+          </ion-row>
+        </ion-row> -->
+          <ion-card-title class="ion-text-center activite">Trafic</ion-card-title>
+      <div class="tbl-header">
+        <table class="list-resume" cellpadding="0" cellspacing="0" border="0">
+          <thead>
+              <tr>
+                <th size="3">
+                   <ion-label color="dark ion-text-center"></ion-label>
+                </th>
+                <th size="3">
+                   <ion-label color="dark ion-text-center">Rev</ion-label>
+                </th>
+                <th size="3">
+                   <ion-label color="dark ion-text-center">Com..</ion-label>
+                </th>
+                <th size="3">
+                   <ion-label color="dark ion-text-center">Prod..</ion-label>
+                </th>
+              </tr>
 
-      <ion-card-title class="ion-text-center activite">Evolution</ion-card-title> 
-      <ion-grid>                  
-        <canvas #barChart></canvas>
-      </ion-grid>
-      <ion-grid>
-        <ion-card-title class="ion-text-center activite">Activite</ion-card-title>
-        <ion-row>
-          <ion-col  *ngFor="let commande of etatCommendes" class="rectangle" >
-             <ion-label color="light ion-text-center">{{commande.value}}</ion-label>
-            <div>
-               
-              {{commande.label}}
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-
+          </thead>
+          <tbody>
+          <tr *ngFor="let etat of datasLabel ; let i = index"  [ngStyle]="{'background-color': colors[i]}" >
+            <td size="3">
+               <ion-label color="dark ion-text-center">{{datasLabel[i]}}</ion-label>
+            </td>
+            <td size="3">
+               <ion-label color="dark ion-text-center">{{originDatas.prix[i]}}</ion-label>
+            </td>
+            <td size="3">
+               <ion-label color="dark ion-text-center">{{originDatas.commande[i]}}</ion-label>
+            </td>
+            <td size="3">
+               <ion-label color="dark ion-text-center">{{originDatas.produit[i]}}</ion-label>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      </ion-row>
+    </ion-grid>
 </ion-content>

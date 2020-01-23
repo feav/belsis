@@ -116,12 +116,12 @@
 	        </ion-item-sliding>
 	    </ion-list>
 	</ion-grid>
-	<ion-fab class="fab-show-list" color="light" (click)="readyOrder()" vertical="bottom" horizontal="start" slot="fixed" [ngClass]="{'hide': order_etat === 'trash' || order_etat === 'paye'|| order_etat === 'prete'}">
+	<ion-fab class="fab-show-list" color="light" (click)="readyOrder()" *ngIf="user.role=='cuisinier'" vertical="bottom" horizontal="start" slot="fixed" [ngClass]="{'hide': order_etat === 'trash' || order_etat === 'paye'|| order_etat === 'prete'}">
 		<ion-fab-button >
 	      <ion-icon name="checkmark-circle"></ion-icon>
 	    </ion-fab-button>
 	</ion-fab>
-	<ion-fab class="fab-show-list" vertical="bottom" horizontal="end" slot="fixed" [ngClass]="{'hide': order_etat === 'trash' || order_etat === 'paye'}">
+	<ion-fab class="fab-show-list" vertical="bottom" horizontal="end" slot="fixed" [ngClass]="{'hide': order_etat === 'trash' || order_etat === 'paye' || user.role=='cuisinier' }">
 		<ion-fab-button [ngClass]="{
  	'trash': order_etat === 'trash' ,
  	'paye': order_etat === 'paye' ,

@@ -19,43 +19,7 @@ import * as $ from 'jquery';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  public appPages = [
-    {
-      title: 'Acceuil',
-      url: '/',
-      icon: 'home'//'/assets/logo-tables.svg'
-    },
-    {
-      title: 'Tables',
-      url: '/table',
-      icon: 'wine'//'/assets/logo-tables.svg'
-    },
-    {
-      title: 'Commandes',
-      url: '/commandes',
-      icon: 'restaurant'//'/assets/logo-commande.svg'
-    },
-    {
-      title:'Preparation',
-      url:"/preparation",
-      icon:'basket'
-    },
-    {
-      title: 'Stock',
-      url: '/stokcs',
-      icon: 'filing'//'/assets/logo-stock.svg'
-    },
-    {
-      title: 'Profil',
-      url: '/profile',
-      icon: 'person'//'/assets/logo-commande.svg'
-    },
-    // {
-    //   title: 'Comptabilite',
-    //   url: '/list',
-    //   icon: 'podium'//'/assets/logo-stat.svg'
-    // }
-  ];
+  public appPages :any;
   private user : any;
   private user_name:any;
   constructor(
@@ -77,7 +41,126 @@ export class AppComponent {
     this.userService.getUser().subscribe(data => {
           this.user = data;
           this.user_name = this.user.username;
-          console.log(data);
+          if(this.user.role == "serveur"){
+            this.appPages =[
+                {
+                  title: 'Acceuil',
+                  url: '/',
+                  icon: 'home',
+                  color:'#142767'
+                },
+                {
+                  title: 'Tables',
+                  url: '/table',
+                  icon: 'wine',
+                  color:'#4CAF50'
+                },
+                {
+                  title: 'Commandes',
+                  url: '/commandes',
+                  icon: 'restaurant',
+                  color:'#FF5722'
+                },
+                {
+                  title: 'Profil',
+                  url: '/profile',
+                  icon: 'person',
+                  color:'cadetblue'
+                }
+              ];
+          }else if(this.user.role == "cuisinier"){
+            this.appPages =[
+                {
+                  title: 'Acceuil',
+                  url: '/',
+                  icon: 'home',
+                  color:'#142767'
+                },
+                {
+                  title:'Preparation',
+                  url:"/preparation",
+                  icon:'basket',
+                  color:'brown'
+                },
+                {
+                  title: 'Stock',
+                  url: '/stokcs',
+                  icon: 'filing',
+                  color:'#FF9800'
+                },
+                {
+                  title: 'Profil',
+                  url: '/profile',
+                  icon: 'person',
+                  color:'cadetblue'
+                },
+                {
+                  title: 'Categories',
+                  url: '/categorie',
+                  icon: 'apps',
+                  color:'#9E9E9E'
+                }
+              ];
+
+          }else if(this.user.role == "superadmin"){
+            this.appPages =[
+                {
+                  title: 'Acceuil',
+                  url: '/',
+                  icon: 'home',
+                  color:'#142767'
+                },
+                {
+                  title: 'Tables',
+                  url: '/table',
+                  icon: 'wine',
+                  color:'#4CAF50'
+                },
+                {
+                  title: 'Commandes',
+                  url: '/commandes',
+                  icon: 'restaurant',
+                  color:'#FF5722'
+                },
+                {
+                  title:'Preparation',
+                  url:"/preparation",
+                  icon:'basket',
+                  color:'brown'
+                },
+                {
+                  title: 'Stock',
+                  url: '/stokcs',
+                  icon: 'filing',
+                  color:'#FF9800'
+                },
+                {
+                  title: 'Profil',
+                  url: '/profile',
+                  icon: 'person',
+                  color:'cadetblue'
+                },
+                {
+                  title: 'Categories',
+                  url: '/categorie',
+                  icon: 'apps',
+                  color:'#9E9E9E'
+                },
+                {
+                  title: 'Personnel',
+                  url: '/personnel',
+                  icon: 'people',
+                  color:'#f1c40f'
+                },
+                {
+                  title: 'Comptabilite',
+                  url: '/comptabilite',
+                  icon: 'ios-pie',
+                  color:'#d28207'
+                }
+              ];
+
+          }
       }, error => {
           console.log(error);
       });
