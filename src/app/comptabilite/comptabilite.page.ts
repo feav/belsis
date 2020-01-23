@@ -39,15 +39,15 @@ export class ComptabilitePage  {
           this.commandes = [Math.floor(Math.random() * 100) + 1,Math.floor(Math.random() * 100) + 1,Math.floor(Math.random() * 100) + 1];
           let datas = [3,4,5,23,4,12,34,5,34,23,55,23,12,13];
           let colors = [];
-          let avg = 10;
+          let avg = 50;
           let datasLabel = [];
-          let max = 31;
+          let max = 5;
           for(var i= 0 ; i< max; i++){
-                datas.push(Math.floor(Math.random() * 600) + 1);
+                datas.push(Math.floor(Math.random() * 200) + 100);
                 if(datas[i]>avg)
-                        colors.push('rgba(50, 255, 50, 0.4)');
+                        colors.push('rgba('+Math.floor(Math.random() * 255)+', '+Math.floor(Math.random() * 255)+', '+Math.floor(Math.random() * 255)+', 0.4)');
                 else
-                        colors.push('rgba(255, 25, 25, 0.4)');
+                        colors.push('rgba('+Math.floor(Math.random() * 255)+', '+Math.floor(Math.random() * 255)+', '+Math.floor(Math.random() * 255)+', 0.4)');
                 datasLabel.push( (i+1)+"" );
           }
           this.bars = new Chart(this.barChart.nativeElement, {

@@ -47,7 +47,6 @@ const routes: Routes = [
   { path: 'profile', loadChildren: './user/profile/profile.module#ProfilePageModule' },
   { path: 'commandes/new', loadChildren: './commandes/nouveau/nouveau.module#NouveauPageModule' },
   { path: 'modal-details', loadChildren: './table/modal-details/modal-details.module#ModalDetailsPageModule' },
-  { path: 'detail', loadChildren: './commandes/detail/detail.module#DetailPageModule' },
   
   { path: 'choice-produit', loadChildren: './commandes/choice-produit/choice-produit.module#ChoiceProduitPageModule' },
   { path: 'general-settings', loadChildren: './pages/settings/general-settings/general-settings.module#GeneralSettingsPageModule' },
