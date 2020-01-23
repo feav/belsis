@@ -56,11 +56,12 @@ export class MenuPage implements OnInit {
       icon: 'people',
       color:'#f1c40f'
     },
-    // {
-    //   title: 'Comptabilite',
-    //   url: '/list',
-    //   icon: 'podium'//'/assets/logo-stat.svg'
-    // }
+    {
+      title: 'Comptabilite',
+      url: '/comptabilite',
+      icon: 'ios-pie',
+      color:'#d28207'
+    }
   ];
   constructor(private modalCtrl:ModalController) { }
   selectPage(url){

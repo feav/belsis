@@ -66,6 +66,7 @@ export class ProduitService {
      }
     deleteProduct(product_id){
           let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
+          let operation ="add";
         return new Promise(resolve => {
           this.http.get(this.host+ "/api/produit/"+"delete?product_id="+product_id,httpOptions)
             .subscribe(data => {

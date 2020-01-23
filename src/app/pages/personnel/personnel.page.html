@@ -11,24 +11,58 @@
 
 <ion-content>
 
-	<ion-searchbar placeholder="Filtrer le personnel"></ion-searchbar>
-
+	<!-- <ion-searchbar placeholder="Filtrer le personnel"></ion-searchbar> -->
+  <ion-refresher slot="fixed"  (ionRefresh)="initItems($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Tirer pour raffaichir"
+      refreshingSpinner="circles"
+      refreshingText="Raffraichissement...">
+    </ion-refresher-content> 
+  </ion-refresher>
 	<ion-row style="justify-content: center;">
         <button class="add" (click)="openAddPersonnelModal()">AJOUTER UN PERSONNEL</button>
     </ion-row>
 
 	<!-- List of Text Items -->
-	<ion-list>
-	  <ion-item *ngFor="let user of users" (click)="showUserDetail(user.id)">
-		    <ion-avatar slot="start">
-	   			 <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-	  		</ion-avatar>
+	<ion-row>
+	  <ion-col  size="6" *ngFor="let user of users" (click)="showUserDetail(user.id)">
+		    <!-- <ion-avatar  horizontal="center"> -->
+           <img class="avatar"  *ngIf="user.avatar" [src]="user.avatar">
+           <img class="avatar"  *ngIf="!user.avatar" src="../../../assets/avatar-min.png">
+	  		<!-- </ion-avatar> -->
 	  		<ion-label>
-	            <h3>{{ user.prenom  | uppercase }}, {{ user.nom | uppercase }}</h3>
-	            <p>{{ user.role  }}</p>
-	            <ion-text class="badge ion-text-start badge--left">{{ user.totalCommande }} commandes</ion-text> <ion-text class="badge ion-float-end badge--right">Ventes {{ user.totalPrice }} FCFA</ion-text>
+	            <h3 class="title-name">{{ user.prenom  | uppercase }}, {{ user.nom | uppercase }}</h3>
+              <p>{{ user.role  }}</p> 
+              <h3 class="title-name">{{ user.totalPrice }} CFA</h3> 
+              <div>
+                <table style="width: 100%;font-size: 10px;">
+                  <tr>
+                    <td *ngIf="user.role=='cuisinier' || user.role=='serveur'">
+                      <ion-icon name="cart"></ion-icon>
+                      {{ user.activity.paye.totalCommande }}
+                    </td>
+                    <td *ngIf="user.role=='cuisinier'">
+                      <ion-icon name="checkmark"  style="color:green"></ion-icon>
+                      {{ user.activity.prete.totalCommande }}
+                    </td>
+                    <td *ngIf="user.role=='serveur'">
+                      <ion-icon name="create"></ion-icon>
+                      {{ user.activity.edition.totalCommande }}
+                    </td>
+                    <td *ngIf="user.role=='cuisinier'">
+                      <ion-icon name="refresh"></ion-icon>
+                      {{ user.activity.en_cours.totalCommande }}
+                    </td>
+                    <td *ngIf="user.role=='serveur'">
+                      <ion-icon name="trash" style="color:red"></ion-icon>
+                      {{ user.activity.remove.totalCommande }}
+                    </td>
+                  </tr>
+                </table>
+              </div>
           </ion-label>
-	  </ion-item>
-	</ion-list>
+	  </ion-col>
+	</ion-row>
 
 </ion-content>

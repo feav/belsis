@@ -38,7 +38,10 @@ export class PersonnelPage implements OnInit {
   openModalMenu(){
     this.utilsService.openMenu();
   }
-
+  initItems($event){
+    this.loadUsers();
+    $event.target.complete();
+  }
   loadUsers(){
 
   	// get restaurant

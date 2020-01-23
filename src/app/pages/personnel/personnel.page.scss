@@ -1,7 +1,9 @@
 button.add {
-    padding: 10px;
-    background: #1b3079;
-    color: white;
+	padding: 10px;
+    background: #ffffff;
+    color: #142767;
+    border: 2px solid #142767;
+    border-radius: 15px;
 }
 
 .badge {
@@ -17,4 +19,27 @@ button.add {
 .badge--right {
 	color: #27ae60;
 	/* border: solid 1px #27ae60 ; */
+}
+
+.title-name{
+	font-size: 10px
+}
+
+ion-col {
+    text-align: center;
+    border: 0.1px solid #00000038;
+    background: #f7f7f7;
+}
+
+ion-row{
+	margin-top: 10px;
+}
+
+img.avatar{
+	border-radius: 100%;
+    width: 65px;
+    height: 65px;
+}
+table ion-icon{
+	font-size: 8px;
 }

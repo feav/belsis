@@ -1,106 +1,164 @@
-	#menu{
-		ion-icon{
-			color: white;
-		}
+
+ion-icon#menu {
+    font-size: 25px;
+            color: white;
+    margin-left: 5px;
+}
+	.flex-center-row {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+.flex{
+	display: flex;
+}
+.rectangle {
+    height: 69px;
+    width: 20%;
+    border-radius: 8px;
+    background-color: #194c6f;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    margin: 5px;
+    ion-label {
+	    font-size: 25px;
+	    width: 100%;
+	    text-align: center;
+	    margin-left: 23px;
+	    font-weight: 20
+	}
+	div {
+	    color: white;
+	    font-size: 10px;
+	    position: absolute;
+	    bottom: 10px;
+	    text-align: center !important;
+	    width: 90%;
 	}
 
-	.left-round-button {
-		border-radius: 45% 0 0 45%;
-	}
+}
+div.list-commande {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+        width: 100%;
+    .somme{
+    	font-size: 12px;
+    }
+    .table{
+    	font-size: 10px;
+    }
+}
+.ion-color-secondary {
+    --ion-color-base: #9E9E9E !important;
+}
+ion-fab-button {
+    position: absolute;
+    right: 0;
+    top: 73px;
+    right: 5px;
+}
+.activite {
+height: 20px;
+    color: #111010;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 20px;
+}
+.header-bg{
+// background: url(background.svg); 
+    background-repeat: no-repeat;
+    min-height: 100px;
+    background-position: 100% 100%;
+    border-color: #142766;
+    background: #142767;
+    padding-bottom: 15px;
+    .label-title{
+    	font-size: 10px;
+    }
+    .ion-text-center{
+    	text-align: center;
 
-	.right-round-button {
-		border-radius: 0 45% 45% 0;
-	}
+    }
+    .block{
+    	display: block;
+    }
+    .price-label{
+    	color: white;
+    	font-size: 25px;
+    }
+    .table-choice{
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        ion-select{
+            color: white;
+        }
+        > div{
+            width: max-content;
+        }
+    }
+    .date-label{
+	    color: black;
+	    font-size: 15px;
+	    height: max-content;
+	    width: max-content;
+	    padding: 5px 20px 5px 20px;
+	    border-radius: 8px;
+	    background-color: #FFF;
+	    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+	    margin-top: 10px;
+    }
 
-	.back-ground-color{
-		background-color: #142768;
-		color: white;
-	}
+}
 
-	.text-color {
-		color: #142768;
-		background-color: white;
-	}
+@media (min-width : 200px) and (max-width : 500px) {
 
-	.button-swicht {
-		padding: 15px;
-		border-style: solid;
-		border-width: 2px;
-		border-color: #142768;
-		font-weight: bold;
-	}
-
-	#buttonSwicht {
-		padding: 20px;
-	}
-
-	.welcome-card img {
-	  max-height: 35vh;
-	  overflow: hidden;
-	}
-	ion-card-title{
-		text-align:center;
-	}
-	ion-header{
-		ion-toolbar{
-		    --background : #142768!important; 
-		    ion-title{
-		    	text-align: center;
-		    	color: white;
-		    }
-		    ion-button{
-		    	color: white;
-		    	ion-menu-button{
-		    		color: white;
-		    	}
-		    }
-		}
-	}
-	ion-content{
-		div.ion-content{
-			//--background-image:url("/assets/bg-belsis.svg");
-			background-image: url(/assets/bg-belsis.svg);
-		    height: 100%;
-		    width: 100%;
-		    background-size: 500px 500px;
-		}
-		
-	}
-	ion-card{
-		border-radius: 5px;
-		background:rgba(20,39,104,.98);
-		overflow: visible;
-		ion-card-content{
-			padding: 0;
-			.img-content{
-				display: flex;
-	    		justify-content: center;
-			    margin: 20px;
-			    img{
-			    	width: 100px;
-			    	height: 100px;
-				}
-			}
-			.foot{
-				text-align: center;
-			    background: rgba(255, 255, 255, 0.8);
-			    line-height: 40px;
-			    color: black;
-			    font-weight: bold;
-			}
-		}
-		ion-card-subtitle {
-			position: absolute;
-		    color: white;
-		    right: -25px;
-		    top: -25px;
-		    /*background: green;*/
-		    width: 50px;
-		    height: 50px;
-		    border-radius: 100%;
-		    text-align: center;
-		    line-height: 50px;
-		    font-size: x-large;
-		}
-	}
-	
+}
+.round{
+    ion-icon {
+        margin-right: 10px;
+        font-size: 30px;
+        font-weight: 800;
+    }
+}
+.green{
+	color: green;
+}
+.red{
+	color: red;
+}
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.rotating {
+  -webkit-animation: rotating 2s linear infinite;
+  -moz-animation: rotating 2s linear infinite;
+  -ms-animation: rotating 2s linear infinite;
+  -o-animation: rotating 2s linear infinite;
+  animation: rotating 2s linear infinite;
+}
