@@ -61,7 +61,8 @@ export class UtilsService {
   }
 
   dismissLoading(){
-      this.loadingController.dismiss();
+  	if(this.loadingController)
+      	this.loadingController.dismiss();
   }
     curentUserInfo(){
         let curentcy = localStorage.getItem('userconnected');

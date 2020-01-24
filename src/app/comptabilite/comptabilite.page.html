@@ -30,9 +30,9 @@
         <ion-grid>                  
           <canvas #barChart></canvas>
           <ion-row class="type">
-            <ion-col [ngClass]="{'selected': type === 'prix'}" (click)="setType('prix')">Prix</ion-col>
-            <ion-col [ngClass]="{'selected': item === 'commande'}"  (click)="setType('commande')" >Commande</ion-col>
-            <ion-col [ngClass]="{'selected': item === 'produit'}"  (click)="setType('produit')">Produit</ion-col>
+            <ion-col [ngClass]="{'selected': type === 'prix'}" (click)="setType('prix')">Revenu</ion-col>
+            <ion-col [ngClass]="{'selected': type === 'commande'}"  (click)="setType('commande')" >Commande</ion-col>
+            <ion-col [ngClass]="{'selected': type === 'produit'}"  (click)="setType('produit')">Produit</ion-col>
           </ion-row>
         </ion-grid>
           <!-- <ion-card-title class="ion-text-center activite">Meilleures Ventes</ion-card-title> -->
@@ -55,7 +55,7 @@
                    <ion-label color="dark ion-text-center"></ion-label>
                 </th>
                 <th size="3">
-                   <ion-label color="dark ion-text-center">Rev</ion-label>
+                   <ion-label color="dark ion-text-center">Prix</ion-label>
                 </th>
                 <th size="3">
                    <ion-label color="dark ion-text-center">Com..</ion-label>

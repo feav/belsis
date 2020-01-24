@@ -50,10 +50,7 @@ export class ComptabilitePage  {
     this.createBarChart();
   }
   goto(target){
-    if(target=="annee"){
-      alert("Pas encore dispo");
-      return;
-    }
+    
     if(this.item!=target)
       this.createBarChart() ;
 
@@ -103,10 +100,13 @@ export class ComptabilitePage  {
 
              let avgMontant = datas.reduce((a, b) => (a + b)) / datas.length; 
              for(var i= 0; i< datas.length; i++){
-               if(avgMontant < datas[i])
-                 this.colors.push('rgba('+Math.floor(Math.random() * 200)+', '+Math.floor(Math.random() * 255)+', '+Math.floor(Math.random() * 255)+', 0.4)');
-               else
-                 this.colors.push('rgba(255, 0, 0, 0.4)');
+               if(avgMontant < datas[i]){
+               	this.colors.push('rgba('+Math.floor(Math.random() * 200)+', '+Math.floor(Math.random() * 255)+', '+Math.floor(Math.random() * 255)+', 0.4)');
+               }else if (datas[i] == 0) {
+               	this.colors.push('rgba(0, 0, 0, 0.35)');
+               }else {
+               	this.colors.push('rgba(255, 0, 0, 0.4)');
+               }
 
              }
 
