@@ -119,4 +119,16 @@ export class CommandeService {
   prepareOrder(order_id:number){
     return this.changeState(order_id,"en_cours");
   }
+
+
+    getByRangeOfTime(range){
+          let httpOptions = {headers: new HttpHeaders({"Content-Type":  "application/json"})};
+          let operation ="add";
+        return new Promise(resolve => {
+          this.http.get(this.host+this.base+"get-shop-activity-by-echeance?echeance="+range,httpOptions)
+            .subscribe(data => {
+              resolve(data);
+            })
+          });
+     }
 }

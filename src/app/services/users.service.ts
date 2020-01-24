@@ -110,5 +110,13 @@ export class UsersService {
     updateUser(user: User): Observable<any> {
     	return this.http.post(`${ this.HOST_BASE + this.API_BASE }add`, user);	
     }
+
+    resetPassword(data: any): Observable<any>{
+    	return this.http.post(`${ this.HOST_BASE + this.API_BASE }reset-password`, data);
+    }
+
+    updateAvatar(data: any){
+    	return this.http.post(`${ this.HOST_BASE + this.API_BASE }update-avatar`, data);
+    }
     
 }

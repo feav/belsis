@@ -1,4 +1,93 @@
+ion-row.duration ion-col {
+    background: #142768;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+}
 
+ion-row.type ion-col {
+    text-align: center;
+    font-size: 13px;
+}
+ion-row.type ion-col.selected {
+    color: #142768;
+    font-weight: 800;
+}
+.list-resume{
+    color:black;
+}
+ion-row.duration ion-col.selected{
+    color: black;
+    background: white;
+    border: 3px solid #142768;
+}
+table.list-resume {
+    width: 100%;
+    font-size: 12px;
+    tr{
+        margin-top: 10px;
+        td{
+            text-align: center;
+        }
+    }
+}
+
+table{
+  width:100%;
+  table-layout: fixed;
+}
+.tbl-header{
+  background-color: rgba(255,255,255,0.3);
+ }
+.tbl-content{
+  height:300px;
+  overflow-x:auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+th{
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  color: #fff;
+  text-transform: uppercase;
+}
+td{
+  padding: 15px;
+  text-align: left;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 12px;
+  color: #fff;
+  border-bottom: solid 1px rgba(255,255,255,0.1);
+}
+
+.principal-products ion-row.principal{
+    height: 160px;
+    border: 2px solid #1f347b;
+        background-size: 100%;
+    ion-label {
+        font-size: 100%;
+        width: 100%;
+        background: #00000057;
+        height: max-content;
+        color: white;
+    }
+}
+.principal-products ion-row{ 
+    ion-label {
+        font-size: 100%;
+        width: 100%;
+        background: #00000057;
+        height: max-content;
+        color: white;
+    }
+}
+ion-card-title.ion-text-center {
+    width: 100%;
+}
 ion-icon#menu {
     font-size: 25px;
             color: white;

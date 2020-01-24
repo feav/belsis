@@ -1,4 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { MenuController , ToastController, ActionSheetController, Platform ,ModalController} from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+
+import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera/ngx';
+import { File, FileEntry } from '@ionic-native/file/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
+import { Base64 } from '@ionic-native/base64/ngx';
+
 import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
 import {User} from '../../models/user.model';
@@ -15,7 +24,6 @@ export class ProfilePage implements OnInit {
     user: User = new User();
     restaurant: Restaurant = new Restaurant();
 
-  /*public person: {company: string, birthdate?: any};*/
   public profil={
       id: 0,
       name: "",
@@ -27,11 +35,24 @@ export class ProfilePage implements OnInit {
   dob: any;
   age: any;
 
+  newPassword: string = '';
+  oldPassword: string = '';
+
   showProfile: boolean;
    constructor(
-       private utilService: UtilsService,
-      private userService: UsersService,
-      private router: Router) { }
+   		private base64: Base64,
+        private platform: Platform,
+        private camera: Camera,
+        private file: File,
+        private webView: WebView,
+        private storage: Storage,
+        private filePath: FilePath,
+        private actionSheetController: ActionSheetController,
+        private ref: ChangeDetectorRef,
+		private utilService: UtilsService,
+		private userService: UsersService,
+		private router: Router
+	) { }
 
     ngOnInit() {
         this.init();
@@ -55,34 +76,59 @@ export class ProfilePage implements OnInit {
         });
          */
     }
- /* async ionViewDidLoad() {
 
-   /!* let person = JSON.parse(localStorage.getItem('PERSON'));
-    if (person){
-      this.person = person;
-      this.age = this.getAge(this.person.birthdate);
-      this.dob = new Date(this.person.birthdate).toISOString();
-    }*!/
-  }*/
+  	resetPassword() {
+  	
+	  	let data = {
+	  		oldPassword: this.oldPassword,
+	  		newPassword: this.newPassword
+	  	};
 
-  reset() {
-    /*this.person = {company: null, birthdate: null};
-    this.dob = null;
-    this.showProfile = false;*/
-  }
+	  	if(!this.formIsClean()) {
+	  		this.utilService.presentToast('Remplissez tous les champs', 2000, "danger");
+	  		return;
+	  	}
+
+	  	this.utilService.presentLoading("Vérification en cours");
+
+	    this.userService.resetPassword(data)
+	    	.subscribe(
+	    		data => {
+	    			this.utilService.dismissLoading();
+	    			this.utilService.presentToast('Mot de passe réinitialisé avec succès', 2000, "success");	
+	    			console.log(data);
+	    		},
+	    		error => {
+	    			this.utilService.dismissLoading();
+	    			if(error.status === 500){
+	    				console.log(error.error.message);
+	    				this.utilService.presentToast(`${error.error.message}`, 2000, "danger");	
+	    			} else {
+	    				this.utilService.presentToast('Une erreur s\'est produite', 2000, "danger");
+	    				console.log(error);
+	    			}
+	    			
+	    		}
+	    	);
+  	}
+
+  	formIsClean() {
+        
+        let bad = true;
+        
+        if(this.newPassword == ''){
+            this.utilService.presentToast("Nom non defini", 2000,"warning");
+            bad = false;
+        }
+        if(this.oldPassword == ''){
+            this.utilService.presentToast("Image non definie", 2000,"warning");
+            bad = false;
+        }
+
+        return bad;
+    }
 
   save(){
-   /* this.person.birthdate = new Date(this.dob).getTime();
-    this.age = this.getAge(this.person.birthdate);
-    this.showProfile = true;
-    //localStorage.setItem('PERSON', JSON.stringify(this.person));*/
-  }
-
-  getAge(birthdate){
-    /*
-     let currentTime = new Date().getTime();
-     return ((currentTime - birthdate)/31556952000).toFixed(0);
-     */
   }
 
   init() {
@@ -103,5 +149,58 @@ export class ProfilePage implements OnInit {
           console.log(error);
       });
   }
+
+  /* FONCTION UTILISEE */
+    async selectImage(){
+        
+        const actionSheet = await this.actionSheetController.create({
+            header: "Select Image Source",
+            buttons: [
+                {
+                    text: 'Load From Library',
+                    handler: ()=>{
+                        this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+                    }
+                },
+                {
+                    text: 'Use Camera',
+                    handler: ()=>{
+                        this.takePicture(this.camera.PictureSourceType.CAMERA);
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    role: 'cancel'
+                }
+            ]
+        });
+
+        await actionSheet.present();
+    }
+    /* fonction utilisee */
+    takePicture(sourceType: PictureSourceType) {
+
+        const options : CameraOptions = {
+            quality: 100,
+            sourceType: sourceType,
+            saveToPhotoAlbum: false,
+            correctOrientation: true,
+              destinationType: this.camera.DestinationType.DATA_URL
+        };
+
+        this.camera.getPicture(options).then(imagePath =>{
+            this.user.avatar = 'data:image/jpeg;base64,' + imagePath;
+            this.user.user_id = this.user.id;
+            this.userService.updateUser(this.user)
+            	.subscribe(
+            		data => {
+            			console.log(data);
+            		},
+            		error => {
+            			console.log(error);
+            		}
+            	)
+        });
+    }
 
 }

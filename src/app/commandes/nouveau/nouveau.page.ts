@@ -12,6 +12,8 @@ import * as $ from 'jquery';
 import {reject} from "q";
 import {ArrayType} from "@angular/compiler";
 import {ChoiceProduitPage} from "../../commandes/choice-produit/choice-produit.page" ;
+import { UsersService } from '../../services/users.service';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-nouveau',
@@ -48,7 +50,8 @@ export class NouveauPage implements OnInit {
     private loading:any;
     private tableName : any = "Non definie";
     private role : any = "";
-  constructor(
+    private user: User = new User();
+  constructor(private userService: UsersService,
          public toaster: ToastController,
       private modalCtrl:ModalController,
       private router: Router,private route: ActivatedRoute,
@@ -62,6 +65,11 @@ export class NouveauPage implements OnInit {
     this.route.queryParams.subscribe(params => {
         this.order_id = params["order_id"];
     });
+    this.userService.getUser().subscribe(data => {
+          this.user = data;
+      }, error => {
+          console.log(error);
+      });
   }
 
 
