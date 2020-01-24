@@ -13,6 +13,7 @@ import {reject} from "q";
 import {ArrayType} from "@angular/compiler";
 import {ChoiceProduitPage} from "../../commandes/choice-produit/choice-produit.page" ;
 import { UsersService } from '../../services/users.service';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-nouveau',
@@ -49,7 +50,7 @@ export class NouveauPage implements OnInit {
     private loading:any;
     private tableName : any = "Non definie";
     private role : any = "";
-  private user:any;
+    private user: User = new User();
   constructor(private userService: UsersService,
          public toaster: ToastController,
       private modalCtrl:ModalController,

@@ -3,6 +3,8 @@ import {reject} from 'q';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
+import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -47,6 +49,14 @@ export class TableService {
 		      resolve(data);
 		    })
 		  });
+	}
+
+	saveTable(table: any): Observable<any>{
+		return this.http.post(this.host +this.base + 'add', table);
+	}
+
+	updateTable(table: any): Observable<any>{
+		return this.http.post(this.host +this.base + 'add', table);
 	}
 
 }

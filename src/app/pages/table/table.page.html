@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon id="menu" ion-button ion-btn color="light" name="menu" (click)="openModalMenu()"></ion-icon>
+    </ion-buttons>
+    <ion-title>TABLES</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+		<ion-row>
+			<ion-col  size="6" *ngFor="let table of tables; let index = index" (click)="openTable(index)">
+			    <h4 class="title-name">T#0{{ table.id }}</h4>
+			    <img class="avatar" src="../../../assets/table.png">
+				<ion-label>
+			      <p>{{ table.name }}</p> 
+			  </ion-label>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+    <ion-fab (click)="openCategori(-1)" vertical="bottom" horizontal="end" slot="fixed">
+      	<ion-fab-button color="dark" >
+        	<ion-icon name="add"></ion-icon>
+      	</ion-fab-button>
+    </ion-fab>
+</ion-content>

@@ -71,6 +71,12 @@ export class MenuPage implements OnInit {
                   url: '/categorie',
                   icon: 'apps',
                   color:'#9E9E9E'
+                },
+                {
+                  title: 'Tables',
+                  url: '/gestion-table',
+                  icon: 'apps',
+                  color:'#9E9E9E'
                 }
               ];
 
@@ -129,6 +135,12 @@ export class MenuPage implements OnInit {
                   url: '/comptabilite',
                   icon: 'ios-pie',
                   color:'#d28207'
+                },
+                {
+                  title: 'Tables',
+                  url: '/gestion-table',
+                  icon: 'apps',
+                  color:'#9E9E9E'
                 }
               ];
 

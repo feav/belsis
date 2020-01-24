@@ -53,7 +53,9 @@ const routes: Routes = [
   { path: 'preparation', loadChildren: './commandes/preparation/preparation.module#PreparationPageModule' },
   { path: 'menu', loadChildren: './menu/menu.module#MenuPageModule' },
   { path: 'categorie', loadChildren: './categorie/categorie.module#CategoriePageModule' },
-  { path: 'personnel', loadChildren: './pages/personnel/personnel.module#PersonnelPageModule' }
+  { path: 'personnel', loadChildren: './pages/personnel/personnel.module#PersonnelPageModule' },
+  { path: 'gestion-table', loadChildren: './pages/table/table.module#TablePageModule' }
+
 
 
 
