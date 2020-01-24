@@ -10,6 +10,7 @@ export class User {
     avatar: string;
     totalCommande: number;
     totalPrice: number;
+    user_id: number;
 
     constructor() {
         this.id = null;
@@ -22,5 +23,6 @@ export class User {
         this.totalCommande = 0;
         this.avatar = '';
         this.password = ''
+        this.user_id = null;
     }
 }

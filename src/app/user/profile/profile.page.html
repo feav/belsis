@@ -10,12 +10,13 @@
         <ion-grid class="header-bg">
           <div >
             <ion-label color="light ion-text-center block label-title">
-            	<img class="profile-image" src="/assets/profile.svg">
+            	<img *ngIf="user.avatar" class="profile-image" [src]="user.avatar">
+            	<img *ngIf="!user.avatar" class="profile-image" src="/assets/avatar-min.png">
             </ion-label>
             <ion-label color="light ion-text-center block label-title">{{ user.role }}, {{ user.prenom }}</ion-label>
             <ion-label color="light ion-text-center price-label block">{{restaurant.nom}} </ion-label>
             <div class="flex-center-row">
-              <ion-label color="light ion-text-center date-label block">Modifier la Photo</ion-label>
+              <ion-label color="light ion-text-center date-label block" (click)="selectImage()">Modifier la Photo</ion-label>
             </div>
           </div>
       </ion-grid> 
@@ -29,14 +30,14 @@
                	<form #resetPasswordForm="ngForm">
 					<ion-grid>
 						<ion-row>
-							<input required placeholder="Ancien mot de passe" />
+							<input required type="password" name="oldPassword" placeholder="Ancien mot de passe" [(ngModel)]="oldPassword"/>
 						</ion-row>
 						<ion-row>
-							<input required placeholder="Nouveau mot de passe" />
+							<input required type="password" name="newPassword" placeholder="Nouveau mot de passe" [(ngModel)]="newPassword"/>
 						</ion-row>
 						<ion-row>
 							<ion-col class="ion-text-center">
-								<ion-button type="submit">Reinitialiser</ion-button>
+								<ion-button type="submit" (click)="resetPassword()">Reinitialiser</ion-button>
 							</ion-col>
 						</ion-row>
 					</ion-grid>
