@@ -8,8 +8,12 @@ import  { AuthGuard } from './guards/auth.guard';
 let home = 'login';
 
 let user_exist = localStorage.getItem('userconnected');
+let first_usage = localStorage.getItem('first_usage');
+let default_route = 'home';
 
-if(user_exist){
+if(first_usage == 'undefined' || first_usage == null || first_usage == '' ){
+  default_route = 'welcome';
+}else if(user_exist){
   home = 'home';
   localStorage.setItem('recentLogged', "0");
 }
@@ -17,7 +21,7 @@ if(user_exist){
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: default_route,
     pathMatch: 'full'
   },
   {
@@ -54,7 +58,10 @@ const routes: Routes = [
   { path: 'menu', loadChildren: './menu/menu.module#MenuPageModule' },
   { path: 'categorie', loadChildren: './categorie/categorie.module#CategoriePageModule' },
   { path: 'personnel', loadChildren: './pages/personnel/personnel.module#PersonnelPageModule' },
-  { path: 'gestion-table', loadChildren: './pages/table/table.module#TablePageModule' }
+  { path: 'gestion-table', loadChildren: './pages/table/table.module#TablePageModule' },
+  { path: 'register', loadChildren: './user/register/register.module#RegisterPageModule' },
+  { path: 'welcome', loadChildren: './welcome/welcome.module#WelcomePageModule' }
+
 
 
 

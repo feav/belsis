@@ -75,7 +75,7 @@ export class MenuPage implements OnInit {
                 {
                   title: 'Tables',
                   url: '/gestion-table',
-                  icon: 'apps',
+                  icon: 'settings',
                   color:'#9E9E9E'
                 }
               ];
@@ -139,7 +139,7 @@ export class MenuPage implements OnInit {
                 {
                   title: 'Tables',
                   url: '/gestion-table',
-                  icon: 'apps',
+                  icon: 'settings',
                   color:'#9E9E9E'
                 }
               ];
