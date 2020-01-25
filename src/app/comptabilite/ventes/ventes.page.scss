@@ -83,6 +83,8 @@ td{
         background: #00000057;
         height: max-content;
         color: white;
+        position: absolute;
+        left: 0;
     }
 }
 ion-card-title.ion-text-center {
@@ -93,13 +95,13 @@ ion-icon#menu {
             color: white;
     margin-left: 5px;
 }
-	.flex-center-row {
+    .flex-center-row {
     display: flex;
     justify-content: center;
     flex-direction: row;
 }
 .flex{
-	display: flex;
+    display: flex;
 }
 .rectangle {
     height: 69px;
@@ -109,20 +111,20 @@ ion-icon#menu {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
     margin: 5px;
     ion-label {
-	    font-size: 25px;
-	    width: 100%;
-	    text-align: center;
-	    margin-left: 23px;
-	    font-weight: 20
-	}
-	div {
-	    color: white;
-	    font-size: 10px;
-	    position: absolute;
-	    bottom: 10px;
-	    text-align: center !important;
-	    width: 90%;
-	}
+        font-size: 25px;
+        width: 100%;
+        text-align: center;
+        margin-left: 23px;
+        font-weight: 20
+    }
+    div {
+        color: white;
+        font-size: 10px;
+        position: absolute;
+        bottom: 10px;
+        text-align: center !important;
+        width: 90%;
+    }
 
 }
 div.list-commande {
@@ -131,10 +133,10 @@ div.list-commande {
     font-size: 15px;
         width: 100%;
     .somme{
-    	font-size: 12px;
+        font-size: 12px;
     }
     .table{
-    	font-size: 10px;
+        font-size: 10px;
     }
 }
 .ion-color-secondary {
@@ -162,18 +164,18 @@ height: 20px;
     background: #142767;
     padding-bottom: 15px;
     .label-title{
-    	font-size: 10px;
+        font-size: 10px;
     }
     .ion-text-center{
-    	text-align: center;
+        text-align: center;
 
     }
     .block{
-    	display: block;
+        display: block;
     }
     .price-label{
-    	color: white;
-    	font-size: 25px;
+        color: white;
+        font-size: 25px;
     }
     .table-choice{
         margin: auto;
@@ -187,15 +189,15 @@ height: 20px;
         }
     }
     .date-label{
-	    color: black;
-	    font-size: 15px;
-	    height: max-content;
-	    width: max-content;
-	    padding: 5px 20px 5px 20px;
-	    border-radius: 8px;
-	    background-color: #FFF;
-	    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-	    margin-top: 10px;
+        color: black;
+        font-size: 15px;
+        height: max-content;
+        width: max-content;
+        padding: 5px 20px 5px 20px;
+        border-radius: 8px;
+        background-color: #FFF;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+        margin-top: 10px;
     }
 
 }
@@ -213,11 +215,17 @@ height: 20px;
     }
 }
 .green{
-	color: green;
+    color: green;
 }
 .red{
-	color: red;
+    color: red;
 }
+img {
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+}
+
 @-webkit-keyframes rotating /* Safari and Chrome */ {
   from {
     -webkit-transform: rotate(0deg);

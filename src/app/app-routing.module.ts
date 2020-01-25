@@ -60,7 +60,8 @@ const routes: Routes = [
   { path: 'personnel', loadChildren: './pages/personnel/personnel.module#PersonnelPageModule' },
   { path: 'gestion-table', loadChildren: './pages/table/table.module#TablePageModule' },
   { path: 'register', loadChildren: './user/register/register.module#RegisterPageModule' },
-  { path: 'welcome', loadChildren: './welcome/welcome.module#WelcomePageModule' }
+  { path: 'welcome', loadChildren: './welcome/welcome.module#WelcomePageModule' },  { path: 'ventes', loadChildren: './comptabilite/ventes/ventes.module#VentesPageModule' }
+
 
 
 
