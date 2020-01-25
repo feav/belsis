@@ -53,6 +53,7 @@ export class VentesPage  {
     this.produits.sort(function(a,b){ if(a.qty_vendu<b.qty_vendu){return 1}else{return -1;} })
   }
   goto(target){
+     this.produits = [];
     if(this.item!=target)
       this.createBarChart() ;
 
