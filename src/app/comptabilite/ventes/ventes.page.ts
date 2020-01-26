@@ -1,14 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { MenuController , ToastController, } from '@ionic/angular';
 import { Chart } from 'chart.js';
-import { UtilsService } from "../services/utils.service";
-import { CommandeService } from "../services/commande.service";
+import { UtilsService } from "../../services/utils.service";
+import { CommandeService } from "../../services/commande.service";
 @Component({
-  selector: 'app-comptabilite',
-  templateUrl: './comptabilite.page.html',
-  styleUrls: ['./comptabilite.page.scss'],
+  selector: 'app-ventes',
+  templateUrl: './ventes.page.html',
+  styleUrls: ['./ventes.page.scss'],
 })
-export class ComptabilitePage  {
+export class VentesPage  {
   @ViewChild('barChart',{static: true}) barChart;
 
   @ViewChild('barChartSecond',{static: true}) barChartSecond;
@@ -24,6 +24,7 @@ export class ComptabilitePage  {
   private colors = [];
   private datasLabel = [];
   private type = "prix";
+  private produits = [];
   private originDatas:{prix : any,commande : any,produit : any} = {prix : [],commande : [],produit : []};
   slideOpts = {
     initialSlide: 1,
@@ -37,8 +38,22 @@ export class ComptabilitePage  {
     this.type = target;
     this.createBarChart();
   }
+  addProduct(prod){
+    var find = false;
+    for(var i = 0 ; i < this.produits.length; i++){
+      if(prod.id == this.produits[i].id){
+        this.produits[i].qty_vendu += prod.qty_vendu;
+        find = true;
+        break;
+      }
+    }
+    if(find == false){
+      this.produits.push(prod);
+    }
+    this.produits.sort(function(a,b){ if(a.qty_vendu<b.qty_vendu){return 1}else{return -1;} })
+  }
   goto(target){
-
+     this.produits = [];
     if(this.item!=target)
       this.createBarChart() ;
 
@@ -46,17 +61,23 @@ export class ComptabilitePage  {
     console.log(target);
      this.commandeService.getByRangeOfTime(target).then(
            (datas:any) =>{
-
              this.originDatas.prix = [];
              this.originDatas.commande = [];
              this.originDatas.produit = [];
              this.datasLabel = [];
 
              for(var i= 0; i< datas.length; i++){
-               this.originDatas.prix.push(datas[i].somme_commande_paye);
-               this.originDatas.commande.push(datas[i].nbr_commande_paye);
-               this.originDatas.produit.push(datas[i].total_produit);
-               this.datasLabel.push(datas[i].label);
+               var val = 0;
+               var label = "";
+               if(datas[i].top_vente.length){
+                 this.addProduct(datas[i].top_vente[0]);
+                 val = datas[i].top_vente[0].qty_vendu;
+                 label = datas[i].top_vente[0].nom;
+               }
+               this.originDatas.prix.push(val);
+               this.originDatas.commande.push(val);
+               this.originDatas.produit.push(val);
+               this.datasLabel.push(label);
              }
              this.createBarChart();
             },error=>{
@@ -88,13 +109,10 @@ export class ComptabilitePage  {
 
              let avgMontant = datas.reduce((a, b) => (a + b)) / datas.length; 
              for(var i= 0; i< datas.length; i++){
-               if(avgMontant < datas[i]){
-               	this.colors.push('rgba('+Math.floor(Math.random() * 200)+', '+Math.floor(Math.random() * 255)+', '+Math.floor(Math.random() * 255)+', 0.4)');
-               }else if (datas[i] == 0) {
-               	this.colors.push('rgba(0, 0, 0, 0.35)');
-               }else {
-               	this.colors.push('rgba(255, 0, 0, 0.4)');
-               }
+               if(avgMontant < datas[i])
+                 this.colors.push('rgba('+Math.floor(Math.random() * 200)+', '+Math.floor(Math.random() * 255)+', '+Math.floor(Math.random() * 255)+', 0.4)');
+               else
+                 this.colors.push('rgba(255, 0, 0, 0.4)');
 
              }
 

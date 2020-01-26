@@ -31,54 +31,44 @@
           <canvas #barChart></canvas>
           <ion-row class="type">
             <ion-col [ngClass]="{'selected': type === 'prix'}" (click)="setType('prix')">Revenu</ion-col>
-            <ion-col [ngClass]="{'selected': type === 'commande'}"  (click)="setType('commande')" >Commande</ion-col>
-            <ion-col [ngClass]="{'selected': type === 'produit'}"  (click)="setType('produit')">Produit</ion-col>
+            <ion-col [ngClass]="{'selected': item === 'commande'}"  (click)="setType('commande')" >Commande</ion-col>
+            <ion-col [ngClass]="{'selected': item === 'produit'}"  (click)="setType('produit')">Produit</ion-col>
           </ion-row>
         </ion-grid>
-          <!-- <ion-card-title class="ion-text-center activite">Meilleures Ventes</ion-card-title> -->
-        <!-- <ion-row class="principal-products">
-          <ion-row style='background-image: url(https://yzgeneration.com/wp-content/uploads/2013/09/Anonymous-Facebook-620x350.png)' class="principal">
-            <ion-label>MACCARONI FROMAGE - 1500 - 100.000 CFA</ion-label>
-          </ion-row>
+         
+        <ion-card-title class="ion-text-center activite">Meilleures ventes</ion-card-title> 
+
+          <ion-row class="principal-products">
           <ion-row>
-            <ion-col size="4"><img src="https://yzgeneration.com/wp-content/uploads/2013/09/Anonymous-Facebook-620x350.png"></ion-col>
-            <ion-col size="4"><img src="https://yzgeneration.com/wp-content/uploads/2013/09/Anonymous-Facebook-620x350.png"></ion-col>
-            <ion-col size="4"><img src="https://yzgeneration.com/wp-content/uploads/2013/09/Anonymous-Facebook-620x350.png"></ion-col>
+            <ion-col size="4"  *ngFor="let produit of this.produits ; let i = index">
+              <img [src]="produit.image">
+              <ion-label>{{produit.qty_vendu}} - {{produit.nom}} </ion-label>
+            </ion-col>
           </ion-row>
-        </ion-row> -->
+        </ion-row>
+
+
           <ion-card-title class="ion-text-center activite">Trafic</ion-card-title>
       <div class="tbl-header">
         <table class="list-resume" cellpadding="0" cellspacing="0" border="0">
           <thead>
               <tr>
-                <th size="3">
-                   <ion-label color="dark ion-text-center"></ion-label>
+                <th size="9">
+                   <ion-label color="dark ion-text-center">Nom</ion-label>
                 </th>
                 <th size="3">
-                   <ion-label color="dark ion-text-center">Prix</ion-label>
-                </th>
-                <th size="3">
-                   <ion-label color="dark ion-text-center">Com..</ion-label>
-                </th>
-                <th size="3">
-                   <ion-label color="dark ion-text-center">Prod..</ion-label>
+                   <ion-label color="dark ion-text-center">QTE</ion-label>
                 </th>
               </tr>
 
           </thead>
           <tbody>
           <tr *ngFor="let etat of datasLabel ; let i = index" [ngClass]="{'display_none': originDatas.prix[i] == 0 }" [ngStyle]="{'background-color': colors[i]}" >
-            <td size="3">
+            <td size="9">
                <ion-label color="dark ion-text-center">{{datasLabel[i]}}</ion-label>
             </td>
             <td size="3">
                <ion-label color="dark ion-text-center">{{originDatas.prix[i]}}</ion-label>
-            </td>
-            <td size="3">
-               <ion-label color="dark ion-text-center">{{originDatas.commande[i]}}</ion-label>
-            </td>
-            <td size="3">
-               <ion-label color="dark ion-text-center">{{originDatas.produit[i]}}</ion-label>
             </td>
           </tr>
           </tbody>
