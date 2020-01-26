@@ -332,4 +332,8 @@ export class NouveauPage implements OnInit {
         });
     }
 
+    manageTables() {
+    	this.router.navigate(['/gestion-table']);
+    }
+
 }

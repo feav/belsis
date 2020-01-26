@@ -138,6 +138,9 @@
 		    <ion-fab-button (click)="showListCategory()"   color="dark"  [ngClass]="{'hide': order_etat === 'trash' ||  order_etat === 'paye' ||  order_etat === 'prete' ||  order_etat === 'en_cours'}" >
 		      <ion-icon name="add"></ion-icon> 
 		    </ion-fab-button>
+		    <ion-fab-button (click)="manageTables()"   color="secondary">
+		      <ion-icon name="settings"></ion-icon> 
+		    </ion-fab-button>
 	     </ion-fab-list>
 	     <ion-fab-list  side="top" >
 		    <ion-fab-button (click)="prepareOrder()" color="success" [ngClass]="{'hide':	 order_etat === 'trash' ||  order_etat === 'paye' ||  order_etat === 'prete'||  order_etat === 'en_cours'}">

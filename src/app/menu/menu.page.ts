@@ -135,12 +135,6 @@ export class MenuPage implements OnInit {
                   url: '/ventes',
                   icon: 'podium',
                   color:'#009688'
-                },
-                {
-                  title: 'Tables',
-                  url: '/gestion-table',
-                  icon: 'settings',
-                  color:'#00BCD4'
                 }
               ];
 
