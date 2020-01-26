@@ -110,5 +110,9 @@ export class UsersService {
     updateUser(user: User): Observable<any> {
     	return this.http.post(`${ this.HOST_BASE + this.API_BASE }add`, user);	
     }
+
+   	inscription(user: User): Observable<any> {
+   		return this.http.post(`${ this.HOST_BASE + this.API_BASE }inscription`, user);	
+   	}
     
 }

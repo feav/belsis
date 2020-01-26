@@ -1,9 +1,62 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button id="menu" ion-button ion-btn color="light" defaultHref="welcome"></ion-back-button>
+    </ion-buttons>
+    <ion-title >CREER UN COMPTE</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
+        <ion-grid class="header-bg">
+          <div >
+            <ion-label color="light ion-text-center block label-title">
+            	<img *ngIf="user.avatar" class="profile-image" [src]="user.avatar">
+            	<img *ngIf="!user.avatar" class="profile-image" src="/assets/avatar-min.png">
+            </ion-label>
+			<div class="take-image">
+				<ion-fab-button size="small"  color="light">
+					<ion-icon name="camera"></ion-icon>
+				</ion-fab-button>
+			</div>
+          </div>
+      </ion-grid> 
+      <ion-grid>
+      </ion-grid>
+      <ion-grid>
+        <ion-card-title class="ion-text-center activite">Informations</ion-card-title>
+        <ion-row>
+          <ion-col>
+            <div>
+               	<form>
+					<ion-grid>
+						<ion-row>
+							<input required placeholder="Nom : " name="name" [(ngModel)]="user.nom" />
+						</ion-row>
+						<ion-row>
+							<input required placeholder="Prénom : " name="prenom" [(ngModel)]="user.prenom" />
+						</ion-row>
+						<ion-row>
+							<input required placeholder="Pseudo : " name="username" [(ngModel)]="user.username" />
+						</ion-row>
+						<ion-row>
+							<input required placeholder="Email : " name="email" [(ngModel)]="user.email" />
+						</ion-row>
+						<ion-row>
+							<input required placeholder="Mot de passe : " name="password" [(ngModel)]="user.password" />
+						</ion-row>
+						<ion-row>
+							<input required placeholder="Confirmer le mot de passe : " name="repassword" [(ngModel)]="rePassword" />
+						</ion-row>
+						<ion-row>
+							<ion-col class="ion-text-center">
+								<ion-button (click)="createAccount()" class="addProductButton" type="submit">CREER</ion-button>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+				</form>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
 </ion-content>
