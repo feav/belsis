@@ -3,19 +3,15 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { UsersService } from "./services/users.service";
 import  { AuthGuard } from './guards/auth.guard';
+import  { UnauthGuard } from './guards/unauth.guard';
 
-
-let home = 'login';
-
-let user_exist = localStorage.getItem('userconnected');
 let first_usage = localStorage.getItem('first_usage');
 let default_route = 'home';
 
 if(first_usage == 'undefined' || first_usage == null || first_usage == '' ){
   default_route = 'welcome';
-}else if(user_exist){
-  home = 'home';
-  localStorage.setItem('recentLogged', "0");
+}else {
+	default_route = 'home';
 }
 
 const routes: Routes = [
@@ -26,7 +22,8 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
+    canActivate: [UnauthGuard]
   },
   {
     path: 'list',
@@ -60,7 +57,8 @@ const routes: Routes = [
   { path: 'personnel', loadChildren: './pages/personnel/personnel.module#PersonnelPageModule' },
   { path: 'gestion-table', loadChildren: './pages/table/table.module#TablePageModule' },
   { path: 'register', loadChildren: './user/register/register.module#RegisterPageModule' },
-  { path: 'welcome', loadChildren: './welcome/welcome.module#WelcomePageModule' },  { path: 'ventes', loadChildren: './comptabilite/ventes/ventes.module#VentesPageModule' }
+  { path: 'welcome', loadChildren: './welcome/welcome.module#WelcomePageModule' },
+  { path: 'ventes', loadChildren: './comptabilite/ventes/ventes.module#VentesPageModule' }
 
 
 
