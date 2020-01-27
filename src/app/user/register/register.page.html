@@ -42,11 +42,38 @@
 							<input required placeholder="Email : " name="email" [(ngModel)]="user.email" />
 						</ion-row>
 						<ion-row>
+							<ion-select placeholder="Choisissez un rôle" name="role" [(ngModel)]="user.role" okText="Okay" cancelText="Annuler">
+						      <ion-select-option *ngFor="let role of roles" [selected]="role == admin && isManager.checked" [disabled]="role == admin" value="{{ role }}">{{ role }}</ion-select-option>
+						    </ion-select>
+						</ion-row>
+						<ion-row>
 							<input required placeholder="Mot de passe : " name="password" [(ngModel)]="user.password" />
 						</ion-row>
 						<ion-row>
 							<input required placeholder="Confirmer le mot de passe : " name="repassword" [(ngModel)]="rePassword" />
 						</ion-row>
+						<ion-row *ngIf="!isManager.checked">
+							<input required placeholder="Identifiant du restaurant : " name="restaurant_identifier" [(ngModel)]="user.restaurant_token" />
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<ion-item>
+									<ion-label>Gérant ?</ion-label>
+								    <ion-checkbox #isManager (ionChange)="manageRestaurant($event, isManager)" slot="end"></ion-checkbox>
+								</ion-item>
+							</ion-col>
+						</ion-row>
+						<div *ngIf="isManager.checked">
+							<ion-row>
+								<input required placeholder="Nom du restaurant : " name="nom_restaurant" [(ngModel)]="restaurant.nom" />
+							</ion-row>
+							<ion-row>
+								<input required placeholder="Dévise : " name="devise" [(ngModel)]="restaurant.devise" />
+							</ion-row>
+							<ion-row>
+								<input required type="number" placeholder="Chiffre d'affaire : " name="chiffre_affaire" [(ngModel)]="restaurant.chiffre_affaire" />
+							</ion-row>
+						</div>
 						<ion-row>
 							<ion-col class="ion-text-center">
 								<ion-button (click)="createAccount()" class="addProductButton" type="submit">CREER</ion-button>

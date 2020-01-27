@@ -11,6 +11,7 @@ export class User {
     totalCommande: number;
     totalPrice: number;
     user_id: number;
+    restaurant_token: string;
 
     constructor() {
         this.id = null;
@@ -24,5 +25,6 @@ export class User {
         this.avatar = '';
         this.password = ''
         this.user_id = null;
+        this.restaurant_token = '';
     }
 }

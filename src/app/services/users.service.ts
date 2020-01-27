@@ -119,7 +119,7 @@ export class UsersService {
     	return this.http.post(`${ this.HOST_BASE + this.API_BASE }update-avatar`, data);
     }
 
-   	inscription(user: User): Observable<any> {
+   	inscription(user: any): Observable<any> {
    		return this.http.post(`${ this.HOST_BASE + this.API_BASE }inscription`, user);	
    	}
     

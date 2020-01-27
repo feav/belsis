@@ -13,6 +13,7 @@ import { Base64 } from '@ionic-native/base64/ngx';
 
 
 import { User } from './../../models/user.model';
+import { Restaurant } from './../../models/restaurant.model';
 import { UsersService } from './../../services/users.service';
 import { UtilsService } from './../../services/utils.service';
 import { RoleService } from './../../services/role.service';
@@ -25,8 +26,10 @@ import { RoleService } from './../../services/role.service';
 export class RegisterPage implements OnInit {
 
 	public user: User = new User();
+  public restaurant: Restaurant = new Restaurant();
 	public roles = null;
 	public rePassword: string = '';
+  public isFormRestaurantOpen: boolean = false;
 
   constructor(
   	private router: Router,
@@ -47,6 +50,7 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
   	this.initRoles();
+    this.roles = this.roles.filter(elt => { return elt != 'admin' && elt != 'superadmin' });
   }
 
   initRoles(){
@@ -98,6 +102,20 @@ export class RegisterPage implements OnInit {
   formIsClean(){
     
     let bad = true;
+
+    if (this.isFormRestaurantOpen){
+       console.log(this.restaurant)
+      if(this.restaurant.nom == '' || this.restaurant.nom == undefined){
+        this.utilsService.presentToast("Nom du restaurant non defini", 2000, "danger");
+        bad = false;
+      }else if(!this.restaurant.devise || this.restaurant.devise == undefined){
+        this.utilsService.presentToast("Dévise non defini", 2000, "warning");
+        // bad = false;
+      }else if(this.restaurant.chiffre_affaire || this.restaurant.chiffre_affaire == undefined  ){
+        this.utilsService.presentToast("Chiffre d'affaire non defini", 2000, "warning");
+        // bad = false;
+      }
+    }
     
     if(this.user.nom == ''){
         this.utilsService.presentToast("Nom non defini", 2000, "danger");
@@ -123,10 +141,19 @@ export class RegisterPage implements OnInit {
         this.utilsService.presentToast("Les mots de passe ne sont pas identiques", 2000, "danger");
         bad = false;
     }
+    else if(this.user.role == ''){
+        this.utilsService.presentToast("Veillez choisir votre rôle", 2000, "danger");
+        bad = false;
+    }
+    else if(this.user.restaurant_token == '' && !this.isFormRestaurantOpen){
+        this.utilsService.presentToast("Veillez préciser l'identifiant du restaurant", 2000, "danger");
+        bad = false;
+    }
     else if(this.user.avatar == ''){
         this.utilsService.presentToast("Avatar non definie", 2000, "warning");
         // bad = false;
     }
+
     return bad;
 	}
 
@@ -137,12 +164,34 @@ export class RegisterPage implements OnInit {
 
 		this.utilsService.presentLoading('Création en cours ...');
 
+    let data: any = {};
+
+    if(this.isFormRestaurantOpen){
+
+      data = this.user;
+      data.nom_restaurant = this.restaurant.nom;
+      data.devise = this.restaurant.devise;
+      data.chiffre_affaire = this.restaurant.chiffre_affaire;
+
+      console.log(data);
+
+    } else {
+      data.restaurant_token = null;
+      data = this.user;
+      delete data.restaurant_token;
+    }
+
+
 		this.usersService.inscription(this.user)
 			.subscribe(
 				data => {
 					this.utilsService.dismissLoading();
 					console.log(data);
 					this.utilsService.presentToast("Créé avec succès", 2000, "success");
+          // clear infos
+          this.user = new User();
+          this.restaurant = new Restaurant();
+          // redirection
 					this.router.navigate(['/login']);
 				},
 				error => {
@@ -150,8 +199,25 @@ export class RegisterPage implements OnInit {
 					this.utilsService.presentToast("Une erreur s'est produite", 2000, "danger");
 					console.log(error);
 				}
-			)
-
+			);
+      
 	}
+
+  manageRestaurant(event, checkbox_elt){
+    
+    this.initRoles();
+
+    if(checkbox_elt.checked) {
+      console.log(this.roles);
+      this.roles = this.roles.filter(elt => { return elt == 'admin'});
+      this.isFormRestaurantOpen = true;
+    }else{
+      this.roles = this.roles.filter(elt => { return elt != 'admin' && elt != 'superadmin' });
+      this.isFormRestaurantOpen = false;
+    }
+
+    this.user.role = this.roles[0];
+
+  }
 
 }
